@@ -267,7 +267,7 @@
     margin-bottom: 1.25rem;
   }
 
-  .contact-lede em { color: var(--accent); font-style: italic; }
+  .contact-lede em { color: #C4916E; font-style: italic; }
 
   .contact-sub {
     font-size: 0.9rem;
@@ -437,7 +437,7 @@
 
     <!-- PROJECT 1 -->
     <a class="project-card"
-       href="qualifications.html#proj-residential-dwelling"
+       href="qualifications.html#proj-beach-house"
        data-category="residential academic">
       <div class="card-top">
         <div class="card-badges">
@@ -464,7 +464,7 @@ The proposal responds to a client brief focused on accessible, adaptable living,
 
     <!-- PROJECT 2 -->
     <a class="project-card"
-       href="qualifications.html#proj-site-analysis"
+       href="qualifications.html#proj-richmond-tp"
        data-category="analysis academic">
       <div class="card-top">
         <div class="card-badges">
@@ -486,7 +486,7 @@ The proposal responds to a client brief focused on accessible, adaptable living,
 
     <!-- PROJECT 3 -->
     <a class="project-card"
-       href="qualifications.html#proj-commercial"
+       href="qualifications.html#proj-richmond-wd"
        data-category="commercial academic">
       <div class="card-top">
         <div class="card-badges">
@@ -508,7 +508,7 @@ The proposal responds to a client brief focused on accessible, adaptable living,
 
     <!-- PROJECT 4 -->
     <a class="project-card"
-       href="qualifications.html#proj-documentation"
+       href="qualifications.html#proj-bal"
        data-category="documentation academic">
       <div class="card-top">
         <div class="card-badges">
@@ -531,7 +531,7 @@ The proposal responds to a client brief focused on accessible, adaptable living,
 
     <!-- PROJECT 5 -->
     <a class="project-card"
-       href="qualifications.html#proj-multires"
+       href="qualifications.html#proj-wellness"
        data-category="residential academic">
       <div class="card-top">
         <div class="card-badges">
@@ -545,8 +545,8 @@ The proposal responds to a client brief focused on accessible, adaptable living,
       <div class="card-tags">
         <span class="tag">Commercial Design</span>
         <span class="tag">BIM Modelling</span>
-        <span class="tag">Rendering</span> 
-        <span class="tag">Spacial Planning</span>
+        <span class="tag">Rendering</span>
+        <span class="tag">Spatial Planning</span>
         <span class="tag">Presentation</span>
       </div>
       <span class="card-arrow">↗</span>
@@ -626,17 +626,18 @@ function drawGrid() {
   }
   // fade right + bottom
   const gR = ctx.createLinearGradient(W*0.55, 0, W, 0);
-  gR.addColorStop(0,'rgba(246,245,242,0)');
-  gR.addColorStop(1,'rgba(246,245,242,1)');
+  gR.addColorStop(0,'rgba(242,237,230,0)');
+  gR.addColorStop(1,'rgba(242,237,230,1)');
   ctx.fillStyle = gR; ctx.fillRect(0, 0, W, H);
 
   const gB = ctx.createLinearGradient(0, H*0.6, 0, H);
-  gB.addColorStop(0,'rgba(246,245,242,0)');
-  gB.addColorStop(1,'rgba(246,245,242,1)');
+  gB.addColorStop(0,'rgba(242,237,230,0)');
+  gB.addColorStop(1,'rgba(242,237,230,1)');
   ctx.fillStyle = gB; ctx.fillRect(0, 0, W, H);
 }
 
 window.addEventListener('resize', drawGrid);
+setTimeout(drawGrid, 100);
 drawGrid();
 
 // Scroll fade
