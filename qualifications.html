@@ -14,7 +14,6 @@
   .breadcrumb span { color: var(--border-strong); }
   .page-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 1rem; }
   .page-subtitle { font-size: 1rem; color: var(--text-secondary); max-width: 560px; line-height: 1.75; }
-
   .course-band { background: var(--bg-dark); }
   .course-inner { max-width: 1160px; margin: 0 auto; padding: 3rem; display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
   .course-name { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--bg); margin-bottom: 0.5rem; }
@@ -23,63 +22,28 @@
   .course-meta-cell { background: rgba(28,15,8,0.5); padding: 1rem 1.5rem; text-align: center; }
   .course-meta-value { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--bg); line-height: 1; margin-bottom: 0.25rem; }
   .course-meta-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(242,237,230,0.4); }
-
-  /* PROJECT NAV GRID */
   .proj-nav { background: var(--bg-card); border-bottom: 0.5px solid var(--border); padding: 2.5rem 3rem; }
   .proj-nav-inner { max-width: 1160px; margin: 0 auto; }
   .proj-nav-label { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.25rem; }
   .proj-nav-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5px; background: var(--border); border: 0.5px solid var(--border); }
-  .proj-nav-item {
-    position: relative;
-    background: var(--bg-card);
-    padding: 1.5rem 1.25rem 1.25rem;
-    text-decoration: none;
-    overflow: hidden;
-    transition: background 0.25s;
-    min-height: 110px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
-  .proj-nav-item::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    opacity: 0.1;
-    transition: opacity 0.3s;
-  }
+  .proj-nav-item { position: relative; background: var(--bg-card); padding: 1.5rem 1.25rem 1.25rem; text-decoration: none; overflow: hidden; transition: background 0.25s; min-height: 110px; display: flex; flex-direction: column; justify-content: flex-end; }
+  .proj-nav-item::before { content: ''; position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0.1; transition: opacity 0.3s; }
   .proj-nav-item:hover::before { opacity: 0.18; }
   .proj-nav-item:hover { background: var(--accent-light); }
-  .proj-nav-item::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-  }
+  .proj-nav-item::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
   .proj-nav-item:hover::after { transform: scaleX(1); }
   .proj-nav-num { font-size: 10px; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 0.35rem; position: relative; z-index: 2; }
   .proj-nav-title { font-family: 'Playfair Display', serif; font-size: 0.9rem; line-height: 1.25; color: var(--text-primary); position: relative; z-index: 2; }
   .proj-nav-type { font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.4rem; position: relative; z-index: 2; }
-  /* Thumbnail bg images — replace src with your actual image paths once exported */
-  .proj-nav-item.beach::before { background-image: url('images/beach-house/01-site-analysis.png'); }
-  .proj-nav-item.rich-tp::before { background-image: url('images/richmond-tp/01-site-plan.png'); }
-  .proj-nav-item.rich-wd::before { background-image: url('images/richmond-wd/01-site-plan.png'); }
-  .proj-nav-item.bal::before { background-image: url('images/bal/02-site-plan-bal40.png'); }
+  .proj-nav-item.beach::before { background-image: url('images/beach-house/01-site-plan.png'); }
+  .proj-nav-item.rich-tp::before { background-image: url('images/richmond-tp/tp01-site-analysis.png'); }
+  .proj-nav-item.rich-wd::before { background-image: url('images/richmond-wd/a01-site-plan.png'); }
+  .proj-nav-item.bal::before { background-image: url('images/bal/a02-site-plan-bal40.png'); }
   .proj-nav-item.wellness::before { background-image: url('images/wellness/00-a1-poster.png'); }
-
-  /* UNITS */
   .units-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5px; background: var(--border); border: 0.5px solid var(--border); margin-top: 2rem; }
   .unit-cell { background: var(--bg-card); padding: 1.1rem 1.4rem; display: flex; align-items: flex-start; gap: 0.75rem; }
   .unit-code { font-size: 10px; font-weight: 600; letter-spacing: 0.06em; color: var(--accent); background: var(--accent-light); padding: 3px 7px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
   .unit-name { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
-
-  /* PROJECT SECTIONS */
   .proj-section { scroll-margin-top: 80px; padding-bottom: 5rem; }
   .proj-intro-header { display: flex; gap: 0.5rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
   .proj-section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.15; color: var(--text-primary); margin-bottom: 0.25rem; }
@@ -98,13 +62,9 @@
   .outcomes-list li::before { content: '→'; color: var(--accent); font-size: 0.75rem; margin-top: 0.2rem; flex-shrink: 0; }
   .back-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 12px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; margin-bottom: 1.5rem; transition: color 0.2s; }
   .back-link:hover { color: var(--accent); }
-
-  /* IMAGE COMPONENTS */
   .img-hero { width: 100%; display: block; margin-bottom: 1.5rem; border: 0.5px solid var(--border); background: var(--bg-card); }
   .img-hero-placeholder { width: 100%; aspect-ratio: 297/210; background: var(--bg-mid); border: 0.5px solid var(--border-strong); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; }
   .img-hero-placeholder.portrait { aspect-ratio: 3/4; max-width: 520px; margin-left: auto; margin-right: auto; }
-  .img-hero-placeholder.square { aspect-ratio: 1/1; }
-  .img-hero-placeholder.wide { aspect-ratio: 4/1; }
   .img-placeholder-label { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-align: center; padding: 1rem; line-height: 1.7; }
   .img-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5px; background: var(--border); margin-bottom: 1.5rem; }
   .img-grid-2 .img-slot { background: var(--bg-mid); aspect-ratio: 297/210; display: flex; align-items: center; justify-content: center; overflow: hidden; }
@@ -112,53 +72,55 @@
   .img-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5px; background: var(--border); margin-bottom: 1.5rem; }
   .img-grid-3 .img-slot { background: var(--bg-mid); aspect-ratio: 297/210; display: flex; align-items: center; justify-content: center; overflow: hidden; }
   .img-grid-3 .img-slot img { width: 100%; height: 100%; object-fit: contain; display: block; background: var(--bg-card); }
-  .img-grid-3 .img-slot.tall { aspect-ratio: 210/297; }
   .img-full { width: 100%; display: block; border: 0.5px solid var(--border); margin-bottom: 1.5rem; background: var(--bg-card); }
   .img-full-placeholder { width: 100%; aspect-ratio: 4/1; background: var(--bg-mid); border: 0.5px solid var(--border-strong); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; }
   .img-label { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; margin-top: 0.25rem; display: block; }
-
-  /* PLAN + LEGEND */
   .plan-legend-wrap { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; align-items: start; margin-bottom: 1.5rem; }
   .legend-block { background: var(--bg-mid); border: 0.5px solid var(--border-strong); padding: 1.5rem; }
   .legend-title { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 0.5px solid var(--border-strong); }
   .legend-grid { display: grid; grid-template-columns: auto 1fr auto 1fr; gap: 0.4rem 1rem; align-items: baseline; }
   .legend-num { font-size: 11px; font-weight: 600; color: var(--accent); white-space: nowrap; }
   .legend-name { font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-secondary); }
-
-  /* JOURNAL FLIPPER */
+  /* JOURNAL — DOUBLE PAGE SPREAD */
   .journal-wrap { margin-bottom: 2rem; }
-  .journal-viewer { background: var(--bg-mid); border: 0.5px solid var(--border-strong); padding: 1.75rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
-  .journal-stage { width: 100%; max-width: 700px; }
-  .journal-page { width: 100%; display: block; border: 0.5px solid var(--border); background: var(--bg-card); }
-  .journal-page.hidden { display: none; }
-  .journal-placeholder { width: 100%; aspect-ratio: 297/210; background: var(--bg-card); border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center; }
-  .journal-placeholder.portrait { aspect-ratio: 210/297; }
-  .journal-controls { display: flex; align-items: center; gap: 1.5rem; }
-  .journal-btn { background: var(--bg-card); border: 0.5px solid var(--border-strong); padding: 0.5rem 1.25rem; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; }
+  .journal-viewer { background: var(--bg-mid); border: 0.5px solid var(--border-strong); padding: 1.5rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+  .journal-spread { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; width: 100%; max-width: 780px; background: var(--border); }
+  .journal-spread-slot { background: var(--bg-card); overflow: hidden; aspect-ratio: 210/297; display: flex; align-items: center; justify-content: center; }
+  .journal-spread-slot img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .journal-spread-slot.blank { background: var(--bg-card); }
+  .journal-spread-slot .journal-page { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .journal-controls { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+  .journal-btn { background: var(--bg-card); border: 0.5px solid var(--border-strong); padding: 0.45rem 1.1rem; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; }
   .journal-btn:hover { background: var(--accent); color: var(--bg-card); border-color: var(--accent); }
   .journal-btn:disabled { opacity: 0.3; cursor: default; background: var(--bg-card); color: var(--text-muted); border-color: var(--border); }
-  .journal-counter { font-size: 12px; letter-spacing: 0.06em; color: var(--text-muted); min-width: 90px; text-align: center; }
+  .journal-btn-full { background: transparent; border: 0.5px solid var(--border-strong); padding: 0.45rem 1rem; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 0.4rem; }
+  .journal-btn-full:hover { color: var(--accent); border-color: var(--accent); }
+  .journal-counter { font-size: 12px; letter-spacing: 0.06em; color: var(--text-muted); min-width: 100px; text-align: center; }
   .journal-note { font-size: 11px; color: var(--text-muted); font-style: italic; text-align: center; }
-
+  /* Fullscreen overlay */
+  .journal-fullscreen {
+    position: fixed; inset: 0; z-index: 300;
+    background: rgba(26,20,16,0.96);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 1.25rem; padding: 2rem;
+    opacity: 0; pointer-events: none; transition: opacity 0.25s;
+  }
+  .journal-fullscreen.open { opacity: 1; pointer-events: all; }
+  .journal-fullscreen-spread { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; background: rgba(255,255,255,0.1); max-width: min(1200px, 90vw); width: 100%; }
+  .journal-fullscreen-slot { background: var(--bg-card); overflow: hidden; aspect-ratio: 210/297; display: flex; align-items: center; justify-content: center; }
+  .journal-fullscreen-slot img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .journal-fullscreen-controls { display: flex; align-items: center; gap: 1.25rem; }
+  .journal-fullscreen-btn { background: rgba(255,255,255,0.1); border: 0.5px solid rgba(255,255,255,0.2); padding: 0.5rem 1.25rem; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(242,237,230,0.8); cursor: pointer; transition: all 0.2s; }
+  .journal-fullscreen-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+  .journal-fullscreen-btn:disabled { opacity: 0.3; cursor: default; }
+  .journal-fullscreen-counter { font-size: 12px; letter-spacing: 0.06em; color: rgba(242,237,230,0.5); min-width: 120px; text-align: center; }
+  .journal-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; color: rgba(242,237,230,0.5); font-size: 1.25rem; cursor: pointer; padding: 0.25rem; transition: color 0.2s; line-height: 1; }
+  .journal-close:hover { color: var(--bg); }
   .h4-serif { font-family: 'Playfair Display', serif; font-size: 1.05rem; margin: 2rem 0 0.75rem; color: var(--text-secondary); font-weight: 400; letter-spacing: 0.02em; }
   .h4-serif-bold { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin: 1.75rem 0 0.75rem; }
-
-  @media (max-width: 1000px) {
-    .proj-nav-grid { grid-template-columns: repeat(3, 1fr); }
-    .proj-nav { padding: 2rem 1.5rem; }
-  }
-  @media (max-width: 900px) {
-    .course-inner { grid-template-columns: 1fr; }
-    .proj-detail { grid-template-columns: 1fr; }
-    .proj-sidebar { position: static; }
-    .img-grid-2 { grid-template-columns: 1fr; }
-    .img-grid-3 { grid-template-columns: 1fr 1fr; }
-    .plan-legend-wrap { grid-template-columns: 1fr; }
-    .page-header-inner { padding: 3rem 1.5rem 2.5rem; }
-  }
-  @media (max-width: 600px) {
-    .proj-nav-grid { grid-template-columns: 1fr 1fr; }
-  }
+  @media (max-width: 1000px) { .proj-nav-grid { grid-template-columns: repeat(3, 1fr); } .proj-nav { padding: 2rem 1.5rem; } }
+  @media (max-width: 900px) { .course-inner { grid-template-columns: 1fr; } .proj-detail { grid-template-columns: 1fr; } .proj-sidebar { position: static; } .img-grid-2 { grid-template-columns: 1fr; } .img-grid-3 { grid-template-columns: 1fr 1fr; } .plan-legend-wrap { grid-template-columns: 1fr; } .page-header-inner { padding: 3rem 1.5rem 2.5rem; } }
+  @media (max-width: 600px) { .proj-nav-grid { grid-template-columns: 1fr 1fr; } }
 </style>
 </head>
 <body>
@@ -195,41 +157,19 @@
   </div>
 </div>
 
-<!-- PROJECT NAVIGATION GRID -->
 <div class="proj-nav">
   <div class="proj-nav-inner">
     <div class="proj-nav-label">Jump to project</div>
     <div class="proj-nav-grid">
-      <a href="#proj-beach-house" class="proj-nav-item beach">
-        <div class="proj-nav-num">01</div>
-        <div class="proj-nav-title">Beach House</div>
-        <div class="proj-nav-type">Residential Design</div>
-      </a>
-      <a href="#proj-richmond-tp" class="proj-nav-item rich-tp">
-        <div class="proj-nav-num">02</div>
-        <div class="proj-nav-title">Richmond Townhouse — Town Planning</div>
-        <div class="proj-nav-type">Town Planning</div>
-      </a>
-      <a href="#proj-richmond-wd" class="proj-nav-item rich-wd">
-        <div class="proj-nav-num">03</div>
-        <div class="proj-nav-title">Richmond Townhouse — Working Drawings</div>
-        <div class="proj-nav-type">Construction Documentation</div>
-      </a>
-      <a href="#proj-bal" class="proj-nav-item bal">
-        <div class="proj-nav-num">04</div>
-        <div class="proj-nav-title">Bushfire-Responsive Design</div>
-        <div class="proj-nav-type">BAL Assessment</div>
-      </a>
-      <a href="#proj-wellness" class="proj-nav-item wellness">
-        <div class="proj-nav-num">05</div>
-        <div class="proj-nav-title">Dune Wellness Centre</div>
-        <div class="proj-nav-type">Commercial Design</div>
-      </a>
+      <a href="#proj-beach-house" class="proj-nav-item beach"><div class="proj-nav-num">01</div><div class="proj-nav-title">Beach House</div><div class="proj-nav-type">Residential Design</div></a>
+      <a href="#proj-richmond-tp" class="proj-nav-item rich-tp"><div class="proj-nav-num">02</div><div class="proj-nav-title">Richmond Townhouse — Town Planning</div><div class="proj-nav-type">Town Planning</div></a>
+      <a href="#proj-richmond-wd" class="proj-nav-item rich-wd"><div class="proj-nav-num">03</div><div class="proj-nav-title">Richmond Townhouse — Working Drawings</div><div class="proj-nav-type">Construction Documentation</div></a>
+      <a href="#proj-bal" class="proj-nav-item bal"><div class="proj-nav-num">04</div><div class="proj-nav-title">Bushfire-Responsive Design</div><div class="proj-nav-type">BAL Assessment</div></a>
+      <a href="#proj-wellness" class="proj-nav-item wellness"><div class="proj-nav-num">05</div><div class="proj-nav-title">Dune Wellness Centre</div><div class="proj-nav-type">Commercial Design</div></a>
     </div>
   </div>
 </div>
 
-<!-- UNITS -->
 <div class="section-wrap">
   <div class="section-header">
     <span class="section-eyebrow">Course content</span>
@@ -270,7 +210,6 @@
   </div>
   <p style="color:var(--text-secondary); max-width:600px; margin-bottom:4rem; font-size:0.95rem; line-height:1.75;">Each project below was completed as part of the 22627VIC course at Holmesglen, representing the range of briefs, scales, and documentation types covered across the qualification.</p>
 
-
   <!-- ============================================================ -->
   <!-- 01  BEACH HOUSE                                              -->
   <!-- ============================================================ -->
@@ -285,22 +224,17 @@
 
     <div class="proj-detail">
       <div class="proj-body">
-
         <span class="img-label">A01 — Site plan</span>
         <img src="images/beach-house/01-site-plan.png" alt="Beach House site plan" class="img-hero">
 
         <span class="img-label">A02 — Floor plan</span>
         <img src="images/beach-house/02-floor-plan.png" alt="Beach House floor plan" class="img-hero">
 
-       <span class="img-label">A03–A04 — Elevations</span>
-<div class="img-grid-2">
-  <div class="img-slot">
-    <img src="images/beach-house/03-north-south-elevations.png" alt="North and South elevations">
-  </div>
-  <div class="img-slot">
-    <img src="images/beach-house/04-east-west-elevations.png" alt="East and West elevations">
-  </div>
-</div>
+        <span class="img-label">A03–A04 — Elevations</span>
+        <div class="img-grid-2">
+          <div class="img-slot"><img src="images/beach-house/03-north-south-elevations.png" alt="North and South elevations"></div>
+          <div class="img-slot"><img src="images/beach-house/04-east-west-elevations.png" alt="East and West elevations"></div>
+        </div>
 
         <span class="img-label">A05 — Section</span>
         <img src="images/beach-house/05-section.png" alt="Beach House section" class="img-hero">
@@ -327,11 +261,7 @@
         <div class="proj-sidebar-row">
           <div class="proj-sidebar-label">Tags</div>
           <div class="proj-tags-row">
-            <span class="tag">Freehand</span>
-            <span class="tag">Passive Solar</span>
-            <span class="tag">Site Analysis</span>
-            <span class="tag">Accessible Design</span>
-            <span class="tag">Coastal</span>
+            <span class="tag">Freehand</span><span class="tag">Passive Solar</span><span class="tag">Site Analysis</span><span class="tag">Accessible Design</span><span class="tag">Coastal</span>
           </div>
         </div>
       </div>
@@ -339,7 +269,6 @@
   </div>
 
   <hr class="proj-divider">
-
 
   <!-- ============================================================ -->
   <!-- 02  RICHMOND TOWNHOUSE — TOWN PLANNING                       -->
@@ -355,63 +284,55 @@
 
     <div class="proj-detail">
       <div class="proj-body">
-
         <h4 class="h4-serif">Design Journal — 15 pages</h4>
         <div class="journal-wrap">
           <div class="journal-viewer">
-            <img src="Images/richmond-tp/journal-01.png" alt="Journal page 1" class="journal-page">
-<img src="images/richmond-tp/journal-02.png" alt="Journal page 2" class="journal-page hidden">
-<img src="images/richmond-tp/journal-03.png" alt="Journal page 3" class="journal-page hidden">
-<img src="images/richmond-tp/journal-04.png" alt="Journal page 4" class="journal-page hidden">
-<img src="images/richmond-tp/journal-05.png" alt="Journal page 5" class="journal-page hidden">
-<img src="images/richmond-tp/journal-06.png" alt="Journal page 6" class="journal-page hidden">
-<img src="images/richmond-tp/journal-07.png" alt="Journal page 7" class="journal-page hidden">
-<img src="images/richmond-tp/journal-08.png" alt="Journal page 8" class="journal-page hidden">
-<img src="images/richmond-tp/journal-09.png" alt="Journal page 9" class="journal-page hidden">
-<img src="images/richmond-tp/journal-10.png" alt="Journal page 10" class="journal-page hidden">
-<img src="images/richmond-tp/journal-11.png" alt="Journal page 11" class="journal-page hidden">
-<img src="images/richmond-tp/journal-12.png" alt="Journal page 12" class="journal-page hidden">
-<img src="images/richmond-tp/journal-13.png" alt="Journal page 13" class="journal-page hidden">
-<img src="images/richmond-tp/journal-14.png" alt="Journal page 14" class="journal-page hidden">
-<img src="images/richmond-tp/journal-15.png" alt="Journal page 15" class="journal-page hidden">
+            <!-- DOUBLE PAGE SPREAD -->
+            <div class="journal-spread" id="journalSpread">
+              <div class="journal-spread-slot" id="spreadLeft"></div>
+              <div class="journal-spread-slot" id="spreadRight"></div>
+            </div>
             <div class="journal-controls">
               <button class="journal-btn" id="journalPrev" disabled>← Prev</button>
-              <span class="journal-counter" id="journalCounter">Page 1 of 15</span>
+              <span class="journal-counter" id="journalCounter">Pages 1–2 of 15</span>
               <button class="journal-btn" id="journalNext">Next →</button>
+              <button class="journal-btn-full" id="journalFullBtn">⛶ Full screen</button>
             </div>
-            <p class="journal-note">Design journal — use the arrows to flip through the development process</p>
+            <p class="journal-note">Design journal — navigate page by page or open fullscreen for detail</p>
           </div>
         </div>
+
+        <!-- FULLSCREEN OVERLAY -->
+        <div class="journal-fullscreen" id="journalFullscreen">
+          <button class="journal-close" id="journalClose">✕</button>
+          <div class="journal-fullscreen-spread" id="fsSpread">
+            <div class="journal-fullscreen-slot" id="fsLeft"></div>
+            <div class="journal-fullscreen-slot" id="fsRight"></div>
+          </div>
+          <div class="journal-fullscreen-controls">
+            <button class="journal-fullscreen-btn" id="fsPrev" disabled>← Prev</button>
+            <span class="journal-fullscreen-counter" id="fsCounter">Pages 1–2 of 15</span>
+            <button class="journal-fullscreen-btn" id="fsNext">Next →</button>
+          </div>
+        </div>
+
+
 
         <h4 class="h4-serif">Planning Drawing Set</h4>
 
         <span class="img-label">TP-00 — Front page &amp; neighbourhood character</span>
-        <div class="img-hero-placeholder">
-          <!-- REPLACE WITH: <img src="images/richmond-tp/tp00-front-page.png" alt="Front page and neighbourhood character" class="img-hero"> -->
-          <span class="img-placeholder-label">TP-00 — Front page, drawing list, neighbourhood character<br><em>images/richmond-tp/tp00-front-page.png</em></span>
-        </div>
+        <img src="images/richmond-tp/tp00-front-page.png" alt="Front page and neighbourhood character" class="img-hero">
 
         <span class="img-label">TP-01 — Site analysis plan</span>
-        <div class="img-hero-placeholder">
-          <!-- REPLACE WITH: <img src="images/richmond-tp/tp01-site-analysis.png" alt="Site analysis plan" class="img-hero"> -->
-          <span class="img-placeholder-label">TP-01 — Site analysis plan · 318 Burnley Street<br><em>images/richmond-tp/tp01-site-analysis.png</em></span>
-        </div>
+        <img src="images/richmond-tp/tp01-site-analysis.png" alt="Site analysis plan" class="img-hero">
 
         <span class="img-label">TP-05 — Elevations (all four)</span>
-        <div class="img-hero-placeholder">
-          <!-- REPLACE WITH: <img src="images/richmond-tp/tp05-elevations.png" alt="All four elevations" class="img-hero"> -->
-          <span class="img-placeholder-label">TP-05 — North, South, East, West elevations<br><em>images/richmond-tp/tp05-elevations.png</em></span>
-        </div>
+        <img src="images/richmond-tp/tp05-elevations.png" alt="All four elevations" class="img-hero">
 
+        <span class="img-label">TP-06 &amp; TP-07 — Shadow diagrams</span>
         <div class="img-grid-2">
-          <div class="img-slot">
-            <!-- REPLACE DIV WITH: <img src="images/richmond-tp/tp06-shadow-9am.png" alt="Shadow diagram 9AM"> -->
-            <span class="img-placeholder-label">TP-06 — Shadow diagram 9AM<br><em>images/richmond-tp/tp06-shadow-9am.png</em></span>
-          </div>
-          <div class="img-slot">
-            <!-- REPLACE DIV WITH: <img src="images/richmond-tp/tp07-shadow-3pm.png" alt="Shadow diagram 3PM"> -->
-            <span class="img-placeholder-label">TP-07 — Shadow diagram 3PM<br><em>images/richmond-tp/tp07-shadow-3pm.png</em></span>
-          </div>
+          <div class="img-slot"><img src="images/richmond-tp/tp06-shadow-9am.png" alt="Shadow diagram 9AM"></div>
+          <div class="img-slot"><img src="images/richmond-tp/tp07-shadow-3pm.png" alt="Shadow diagram 3PM"></div>
         </div>
 
         <p>Residential town planning documentation for a contemporary townhouse development at 318 Burnley Street, Richmond — a narrow 305m² site in General Residential Zone 4. The project explored site analysis, neighbourhood character, overshadowing, and contextual response for a planning permit submission.</p>
@@ -437,11 +358,7 @@
         <div class="proj-sidebar-row">
           <div class="proj-sidebar-label">Tags</div>
           <div class="proj-tags-row">
-            <span class="tag">Town Planning</span>
-            <span class="tag">Shadow Diagrams</span>
-            <span class="tag">Neighbourhood Character</span>
-            <span class="tag">Site Analysis</span>
-            <span class="tag">GRZ4</span>
+            <span class="tag">Town Planning</span><span class="tag">Shadow Diagrams</span><span class="tag">Neighbourhood Character</span><span class="tag">Site Analysis</span><span class="tag">GRZ4</span>
           </div>
         </div>
       </div>
@@ -449,7 +366,6 @@
   </div>
 
   <hr class="proj-divider">
-
 
   <!-- ============================================================ -->
   <!-- 03  RICHMOND TOWNHOUSE — WORKING DRAWINGS                    -->
@@ -461,67 +377,38 @@
       <span class="badge badge-academic">Academic · 2025</span>
     </div>
     <h2 class="proj-section-title">Richmond Townhouse — Construction Documentation</h2>
-    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.25rem; letter-spacing:0.04em;">318 Burnley Street, Richmond VIC 3121 · AT 2.2 · A01–A11 (10 of 11 sheets presented)</p>
+    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.25rem; letter-spacing:0.04em;">318 Burnley Street, Richmond VIC 3121 · AT 2.2 · A01–A11</p>
 
     <div class="proj-detail">
       <div class="proj-body">
-
         <span class="img-label">A01 — Site plan</span>
-        <div class="img-hero-placeholder">
-          <!-- REPLACE WITH: <img src="images/richmond-wd/a01-site-plan.png" alt="Site plan" class="img-hero"> -->
-          <span class="img-placeholder-label">A01 — Site plan · 1:100 · 318 Burnley Street<br><em>images/richmond-wd/a01-site-plan.png</em></span>
-        </div>
+        <img src="images/richmond-wd/a01-site-plan.png" alt="Site plan" class="img-hero">
 
         <span class="img-label">A02 — Ground floor plan</span>
-        <div class="img-hero-placeholder">
-          <!-- REPLACE WITH: <img src="images/richmond-wd/a02-ground-floor-plan.png" alt="Ground floor plan" class="img-hero"> -->
-          <span class="img-placeholder-label">A02 — Ground floor plan · 1:100<br><em>images/richmond-wd/a02-ground-floor-plan.png</em></span>
-        </div>
+        <img src="images/richmond-wd/a02-ground-floor-plan.png" alt="Ground floor plan" class="img-hero">
 
         <span class="img-label">A03 — First floor plan</span>
-        <div class="img-hero-placeholder">
-          <!-- REPLACE WITH: <img src="images/richmond-wd/a03-first-floor-plan.png" alt="First floor plan" class="img-hero"> -->
-          <span class="img-placeholder-label">A03 — First floor plan · 1:100<br><em>images/richmond-wd/a03-first-floor-plan.png</em></span>
-        </div>
+        <img src="images/richmond-wd/a03-first-floor-plan.png" alt="First floor plan" class="img-hero">
 
         <span class="img-label">A05 — Elevations (North &amp; East)</span>
-        <div class="img-hero-placeholder">
-          <!-- REPLACE WITH: <img src="images/richmond-wd/a05-elevations.png" alt="Elevations North and East" class="img-hero"> -->
-          <span class="img-placeholder-label">A05 — North &amp; East elevations · 1:100<br><em>images/richmond-wd/a05-elevations.png</em></span>
-        </div>
+        <img src="images/richmond-wd/a05-elevations.png" alt="Elevations North and East" class="img-hero">
 
         <span class="img-label">A06 — Sections (Cross A-A, Cross C-C, Longitudinal B-B)</span>
-        <div class="img-hero-placeholder">
-          <!-- REPLACE WITH: <img src="images/richmond-wd/a06-sections.png" alt="Cross and longitudinal sections" class="img-hero"> -->
-          <span class="img-placeholder-label">A06 — Cross sections A-A, C-C &amp; longitudinal section B-B · 1:50<br><em>images/richmond-wd/a06-sections.png</em></span>
-        </div>
+        <img src="images/richmond-wd/a06-sections.png" alt="Cross and longitudinal sections" class="img-hero">
 
+        <span class="img-label">A07 &amp; A08 — Construction details</span>
         <div class="img-grid-2">
-          <div class="img-slot">
-            <!-- REPLACE DIV WITH: <img src="images/richmond-wd/a07-detail-first-floor-junction.png" alt="Construction detail D01 first floor junction"> -->
-            <span class="img-placeholder-label">A07 — D01 First floor junction detail · 1:10<br><em>images/richmond-wd/a07-detail-first-floor-junction.png</em></span>
-          </div>
-          <div class="img-slot">
-            <!-- REPLACE DIV WITH: <img src="images/richmond-wd/a08-detail-skylight.png" alt="Construction detail D02 skylight"> -->
-            <span class="img-placeholder-label">A08 — D02 Skylight detail · 1:10<br><em>images/richmond-wd/a08-detail-skylight.png</em></span>
-          </div>
+          <div class="img-slot"><img src="images/richmond-wd/a07-detail-first-floor-junction.png" alt="Construction detail D01 first floor junction"></div>
+          <div class="img-slot"><img src="images/richmond-wd/a08-detail-skylight.png" alt="Construction detail D02 skylight"></div>
         </div>
 
         <span class="img-label">A09 — Ground floor electrical plan</span>
-        <div class="img-hero-placeholder">
-          <!-- REPLACE WITH: <img src="images/richmond-wd/a09-electrical-plan.png" alt="Ground floor electrical plan" class="img-hero"> -->
-          <span class="img-placeholder-label">A09 — Ground floor electrical plan · 1:100<br><em>images/richmond-wd/a09-electrical-plan.png</em></span>
-        </div>
+        <img src="images/richmond-wd/a09-electrical-plan.png" alt="Ground floor electrical plan" class="img-hero">
 
+        <span class="img-label">A10 &amp; A11 — Schedules</span>
         <div class="img-grid-2">
-          <div class="img-slot">
-            <!-- REPLACE DIV WITH: <img src="images/richmond-wd/a10-window-schedule.png" alt="Ground floor window schedule"> -->
-            <span class="img-placeholder-label">A10 — Ground floor window schedule · 1:50<br><em>images/richmond-wd/a10-window-schedule.png</em></span>
-          </div>
-          <div class="img-slot">
-            <!-- REPLACE DIV WITH: <img src="images/richmond-wd/a11-door-schedule.png" alt="Ground floor door schedule"> -->
-            <span class="img-placeholder-label">A11 — Ground floor door schedule · 1:50<br><em>images/richmond-wd/a11-door-schedule.png</em></span>
-          </div>
+          <div class="img-slot"><img src="images/richmond-wd/a10-window-schedule.png" alt="Ground floor window schedule"></div>
+          <div class="img-slot"><img src="images/richmond-wd/a11-door-schedule.png" alt="Ground floor door schedule"></div>
         </div>
 
         <p>Further refinement of the approved Richmond townhouse concept into a full construction documentation set. The project took the design from planning approval through to a coordinated working drawing set suitable for a building permit application — including structural coordination, services integration, and detailed specifications for materials, windows, and doors.</p>
@@ -542,16 +429,11 @@
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Site</div><div class="proj-sidebar-value">318 Burnley Street, Richmond VIC 3121</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Type</div><div class="proj-sidebar-value">Residential — Class 1a, two-storey</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Scale</div><div class="proj-sidebar-value">1:100 plans &amp; elevations · 1:50 sections · 1:10 details</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Sheets presented</div><div class="proj-sidebar-value">10 of 11 (framing layout omitted)</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Materials</div><div class="proj-sidebar-value">Austral Bricks Aged Red · James Hardie Axon cladding · Lysaght Trimdek · Enduradeck Walnut decking</div></div>
         <div class="proj-sidebar-row">
           <div class="proj-sidebar-label">Tags</div>
           <div class="proj-tags-row">
-            <span class="tag">Construction Documentation</span>
-            <span class="tag">Sections</span>
-            <span class="tag">Details</span>
-            <span class="tag">Schedules</span>
-            <span class="tag">Electrical</span>
+            <span class="tag">Construction Documentation</span><span class="tag">Sections</span><span class="tag">Details</span><span class="tag">Schedules</span><span class="tag">Electrical</span>
           </div>
         </div>
       </div>
@@ -559,7 +441,6 @@
   </div>
 
   <hr class="proj-divider">
-
 
   <!-- ============================================================ -->
   <!-- 04  BAL ASSESSMENT                                           -->
@@ -575,29 +456,17 @@
 
     <div class="proj-detail">
       <div class="proj-body">
-
         <span class="img-label">A02 — Site plan to BAL 40</span>
-        <div class="img-hero-placeholder">
-          <!-- REPLACE WITH: <img src="images/bal/a02-site-plan-bal40.png" alt="Site plan BAL 40" class="img-hero"> -->
-          <span class="img-placeholder-label">A02 — Site plan · BAL 40 · 1:200 · 31 Livingstone Close, Burwood<br><em>images/bal/a02-site-plan-bal40.png</em></span>
-        </div>
+        <img src="images/bal/a02-site-plan-bal40.png" alt="Site plan BAL 40" class="img-hero">
 
+        <span class="img-label">A08 &amp; A09 — Construction details</span>
         <div class="img-grid-2">
-          <div class="img-slot">
-            <!-- REPLACE DIV WITH: <img src="images/bal/a08-detail-bal19-lightweight.png" alt="BAL 19 lightweight construction detail"> -->
-            <span class="img-placeholder-label">A08 — BAL 19 lightweight construction detail · 1:20<br><em>images/bal/a08-detail-bal19-lightweight.png</em></span>
-          </div>
-          <div class="img-slot">
-            <!-- REPLACE DIV WITH: <img src="images/bal/a09-detail-bal40-heavyweight.png" alt="BAL 40 heavyweight construction detail"> -->
-            <span class="img-placeholder-label">A09 — BAL 40 heavyweight construction detail · 1:20<br><em>images/bal/a09-detail-bal40-heavyweight.png</em></span>
-          </div>
+          <div class="img-slot"><img src="images/bal/a08-detail-bal19-lightweight.png" alt="BAL 19 lightweight construction detail"></div>
+          <div class="img-slot"><img src="images/bal/a09-detail-bal40-heavyweight.png" alt="BAL 40 heavyweight construction detail"></div>
         </div>
 
         <span class="img-label">A01 — Drawing register &amp; benefits statement</span>
-        <div class="img-hero-placeholder">
-          <!-- REPLACE WITH: <img src="images/bal/a01-register-benefits.png" alt="Drawing register and benefits statement" class="img-hero"> -->
-          <span class="img-placeholder-label">A01 — Drawing register &amp; benefits statement<br><em>images/bal/a01-register-benefits.png</em></span>
-        </div>
+        <img src="images/bal/a01-register-benefits.png" alt="Drawing register and benefits statement" class="img-hero">
 
         <p>Site planning and construction detailing for a dwelling at 31 Livingstone Close, Burwood, developed in accordance with AS 3959 — addressing both BAL 19 (lightweight) and BAL 40 (heavyweight) construction requirements to improve bushfire resilience and occupant safety.</p>
         <p>The BAL 40 detail required a fundamentally different approach to materials: brick veneer walls with Hebel Powerfence boundary fencing, reinforced concrete driveway suitable for CFA truck load, dedicated fire water tanks with 65mm CFA hose coupling, and Eurotec roller shutters on all openings. The lightweight BAL 19 detail addressed the same issues through FC sheet cladding, ember-proof gutter mesh, and sealed roof-wall junctions.</p>
@@ -622,11 +491,7 @@
         <div class="proj-sidebar-row">
           <div class="proj-sidebar-label">Tags</div>
           <div class="proj-tags-row">
-            <span class="tag">AS 3959</span>
-            <span class="tag">BAL 19</span>
-            <span class="tag">BAL 40</span>
-            <span class="tag">Construction Details</span>
-            <span class="tag">CFA</span>
+            <span class="tag">AS 3959</span><span class="tag">BAL 19</span><span class="tag">BAL 40</span><span class="tag">Construction Details</span><span class="tag">CFA</span>
           </div>
         </div>
       </div>
@@ -635,9 +500,8 @@
 
   <hr class="proj-divider">
 
-
   <!-- ============================================================ -->
-  <!-- 05  DUNE WELLNESS CENTRE                                     -->
+  <!-- 05  DUNE WELLNESS CENTRE — PLACEHOLDERS UNTIL IMAGES READY   -->
   <!-- ============================================================ -->
   <div class="proj-section" id="proj-wellness">
     <a href="index.html#work" class="back-link">← Back to all work</a>
@@ -646,71 +510,65 @@
       <span class="badge badge-academic">Academic · 2026</span>
     </div>
     <h2 class="proj-section-title">Dune Wellness Centre</h2>
-    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.25rem; letter-spacing:0.04em;">Commercial concept · BIM &amp; rendered presentation · ArchiCAD · Twinmotion · Affinity</p>
+    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.25rem; letter-spacing:0.04em;">Commercial concept · BIM &amp; rendered presentation · ArchiCAD · Affinity</p>
 
     <div class="proj-detail">
       <div class="proj-body">
-
-        <!-- A1 poster — portrait, centred, given space to breathe -->
         <span class="img-label">A1 Presentation Poster</span>
         <div style="display:flex; justify-content:center; margin-bottom:1.5rem;">
           <div class="img-hero-placeholder portrait">
-            <!-- REPLACE with: <img src="images/wellness/00-a1-poster.png" alt="Dune Wellness Centre A1 presentation poster"
-                 style="width:100%; max-width:520px; display:block; margin:0 auto; border:0.5px solid var(--border);"> -->
-            <span class="img-placeholder-label">00 — A1 portrait presentation poster<br><em>images/wellness/00-a1-poster.png</em></span>
+            <!-- REPLACE WITH: <img src="images/wellness/00-a1-poster.png" alt="Dune Wellness Centre A1 presentation poster" style="width:100%; max-width:520px; display:block; margin:0 auto; border:0.5px solid var(--border);"> -->
+            <span class="img-placeholder-label">00 — A1 portrait poster<br>images/wellness/00-a1-poster.png</span>
           </div>
         </div>
 
-        <!-- 2 hero renders — generous -->
         <span class="img-label">Renders — exterior</span>
-        <div class="img-grid-2" style="margin-bottom:1.5px;">
-          <div class="img-slot" style="aspect-ratio:16/10;">
-            <!-- REPLACE DIV WITH: <img src="images/wellness/01-render-front-perspective.png" alt="Front perspective render"> -->
-            <span class="img-placeholder-label">01 — Front perspective<br><em>images/wellness/01-render-front-perspective.png</em></span>
+        <div class="img-grid-2">
+          <div class="img-slot">
+            <!-- REPLACE DIV CONTENTS WITH: <img src="images/wellness/01-render-front-perspective.png" alt="Front perspective render"> -->
+            <span class="img-placeholder-label">01 — Front perspective</span>
           </div>
-          <div class="img-slot" style="aspect-ratio:16/10;">
-            <!-- REPLACE DIV WITH: <img src="images/wellness/02-render-mineral-pool-terrace.png" alt="Mineral pool terrace render"> -->
-            <span class="img-placeholder-label">02 — Mineral pool terrace<br><em>images/wellness/02-render-mineral-pool-terrace.png</em></span>
+          <div class="img-slot">
+            <!-- REPLACE DIV CONTENTS WITH: <img src="images/wellness/02-render-mineral-pool-terrace.png" alt="Mineral pool terrace render"> -->
+            <span class="img-placeholder-label">02 — Mineral pool terrace</span>
           </div>
         </div>
 
-        <!-- Interior renders 3-col -->
-        <span class="img-label" style="margin-top:1.5px; display:block;">Renders — interior</span>
-        <div class="img-grid-3" style="margin-top:0.5rem;">
+        <span class="img-label">Renders — interior</span>
+        <div class="img-grid-3">
           <div class="img-slot">
-            <!-- REPLACE DIV WITH: <img src="images/wellness/03-render-reception.png" alt="Reception render"> -->
-            <span class="img-placeholder-label">03 — Reception<br><em>images/wellness/03-render-reception.png</em></span>
+            <!-- REPLACE DIV CONTENTS WITH: <img src="images/wellness/03-render-reception.png" alt="Reception"> -->
+            <span class="img-placeholder-label">03 — Reception</span>
           </div>
           <div class="img-slot">
-            <!-- REPLACE DIV WITH: <img src="images/wellness/04-render-lounge.png" alt="Lounge render"> -->
-            <span class="img-placeholder-label">04 — Lounge<br><em>images/wellness/04-render-lounge.png</em></span>
+            <!-- REPLACE DIV CONTENTS WITH: <img src="images/wellness/04-render-lounge.png" alt="Lounge"> -->
+            <span class="img-placeholder-label">04 — Lounge</span>
           </div>
           <div class="img-slot">
-            <!-- REPLACE DIV WITH: <img src="images/wellness/05-render-cold-plunge-garden.png" alt="Cold plunge and garden render"> -->
-            <span class="img-placeholder-label">05 — Cold plunge &amp; garden<br><em>images/wellness/05-render-cold-plunge-garden.png</em></span>
+            <!-- REPLACE DIV CONTENTS WITH: <img src="images/wellness/05-render-cold-plunge-garden.png" alt="Cold plunge and garden"> -->
+            <span class="img-placeholder-label">05 — Cold plunge &amp; garden</span>
           </div>
         </div>
         <div class="img-grid-3" style="margin-top:1.5px;">
           <div class="img-slot">
-            <!-- REPLACE DIV WITH: <img src="images/wellness/06-render-studio.png" alt="Studio render"> -->
-            <span class="img-placeholder-label">06 — Studio<br><em>images/wellness/06-render-studio.png</em></span>
+            <!-- REPLACE DIV CONTENTS WITH: <img src="images/wellness/06-render-studio.png" alt="Studio"> -->
+            <span class="img-placeholder-label">06 — Studio</span>
           </div>
           <div class="img-slot">
-            <!-- REPLACE DIV WITH: <img src="images/wellness/07-render-retail.png" alt="Retail display render"> -->
-            <span class="img-placeholder-label">07 — Retail display<br><em>images/wellness/07-render-retail.png</em></span>
+            <!-- REPLACE DIV CONTENTS WITH: <img src="images/wellness/07-render-retail.png" alt="Retail display"> -->
+            <span class="img-placeholder-label">07 — Retail display</span>
           </div>
           <div class="img-slot">
-            <!-- REPLACE DIV WITH: <img src="images/wellness/08-render-stairs.png" alt="Stairs render"> -->
-            <span class="img-placeholder-label">08 — Stairs<br><em>images/wellness/08-render-stairs.png</em></span>
+            <!-- REPLACE DIV CONTENTS WITH: <img src="images/wellness/08-render-stairs.png" alt="Stairs"> -->
+            <span class="img-placeholder-label">08 — Stairs</span>
           </div>
         </div>
 
-        <!-- Ground floor plan + legend -->
         <span class="img-label" style="margin-top:1.5rem; display:block;">Ground floor &amp; landscaping plan</span>
         <div class="plan-legend-wrap" style="margin-top:0.5rem;">
           <div class="img-hero-placeholder" style="margin-bottom:0; aspect-ratio:4/3;">
-            <!-- REPLACE with: <img src="images/wellness/09-ground-floor-landscape-plan.png" alt="Ground floor and landscaping plan" class="img-hero" style="margin-bottom:0;"> -->
-            <span class="img-placeholder-label">09 — Ground floor &amp; landscaping plan<br><em>images/wellness/09-ground-floor-landscape-plan.png</em></span>
+            <!-- REPLACE WITH: <img src="images/wellness/09-ground-floor-landscape-plan.png" alt="Ground floor and landscaping plan" class="img-hero" style="margin-bottom:0;"> -->
+            <span class="img-placeholder-label">09 — Ground floor &amp; landscaping plan</span>
           </div>
           <div class="legend-block">
             <div class="legend-title">Legend</div>
@@ -735,40 +593,38 @@
           </div>
         </div>
 
-        <!-- First floor plan -->
         <span class="img-label" style="margin-top:1.5rem; display:block;">Level one floor plan</span>
         <div class="img-hero-placeholder" style="margin-top:0.5rem;">
           <!-- REPLACE WITH: <img src="images/wellness/10-first-floor-plan.png" alt="Level one floor plan" class="img-hero"> -->
-          <span class="img-placeholder-label">10 — Level one floor plan<br><em>images/wellness/10-first-floor-plan.png</em></span>
+          <span class="img-placeholder-label">10 — Level one floor plan</span>
         </div>
 
-        <!-- Section + elevations 2-col -->
         <span class="img-label">Section A-A</span>
         <div class="img-hero-placeholder">
           <!-- REPLACE WITH: <img src="images/wellness/11-section-aa.png" alt="Section A-A" class="img-hero"> -->
-          <span class="img-placeholder-label">11 — Section A-A<br><em>images/wellness/11-section-aa.png</em></span>
+          <span class="img-placeholder-label">11 — Section A-A</span>
         </div>
 
         <span class="img-label">Elevations — North, East, South, West</span>
         <div class="img-grid-2">
           <div class="img-slot">
-            <!-- REPLACE DIV WITH: <img src="images/wellness/12-elevation-north-east.png" alt="North and East elevations"> -->
-            <span class="img-placeholder-label">12 — North &amp; East elevations<br><em>images/wellness/12-elevation-north-east.png</em></span>
+            <!-- REPLACE DIV CONTENTS WITH: <img src="images/wellness/12-elevation-north-east.png" alt="North and East elevations"> -->
+            <span class="img-placeholder-label">12 — North &amp; East elevations</span>
           </div>
           <div class="img-slot">
-            <!-- REPLACE DIV WITH: <img src="images/wellness/13-elevation-south-west.png" alt="South and West elevations"> -->
-            <span class="img-placeholder-label">13 — South &amp; West elevations<br><em>images/wellness/13-elevation-south-west.png</em></span>
+            <!-- REPLACE DIV CONTENTS WITH: <img src="images/wellness/13-elevation-south-west.png" alt="South and West elevations"> -->
+            <span class="img-placeholder-label">13 — South &amp; West elevations</span>
           </div>
         </div>
 
         <p>A commercial wellness centre concept exploring spatial zoning, materiality, and user experience through a calm and grounded architectural language. The building organises ritual-based zones — movement, heat, water, and rest — through a sequence of textured, tactile spaces animated by light, greenery, and curved form.</p>
-        <p>The project combined BIM modelling in ArchiCAD, rendering in Twinmotion, and presentation layout in Affinity to produce a cohesive submission. The A1 poster was designed as a standalone document — communicating design intent, atmosphere, floor plans, section, and all four elevations in a single composition.</p>
+        <p>The project combined BIM modelling in ArchiCAD and presentation layout in Affinity to produce a cohesive submission. The A1 poster was designed as a standalone document — communicating design intent, atmosphere, floor plans, section, and all four elevations in a single composition.</p>
 
         <h4 class="h4-serif-bold">Key outcomes</h4>
         <ul class="outcomes-list">
           <li>Designed a 16-room commercial wellness centre across two floors with landscape integration</li>
           <li>Produced a full BIM model in ArchiCAD and extracted plans, sections, and elevations from it</li>
-          <li>Generated interior and exterior renders in Twinmotion communicating material and atmospheric intent</li>
+          <li>Generated interior and exterior renders communicating material and atmospheric intent</li>
           <li>Designed and produced an A1 portrait presentation poster as a complete design communication document</li>
           <li>Organised spaces through a ritual-based zoning strategy: movement, heat, water, rest</li>
         </ul>
@@ -777,17 +633,13 @@
       <div class="proj-sidebar">
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Year</div><div class="proj-sidebar-value">2026</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Type</div><div class="proj-sidebar-value">Commercial — Wellness Centre</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Software</div><div class="proj-sidebar-value">ArchiCAD · Twinmotion · Affinity</div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Software</div><div class="proj-sidebar-value">ArchiCAD · Affinity</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Spaces</div><div class="proj-sidebar-value">16 rooms — see legend</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Deliverables</div><div class="proj-sidebar-value">A1 poster · 8 renders · Ground &amp; first floor plans · Section A-A · 4 elevations</div></div>
         <div class="proj-sidebar-row">
           <div class="proj-sidebar-label">Tags</div>
           <div class="proj-tags-row">
-            <span class="tag">Commercial Design</span>
-            <span class="tag">BIM</span>
-            <span class="tag">Twinmotion</span>
-            <span class="tag">Spatial Planning</span>
-            <span class="tag">Presentation</span>
+            <span class="tag">Commercial Design</span><span class="tag">BIM</span><span class="tag">Rendering</span><span class="tag">Spatial Planning</span><span class="tag">Presentation</span>
           </div>
         </div>
       </div>
@@ -808,25 +660,115 @@
 </footer>
 
 <script>
-  const pages = document.querySelectorAll('.journal-page');
-  const prevBtn = document.getElementById('journalPrev');
-  const nextBtn = document.getElementById('journalNext');
-  const counter = document.getElementById('journalCounter');
-  let current = 0;
+  // Journal — double page spread viewer
+  const journalSrcs = [
+    'images/richmond-tp/journal-01.png',
+    'images/richmond-tp/journal-02.png',
+    'images/richmond-tp/journal-03.png',
+    'images/richmond-tp/journal-04.png',
+    'images/richmond-tp/journal-05.png',
+    'images/richmond-tp/journal-06.png',
+    'images/richmond-tp/journal-07.png',
+    'images/richmond-tp/journal-08.png',
+    'images/richmond-tp/journal-09.png',
+    'images/richmond-tp/journal-10.png',
+    'images/richmond-tp/journal-11.png',
+    'images/richmond-tp/journal-12.png',
+    'images/richmond-tp/journal-13.png',
+    'images/richmond-tp/journal-14.png',
+    'images/richmond-tp/journal-15.png'
+  ];
+  const TOTAL = journalSrcs.length;
+  let spread = 0;
+  let fsSpread = 0;
 
-  function showPage(n) {
-    pages.forEach((p, i) => p.classList.toggle('hidden', i !== n));
-    counter.textContent = 'Page ' + (n + 1) + ' of ' + pages.length;
-    prevBtn.disabled = n === 0;
-    nextBtn.disabled = n === pages.length - 1;
-    current = n;
+  function spreadLabel(s) {
+    const l = s + 1;
+    const r = s + 2;
+    if (r > TOTAL) return 'Page ' + l + ' of ' + TOTAL;
+    return 'Pages ' + l + '–' + r + ' of ' + TOTAL;
   }
 
-  if (prevBtn && nextBtn) {
-    prevBtn.addEventListener('click', () => { if (current > 0) showPage(current - 1); });
-    nextBtn.addEventListener('click', () => { if (current < pages.length - 1) showPage(current + 1); });
-    showPage(0);
+  function renderSpread(s, leftSlot, rightSlot, counter, prevBtn, nextBtn) {
+    leftSlot.innerHTML = '';
+    rightSlot.innerHTML = '';
+    const imgL = new Image();
+    imgL.src = journalSrcs[s];
+    imgL.alt = 'Page ' + (s + 1);
+    imgL.style.cssText = 'width:100%;height:100%;object-fit:contain;display:block;';
+    leftSlot.appendChild(imgL);
+    if (s + 1 < TOTAL) {
+      const imgR = new Image();
+      imgR.src = journalSrcs[s + 1];
+      imgR.alt = 'Page ' + (s + 2);
+      imgR.style.cssText = 'width:100%;height:100%;object-fit:contain;display:block;';
+      rightSlot.appendChild(imgR);
+    }
+    counter.textContent = spreadLabel(s);
+    prevBtn.disabled = s === 0;
+    nextBtn.disabled = s + 2 >= TOTAL;
   }
+
+  const leftSlot  = document.getElementById('spreadLeft');
+  const rightSlot = document.getElementById('spreadRight');
+  const prevBtn   = document.getElementById('journalPrev');
+  const nextBtn   = document.getElementById('journalNext');
+  const counter   = document.getElementById('journalCounter');
+  const fullBtn   = document.getElementById('journalFullBtn');
+  const fs        = document.getElementById('journalFullscreen');
+  const fsLeft    = document.getElementById('fsLeft');
+  const fsRight   = document.getElementById('fsRight');
+  const fsPrev    = document.getElementById('fsPrev');
+  const fsNext    = document.getElementById('fsNext');
+  const fsCounter = document.getElementById('fsCounter');
+  const closeBtn  = document.getElementById('journalClose');
+
+  // Init on DOMContentLoaded to ensure elements exist
+  document.addEventListener('DOMContentLoaded', function() {
+    renderSpread(spread, leftSlot, rightSlot, counter, prevBtn, nextBtn);
+  });
+
+  // Also render immediately in case DOMContentLoaded already fired
+  if (document.readyState !== 'loading') {
+    renderSpread(spread, leftSlot, rightSlot, counter, prevBtn, nextBtn);
+  }
+
+  prevBtn.addEventListener('click', () => {
+    if (spread >= 2) { spread -= 2; renderSpread(spread, leftSlot, rightSlot, counter, prevBtn, nextBtn); }
+  });
+  nextBtn.addEventListener('click', () => {
+    if (spread + 2 < TOTAL) { spread += 2; renderSpread(spread, leftSlot, rightSlot, counter, prevBtn, nextBtn); }
+  });
+
+  fullBtn.addEventListener('click', () => {
+    fsSpread = spread;
+    renderSpread(fsSpread, fsLeft, fsRight, fsCounter, fsPrev, fsNext);
+    fs.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+
+  fsPrev.addEventListener('click', () => {
+    if (fsSpread >= 2) { fsSpread -= 2; renderSpread(fsSpread, fsLeft, fsRight, fsCounter, fsPrev, fsNext); }
+  });
+  fsNext.addEventListener('click', () => {
+    if (fsSpread + 2 < TOTAL) { fsSpread += 2; renderSpread(fsSpread, fsLeft, fsRight, fsCounter, fsPrev, fsNext); }
+  });
+
+  function closeFullscreen() {
+    fs.classList.remove('open');
+    document.body.style.overflow = '';
+    spread = fsSpread;
+    renderSpread(spread, leftSlot, rightSlot, counter, prevBtn, nextBtn);
+  }
+
+  closeBtn.addEventListener('click', closeFullscreen);
+  fs.addEventListener('click', e => { if (e.target === fs) closeFullscreen(); });
+  document.addEventListener('keydown', e => {
+    if (!fs.classList.contains('open')) return;
+    if (e.key === 'Escape') closeFullscreen();
+    if (e.key === 'ArrowLeft') fsPrev.click();
+    if (e.key === 'ArrowRight') fsNext.click();
+  });
 </script>
 </body>
 </html>
