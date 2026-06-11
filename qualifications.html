@@ -29,7 +29,7 @@
   .proj-nav { background: var(--bg-card); border-bottom: 0.5px solid var(--border); padding: 2.5rem 3rem; }
   .proj-nav-inner { max-width: 1160px; margin: 0 auto; }
   .proj-nav-label { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.25rem; }
-  .proj-nav-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5px; background: var(--border); border: 0.5px solid var(--border); }
+  .proj-nav-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.5px; background: var(--border); border: 0.5px solid var(--border); }
   .proj-nav-item { position: relative; background: var(--bg-card); padding: 1.5rem 1.25rem 1.25rem; text-decoration: none; overflow: hidden; transition: background 0.25s; min-height: 110px; display: flex; flex-direction: column; justify-content: flex-end; }
   .proj-nav-item::before { content: ''; position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0.1; transition: opacity 0.3s; }
   .proj-nav-item:hover::before { opacity: 0.18; }
@@ -39,11 +39,11 @@
   .proj-nav-num { font-size: 10px; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 0.35rem; position: relative; z-index: 2; }
   .proj-nav-title { font-family: 'Playfair Display', serif; font-size: 0.9rem; line-height: 1.25; color: var(--text-primary); position: relative; z-index: 2; }
   .proj-nav-type { font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.4rem; position: relative; z-index: 2; }
-  .proj-nav-item.beach::before { background-image: url('images/beach-house/01-site-plan.png'); }
-  .proj-nav-item.rich-tp::before { background-image: url('images/richmond-tp/tp01-site-analysis.png'); }
-  .proj-nav-item.rich-wd::before { background-image: url('images/richmond-wd/a01-site-plan.png'); }
-  .proj-nav-item.bal::before { background-image: url('images/bal/a02-site-plan-bal40.png'); }
-  .proj-nav-item.wellness::before { background-image: url('images/wellness/00-a1-poster.png'); }
+  .proj-nav-item.beach::before { background-image: url('images/beach-house/01-site-plan.webp'); }
+  .proj-nav-item.rich-tp::before { background-image: url('images/richmond-tp/tp01-site-analysis.webp'); }
+  .proj-nav-item.rich-wd::before { background-image: url('images/richmond-wd/a01-site-plan.webp'); }
+  .proj-nav-item.bal::before { background-image: url('images/bal/a02-site-plan-bal40.webp'); }
+  .proj-nav-item.wellness::before { background-image: url('images/wellness/00-a1-poster.webp'); }
 
   /* COLLAPSIBLE UNITS */
   .units-toggle { display: flex; align-items: center; justify-content: space-between; cursor: pointer; padding-bottom: 1.25rem; border-bottom: 0.5px solid var(--border); margin-bottom: 0; user-select: none; }
@@ -207,7 +207,7 @@
   .h4-serif { font-family: 'Playfair Display', serif; font-size: 1.05rem; margin: 2rem 0 0.75rem; color: var(--text-secondary); font-weight: 400; letter-spacing: 0.02em; }
   .h4-serif-bold { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin: 1.75rem 0 0.75rem; }
 
-  @media (max-width: 1000px) { .proj-nav-grid { grid-template-columns: repeat(3, 1fr); } .proj-nav { padding: 2rem 1.5rem; } }
+  @media (max-width: 1000px) { .proj-nav-grid { grid-template-columns: repeat(4, 1fr); } .proj-nav { padding: 2rem 1.5rem; } }
   @media (max-width: 900px) { .course-inner { grid-template-columns: 1fr; } .proj-detail { grid-template-columns: 1fr; } .proj-sidebar { position: static; } .img-grid-2 { grid-template-columns: 1fr; } .img-grid-3 { grid-template-columns: 1fr 1fr; } .plan-legend-wrap, .plan-legend-wrap-lg { grid-template-columns: 1fr; } .page-header-inner { padding: 3rem 1.5rem 2.5rem; } }
   @media (max-width: 600px) { .proj-nav-grid { grid-template-columns: 1fr 1fr; } }
 </style>
@@ -254,6 +254,7 @@
       <a href="#proj-richmond-wd" class="proj-nav-item rich-wd"><div class="proj-nav-num">03</div><div class="proj-nav-title">Richmond Townhouse — Working Drawings</div><div class="proj-nav-type">Construction Documentation</div></a>
       <a href="#proj-bal" class="proj-nav-item bal"><div class="proj-nav-num">04</div><div class="proj-nav-title">Bushfire-Responsive Design</div><div class="proj-nav-type">BAL Assessment</div></a>
       <a href="#proj-wellness" class="proj-nav-item wellness"><div class="proj-nav-num">05</div><div class="proj-nav-title">Dune Wellness Centre</div><div class="proj-nav-type">Commercial Design</div></a>
+      <a href="#proj-commercial-details" class="proj-nav-item" style="background:var(--bg-card);"><div class="proj-nav-num">06</div><div class="proj-nav-title">Commercial Construction Details</div><div class="proj-nav-type">Technical Documentation</div></a>
     </div>
   </div>
 </div>
@@ -317,19 +318,19 @@
     <div class="proj-detail">
       <div class="proj-body">
         <span class="img-label">A01 — Site plan</span>
-        <img src="images/beach-house/01-site-plan.png" alt="Beach House site plan" class="img-hero" data-gallery="beach" data-index="0">
+        <img src="images/beach-house/01-site-plan.webp" alt="Beach House site plan" class="img-hero" data-gallery="beach" data-index="0">
 
         <span class="img-label">A02 — Floor plan</span>
-        <img src="images/beach-house/02-floor-plan.png" alt="Beach House floor plan" class="img-hero" data-gallery="beach" data-index="1">
+        <img src="images/beach-house/02-floor-plan.webp" alt="Beach House floor plan" class="img-hero" data-gallery="beach" data-index="1">
 
         <span class="img-label">A03–A04 — Elevations</span>
         <div class="img-grid-2">
-          <div class="img-slot"><img src="images/beach-house/03-north-south-elevations.png" alt="North and South elevations" data-gallery="beach" data-index="2"></div>
-          <div class="img-slot"><img src="images/beach-house/04-east-west-elevations.png" alt="East and West elevations" data-gallery="beach" data-index="3"></div>
+          <div class="img-slot"><img src="images/beach-house/03-north-south-elevations.webp" alt="North and South elevations" data-gallery="beach" data-index="2"></div>
+          <div class="img-slot"><img src="images/beach-house/04-east-west-elevations.webp" alt="East and West elevations" data-gallery="beach" data-index="3"></div>
         </div>
 
         <span class="img-label">A05 — Section</span>
-        <img src="images/beach-house/05-section.png" alt="Beach House section" class="img-hero" data-gallery="beach" data-index="4">
+        <img src="images/beach-house/05-section.webp" alt="Beach House section" class="img-hero" data-gallery="beach" data-index="4">
 
         <p>A freehand residential design project for a contemporary coastal holiday house at 225–227 Ocean Beach Road, Sorrento. The proposal responds to a client brief focused on accessible, adaptable living — balancing passive solar design, site response, and a relaxed coastal character.</p>
         <p>Working freehand required a different kind of thinking to CAD — decisions about proportion and arrangement had to be resolved directly on the page. The section in particular required committing to ceiling heights, roof pitch, and floor levels without the ability to iterate digitally first.</p>
@@ -404,18 +405,18 @@
         <h4 class="h4-serif">Planning Drawing Set</h4>
 
         <span class="img-label">TP-00 — Front page &amp; neighbourhood character</span>
-        <img src="images/richmond-tp/tp00-front-page.png" alt="Front page and neighbourhood character" class="img-hero" data-gallery="rtp" data-index="0">
+        <img src="images/richmond-tp/tp00-front-page.webp" alt="Front page and neighbourhood character" class="img-hero" data-gallery="rtp" data-index="0">
 
         <span class="img-label">TP-01 — Site analysis plan</span>
-        <img src="images/richmond-tp/tp01-site-analysis.png" alt="Site analysis plan" class="img-hero" data-gallery="rtp" data-index="1">
+        <img src="images/richmond-tp/tp01-site-analysis.webp" alt="Site analysis plan" class="img-hero" data-gallery="rtp" data-index="1">
 
         <span class="img-label">TP-05 — Elevations (all four)</span>
-        <img src="images/richmond-tp/tp05-elevations.png" alt="All four elevations" class="img-hero" data-gallery="rtp" data-index="2">
+        <img src="images/richmond-tp/tp05-elevations.webp" alt="All four elevations" class="img-hero" data-gallery="rtp" data-index="2">
 
         <span class="img-label">TP-06 &amp; TP-07 — Shadow diagrams</span>
         <div class="img-grid-2">
-          <div class="img-slot"><img src="images/richmond-tp/tp06-shadow-9am.png" alt="Shadow diagram 9AM" data-gallery="rtp" data-index="3"></div>
-          <div class="img-slot"><img src="images/richmond-tp/tp07-shadow-3pm.png" alt="Shadow diagram 3PM" data-gallery="rtp" data-index="4"></div>
+          <div class="img-slot"><img src="images/richmond-tp/tp06-shadow-9am.webp" alt="Shadow diagram 9AM" data-gallery="rtp" data-index="3"></div>
+          <div class="img-slot"><img src="images/richmond-tp/tp07-shadow-3pm.webp" alt="Shadow diagram 3PM" data-gallery="rtp" data-index="4"></div>
         </div>
 
         <p>Residential town planning documentation for a contemporary townhouse development at 318 Burnley Street, Richmond — a narrow 305m² site in General Residential Zone 4. The project explored site analysis, neighbourhood character, overshadowing, and contextual response for a planning permit submission.</p>
@@ -459,33 +460,33 @@
     <div class="proj-detail">
       <div class="proj-body">
         <span class="img-label">A01 — Site plan</span>
-        <img src="images/richmond-wd/a01-site-plan.png" alt="Site plan" class="img-hero" data-gallery="rwd" data-index="0">
+        <img src="images/richmond-wd/a01-site-plan.webp" alt="Site plan" class="img-hero" data-gallery="rwd" data-index="0">
 
         <span class="img-label">A02 — Ground floor plan</span>
-        <img src="images/richmond-wd/a02-ground-floor-plan.png" alt="Ground floor plan" class="img-hero" data-gallery="rwd" data-index="1">
+        <img src="images/richmond-wd/a02-ground-floor-plan.webp" alt="Ground floor plan" class="img-hero" data-gallery="rwd" data-index="1">
 
         <span class="img-label">A03 — First floor plan</span>
-        <img src="images/richmond-wd/a03-first-floor-plan.png" alt="First floor plan" class="img-hero" data-gallery="rwd" data-index="2">
+        <img src="images/richmond-wd/a03-first-floor-plan.webp" alt="First floor plan" class="img-hero" data-gallery="rwd" data-index="2">
 
         <span class="img-label">A05 — Elevations (North &amp; East)</span>
-        <img src="images/richmond-wd/a05-elevations.png" alt="Elevations North and East" class="img-hero" data-gallery="rwd" data-index="3">
+        <img src="images/richmond-wd/a05-elevations.webp" alt="Elevations North and East" class="img-hero" data-gallery="rwd" data-index="3">
 
         <span class="img-label">A06 — Sections (Cross A-A, Cross C-C, Longitudinal B-B)</span>
-        <img src="images/richmond-wd/a06-sections.png" alt="Cross and longitudinal sections" class="img-hero" data-gallery="rwd" data-index="4">
+        <img src="images/richmond-wd/a06-sections.webp" alt="Cross and longitudinal sections" class="img-hero" data-gallery="rwd" data-index="4">
 
         <span class="img-label">A07 &amp; A08 — Construction details</span>
         <div class="img-grid-2">
-          <div class="img-slot"><img src="images/richmond-wd/a07-detail-first-floor-junction.png" alt="Construction detail D01 first floor junction" data-gallery="rwd" data-index="5"></div>
-          <div class="img-slot"><img src="images/richmond-wd/a08-detail-skylight.png" alt="Construction detail D02 skylight" data-gallery="rwd" data-index="6"></div>
+          <div class="img-slot"><img src="images/richmond-wd/a07-detail-first-floor-junction.webp" alt="Construction detail D01 first floor junction" data-gallery="rwd" data-index="5"></div>
+          <div class="img-slot"><img src="images/richmond-wd/a08-detail-skylight.webp" alt="Construction detail D02 skylight" data-gallery="rwd" data-index="6"></div>
         </div>
 
         <span class="img-label">A09 — Ground floor electrical plan</span>
-        <img src="images/richmond-wd/a09-electrical-plan.png" alt="Ground floor electrical plan" class="img-hero" data-gallery="rwd" data-index="7">
+        <img src="images/richmond-wd/a09-electrical-plan.webp" alt="Ground floor electrical plan" class="img-hero" data-gallery="rwd" data-index="7">
 
         <span class="img-label">A10 &amp; A11 — Schedules</span>
         <div class="img-grid-2">
-          <div class="img-slot"><img src="images/richmond-wd/a10-window-schedule.png" alt="Ground floor window schedule" data-gallery="rwd" data-index="8"></div>
-          <div class="img-slot"><img src="images/richmond-wd/a11-door-schedule.png" alt="Ground floor door schedule" data-gallery="rwd" data-index="9"></div>
+          <div class="img-slot"><img src="images/richmond-wd/a10-window-schedule.webp" alt="Ground floor window schedule" data-gallery="rwd" data-index="8"></div>
+          <div class="img-slot"><img src="images/richmond-wd/a11-door-schedule.webp" alt="Ground floor door schedule" data-gallery="rwd" data-index="9"></div>
         </div>
 
         <p>Further refinement of the approved Richmond townhouse concept into a full construction documentation set. The project took the design from planning approval through to a coordinated working drawing set suitable for a building permit application — including structural coordination, services integration, and detailed specifications for materials, windows, and doors.</p>
@@ -528,15 +529,15 @@
     <div class="proj-detail">
       <div class="proj-body">
         <span class="img-label">A01 — Drawing register &amp; benefits statement</span>
-        <img src="images/bal/a01-register-benefits.png" alt="Drawing register and benefits statement" class="img-hero" data-gallery="bal" data-index="0">
+        <img src="images/bal/a01-register-benefits.webp" alt="Drawing register and benefits statement" class="img-hero" data-gallery="bal" data-index="0">
 
         <span class="img-label">A02 — Site plan to BAL 40</span>
-        <img src="images/bal/a02-site-plan-bal40.png" alt="Site plan BAL 40" class="img-hero" data-gallery="bal" data-index="1">
+        <img src="images/bal/a02-site-plan-bal40.webp" alt="Site plan BAL 40" class="img-hero" data-gallery="bal" data-index="1">
 
         <span class="img-label">A08 &amp; A09 — Construction details</span>
         <div class="img-grid-2">
-          <div class="img-slot"><img src="images/bal/a08-detail-bal19-lightweight.png" alt="BAL 19 lightweight construction detail" data-gallery="bal" data-index="2"></div>
-          <div class="img-slot"><img src="images/bal/a09-detail-bal40-heavyweight.png" alt="BAL 40 heavyweight construction detail" data-gallery="bal" data-index="3"></div>
+          <div class="img-slot"><img src="images/bal/a08-detail-bal19-lightweight.webp" alt="BAL 19 lightweight construction detail" data-gallery="bal" data-index="2"></div>
+          <div class="img-slot"><img src="images/bal/a09-detail-bal40-heavyweight.webp" alt="BAL 40 heavyweight construction detail" data-gallery="bal" data-index="3"></div>
         </div>
 
         <p>Site planning and construction detailing for a dwelling at 31 Livingstone Close, Burwood, developed in accordance with AS 3959 — addressing both BAL 19 (lightweight) and BAL 40 (heavyweight) construction requirements to improve bushfire resilience and occupant safety.</p>
@@ -583,22 +584,22 @@
         <!-- A1 POSTER — portrait hero, centred -->
         <span class="img-label">A1 Presentation Poster</span>
         <div style="display:flex; justify-content:center; margin-bottom:1.5rem;">
-          <img src="images/wellness/00-a1-dune-wellness-poster.png" alt="Dune Wellness Centre A1 presentation poster"
+          <img src="images/wellness/00-a1-dune-wellness-poster.webp" alt="Dune Wellness Centre A1 presentation poster"
                style="width:100%; max-width:520px; display:block; margin:0 auto; border:0.5px solid var(--border); cursor:zoom-in;"
                data-gallery="wellness" data-index="0">
         </div>
 
         <!-- EXTERIOR — entry views -->
         <span class="img-label">Exterior — entry</span>
-        <img src="images/wellness/02-front.png" alt="Entry perspective — canopy and signage" class="img-hero" data-gallery="wellness" data-index="1">
+        <img src="images/wellness/02-front.webp" alt="Entry perspective — canopy and signage" class="img-hero" data-gallery="wellness" data-index="1">
 
         <div class="img-grid-2">
           <div class="img-slot" style="aspect-ratio:16/9;">
-            <img src="images/wellness/01-front-straight.png" alt="Front perspective with fountain forecourt" data-gallery="wellness" data-index="2">
+            <img src="images/wellness/01-front-straight.webp" alt="Front perspective with fountain forecourt" data-gallery="wellness" data-index="2">
           </div>
           <div class="img-slot" style="aspect-ratio:16/9;">
             <!-- placeholder: lounge/reception context near external -->
-            <img src="images/wellness/11-reception-to-doors.png" alt="Reception interior looking to garden doors" data-gallery="wellness" data-index="3">
+            <img src="images/wellness/11-reception-to-doors.webp" alt="Reception interior looking to garden doors" data-gallery="wellness" data-index="3">
           </div>
         </div>
 
@@ -606,48 +607,48 @@
         <span class="img-label" style="margin-top:1rem; display:block;">Exterior — cold plunge &amp; mineral pool</span>
         <div class="img-grid-2" style="margin-top:0.5rem;">
           <div class="img-slot" style="aspect-ratio:16/9;">
-            <img src="images/wellness/04-cold-plunge-w-people.png" alt="Cold plunge garden with people" data-gallery="wellness" data-index="4">
+            <img src="images/wellness/04-cold-plunge-w-people.webp" alt="Cold plunge garden with people" data-gallery="wellness" data-index="4">
           </div>
           <div class="img-slot" style="aspect-ratio:16/9;">
-            <img src="images/wellness/05-magnesium-pool.png" alt="Magnesium pool terrace" data-gallery="wellness" data-index="5">
+            <img src="images/wellness/05-magnesium-pool.webp" alt="Magnesium pool terrace" data-gallery="wellness" data-index="5">
           </div>
         </div>
 
         <!-- INTERIOR — reception lounge (with people first, ArchiCAD second) -->
         <span class="img-label" style="margin-top:1rem; display:block;">Interior — reception &amp; lounge</span>
-        <img src="images/wellness/03-reception-w-people.png" alt="Reception lounge with people" class="img-hero" data-gallery="wellness" data-index="6">
+        <img src="images/wellness/03-reception-w-people.webp" alt="Reception lounge with people" class="img-hero" data-gallery="wellness" data-index="6">
 
         <!-- STUDIO — hero then 2 below -->
         <span class="img-label" style="margin-top:0.25rem; display:block;">Interior — studio</span>
-        <img src="images/wellness/06-studio-main.png" alt="Studio main view with skylight" class="img-hero" data-gallery="wellness" data-index="7">
+        <img src="images/wellness/06-studio-main.webp" alt="Studio main view with skylight" class="img-hero" data-gallery="wellness" data-index="7">
 
         <div class="img-grid-2" style="margin-top:1.5px;">
           <div class="img-slot">
-            <img src="images/wellness/08-studio-straight.png" alt="Studio straight view" data-gallery="wellness" data-index="8">
+            <img src="images/wellness/08-studio-straight.webp" alt="Studio straight view" data-gallery="wellness" data-index="8">
           </div>
           <div class="img-slot">
-            <img src="images/wellness/07-studio-detailed.png" alt="Studio equipment wall detail" data-gallery="wellness" data-index="9">
+            <img src="images/wellness/07-studio-detailed.webp" alt="Studio equipment wall detail" data-gallery="wellness" data-index="9">
           </div>
         </div>
 
         <!-- STAIRS + LOUNGE — paired, lounge last -->
         <div class="img-grid-2" style="margin-top:1.5px;">
           <div class="img-slot" style="aspect-ratio:3/4;">
-            <img src="images/wellness/09-stairs.png" alt="Spiral stair overhead view" data-gallery="wellness" data-index="10">
+            <img src="images/wellness/09-stairs.webp" alt="Spiral stair overhead view" data-gallery="wellness" data-index="10">
           </div>
           <div class="img-slot" style="aspect-ratio:3/4;">
-            <img src="images/wellness/10-lounge-w-people.png" alt="Lounge with people" data-gallery="wellness" data-index="11">
+            <img src="images/wellness/10-lounge-w-people.webp" alt="Lounge with people" data-gallery="wellness" data-index="11">
           </div>
         </div>
 
         <!-- GROUND FLOOR PLAN — full width -->
         <span class="img-label" style="margin-top:1.5rem; display:block;">Ground floor &amp; landscaping plan</span>
-        <img src="images/wellness/20-01-ground-floor-landscaping-plan.png" alt="Ground floor and landscaping plan" class="img-hero" data-gallery="wellness" data-index="12">
+        <img src="images/wellness/20-01-ground-floor-landscaping-plan.webp" alt="Ground floor and landscaping plan" class="img-hero" data-gallery="wellness" data-index="12">
 
         <!-- FIRST FLOOR PLAN — with legend beside it -->
         <span class="img-label" style="margin-top:0.5rem; display:block;">Level one floor plan</span>
         <div class="plan-legend-wrap" style="margin-top:0.5rem;">
-          <img src="images/wellness/20-02-first-floor-plan.png" alt="Level one floor plan"
+          <img src="images/wellness/20-02-first-floor-plan.webp" alt="Level one floor plan"
                style="width:100%; display:block; border:0.5px solid var(--border); background:var(--bg-card); cursor:zoom-in; margin-bottom:0;"
                data-gallery="wellness" data-index="13">
           <div class="legend-block">
@@ -675,25 +676,25 @@
 
         <!-- SECTION — full width -->
         <span class="img-label" style="margin-top:0.5rem; display:block;">Section A-A</span>
-        <img src="images/wellness/20-03-section-a-a.png" alt="Section A-A" class="img-hero" data-gallery="wellness" data-index="14">
+        <img src="images/wellness/20-03-section-a-a.webp" alt="Section A-A" class="img-hero" data-gallery="wellness" data-index="14">
 
         <!-- ELEVATIONS — 4-col grid with labels -->
         <span class="img-label">Elevations</span>
         <div class="img-grid-4">
           <div class="img-slot">
-            <img src="images/wellness/20-04-north-elevation.png" alt="North elevation" data-gallery="wellness" data-index="15">
+            <img src="images/wellness/20-04-north-elevation.webp" alt="North elevation" data-gallery="wellness" data-index="15">
             <span class="elev-label">North</span>
           </div>
           <div class="img-slot">
-            <img src="images/wellness/20-05-east-elevation.png" alt="East elevation" data-gallery="wellness" data-index="16">
+            <img src="images/wellness/20-05-east-elevation.webp" alt="East elevation" data-gallery="wellness" data-index="16">
             <span class="elev-label">East</span>
           </div>
           <div class="img-slot">
-            <img src="images/wellness/20-06-south-elevation.png" alt="South elevation" data-gallery="wellness" data-index="17">
+            <img src="images/wellness/20-06-south-elevation.webp" alt="South elevation" data-gallery="wellness" data-index="17">
             <span class="elev-label">South</span>
           </div>
           <div class="img-slot">
-            <img src="images/wellness/20-07-west-elevation.png" alt="West elevation" data-gallery="wellness" data-index="18">
+            <img src="images/wellness/20-07-west-elevation.webp" alt="West elevation" data-gallery="wellness" data-index="18">
             <span class="elev-label">West</span>
           </div>
         </div>
@@ -755,7 +756,7 @@
       <div class="proj-sidebar">
         <!-- Brand logo -->
         <div class="proj-sidebar-row" style="padding:1.25rem; text-align:center; background:var(--bg-mid);">
-          <img src="images/wellness/dune-logo.png" alt="Dune Wellness logo"
+          <img src="images/wellness/dune-logo.webp" alt="Dune Wellness logo"
                style="max-width:140px; display:block; margin:0 auto; opacity:0.85;">
         </div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Year</div><div class="proj-sidebar-value">2026</div></div>
@@ -768,9 +769,59 @@
     </div>
   </div>
 
-</div>
+  <hr class="proj-divider">
 
-<!-- LIGHTBOX -->
+  <!-- ============================================================ -->
+  <!-- 06  COMMERCIAL CONSTRUCTION DETAILS                          -->
+  <!-- ============================================================ -->
+  <div class="proj-section" id="proj-commercial-details">
+    <a href="index.html#work" class="back-link">← Back to all work</a>
+    <div class="proj-intro-header">
+      <span class="badge badge-type">Commercial</span>
+      <span class="badge badge-academic">Academic · 2026</span>
+    </div>
+    <h2 class="proj-section-title">Commercial Construction Details</h2>
+    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.25rem; letter-spacing:0.04em;">Technical documentation · 2026 · images/commercial-details/</p>
+
+    <div class="proj-detail">
+      <div class="proj-body">
+
+        <span class="img-label">Parapet detail — 1:10</span>
+        <img src="images/commercial-details/parapet-detail.webp" alt="Parapet construction detail 1:10" class="img-hero" data-gallery="comdet" data-index="0">
+
+        <span class="img-label">Canopy detail — 1:10</span>
+        <img src="images/commercial-details/canopy-detail.webp" alt="Canopy construction detail 1:10" class="img-hero" data-gallery="comdet" data-index="1">
+
+        <span class="img-label">Entry footing detail — 1:10</span>
+        <img src="images/commercial-details/entry-footing-detail.webp" alt="Entry footing construction detail 1:10" class="img-hero" data-gallery="comdet" data-index="2">
+
+        <p>Three construction details for a commercial building, produced to working-drawing standard at 1:10 scale as part of the 22627VIC course at Holmesglen. The details address three distinct junctions — the parapet, the canopy, and the entry footing — each requiring resolution of how materials, structure, waterproofing, and finish layers meet at a critical point in the building envelope.</p>
+
+        <h4 class="h4-serif-bold">Key outcomes</h4>
+        <ul class="outcomes-list">
+          <li>Produced three 1:10 construction details resolving parapet, canopy, and entry footing junctions for a commercial building</li>
+          <li>Demonstrated understanding of how structural, waterproofing, and finish layers are sequenced and documented at a detail scale</li>
+          <li>Applied relevant NCC and BCA commercial building requirements to each detail</li>
+          <li>Coordinated material specifications and tolerances within the detail drawings</li>
+        </ul>
+      </div>
+
+      <div class="proj-sidebar">
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Year</div><div class="proj-sidebar-value">2026</div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Type</div><div class="proj-sidebar-value">Commercial — Construction Details</div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Scale</div><div class="proj-sidebar-value">1:10 all drawings</div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Deliverables</div><div class="proj-sidebar-value">Parapet detail · Canopy detail · Entry footing detail</div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Tags</div><div class="proj-tags-row">
+          <span class="tag">Construction Details</span>
+          <span class="tag">Commercial</span>
+          <span class="tag">1:10</span>
+          <span class="tag">Technical Documentation</span>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" id="lbClose">✕</button>
   <div class="lightbox-img-wrap" id="lbImgWrap">
@@ -800,9 +851,9 @@
 // DESIGN DEVELOPMENT JOURNAL (Dune Wellness — landscape pages)
 // ============================================================
 const devSrcs = [
-  'images/wellness/dev-01.png','images/wellness/dev-02.png',
-  'images/wellness/dev-03.png','images/wellness/dev-04.png',
-  'images/wellness/dev-05.png','images/wellness/dev-06.png'
+  'images/wellness/30-dune-01.webp','images/wellness/30-dune-02.webp',
+  'images/wellness/30-dune-03.webp','images/wellness/30-dune-04.webp',
+  'images/wellness/30-dune-05.webp','images/wellness/30-dune-06.webp'
 ];
 const DEV_TOTAL  = devSrcs.length;
 const DEV_SPREADS = Math.ceil(DEV_TOTAL / 2);
@@ -1071,14 +1122,14 @@ document.addEventListener('keydown', e => {
 // spread index 0 = cover, then spread 1 = index 1 (p2), etc.
 // ============================================================
 const journalSrcs = [
-  'images/richmond-tp/journal-01.png','images/richmond-tp/journal-02.png',
-  'images/richmond-tp/journal-03.png','images/richmond-tp/journal-04.png',
-  'images/richmond-tp/journal-05.png','images/richmond-tp/journal-06.png',
-  'images/richmond-tp/journal-07.png','images/richmond-tp/journal-08.png',
-  'images/richmond-tp/journal-09.png','images/richmond-tp/journal-10.png',
-  'images/richmond-tp/journal-11.png','images/richmond-tp/journal-12.png',
-  'images/richmond-tp/journal-13.png','images/richmond-tp/journal-14.png',
-  'images/richmond-tp/journal-15.png'
+  'images/richmond-tp/journal-01.webp','images/richmond-tp/journal-02.webp',
+  'images/richmond-tp/journal-03.webp','images/richmond-tp/journal-04.webp',
+  'images/richmond-tp/journal-05.webp','images/richmond-tp/journal-06.webp',
+  'images/richmond-tp/journal-07.webp','images/richmond-tp/journal-08.webp',
+  'images/richmond-tp/journal-09.webp','images/richmond-tp/journal-10.webp',
+  'images/richmond-tp/journal-11.webp','images/richmond-tp/journal-12.webp',
+  'images/richmond-tp/journal-13.webp','images/richmond-tp/journal-14.webp',
+  'images/richmond-tp/journal-15.webp'
 ];
 const TOTAL  = journalSrcs.length; // 15
 // Spread 0: blank | p1
