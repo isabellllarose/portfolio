@@ -199,6 +199,11 @@
   .journal-close.ui-hidden { opacity: 0; pointer-events: none; }
   .journal-close:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); opacity: 1 !important; }
 
+  /* Elevation 4-grid with labels */
+  .img-grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1.5px; background: var(--border); margin-bottom: 1.5rem; }
+  .img-grid-4 .img-slot { background: var(--bg-mid); display: flex; flex-direction: column; align-items: center; overflow: hidden; }
+  .img-grid-4 .img-slot img { width: 100%; object-fit: contain; display: block; background: var(--bg-card); cursor: zoom-in; }
+  .img-grid-4 .img-slot .elev-label { font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); padding: 0.5rem 0 0.6rem; text-align: center; }
   .h4-serif { font-family: 'Playfair Display', serif; font-size: 1.05rem; margin: 2rem 0 0.75rem; color: var(--text-secondary); font-weight: 400; letter-spacing: 0.02em; }
   .h4-serif-bold { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin: 1.75rem 0 0.75rem; }
 
@@ -570,75 +575,79 @@
       <span class="badge badge-academic">Academic · 2026</span>
     </div>
     <h2 class="proj-section-title">Dune Wellness Centre</h2>
-    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.25rem; letter-spacing:0.04em;">Commercial concept · BIM &amp; rendered presentation · ArchiCAD · Affinity</p>
+    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.25rem; letter-spacing:0.04em;">Commercial concept · BIM &amp; rendered presentation · ArchiCAD · Affinity · AI-assisted visualisation</p>
 
     <div class="proj-detail">
       <div class="proj-body">
 
+        <!-- A1 POSTER — portrait hero, centred -->
         <span class="img-label">A1 Presentation Poster</span>
         <div style="display:flex; justify-content:center; margin-bottom:1.5rem;">
-          <div class="img-hero-placeholder portrait">
-            <!-- REPLACE with: <img src="images/wellness/00-a1-poster.png" alt="A1 poster" style="width:100%;max-width:520px;display:block;margin:0 auto;border:0.5px solid var(--border);cursor:zoom-in;" data-gallery="wellness" data-index="0"> -->
-            <span class="img-placeholder-label">00 — A1 portrait poster<br>images/wellness/00-a1-poster.png</span>
-          </div>
+          <img src="images/wellness/00-a1-dune-wellness-poster.png" alt="Dune Wellness Centre A1 presentation poster"
+               style="width:100%; max-width:520px; display:block; margin:0 auto; border:0.5px solid var(--border); cursor:zoom-in;"
+               data-gallery="wellness" data-index="0">
         </div>
 
-        <span class="img-label">Renders — exterior</span>
+        <!-- EXTERIOR — close angle hero, then wider as secondary -->
+        <span class="img-label">Exterior — entry</span>
+        <img src="images/wellness/02-front.png" alt="Entry perspective — canopy and signage" class="img-hero" data-gallery="wellness" data-index="1">
+
         <div class="img-grid-2">
-          <div class="img-slot">
-            <!-- REPLACE DIV CONTENTS WITH: <img src="images/wellness/01-render-front-perspective.png" alt="Front perspective" data-gallery="wellness" data-index="1"> -->
-            <span class="img-placeholder-label">01 — Front perspective</span>
+          <div class="img-slot" style="aspect-ratio:16/9;">
+            <img src="images/wellness/01-front-straight.png" alt="Front perspective with fountain forecourt" data-gallery="wellness" data-index="2">
           </div>
-          <div class="img-slot">
-            <!-- REPLACE DIV CONTENTS WITH: <img src="images/wellness/02-render-mineral-pool-terrace.png" alt="Mineral pool terrace" data-gallery="wellness" data-index="2"> -->
-            <span class="img-placeholder-label">02 — Mineral pool terrace</span>
+          <div class="img-slot" style="aspect-ratio:16/9;">
+            <img src="images/wellness/05-magnesium-pool.png" alt="Magnesium pool terrace" data-gallery="wellness" data-index="3">
           </div>
         </div>
 
-        <span class="img-label">Renders — interior</span>
-        <div class="img-grid-3">
-          <div class="img-slot">
-            <!-- REPLACE DIV CONTENTS WITH: <img src="images/wellness/03-render-reception.png" alt="Reception" data-gallery="wellness" data-index="3"> -->
-            <span class="img-placeholder-label">03 — Reception</span>
+        <!-- INTERIOR — ArchiCAD reception full width, then grid -->
+        <span class="img-label">Interior — reception</span>
+        <img src="images/wellness/11-reception-to-doors.png" alt="Reception interior looking to garden doors" class="img-hero" data-gallery="wellness" data-index="4">
+
+        <div class="img-grid-2" style="margin-top:1.5px;">
+          <div class="img-slot" style="aspect-ratio:16/9;">
+            <img src="images/wellness/03-reception-w-people.png" alt="Reception lounge with people" data-gallery="wellness" data-index="5">
           </div>
-          <div class="img-slot">
-            <!-- REPLACE DIV CONTENTS WITH: <img src="images/wellness/04-render-lounge.png" alt="Lounge" data-gallery="wellness" data-index="4"> -->
-            <span class="img-placeholder-label">04 — Lounge</span>
-          </div>
-          <div class="img-slot">
-            <!-- REPLACE DIV CONTENTS WITH: <img src="images/wellness/05-render-cold-plunge-garden.png" alt="Cold plunge and garden" data-gallery="wellness" data-index="5"> -->
-            <span class="img-placeholder-label">05 — Cold plunge &amp; garden</span>
-          </div>
-        </div>
-        <div class="img-grid-3" style="margin-top:1.5px;">
-          <div class="img-slot">
-            <!-- REPLACE DIV CONTENTS WITH: <img src="images/wellness/06-render-studio.png" alt="Studio" data-gallery="wellness" data-index="6"> -->
-            <span class="img-placeholder-label">06 — Studio</span>
-          </div>
-          <div class="img-slot">
-            <!-- REPLACE DIV CONTENTS WITH: <img src="images/wellness/07-render-retail.png" alt="Retail display" data-gallery="wellness" data-index="7"> -->
-            <span class="img-placeholder-label">07 — Retail display</span>
-          </div>
-          <div class="img-slot">
-            <!-- REPLACE DIV CONTENTS WITH: <img src="images/wellness/08-render-stairs.png" alt="Stairs" data-gallery="wellness" data-index="8"> -->
-            <span class="img-placeholder-label">08 — Stairs</span>
+          <div class="img-slot" style="aspect-ratio:16/9;">
+            <img src="images/wellness/04-cold-plunge-w-people.png" alt="Cold plunge garden with people" data-gallery="wellness" data-index="6">
           </div>
         </div>
 
-        <!-- Ground floor — full width, no legend (landscape plan has its own labels) -->
+        <!-- STUDIO views — 3 col -->
+        <span class="img-label" style="margin-top:1rem; display:block;">Interior — studio</span>
+        <div class="img-grid-3" style="margin-top:0.5rem;">
+          <div class="img-slot">
+            <img src="images/wellness/06-studio-main.png" alt="Studio main view with skylight" data-gallery="wellness" data-index="7">
+          </div>
+          <div class="img-slot">
+            <img src="images/wellness/08-studio-straight.png" alt="Studio straight view" data-gallery="wellness" data-index="8">
+          </div>
+          <div class="img-slot">
+            <img src="images/wellness/07-studio-detailed.png" alt="Studio equipment wall detail" data-gallery="wellness" data-index="9">
+          </div>
+        </div>
+
+        <!-- STAIRS — portrait, constrained width, then lounge last -->
+        <div class="img-grid-2" style="margin-top:1.5px;">
+          <div class="img-slot" style="aspect-ratio:3/4;">
+            <img src="images/wellness/09-stairs.png" alt="Spiral stair overhead view" data-gallery="wellness" data-index="10">
+          </div>
+          <div class="img-slot" style="aspect-ratio:3/4;">
+            <img src="images/wellness/10-lounge-w-people.png" alt="Lounge with people" data-gallery="wellness" data-index="11">
+          </div>
+        </div>
+
+        <!-- GROUND FLOOR PLAN — full width -->
         <span class="img-label" style="margin-top:1.5rem; display:block;">Ground floor &amp; landscaping plan</span>
-        <div class="img-hero-placeholder" style="margin-top:0.5rem; aspect-ratio:4/3;">
-          <!-- REPLACE with: <img src="images/wellness/09-ground-floor-landscape-plan.png" alt="Ground floor and landscaping plan" class="img-hero" data-gallery="wellness" data-index="9"> -->
-          <span class="img-placeholder-label">09 — Ground floor &amp; landscaping plan</span>
-        </div>
+        <img src="images/wellness/20-01-ground-floor-landscaping-plan.png" alt="Ground floor and landscaping plan" class="img-hero" data-gallery="wellness" data-index="12">
 
-        <!-- Level one — smaller, legend beside it -->
-        <span class="img-label" style="margin-top:1.5rem; display:block;">Level one floor plan</span>
+        <!-- FIRST FLOOR PLAN — with legend beside it -->
+        <span class="img-label" style="margin-top:0.5rem; display:block;">Level one floor plan</span>
         <div class="plan-legend-wrap" style="margin-top:0.5rem;">
-          <div class="img-hero-placeholder" style="margin-bottom:0; aspect-ratio:4/3;">
-            <!-- REPLACE with: <img src="images/wellness/10-first-floor-plan.png" alt="Level one floor plan" class="img-hero" style="margin-bottom:0;" data-gallery="wellness" data-index="10"> -->
-            <span class="img-placeholder-label">10 — Level one floor plan</span>
-          </div>
+          <img src="images/wellness/20-02-first-floor-plan.png" alt="Level one floor plan"
+               style="width:100%; display:block; border:0.5px solid var(--border); background:var(--bg-card); cursor:zoom-in; margin-bottom:0;"
+               data-gallery="wellness" data-index="13">
           <div class="legend-block">
             <div class="legend-title">Legend</div>
             <div class="legend-grid">
@@ -662,42 +671,50 @@
           </div>
         </div>
 
-        <span class="img-label">Section A-A</span>
-        <div class="img-hero-placeholder">
-          <!-- REPLACE WITH: <img src="images/wellness/11-section-aa.png" alt="Section A-A" class="img-hero" data-gallery="wellness" data-index="11"> -->
-          <span class="img-placeholder-label">11 — Section A-A</span>
-        </div>
+        <!-- SECTION — full width -->
+        <span class="img-label" style="margin-top:0.5rem; display:block;">Section A-A</span>
+        <img src="images/wellness/20-03-section-a-a.png" alt="Section A-A" class="img-hero" data-gallery="wellness" data-index="14">
 
-        <span class="img-label">Elevations — North, East, South, West</span>
-        <div class="img-grid-2">
+        <!-- ELEVATIONS — 4-col grid with labels -->
+        <span class="img-label">Elevations</span>
+        <div class="img-grid-4">
           <div class="img-slot">
-            <!-- REPLACE DIV CONTENTS WITH: <img src="images/wellness/12-elevation-north-east.png" alt="North and East elevations" data-gallery="wellness" data-index="12"> -->
-            <span class="img-placeholder-label">12 — North &amp; East elevations</span>
+            <img src="images/wellness/20-04-north-elevation.png" alt="North elevation" data-gallery="wellness" data-index="15">
+            <span class="elev-label">North</span>
           </div>
           <div class="img-slot">
-            <!-- REPLACE DIV CONTENTS WITH: <img src="images/wellness/13-elevation-south-west.png" alt="South and West elevations" data-gallery="wellness" data-index="13"> -->
-            <span class="img-placeholder-label">13 — South &amp; West elevations</span>
+            <img src="images/wellness/20-05-east-elevation.png" alt="East elevation" data-gallery="wellness" data-index="16">
+            <span class="elev-label">East</span>
+          </div>
+          <div class="img-slot">
+            <img src="images/wellness/20-06-south-elevation.png" alt="South elevation" data-gallery="wellness" data-index="17">
+            <span class="elev-label">South</span>
+          </div>
+          <div class="img-slot">
+            <img src="images/wellness/20-07-west-elevation.png" alt="West elevation" data-gallery="wellness" data-index="18">
+            <span class="elev-label">West</span>
           </div>
         </div>
 
         <p>A commercial wellness centre concept exploring spatial zoning, materiality, and user experience through a calm and grounded architectural language. The building organises ritual-based zones — movement, heat, water, and rest — through a sequence of textured, tactile spaces animated by light, greenery, and curved form.</p>
-        <p>The project combined BIM modelling in ArchiCAD and presentation layout in Affinity to produce a cohesive submission. The A1 poster was designed as a standalone document — communicating design intent, atmosphere, floor plans, section, and all four elevations in a single composition.</p>
+        <p>The project combined BIM modelling in ArchiCAD and presentation layout in Affinity to produce a cohesive submission. The A1 poster was designed as a standalone document — communicating design intent, atmosphere, floor plans, section, and all four elevations in a single composition. Visualisations were produced using ArchiCAD Cineware and AI-assisted rendering tools.</p>
 
         <h4 class="h4-serif-bold">Key outcomes</h4>
         <ul class="outcomes-list">
           <li>Designed a 16-room commercial wellness centre across two floors with landscape integration</li>
           <li>Produced a full BIM model in ArchiCAD and extracted plans, sections, and elevations from it</li>
-          <li>Generated interior and exterior renders communicating material and atmospheric intent</li>
+          <li>Generated interior and exterior visualisations communicating material and atmospheric intent</li>
           <li>Designed and produced an A1 portrait presentation poster as a complete design communication document</li>
           <li>Organised spaces through a ritual-based zoning strategy: movement, heat, water, rest</li>
         </ul>
       </div>
+
       <div class="proj-sidebar">
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Year</div><div class="proj-sidebar-value">2026</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Type</div><div class="proj-sidebar-value">Commercial — Wellness Centre</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Software</div><div class="proj-sidebar-value">ArchiCAD · Affinity</div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Software</div><div class="proj-sidebar-value">ArchiCAD · Affinity · AI-assisted visualisation</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Spaces</div><div class="proj-sidebar-value">16 rooms — see legend</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Deliverables</div><div class="proj-sidebar-value">A1 poster · 8 renders · Ground &amp; first floor plans · Section A-A · 4 elevations</div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Deliverables</div><div class="proj-sidebar-value">A1 poster · Renders · Ground &amp; first floor plans · Section A-A · 4 elevations</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Tags</div><div class="proj-tags-row"><span class="tag">Commercial Design</span><span class="tag">BIM</span><span class="tag">Rendering</span><span class="tag">Spatial Planning</span><span class="tag">Presentation</span></div></div>
       </div>
     </div>
