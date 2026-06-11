@@ -321,6 +321,59 @@
     .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
     .contact-band { padding: 4rem 1.5rem; }
   }
+
+  /* Mobile nav hamburger */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 0.25rem;
+    background: none;
+    border: none;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--text-primary);
+    transition: all 0.25s;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  .nav-mobile-menu {
+    display: none;
+    position: fixed;
+    top: 60px; left: 0; right: 0;
+    background: rgba(242,237,230,0.98);
+    backdrop-filter: blur(16px);
+    border-bottom: 0.5px solid var(--border);
+    padding: 1.5rem 1.5rem 2rem;
+    z-index: 99;
+    flex-direction: column;
+    gap: 0;
+  }
+  .nav-mobile-menu.open { display: flex; }
+  .nav-mobile-menu a {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 1rem 0;
+    border-bottom: 0.5px solid var(--border);
+    transition: color 0.2s;
+  }
+  .nav-mobile-menu a:last-child { border-bottom: none; }
+  .nav-mobile-menu a:hover { color: var(--accent); }
+
+  @media (max-width: 768px) {
+    .nav-hamburger { display: flex; }
+    .nav-links { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -334,7 +387,20 @@
     <li><a href="#about">About</a></li>
     <li><a href="#contact" class="nav-cta">Contact</a></li>
   </ul>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <a href="#work" onclick="closeMobileMenu()">Work</a>
+  <a href="qualifications.html" onclick="closeMobileMenu()">Qualifications</a>
+  <a href="concept-works.html" onclick="closeMobileMenu()">Concept Works</a>
+  <a href="professional-works.html" onclick="closeMobileMenu()">Professional Works</a>
+  <a href="#about" onclick="closeMobileMenu()">About</a>
+  <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+</div>
 
 <!-- HERO -->
 <div class="hero" id="home">
@@ -428,17 +494,21 @@
     <button class="filter-btn active" data-filter="all">All Work</button>
     <button class="filter-btn" data-filter="residential">Residential</button>
     <button class="filter-btn" data-filter="commercial">Commercial</button>
-    <button class="filter-btn" data-filter="documentation">Documentation</button>
-    <button class="filter-btn" data-filter="analysis">Site Analysis</button>
-    <button class="filter-btn" data-filter="academic">Academic Only</button>
+    <button class="filter-btn" data-filter="academic">Academic</button>
+    <button class="filter-btn" data-filter="concept">Concept Work</button>
+    <button class="filter-btn" data-filter="technical">Technical Documentation</button>
+    <button class="filter-btn" data-filter="planning">Site Analysis &amp; Planning</button>
+    <button class="filter-btn" data-filter="visualisation">Visualisation</button>
+    <button class="filter-btn" data-filter="rd">Research &amp; Development</button>
+    <button class="filter-btn" data-filter="professional">Professional Work</button>
   </div>
 
   <div class="projects-grid" id="projectsGrid">
 
-    <!-- PROJECT 1 -->
+    <!-- PROJECT 1: BEACH HOUSE -->
     <a class="project-card"
        href="qualifications.html#proj-beach-house"
-       data-category="residential academic">
+       data-category="residential academic planning">
       <div class="card-top">
         <div class="card-badges">
           <span class="badge badge-type">Residential</span>
@@ -447,25 +517,20 @@
         <span class="card-year">2025</span>
       </div>
       <h3 class="card-title">Beach House</h3>
-      <p class="card-desc">
-A freehand residential design project for a contemporary coastal holiday house in southern Victoria.
-
-The proposal responds to a client brief focused on accessible, adaptable living, passive solar design and site response, presented through design drawings including a site analysis plan, floor plan, elevations and section.
-</p>
+      <p class="card-desc">A freehand residential design for a contemporary coastal holiday house in southern Victoria — site analysis, floor plan, elevations and section.</p>
       <div class="card-tags">
         <span class="tag">Residential Design</span>
         <span class="tag">Freehand Drawing</span>
-        <span class="tag">Passive solar</span>
+        <span class="tag">Passive Solar</span>
         <span class="tag">Site Analysis</span>
-        <span class="tag">Accessible Design</span>
       </div>
       <span class="card-arrow">↗</span>
     </a>
 
-    <!-- PROJECT 2 -->
+    <!-- PROJECT 2: RICHMOND TP -->
     <a class="project-card"
        href="qualifications.html#proj-richmond-tp"
-       data-category="analysis academic">
+       data-category="residential academic planning rd">
       <div class="card-top">
         <div class="card-badges">
           <span class="badge badge-type">Residential</span>
@@ -474,7 +539,7 @@ The proposal responds to a client brief focused on accessible, adaptable living,
         <span class="card-year">2025</span>
       </div>
       <h3 class="card-title">Richmond Townhouse — Town Planning</h3>
-      <p class="card-desc">Residential town planning documentation exploring site analysis, neighbourhood character, overshadowing, and contextual response for a contemporary townhouse development in Richmond.</p>
+      <p class="card-desc">Residential town planning documentation exploring site analysis, neighbourhood character, overshadowing, and contextual response.</p>
       <div class="card-tags">
         <span class="tag">Town Planning</span>
         <span class="tag">Shadow Diagrams</span>
@@ -484,10 +549,10 @@ The proposal responds to a client brief focused on accessible, adaptable living,
       <span class="card-arrow">↗</span>
     </a>
 
-    <!-- PROJECT 3 -->
+    <!-- PROJECT 3: RICHMOND WD -->
     <a class="project-card"
        href="qualifications.html#proj-richmond-wd"
-       data-category="commercial academic">
+       data-category="residential academic technical">
       <div class="card-top">
         <div class="card-badges">
           <span class="badge badge-type">Working Drawings</span>
@@ -495,21 +560,21 @@ The proposal responds to a client brief focused on accessible, adaptable living,
         </div>
         <span class="card-year">2025</span>
       </div>
-      <h3 class="card-title">Richmond Townhouse - Construction Documentation</h3>
-      <p class="card-desc">Further refinement of the approved townhouse concept into a detailed documentation package, including plans, sections, elevations and construction details suitable for residential construction.</p>
+      <h3 class="card-title">Richmond Townhouse — Construction Documentation</h3>
+      <p class="card-desc">Full construction documentation set — plans, sections, elevations, details, electrical layout, and schedules to building permit standard.</p>
       <div class="card-tags">
-        <span class="tag">Construction documentation</span>
-        <span class="tag">Sections</span> 
+        <span class="tag">Construction Documentation</span>
+        <span class="tag">Sections</span>
         <span class="tag">Elevations</span>
         <span class="tag">Details</span>
       </div>
       <span class="card-arrow">↗</span>
     </a>
 
-    <!-- PROJECT 4 -->
+    <!-- PROJECT 4: BAL -->
     <a class="project-card"
        href="qualifications.html#proj-bal"
-       data-category="documentation academic">
+       data-category="residential academic technical planning">
       <div class="card-top">
         <div class="card-badges">
           <span class="badge badge-type">BAL Assessment</span>
@@ -518,21 +583,20 @@ The proposal responds to a client brief focused on accessible, adaptable living,
         <span class="card-year">2025</span>
       </div>
       <h3 class="card-title">Bushfire-Responsive Residential Design</h3>
-      <p class="card-desc"> Site planning and construction detailing developed in accordance with AS 3959, incorporating BAL 19 and BAL 40 requirements to improve bushfire resilience and occupant safety.</p>
+      <p class="card-desc">Site planning and construction detailing in accordance with AS 3959, incorporating BAL 19 and BAL 40 requirements.</p>
       <div class="card-tags">
         <span class="tag">AS 3959</span>
-        <span class="tag">BAL 19</span> 
+        <span class="tag">BAL 19</span>
         <span class="tag">BAL 40</span>
-        <span class="tag">Construction documentation</span>
-        <span class="tag">Details</span>
+        <span class="tag">Construction Details</span>
       </div>
       <span class="card-arrow">↗</span>
     </a>
 
-    <!-- PROJECT 5 -->
+    <!-- PROJECT 5: DUNE WELLNESS -->
     <a class="project-card"
        href="qualifications.html#proj-wellness"
-       data-category="residential academic">
+       data-category="commercial academic visualisation rd">
       <div class="card-top">
         <div class="card-badges">
           <span class="badge badge-type">Commercial</span>
@@ -541,13 +605,12 @@ The proposal responds to a client brief focused on accessible, adaptable living,
         <span class="card-year">2026</span>
       </div>
       <h3 class="card-title">Dune Wellness Centre</h3>
-      <p class="card-desc">A commercial wellness centre concept exploring spatial zoning, materiality and user experience through a calm and grounded architectural language. The project combined BIM modelling, rendered visualisations and presentation drawings to communicate the design intent and atmosphere of the proposal.</p>
+      <p class="card-desc">A commercial wellness centre concept combining BIM modelling, rendered visualisations, and a full presentation drawing set.</p>
       <div class="card-tags">
         <span class="tag">Commercial Design</span>
         <span class="tag">BIM Modelling</span>
         <span class="tag">Rendering</span>
         <span class="tag">Spatial Planning</span>
-        <span class="tag">Presentation</span>
       </div>
       <span class="card-arrow">↗</span>
     </a>
@@ -555,9 +618,15 @@ The proposal responds to a client brief focused on accessible, adaptable living,
     <!-- PLACEHOLDER -->
     <div class="project-card card-ghost" data-category="placeholder">
       <div class="card-ghost-icon">+</div>
-      <p>Your next<br>project here</p>
+      <p>More projects<br>to come</p>
     </div>
 
+  </div>
+
+  <!-- SECTION LINKS -->
+  <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:2.5rem;">
+    <a href="concept-works.html" class="btn btn-outline" style="font-size:11px;">Concept Works →</a>
+    <a href="professional-works.html" class="btn btn-outline" style="font-size:11px;">Professional Works →</a>
   </div>
 </div>
 
@@ -608,7 +677,7 @@ function drawGrid() {
   const H = canvas.height = canvas.offsetHeight;
   ctx.clearRect(0, 0, W, H);
   const sp = 52;
-  ctx.strokeStyle = 'rgba(59,91,140,0.09)';
+  ctx.strokeStyle = 'rgba(74,31,26,0.07)';
   ctx.lineWidth = 0.5;
   for (let x = 0; x <= W; x += sp) {
     ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
@@ -616,7 +685,7 @@ function drawGrid() {
   for (let y = 0; y <= H; y += sp) {
     ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
   }
-  ctx.strokeStyle = 'rgba(59,91,140,0.18)';
+  ctx.strokeStyle = 'rgba(74,31,26,0.15)';
   for (let x = 0; x <= W; x += sp * 4) {
     for (let y = 0; y <= H; y += sp * 4) {
       const s = 5;
@@ -624,12 +693,10 @@ function drawGrid() {
       ctx.beginPath(); ctx.moveTo(x,y-s); ctx.lineTo(x,y+s); ctx.stroke();
     }
   }
-  // fade right + bottom
   const gR = ctx.createLinearGradient(W*0.55, 0, W, 0);
   gR.addColorStop(0,'rgba(242,237,230,0)');
   gR.addColorStop(1,'rgba(242,237,230,1)');
   ctx.fillStyle = gR; ctx.fillRect(0, 0, W, H);
-
   const gB = ctx.createLinearGradient(0, H*0.6, 0, H);
   gB.addColorStop(0,'rgba(242,237,230,0)');
   gB.addColorStop(1,'rgba(242,237,230,1)');
@@ -646,7 +713,7 @@ window.addEventListener('scroll', () => {
   canvas.style.opacity = Math.max(0, 1 - window.scrollY / (h * 0.5));
 });
 
-// Filter
+// Filter — exact word match so 'rd' doesn't match 'residential'
 const filterBtns = document.querySelectorAll('.filter-btn');
 const cards = document.querySelectorAll('#projectsGrid .project-card:not(.card-ghost)');
 
@@ -656,11 +723,32 @@ filterBtns.forEach(btn => {
     btn.classList.add('active');
     const f = btn.dataset.filter;
     cards.forEach(card => {
-      const cats = card.dataset.category || '';
+      const cats = (card.dataset.category || '').split(' ');
       const show = f === 'all' || cats.includes(f);
       card.style.display = show ? 'block' : 'none';
     });
   });
+});
+
+// Mobile nav
+const hamburger = document.getElementById('navHamburger');
+const mobileMenu = document.getElementById('navMobileMenu');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+
+function closeMobileMenu() {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+}
+
+// Close mobile menu on outside click
+document.addEventListener('click', e => {
+  if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+    closeMobileMenu();
+  }
 });
 </script>
 </body>

@@ -588,7 +588,7 @@
                data-gallery="wellness" data-index="0">
         </div>
 
-        <!-- EXTERIOR — close angle hero, then wider as secondary -->
+        <!-- EXTERIOR — entry views -->
         <span class="img-label">Exterior — entry</span>
         <img src="images/wellness/02-front.png" alt="Entry perspective — canopy and signage" class="img-hero" data-gallery="wellness" data-index="1">
 
@@ -597,29 +597,31 @@
             <img src="images/wellness/01-front-straight.png" alt="Front perspective with fountain forecourt" data-gallery="wellness" data-index="2">
           </div>
           <div class="img-slot" style="aspect-ratio:16/9;">
-            <img src="images/wellness/05-magnesium-pool.png" alt="Magnesium pool terrace" data-gallery="wellness" data-index="3">
+            <!-- placeholder: lounge/reception context near external -->
+            <img src="images/wellness/11-reception-to-doors.png" alt="Reception interior looking to garden doors" data-gallery="wellness" data-index="3">
           </div>
         </div>
 
-        <!-- INTERIOR — ArchiCAD reception full width, then grid -->
-        <span class="img-label">Interior — reception</span>
-        <img src="images/wellness/11-reception-to-doors.png" alt="Reception interior looking to garden doors" class="img-hero" data-gallery="wellness" data-index="4">
+        <!-- EXTERIOR — cold plunge and mineral pool together -->
+        <span class="img-label" style="margin-top:1rem; display:block;">Exterior — cold plunge &amp; mineral pool</span>
+        <div class="img-grid-2" style="margin-top:0.5rem;">
+          <div class="img-slot" style="aspect-ratio:16/9;">
+            <img src="images/wellness/04-cold-plunge-w-people.png" alt="Cold plunge garden with people" data-gallery="wellness" data-index="4">
+          </div>
+          <div class="img-slot" style="aspect-ratio:16/9;">
+            <img src="images/wellness/05-magnesium-pool.png" alt="Magnesium pool terrace" data-gallery="wellness" data-index="5">
+          </div>
+        </div>
+
+        <!-- INTERIOR — reception lounge (with people first, ArchiCAD second) -->
+        <span class="img-label" style="margin-top:1rem; display:block;">Interior — reception &amp; lounge</span>
+        <img src="images/wellness/03-reception-w-people.png" alt="Reception lounge with people" class="img-hero" data-gallery="wellness" data-index="6">
+
+        <!-- STUDIO — hero then 2 below -->
+        <span class="img-label" style="margin-top:0.25rem; display:block;">Interior — studio</span>
+        <img src="images/wellness/06-studio-main.png" alt="Studio main view with skylight" class="img-hero" data-gallery="wellness" data-index="7">
 
         <div class="img-grid-2" style="margin-top:1.5px;">
-          <div class="img-slot" style="aspect-ratio:16/9;">
-            <img src="images/wellness/03-reception-w-people.png" alt="Reception lounge with people" data-gallery="wellness" data-index="5">
-          </div>
-          <div class="img-slot" style="aspect-ratio:16/9;">
-            <img src="images/wellness/04-cold-plunge-w-people.png" alt="Cold plunge garden with people" data-gallery="wellness" data-index="6">
-          </div>
-        </div>
-
-        <!-- STUDIO views — 3 col -->
-        <span class="img-label" style="margin-top:1rem; display:block;">Interior — studio</span>
-        <div class="img-grid-3" style="margin-top:0.5rem;">
-          <div class="img-slot">
-            <img src="images/wellness/06-studio-main.png" alt="Studio main view with skylight" data-gallery="wellness" data-index="7">
-          </div>
           <div class="img-slot">
             <img src="images/wellness/08-studio-straight.png" alt="Studio straight view" data-gallery="wellness" data-index="8">
           </div>
@@ -628,7 +630,7 @@
           </div>
         </div>
 
-        <!-- STAIRS — portrait, constrained width, then lounge last -->
+        <!-- STAIRS + LOUNGE — paired, lounge last -->
         <div class="img-grid-2" style="margin-top:1.5px;">
           <div class="img-slot" style="aspect-ratio:3/4;">
             <img src="images/wellness/09-stairs.png" alt="Spiral stair overhead view" data-gallery="wellness" data-index="10">
@@ -699,6 +701,47 @@
         <p>A commercial wellness centre concept exploring spatial zoning, materiality, and user experience through a calm and grounded architectural language. The building organises ritual-based zones — movement, heat, water, and rest — through a sequence of textured, tactile spaces animated by light, greenery, and curved form.</p>
         <p>The project combined BIM modelling in ArchiCAD and presentation layout in Affinity to produce a cohesive submission. The A1 poster was designed as a standalone document — communicating design intent, atmosphere, floor plans, section, and all four elevations in a single composition. Visualisations were produced using ArchiCAD Cineware and AI-assisted rendering tools.</p>
 
+        <!-- DESIGN DEVELOPMENT JOURNAL -->
+        <div style="margin-top:3rem; padding-top:2rem; border-top:0.5px solid var(--border);">
+          <h4 class="h4-serif-bold" style="margin-top:0;">Design Development</h4>
+          <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.8; margin-bottom:0.75rem;">
+            The sketches, planning drawings, and research development below document the process by which this design evolved — from an assigned building envelope and massing, through spatial exploration, precedent research, and iterative concept development, to the resolved proposal presented above.
+          </p>
+          <p style="font-size:0.8rem; color:var(--text-muted); font-style:italic; line-height:1.7; margin-bottom:1.5rem; padding-left:1rem; border-left:2px solid var(--border-strong); max-width:500px;">
+            Note: This design development work was produced as a concept exploration exercise. As such, it does not necessarily account for all applicable Australian Standards, NCC requirements, or regulatory provisions that would be addressed in a formal design and documentation process.
+          </p>
+
+          <div class="journal-wrap">
+            <div class="journal-viewer">
+              <div class="journal-spread" id="devSpread">
+                <div class="journal-spread-slot" id="devLeft" style="aspect-ratio:297/210;"></div>
+                <div class="journal-spread-slot" id="devRight" style="aspect-ratio:297/210;"></div>
+              </div>
+              <div class="journal-controls">
+                <button class="journal-btn" id="devPrev" disabled>← Prev</button>
+                <span class="journal-counter" id="devCounter">Pages 1–2</span>
+                <button class="journal-btn" id="devNext">Next →</button>
+                <button class="journal-btn-full" id="devFullBtn">⛶ Full screen</button>
+              </div>
+              <p class="journal-note">Design development sketches and research — flip through to explore the process</p>
+            </div>
+          </div>
+
+          <!-- Fullscreen for design development -->
+          <div class="journal-fullscreen" id="devFullscreen">
+            <button class="journal-close" id="devClose">✕</button>
+            <div class="journal-fullscreen-spread" style="aspect-ratio:unset;">
+              <div class="journal-fullscreen-slot" id="devFsLeft" style="aspect-ratio:297/210;"></div>
+              <div class="journal-fullscreen-slot" id="devFsRight" style="aspect-ratio:297/210;"></div>
+            </div>
+            <div class="journal-fullscreen-controls">
+              <button class="journal-fullscreen-btn" id="devFsPrev" disabled>← Prev</button>
+              <span class="journal-fullscreen-counter" id="devFsCounter">Pages 1–2</span>
+              <button class="journal-fullscreen-btn" id="devFsNext">Next →</button>
+            </div>
+          </div>
+        </div>
+
         <h4 class="h4-serif-bold">Key outcomes</h4>
         <ul class="outcomes-list">
           <li>Designed a 16-room commercial wellness centre across two floors with landscape integration</li>
@@ -710,6 +753,11 @@
       </div>
 
       <div class="proj-sidebar">
+        <!-- Brand logo -->
+        <div class="proj-sidebar-row" style="padding:1.25rem; text-align:center; background:var(--bg-mid);">
+          <img src="images/wellness/dune-logo.png" alt="Dune Wellness logo"
+               style="max-width:140px; display:block; margin:0 auto; opacity:0.85;">
+        </div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Year</div><div class="proj-sidebar-value">2026</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Type</div><div class="proj-sidebar-value">Commercial — Wellness Centre</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Software</div><div class="proj-sidebar-value">ArchiCAD · Affinity · AI-assisted visualisation</div></div>
@@ -749,8 +797,69 @@
 
 <script>
 // ============================================================
-// COLLAPSIBLE UNITS
+// DESIGN DEVELOPMENT JOURNAL (Dune Wellness — landscape pages)
 // ============================================================
+const devSrcs = [
+  'images/wellness/dev-01.png','images/wellness/dev-02.png',
+  'images/wellness/dev-03.png','images/wellness/dev-04.png',
+  'images/wellness/dev-05.png','images/wellness/dev-06.png'
+];
+const DEV_TOTAL  = devSrcs.length;
+const DEV_SPREADS = Math.ceil(DEV_TOTAL / 2);
+let devSpread    = 0;
+let devFsSpread  = 0;
+
+function devSpreadLabel(s) {
+  const l = s * 2 + 1, r = s * 2 + 2;
+  return r > DEV_TOTAL ? 'Page ' + l + ' of ' + DEV_TOTAL : 'Pages ' + l + '–' + r + ' of ' + DEV_TOTAL;
+}
+
+function renderDevSpread(s, L, R, ctr, prev, next) {
+  L.innerHTML = ''; R.innerHTML = '';
+  L.style.background = '';
+  R.style.background = '';
+  const li = s * 2, ri = s * 2 + 1;
+  if (li < DEV_TOTAL) { const img = new Image(); img.src = devSrcs[li]; img.alt = 'Page ' + (li+1); img.style.cssText = 'width:100%;height:100%;object-fit:contain;display:block;'; L.appendChild(img); }
+  if (ri < DEV_TOTAL) { const img = new Image(); img.src = devSrcs[ri]; img.alt = 'Page ' + (ri+1); img.style.cssText = 'width:100%;height:100%;object-fit:contain;display:block;'; R.appendChild(img); }
+  else { R.style.background = 'var(--bg-mid)'; }
+  ctr.textContent = devSpreadLabel(s);
+  prev.disabled = s === 0;
+  next.disabled = s === DEV_SPREADS - 1;
+}
+
+const devL     = document.getElementById('devLeft');
+const devR     = document.getElementById('devRight');
+const devPrev  = document.getElementById('devPrev');
+const devNext  = document.getElementById('devNext');
+const devCtr   = document.getElementById('devCounter');
+const devFull  = document.getElementById('devFullBtn');
+const devFs    = document.getElementById('devFullscreen');
+const devFsL   = document.getElementById('devFsLeft');
+const devFsR   = document.getElementById('devFsRight');
+const devFsP   = document.getElementById('devFsPrev');
+const devFsN   = document.getElementById('devFsNext');
+const devFsCtr = document.getElementById('devFsCounter');
+const devClose = document.getElementById('devClose');
+
+if (devL && DEV_TOTAL > 0) {
+  function initDev() { renderDevSpread(devSpread, devL, devR, devCtr, devPrev, devNext); }
+  if (document.readyState !== 'loading') initDev(); else document.addEventListener('DOMContentLoaded', initDev);
+
+  devPrev.addEventListener('click', () => { if (devSpread > 0) { devSpread--; renderDevSpread(devSpread, devL, devR, devCtr, devPrev, devNext); } });
+  devNext.addEventListener('click', () => { if (devSpread < DEV_SPREADS - 1) { devSpread++; renderDevSpread(devSpread, devL, devR, devCtr, devPrev, devNext); } });
+
+  devFull.addEventListener('click', () => {
+    devFsSpread = devSpread;
+    renderDevSpread(devFsSpread, devFsL, devFsR, devFsCtr, devFsP, devFsN);
+    devFs.classList.add('open'); document.body.style.overflow = 'hidden';
+  });
+  devFsP.addEventListener('click', () => { if (devFsSpread > 0) { devFsSpread--; renderDevSpread(devFsSpread, devFsL, devFsR, devFsCtr, devFsP, devFsN); } });
+  devFsN.addEventListener('click', () => { if (devFsSpread < DEV_SPREADS - 1) { devFsSpread++; renderDevSpread(devFsSpread, devFsL, devFsR, devFsCtr, devFsP, devFsN); } });
+
+  function closeDevFs() { devFs.classList.remove('open'); document.body.style.overflow = ''; devSpread = devFsSpread; renderDevSpread(devSpread, devL, devR, devCtr, devPrev, devNext); }
+  devClose.addEventListener('click', closeDevFs);
+  devFs.addEventListener('click', e => { if (e.target === devFs) closeDevFs(); });
+}
 const unitsToggle = document.getElementById('unitsToggle');
 const unitsGrid   = document.getElementById('unitsGrid');
 unitsToggle.addEventListener('click', () => {
