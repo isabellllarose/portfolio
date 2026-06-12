@@ -68,13 +68,49 @@
   .proj-sidebar-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.3rem; }
   .proj-sidebar-value { font-size: 0.85rem; color: var(--text-primary); line-height: 1.5; }
   .proj-tags-row { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-  .proj-divider { border: none; border-top: 0.5px solid var(--border); margin: 0 0 5rem 0; }
+  .proj-divider { border: none; border-top: 0.5px solid var(--border); margin: 0 0 0 0; }
   .outcomes-list { list-style: none; margin-top: 1rem; }
   .outcomes-list li { font-size: 0.9rem; color: var(--text-secondary); padding: 0.5rem 0; border-bottom: 0.5px solid var(--border); display: flex; align-items: flex-start; gap: 0.75rem; line-height: 1.5; }
   .outcomes-list li:last-child { border-bottom: none; }
   .outcomes-list li::before { content: '→'; color: var(--accent); font-size: 0.75rem; margin-top: 0.2rem; flex-shrink: 0; }
   .back-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 12px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; margin-bottom: 1.5rem; transition: color 0.2s; }
   .back-link:hover { color: var(--accent); }
+
+  /* COLLAPSIBLE PROJECT TOGGLE */
+  .proj-toggle {
+    display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer; padding: 1.5rem 0 1.25rem; user-select: none;
+    border-bottom: 0.5px solid var(--border);
+    margin-bottom: 0;
+  }
+  .proj-toggle-left { display: flex; align-items: baseline; gap: 1.25rem; }
+  .proj-toggle-num { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; color: var(--text-muted); text-transform: uppercase; white-space: nowrap; }
+  .proj-toggle-title { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 2.5vw, 1.6rem); color: var(--text-primary); line-height: 1.2; }
+  .proj-toggle-type { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-left: 0.5rem; }
+  .proj-toggle-arrow { font-size: 1.1rem; color: var(--text-muted); transition: transform 0.3s; flex-shrink: 0; margin-left: 1rem; }
+  .proj-toggle.collapsed .proj-toggle-arrow { transform: rotate(-90deg); }
+  .proj-collapsible { overflow: hidden; transition: max-height 0.4s ease; }
+  .proj-collapsible.collapsed { max-height: 0 !important; }
+
+  /* BACK TO TOP BUTTON */
+  .back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 500;
+    width: 44px; height: 44px;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; line-height: 1;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s, background 0.2s, transform 0.2s;
+    box-shadow: 0 2px 12px rgba(74,31,26,0.25);
+  }
+  .back-to-top.visible { opacity: 1; pointer-events: all; }
+  .back-to-top:hover { background: var(--text-primary); transform: translateY(-2px); }
 
   /* CLICK-TO-ENLARGE IMAGE VIEWER */
   /* Each project gets a gallery — images clickable, lightbox with prev/next within project */
@@ -822,6 +858,10 @@
   </div>
 
 </div>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" id="lbClose">✕</button>
   <div class="lightbox-img-wrap" id="lbImgWrap">
@@ -1241,6 +1281,92 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeFs();
   if (e.key === 'ArrowLeft') fsPrev.click();
   if (e.key === 'ArrowRight') fsNext.click();
+});
+
+// ============================================================
+// BACK TO TOP
+// ============================================================
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  backToTop.classList.toggle('visible', window.scrollY > 400);
+});
+backToTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ============================================================
+// COLLAPSIBLE PROJECTS
+// Builds a toggle header above each proj-section automatically
+// ============================================================
+document.querySelectorAll('.proj-section').forEach((section, i) => {
+  // Gather metadata from existing content
+  const titleEl    = section.querySelector('.proj-section-title');
+  const badgeType  = section.querySelector('.badge-type');
+  const badgeAcad  = section.querySelector('.badge-academic');
+  const backLink   = section.querySelector('.back-link');
+  if (!titleEl) return;
+
+  const num      = String(i + 1).padStart(2, '0');
+  const title    = titleEl.textContent.trim();
+  const typeText = badgeType ? badgeType.textContent.trim() : '';
+  const acadText = badgeAcad ? badgeAcad.textContent.trim() : '';
+
+  // Build toggle header
+  const toggle = document.createElement('div');
+  toggle.className = 'proj-toggle';
+  toggle.innerHTML = `
+    <div class="proj-toggle-left">
+      <span class="proj-toggle-num">${num}</span>
+      <span class="proj-toggle-title">${title}</span>
+      <span class="proj-toggle-type">${typeText}${acadText ? ' · ' + acadText : ''}</span>
+    </div>
+    <span class="proj-toggle-arrow">&#8964;</span>
+  `;
+
+  // Wrap all children after the back-link in a collapsible div
+  const collapsible = document.createElement('div');
+  collapsible.className = 'proj-collapsible';
+
+  // Move all children except back-link into collapsible
+  const children = Array.from(section.children);
+  children.forEach(child => {
+    if (!child.classList.contains('back-link') && !child.classList.contains('proj-toggle')) {
+      collapsible.appendChild(child);
+    }
+  });
+
+  // Set initial natural height so transition works
+  section.appendChild(toggle);
+  section.appendChild(collapsible);
+
+  // Measure and store natural height
+  const naturalHeight = collapsible.scrollHeight + 'px';
+  collapsible.style.maxHeight = naturalHeight;
+
+  // Toggle behaviour
+  toggle.addEventListener('click', () => {
+    const isCollapsed = toggle.classList.contains('collapsed');
+    if (isCollapsed) {
+      collapsible.style.maxHeight = collapsible.scrollHeight + 'px';
+      toggle.classList.remove('collapsed');
+    } else {
+      collapsible.style.maxHeight = collapsible.scrollHeight + 'px'; // set explicit before animating
+      requestAnimationFrame(() => {
+        collapsible.style.maxHeight = collapsible.scrollHeight + 'px';
+        requestAnimationFrame(() => {
+          collapsible.classList.add('collapsed');
+          toggle.classList.add('collapsed');
+        });
+      });
+    }
+  });
+
+  // Re-measure on expand end so content added dynamically (journal) doesn't clip
+  collapsible.addEventListener('transitionend', () => {
+    if (!toggle.classList.contains('collapsed')) {
+      collapsible.style.maxHeight = 'none';
+    }
+  });
 });
 </script>
 </body>
