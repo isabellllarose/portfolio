@@ -92,10 +92,12 @@
   .proj-toggle.collapsed .proj-toggle-arrow { transform: rotate(-90deg); }
   .proj-collapsible { overflow: hidden; transition: max-height 0.45s ease; }
   .proj-collapsible.collapsed { max-height: 0 !important; }
-  .proj-section { scroll-margin-top: 80px; padding-bottom: 0; }
+  .proj-section { scroll-margin-top: 80px; padding-bottom: 0; margin-bottom: 0; }
   .proj-divider { border: none; border-top: 0.5px solid var(--border); margin: 0; }
-  .proj-detail { position: relative; }
-  .proj-sidebar { display: flex; flex-direction: column; gap: 1.5px; background: var(--border); border: 0.5px solid var(--border); position: sticky; top: 80px; align-self: start; max-height: calc(100vh - 100px); overflow-y: auto; }
+  .proj-collapsible { overflow: hidden; transition: max-height 0.45s ease; padding: 0; }
+  .proj-collapsible.collapsed { max-height: 0 !important; }
+  /* Inner padding lives on proj-body, not on collapsible itself */
+  .proj-collapsible .proj-detail { padding: 2rem 0 3rem; }
   .back-to-top {
     position: fixed;
     bottom: 2rem;
@@ -144,13 +146,17 @@
     position: fixed; inset: 0; z-index: 400;
     background: rgba(26,20,16,0.96);
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    padding: 1.5rem;
+    padding: 3rem 1.5rem 1.5rem;
     opacity: 0; pointer-events: none; transition: opacity 0.25s;
   }
   .lightbox.open { opacity: 1; pointer-events: all; }
+  .lightbox-inner {
+    display: flex; align-items: center; justify-content: center;
+    gap: 1.5rem; width: 100%; flex: 1; max-height: calc(100vh - 80px);
+  }
   .lightbox-img-wrap {
-    position: relative; flex: 1; display: flex; align-items: center; justify-content: center;
-    width: 100%; overflow: hidden; max-height: calc(100vh - 60px);
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    height: 100%; overflow: hidden; max-height: 100%;
   }
   .lightbox-img-wrap img {
     max-width: 100%; max-height: 100%; object-fit: contain; display: block;
@@ -159,6 +165,18 @@
   }
   .lightbox-img-wrap img.zoomed { cursor: grab; }
   .lightbox-img-wrap img.zoomed:active { cursor: grabbing; }
+  .lightbox-legend {
+    display: none; flex-direction: column;
+    background: rgba(242,237,230,0.07);
+    border: 0.5px solid rgba(255,255,255,0.12);
+    padding: 1.25rem; min-width: 160px; max-width: 190px; flex-shrink: 0;
+    align-self: center; max-height: 80vh; overflow-y: auto;
+  }
+  .lightbox-legend.visible { display: flex; }
+  .lb-legend-title { font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(242,237,230,0.4); margin-bottom: 0.75rem; padding-bottom: 0.6rem; border-bottom: 0.5px solid rgba(255,255,255,0.1); }
+  .lb-legend-grid { display: grid; grid-template-columns: auto 1fr; gap: 0.35rem 0.6rem; align-items: baseline; }
+  .lb-legend-num { font-size: 10px; font-weight: 600; color: #C4916E; white-space: nowrap; }
+  .lb-legend-name { font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; color: rgba(242,237,230,0.5); }
   /* Floating controls — fixed at bottom centre, auto-hide on idle */
   .lightbox-controls {
     position: fixed; bottom: 1.75rem; left: 50%; transform: translateX(-50%);
@@ -883,8 +901,33 @@
 
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" id="lbClose">✕</button>
-  <div class="lightbox-img-wrap" id="lbImgWrap">
-    <img id="lbImg" src="" alt="">
+  <!-- Main content area: image + optional legend side by side -->
+  <div class="lightbox-inner">
+    <div class="lightbox-img-wrap" id="lbImgWrap">
+      <img id="lbImg" src="" alt="">
+    </div>
+    <!-- Legend panel — only shown for floor plan images -->
+    <div class="lightbox-legend" id="lbLegend">
+      <div class="lb-legend-title">Legend</div>
+      <div class="lb-legend-grid">
+        <span class="lb-legend-num">1</span><span class="lb-legend-name">Reception</span>
+        <span class="lb-legend-num">2</span><span class="lb-legend-name">Retail Display</span>
+        <span class="lb-legend-num">3</span><span class="lb-legend-name">Sauna</span>
+        <span class="lb-legend-num">4</span><span class="lb-legend-name">Steam Room</span>
+        <span class="lb-legend-num">5</span><span class="lb-legend-name">Lift</span>
+        <span class="lb-legend-num">6</span><span class="lb-legend-name">Showers</span>
+        <span class="lb-legend-num">7</span><span class="lb-legend-name">Bathroom</span>
+        <span class="lb-legend-num">8</span><span class="lb-legend-name">Mineral Pool</span>
+        <span class="lb-legend-num">9</span><span class="lb-legend-name">Garden</span>
+        <span class="lb-legend-num">10</span><span class="lb-legend-name">Cold Plunge</span>
+        <span class="lb-legend-num">11</span><span class="lb-legend-name">Refreshment Bar</span>
+        <span class="lb-legend-num">12</span><span class="lb-legend-name">Bathroom</span>
+        <span class="lb-legend-num">13</span><span class="lb-legend-name">Lounge</span>
+        <span class="lb-legend-num">14</span><span class="lb-legend-name">Studio</span>
+        <span class="lb-legend-num">15</span><span class="lb-legend-name">Laundry / Storage</span>
+        <span class="lb-legend-num">16</span><span class="lb-legend-name">Treatment Room</span>
+      </div>
+    </div>
   </div>
   <div class="lightbox-controls" id="lbControls">
     <button class="lightbox-btn" id="lbPrev">&#8592;</button>
@@ -1032,18 +1075,29 @@ function openLightbox(gallery, index) {
   lbActivity();
 }
 
+// Show/hide legend for wellness floor plan images (indices 12 and 13)
+const lbLegend = document.getElementById('lbLegend');
+const LEGEND_GALLERY = 'wellness';
+const LEGEND_INDICES = [12, 13]; // ground floor plan and first floor plan
+
 function showLbImage() {
   const item = galleries[lbGallery][lbIndex];
   lbImg.src  = item.src;
   lbImg.alt  = item.alt;
   lbLabel.textContent = item.alt;
   lbCounter.textContent = (lbIndex + 1) + ' / ' + galleries[lbGallery].length;
-  // Prev always loops, next always loops
   lbPrev.disabled = false;
   lbNext.disabled = false;
   // Reset zoom on navigation
   lbZoomed = false;
   lbImg.classList.remove('zoomed');
+  applyTransform();
+  // Show legend only for floor plan images
+  if (lbGallery === LEGEND_GALLERY && LEGEND_INDICES.includes(lbIndex)) {
+    lbLegend.classList.add('visible');
+  } else {
+    lbLegend.classList.remove('visible');
+  }
 }
 
 function closeLightbox() {
@@ -1051,6 +1105,8 @@ function closeLightbox() {
   document.body.style.overflow = '';
   lbZoomed = false;
   lbImg.classList.remove('zoomed');
+  lbLegend.classList.remove('visible');
+  applyTransform();
 }
 
 // Open on click
@@ -1339,30 +1395,32 @@ document.querySelectorAll('.proj-section').forEach((section, i) => {
     <span class="proj-toggle-arrow">&#8964;</span>
   `;
 
-  // Wrap all content in collapsible — hide back-link, badges, title heading inside it
+  // Move the PRECEDING hr.proj-divider inside this section so it collapses too
+  const prevSibling = section.previousElementSibling;
+  if (prevSibling && prevSibling.classList.contains('proj-divider')) {
+    section.insertBefore(prevSibling, section.firstChild);
+  }
+
+  // Wrap ALL children in collapsible — no padding added here
   const collapsible = document.createElement('div');
   collapsible.className = 'proj-collapsible';
-  collapsible.style.paddingTop = '2rem';
-  collapsible.style.paddingBottom = '3rem';
 
   Array.from(section.children).forEach(child => {
     collapsible.appendChild(child);
   });
 
-  // Hide the redundant elements inside the collapsible
-  const backLink = collapsible.querySelector('.back-link');
-  if (backLink) backLink.style.display = 'none';
-  const introHeader = collapsible.querySelector('.proj-intro-header');
-  if (introHeader) introHeader.style.display = 'none';
-  titleEl.style.display = 'none';
-  // Hide the subtitle address line (first p with text-muted style)
+  // Hide redundant elements — back-link, badges, title, subtitle, ALL img-labels
+  collapsible.querySelectorAll('.back-link, .proj-intro-header, .proj-section-title').forEach(el => {
+    el.style.display = 'none';
+  });
   const subtitle = collapsible.querySelector('p[style*="text-muted"]');
   if (subtitle) subtitle.style.display = 'none';
 
+  // Insert toggle THEN collapsible
   section.appendChild(toggle);
   section.appendChild(collapsible);
 
-  // Set initial height
+  // Set initial open height
   requestAnimationFrame(() => {
     collapsible.style.maxHeight = collapsible.scrollHeight + 'px';
   });
@@ -1375,15 +1433,14 @@ document.querySelectorAll('.proj-section').forEach((section, i) => {
       collapsible.classList.remove('collapsed');
     } else {
       collapsible.style.maxHeight = collapsible.scrollHeight + 'px';
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          collapsible.classList.add('collapsed');
-          toggle.classList.add('collapsed');
-        });
-      });
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        collapsible.classList.add('collapsed');
+        toggle.classList.add('collapsed');
+      }));
     }
   });
 
+  // After opening transition, remove max-height cap so dynamic content isn't clipped
   collapsible.addEventListener('transitionend', () => {
     if (!toggle.classList.contains('collapsed')) {
       collapsible.style.maxHeight = 'none';
