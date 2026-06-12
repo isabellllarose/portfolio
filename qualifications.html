@@ -1506,21 +1506,28 @@ const prevBtn2 = document.getElementById('projNavPrev');
 const nextBtn2 = document.getElementById('projNavNext');
 
 if (track && prevBtn2 && nextBtn2) {
-  const VISIBLE   = 5;
-  const items     = track.querySelectorAll('.proj-nav-item');
-  const total     = items.length;
-  let carouselPos = 0; // index of leftmost visible item
+  const items = track.querySelectorAll('.proj-nav-item');
+  const total = items.length;
+  let carouselPos = 0;
 
-  function getItemWidth() {
-    // track-wrap width / VISIBLE items
-    return track.parentElement.offsetWidth / VISIBLE;
+  function getVisible() {
+    const w = window.innerWidth;
+    if (w <= 480) return 2;
+    if (w <= 768) return 3;
+    return 5;
   }
 
   function updateCarousel() {
-    const w = getItemWidth();
-    // Set each item width explicitly
-    items.forEach(item => { item.style.flex = `0 0 ${w - 1}px`; });
-    track.style.transform = `translateX(-${carouselPos * w}px)`;
+    const VISIBLE = getVisible();
+    const trackW  = track.parentElement.offsetWidth;
+    const itemW   = trackW / VISIBLE;
+
+    items.forEach(item => {
+      item.style.flex  = `0 0 ${itemW - 1}px`;
+      item.style.width = `${itemW - 1}px`;
+    });
+
+    track.style.transform = `translateX(-${carouselPos * itemW}px)`;
     prevBtn2.disabled = carouselPos === 0;
     nextBtn2.disabled = carouselPos >= total - VISIBLE;
   }
@@ -1529,10 +1536,17 @@ if (track && prevBtn2 && nextBtn2) {
     if (carouselPos > 0) { carouselPos--; updateCarousel(); }
   });
   nextBtn2.addEventListener('click', () => {
+    const VISIBLE = getVisible();
     if (carouselPos < total - VISIBLE) { carouselPos++; updateCarousel(); }
   });
 
-  window.addEventListener('resize', updateCarousel);
+  window.addEventListener('resize', () => {
+    // Clamp position on resize so we don't go out of bounds
+    const VISIBLE = getVisible();
+    if (carouselPos > total - VISIBLE) carouselPos = Math.max(0, total - VISIBLE);
+    updateCarousel();
+  });
+
   updateCarousel();
 }
 </script>
