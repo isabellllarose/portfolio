@@ -26,19 +26,31 @@
   .course-meta-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(242,237,230,0.4); }
 
   /* PROJECT NAV */
-  .proj-nav { background: var(--bg-card); border-bottom: 0.5px solid var(--border); padding: 2.5rem 3rem; }
-  .proj-nav-inner { max-width: 1160px; margin: 0 auto; }
+  .proj-nav { background: var(--bg-card); border-bottom: 0.5px solid var(--border); padding: 2rem 0; }
+  .proj-nav-inner { max-width: 1160px; margin: 0 auto; padding: 0 3rem; }
   .proj-nav-label { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.25rem; }
-  .proj-nav-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.5px; background: var(--border); border: 0.5px solid var(--border); }
-  .proj-nav-item { position: relative; background: var(--bg-card); padding: 1.5rem 1.25rem 1.25rem; text-decoration: none; overflow: hidden; transition: background 0.25s; min-height: 110px; display: flex; flex-direction: column; justify-content: flex-end; }
+  /* Carousel wrapper */
+  .proj-nav-carousel { position: relative; display: flex; align-items: center; gap: 0; }
+  .proj-nav-track-wrap { overflow: hidden; flex: 1; }
+  .proj-nav-track { display: flex; gap: 1.5px; transition: transform 0.35s ease; }
+  /* Each item — fixed width so exactly 5 fit */
+  .proj-nav-item { position: relative; background: var(--bg-card); padding: 1.5rem 1.25rem 1.25rem; text-decoration: none; overflow: hidden; transition: background 0.25s; min-height: 110px; display: flex; flex-direction: column; justify-content: flex-end; flex: 0 0 calc(20% - 1.2px); border: 0.5px solid var(--border); }
   .proj-nav-item::before { content: ''; position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0.1; transition: opacity 0.3s; }
-  .proj-nav-item:hover::before { opacity: 0.18; }
+  .proj-nav-item:hover::before { opacity: 0.2; }
   .proj-nav-item:hover { background: var(--accent-light); }
   .proj-nav-item::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
   .proj-nav-item:hover::after { transform: scaleX(1); }
   .proj-nav-num { font-size: 10px; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 0.35rem; position: relative; z-index: 2; }
   .proj-nav-title { font-family: 'Playfair Display', serif; font-size: 0.9rem; line-height: 1.25; color: var(--text-primary); position: relative; z-index: 2; }
   .proj-nav-type { font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.4rem; position: relative; z-index: 2; }
+  /* Carousel arrow buttons */
+  .proj-nav-arrow {
+    background: none; border: none; cursor: pointer; padding: 0.5rem 0.75rem;
+    font-size: 1.2rem; color: var(--accent); transition: color 0.2s, opacity 0.2s;
+    flex-shrink: 0; line-height: 1; z-index: 2;
+  }
+  .proj-nav-arrow:disabled { color: var(--text-muted); opacity: 0.25; cursor: default; }
+  .proj-nav-arrow:not(:disabled):hover { color: var(--text-primary); }
   .proj-nav-item.beach::before { background-image: url('images/beach-house/01-site-plan.webp'); }
   .proj-nav-item.rich-tp::before { background-image: url('images/richmond-tp/tp01-site-analysis.webp'); }
   .proj-nav-item.rich-wd::before { background-image: url('images/richmond-wd/a01-site-plan.webp'); }
@@ -270,9 +282,8 @@
   .h4-serif { font-family: 'Playfair Display', serif; font-size: 1.05rem; margin: 2rem 0 0.75rem; color: var(--text-secondary); font-weight: 400; letter-spacing: 0.02em; }
   .h4-serif-bold { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin: 1.75rem 0 0.75rem; }
 
-  @media (max-width: 1000px) { .proj-nav-grid { grid-template-columns: repeat(4, 1fr); } .proj-nav { padding: 2rem 1.5rem; } }
+  @media (max-width: 1000px) { .proj-nav { padding: 1.5rem 0; } }
   @media (max-width: 900px) { .course-inner { grid-template-columns: 1fr; } .proj-detail { grid-template-columns: 1fr; } .proj-sidebar { position: static; } .img-grid-2 { grid-template-columns: 1fr; } .img-grid-3 { grid-template-columns: 1fr 1fr; } .plan-legend-wrap, .plan-legend-wrap-lg { grid-template-columns: 1fr; } .page-header-inner { padding: 3rem 1.5rem 2.5rem; } }
-  @media (max-width: 600px) { .proj-nav-grid { grid-template-columns: 1fr 1fr; } }
 </style>
 </head>
 <body>
@@ -321,13 +332,19 @@
 <div class="proj-nav">
   <div class="proj-nav-inner">
     <div class="proj-nav-label">Jump to project</div>
-    <div class="proj-nav-grid">
-      <a href="#proj-beach-house" class="proj-nav-item beach"><div class="proj-nav-num">01</div><div class="proj-nav-title">Beach House</div><div class="proj-nav-type">Residential Design</div></a>
-      <a href="#proj-richmond-tp" class="proj-nav-item rich-tp"><div class="proj-nav-num">02</div><div class="proj-nav-title">Richmond Townhouse — Town Planning</div><div class="proj-nav-type">Town Planning</div></a>
-      <a href="#proj-richmond-wd" class="proj-nav-item rich-wd"><div class="proj-nav-num">03</div><div class="proj-nav-title">Richmond Townhouse — Working Drawings</div><div class="proj-nav-type">Construction Documentation</div></a>
-      <a href="#proj-bal" class="proj-nav-item bal"><div class="proj-nav-num">04</div><div class="proj-nav-title">Bushfire-Responsive Design</div><div class="proj-nav-type">BAL Assessment</div></a>
-      <a href="#proj-wellness" class="proj-nav-item wellness"><div class="proj-nav-num">05</div><div class="proj-nav-title">Dune Wellness Centre</div><div class="proj-nav-type">Commercial Design</div></a>
-      <a href="#proj-commercial-details" class="proj-nav-item comdet"><div class="proj-nav-num">06</div><div class="proj-nav-title">Commercial Construction Details</div><div class="proj-nav-type">Technical Documentation</div></a>
+    <div class="proj-nav-carousel">
+      <button class="proj-nav-arrow" id="projNavPrev" disabled>&#8249;</button>
+      <div class="proj-nav-track-wrap">
+        <div class="proj-nav-track" id="projNavTrack">
+          <a href="#proj-beach-house" class="proj-nav-item beach" data-proj-id="proj-beach-house"><div class="proj-nav-num">01</div><div class="proj-nav-title">Beach House</div><div class="proj-nav-type">Residential Design</div></a>
+          <a href="#proj-richmond-tp" class="proj-nav-item rich-tp" data-proj-id="proj-richmond-tp"><div class="proj-nav-num">02</div><div class="proj-nav-title">Richmond Townhouse — Town Planning</div><div class="proj-nav-type">Town Planning</div></a>
+          <a href="#proj-richmond-wd" class="proj-nav-item rich-wd" data-proj-id="proj-richmond-wd"><div class="proj-nav-num">03</div><div class="proj-nav-title">Richmond Townhouse — Working Drawings</div><div class="proj-nav-type">Construction Documentation</div></a>
+          <a href="#proj-bal" class="proj-nav-item bal" data-proj-id="proj-bal"><div class="proj-nav-num">04</div><div class="proj-nav-title">Bushfire-Responsive Design</div><div class="proj-nav-type">BAL Assessment</div></a>
+          <a href="#proj-wellness" class="proj-nav-item wellness" data-proj-id="proj-wellness"><div class="proj-nav-num">05</div><div class="proj-nav-title">Dune Wellness Centre</div><div class="proj-nav-type">Commercial Design</div></a>
+          <a href="#proj-commercial-details" class="proj-nav-item comdet" data-proj-id="proj-commercial-details"><div class="proj-nav-num">06</div><div class="proj-nav-title">Commercial Construction Details</div><div class="proj-nav-type">Technical Documentation</div></a>
+        </div>
+      </div>
+      <button class="proj-nav-arrow" id="projNavNext">&#8250;</button>
     </div>
   </div>
 </div>
@@ -1015,6 +1032,9 @@ if (devL && DEV_TOTAL > 0) {
 }
 const unitsToggle = document.getElementById('unitsToggle');
 const unitsGrid   = document.getElementById('unitsGrid');
+// Default open
+unitsToggle.classList.add('open');
+unitsGrid.classList.add('open');
 unitsToggle.addEventListener('click', () => {
   const open = unitsGrid.classList.toggle('open');
   unitsToggle.classList.toggle('open', open);
@@ -1370,8 +1390,10 @@ backToTop.addEventListener('click', () => {
 });
 
 // ============================================================
-// COLLAPSIBLE PROJECTS
+// COLLAPSIBLE PROJECTS — default COLLAPSED, opens on jump-to
 // ============================================================
+const allToggles = new Map(); // sectionId -> { toggle, collapsible }
+
 document.querySelectorAll('.proj-section').forEach((section, i) => {
   const titleEl   = section.querySelector('.proj-section-title');
   const badgeType = section.querySelector('.badge-type');
@@ -1383,7 +1405,6 @@ document.querySelectorAll('.proj-section').forEach((section, i) => {
   const typeText = badgeType ? badgeType.textContent.trim() : '';
   const acadText = badgeAcad ? badgeAcad.textContent.trim() : '';
 
-  // Build toggle header
   const toggle = document.createElement('div');
   toggle.className = 'proj-toggle';
   toggle.innerHTML = `
@@ -1395,13 +1416,12 @@ document.querySelectorAll('.proj-section').forEach((section, i) => {
     <span class="proj-toggle-arrow">&#8964;</span>
   `;
 
-  // Move the PRECEDING hr.proj-divider inside this section so it collapses too
+  // Move preceding hr inside section
   const prevSibling = section.previousElementSibling;
   if (prevSibling && prevSibling.classList.contains('proj-divider')) {
     section.insertBefore(prevSibling, section.firstChild);
   }
 
-  // Wrap ALL children in collapsible — no padding added here
   const collapsible = document.createElement('div');
   collapsible.className = 'proj-collapsible';
 
@@ -1409,44 +1429,112 @@ document.querySelectorAll('.proj-section').forEach((section, i) => {
     collapsible.appendChild(child);
   });
 
-  // Hide redundant elements — back-link, badges, title, subtitle, ALL img-labels
   collapsible.querySelectorAll('.back-link, .proj-intro-header, .proj-section-title').forEach(el => {
     el.style.display = 'none';
   });
   const subtitle = collapsible.querySelector('p[style*="text-muted"]');
   if (subtitle) subtitle.style.display = 'none';
 
-  // Insert toggle THEN collapsible
   section.appendChild(toggle);
   section.appendChild(collapsible);
 
-  // Set initial open height
-  requestAnimationFrame(() => {
+  // Store for jump-to access
+  allToggles.set(section.id, { toggle, collapsible, section });
+
+  // Default COLLAPSED
+  collapsible.style.maxHeight = '0';
+  toggle.classList.add('collapsed');
+  collapsible.classList.add('collapsed');
+
+  function openSection() {
     collapsible.style.maxHeight = collapsible.scrollHeight + 'px';
-  });
+    toggle.classList.remove('collapsed');
+    collapsible.classList.remove('collapsed');
+  }
+
+  function closeSection() {
+    collapsible.style.maxHeight = collapsible.scrollHeight + 'px';
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      collapsible.classList.add('collapsed');
+      toggle.classList.add('collapsed');
+    }));
+  }
 
   toggle.addEventListener('click', () => {
-    const isCollapsed = toggle.classList.contains('collapsed');
-    if (isCollapsed) {
-      collapsible.style.maxHeight = collapsible.scrollHeight + 'px';
-      toggle.classList.remove('collapsed');
-      collapsible.classList.remove('collapsed');
+    if (toggle.classList.contains('collapsed')) {
+      openSection();
     } else {
-      collapsible.style.maxHeight = collapsible.scrollHeight + 'px';
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        collapsible.classList.add('collapsed');
-        toggle.classList.add('collapsed');
-      }));
+      closeSection();
     }
   });
 
-  // After opening transition, remove max-height cap so dynamic content isn't clipped
   collapsible.addEventListener('transitionend', () => {
     if (!toggle.classList.contains('collapsed')) {
       collapsible.style.maxHeight = 'none';
     }
   });
+
+  // Store open/close functions
+  allToggles.get(section.id).open  = openSection;
+  allToggles.get(section.id).close = closeSection;
 });
+
+// Jump-to-project: open only the clicked project, close all others
+document.querySelectorAll('.proj-nav-item[data-proj-id]').forEach(btn => {
+  btn.addEventListener('click', e => {
+    const targetId = btn.dataset.projId;
+    allToggles.forEach(({ open, close, section }, id) => {
+      if (id === targetId) {
+        open();
+        // Scroll after a short delay to let the section open
+        setTimeout(() => {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
+      } else {
+        close();
+      }
+    });
+    e.preventDefault(); // prevent instant anchor jump, let smooth scroll handle it
+  });
+});
+
+// ============================================================
+// CAROUSEL — proj-nav
+// ============================================================
+const track    = document.getElementById('projNavTrack');
+const prevBtn2 = document.getElementById('projNavPrev');
+const nextBtn2 = document.getElementById('projNavNext');
+
+if (track && prevBtn2 && nextBtn2) {
+  const VISIBLE   = 5;
+  const items     = track.querySelectorAll('.proj-nav-item');
+  const total     = items.length;
+  let carouselPos = 0; // index of leftmost visible item
+
+  function getItemWidth() {
+    // track-wrap width / VISIBLE items
+    return track.parentElement.offsetWidth / VISIBLE;
+  }
+
+  function updateCarousel() {
+    const w = getItemWidth();
+    // Set each item width explicitly
+    items.forEach(item => { item.style.flex = `0 0 ${w - 1}px`; });
+    track.style.transform = `translateX(-${carouselPos * w}px)`;
+    prevBtn2.disabled = carouselPos === 0;
+    nextBtn2.disabled = carouselPos >= total - VISIBLE;
+  }
+
+  prevBtn2.addEventListener('click', () => {
+    if (carouselPos > 0) { carouselPos--; updateCarousel(); }
+  });
+  nextBtn2.addEventListener('click', () => {
+    if (carouselPos < total - VISIBLE) { carouselPos++; updateCarousel(); }
+  });
+
+  window.addEventListener('resize', updateCarousel);
+  updateCarousel();
+}
 </script>
 </body>
 </html>
