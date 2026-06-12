@@ -43,7 +43,8 @@
   .proj-nav-item.rich-tp::before { background-image: url('images/richmond-tp/tp01-site-analysis.webp'); }
   .proj-nav-item.rich-wd::before { background-image: url('images/richmond-wd/a01-site-plan.webp'); }
   .proj-nav-item.bal::before { background-image: url('images/bal/a02-site-plan-bal40.webp'); }
-  .proj-nav-item.wellness::before { background-image: url('images/wellness/00-a1-poster.webp'); }
+  .proj-nav-item.wellness::before { background-image: url('images/wellness/02-front.webp'); }
+  .proj-nav-item.comdet::before { background-image: url('images/commercial-details/parapet-detail.webp'); }
 
   /* COLLAPSIBLE UNITS */
   .units-toggle { display: flex; align-items: center; justify-content: space-between; cursor: pointer; padding-bottom: 1.25rem; border-bottom: 0.5px solid var(--border); margin-bottom: 0; user-select: none; }
@@ -79,29 +80,22 @@
   /* COLLAPSIBLE PROJECT TOGGLE */
   .proj-toggle {
     display: flex; align-items: center; justify-content: space-between;
-    cursor: pointer; padding: 1.5rem 0 1.25rem; user-select: none;
-    border-bottom: 0.5px solid var(--border);
-    margin-bottom: 0;
+    cursor: pointer; padding: 0.85rem 0.5rem; user-select: none;
+    border-bottom: 0.5px solid var(--border); margin-bottom: 0;
   }
-  .proj-toggle-left { display: flex; align-items: baseline; gap: 1.25rem; }
+  .proj-toggle:hover { background: var(--accent-light); padding-left: 0.5rem; padding-right: 0.5rem; }
+  .proj-toggle-left { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
   .proj-toggle-num { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; color: var(--text-muted); text-transform: uppercase; white-space: nowrap; }
-  .proj-toggle-title { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 2.5vw, 1.6rem); color: var(--text-primary); line-height: 1.2; }
-  .proj-toggle-type { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-left: 0.5rem; }
-  .proj-toggle-arrow { font-size: 1.1rem; color: var(--text-muted); transition: transform 0.3s; flex-shrink: 0; margin-left: 1rem; }
+  .proj-toggle-title { font-family: 'Playfair Display', serif; font-size: clamp(1rem, 2vw, 1.35rem); color: var(--text-primary); line-height: 1.2; }
+  .proj-toggle-type { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+  .proj-toggle-arrow { font-size: 1rem; color: var(--text-muted); transition: transform 0.3s; flex-shrink: 0; margin-left: 1rem; }
   .proj-toggle.collapsed .proj-toggle-arrow { transform: rotate(-90deg); }
-  .proj-collapsible { overflow: hidden; transition: max-height 0.4s ease; }
+  .proj-collapsible { overflow: hidden; transition: max-height 0.45s ease; }
   .proj-collapsible.collapsed { max-height: 0 !important; }
-
-  /* Hide back-link and title block inside collapsible — toggle header replaces them */
-  .proj-collapsible .back-link { display: none; }
-  .proj-collapsible .proj-intro-header { display: none; }
-  .proj-collapsible .proj-section-title { display: none; }
-  .proj-collapsible > p[style*="text-muted"] { display: none; }
-  /* Dividers between collapsed projects should be thin with minimal margin */
+  .proj-section { scroll-margin-top: 80px; padding-bottom: 0; }
   .proj-divider { border: none; border-top: 0.5px solid var(--border); margin: 0; }
-  /* Sidebar sticky — scoped so it only sticks within its own project */
   .proj-detail { position: relative; }
-  .proj-sidebar { position: sticky; top: 80px; align-self: start; }
+  .proj-sidebar { display: flex; flex-direction: column; gap: 1.5px; background: var(--border); border: 0.5px solid var(--border); position: sticky; top: 80px; align-self: start; max-height: calc(100vh - 100px); overflow-y: auto; }
   .back-to-top {
     position: fixed;
     bottom: 2rem;
@@ -315,7 +309,7 @@
       <a href="#proj-richmond-wd" class="proj-nav-item rich-wd"><div class="proj-nav-num">03</div><div class="proj-nav-title">Richmond Townhouse — Working Drawings</div><div class="proj-nav-type">Construction Documentation</div></a>
       <a href="#proj-bal" class="proj-nav-item bal"><div class="proj-nav-num">04</div><div class="proj-nav-title">Bushfire-Responsive Design</div><div class="proj-nav-type">BAL Assessment</div></a>
       <a href="#proj-wellness" class="proj-nav-item wellness"><div class="proj-nav-num">05</div><div class="proj-nav-title">Dune Wellness Centre</div><div class="proj-nav-type">Commercial Design</div></a>
-      <a href="#proj-commercial-details" class="proj-nav-item" style="background:var(--bg-card);"><div class="proj-nav-num">06</div><div class="proj-nav-title">Commercial Construction Details</div><div class="proj-nav-type">Technical Documentation</div></a>
+      <a href="#proj-commercial-details" class="proj-nav-item comdet"><div class="proj-nav-num">06</div><div class="proj-nav-title">Commercial Construction Details</div><div class="proj-nav-type">Technical Documentation</div></a>
     </div>
   </div>
 </div>
