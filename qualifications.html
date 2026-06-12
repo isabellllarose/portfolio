@@ -92,7 +92,16 @@
   .proj-collapsible { overflow: hidden; transition: max-height 0.4s ease; }
   .proj-collapsible.collapsed { max-height: 0 !important; }
 
-  /* BACK TO TOP BUTTON */
+  /* Hide back-link and title block inside collapsible — toggle header replaces them */
+  .proj-collapsible .back-link { display: none; }
+  .proj-collapsible .proj-intro-header { display: none; }
+  .proj-collapsible .proj-section-title { display: none; }
+  .proj-collapsible > p[style*="text-muted"] { display: none; }
+  /* Dividers between collapsed projects should be thin with minimal margin */
+  .proj-divider { border: none; border-top: 0.5px solid var(--border); margin: 0; }
+  /* Sidebar sticky — scoped so it only sticks within its own project */
+  .proj-detail { position: relative; }
+  .proj-sidebar { position: sticky; top: 80px; align-self: start; }
   .back-to-top {
     position: fixed;
     bottom: 2rem;
@@ -113,22 +122,28 @@
   .back-to-top:hover { background: var(--text-primary); transform: translateY(-2px); }
 
   /* CLICK-TO-ENLARGE IMAGE VIEWER */
-  /* Each project gets a gallery — images clickable, lightbox with prev/next within project */
-  .img-hero { width: 100%; display: block; margin-bottom: 1.5rem; border: 0.5px solid var(--border); background: var(--bg-card); cursor: zoom-in; transition: opacity 0.2s; }
+  .img-hero { width: 100%; display: block; margin-bottom: 1.5rem; cursor: zoom-in; transition: opacity 0.2s; }
   .img-hero:hover { opacity: 0.92; }
   .img-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5px; background: var(--border); margin-bottom: 1.5rem; }
-  .img-grid-2 .img-slot { background: var(--bg-mid); aspect-ratio: 297/210; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-  .img-grid-2 .img-slot img { width: 100%; height: 100%; object-fit: contain; display: block; background: var(--bg-card); cursor: zoom-in; transition: opacity 0.2s; }
+  .img-grid-2 .img-slot { background: transparent; display: flex; align-items: stretch; overflow: hidden; }
+  .img-grid-2 .img-slot img { width: 100%; height: 100%; object-fit: contain; display: block; background: transparent; cursor: zoom-in; transition: opacity 0.2s; }
   .img-grid-2 .img-slot img:hover { opacity: 0.9; }
+  /* Auto-height grid — each column sizes to its image, no forced aspect ratio */
+  .img-grid-2.auto-height { align-items: start; }
+  .img-grid-2.auto-height .img-slot { display: block; height: auto; }
+  .img-grid-2.auto-height .img-slot img { width: 100%; height: auto; object-fit: unset; }
   .img-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5px; background: var(--border); margin-bottom: 1.5rem; }
-  .img-grid-3 .img-slot { background: var(--bg-mid); aspect-ratio: 297/210; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-  .img-grid-3 .img-slot img { width: 100%; height: 100%; object-fit: contain; display: block; background: var(--bg-card); cursor: zoom-in; transition: opacity 0.2s; }
+  .img-grid-3 .img-slot { background: transparent; display: flex; align-items: stretch; overflow: hidden; }
+  .img-grid-3 .img-slot img { width: 100%; height: 100%; object-fit: contain; display: block; background: transparent; cursor: zoom-in; transition: opacity 0.2s; }
   .img-grid-3 .img-slot img:hover { opacity: 0.9; }
   .img-hero-placeholder { width: 100%; aspect-ratio: 297/210; background: var(--bg-mid); border: 0.5px solid var(--border-strong); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; }
   .img-hero-placeholder.portrait { aspect-ratio: 3/4; max-width: 520px; margin-left: auto; margin-right: auto; }
   .img-placeholder-label { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-align: center; padding: 1rem; line-height: 1.7; }
-  .img-full { width: 100%; display: block; border: 0.5px solid var(--border); margin-bottom: 1.5rem; background: var(--bg-card); cursor: zoom-in; }
+  .img-full { width: 100%; display: block; margin-bottom: 1.5rem; cursor: zoom-in; }
   .img-label { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; margin-top: 0.25rem; display: block; }
+  /* Elevation grid — align bottom of each image to a common baseline */
+  .img-grid-4 .img-slot { background: transparent; display: flex; flex-direction: column; align-items: center; overflow: hidden; justify-content: flex-end; }
+  .img-grid-4 .img-slot img { width: 100%; object-fit: contain; display: block; background: transparent; cursor: zoom-in; vertical-align: bottom; }
 
   /* LIGHTBOX */
   .lightbox {
@@ -253,11 +268,21 @@
 <nav>
   <a href="index.html" class="nav-logo">Isabella Heath</a>
   <ul class="nav-links">
-    <li><a href="index.html#work">Work</a></li>
+    <li class="nav-dropdown">
+      <a href="index.html#work">Work</a>
+      <div class="nav-dropdown-menu">
+        <a href="qualifications.html">Academic Work</a>
+        <a href="concept-works.html">Concept Works</a>
+        <a href="professional-works.html">Professional Works</a>
+      </div>
+    </li>
     <li><a href="qualifications.html" class="active">Qualifications</a></li>
     <li><a href="index.html#about">About</a></li>
     <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
   </ul>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <div class="page-header">
@@ -667,12 +692,12 @@
           </div>
         </div>
 
-        <!-- STAIRS + LOUNGE — paired, lounge last -->
-        <div class="img-grid-2" style="margin-top:1.5px;">
-          <div class="img-slot" style="aspect-ratio:3/4;">
+        <!-- STAIRS + LOUNGE — auto height so portrait stair doesn't force whitespace -->
+        <div class="img-grid-2 auto-height" style="margin-top:1.5px; align-items:start;">
+          <div class="img-slot">
             <img src="images/wellness/09-stairs.webp" alt="Spiral stair overhead view" data-gallery="wellness" data-index="10">
           </div>
-          <div class="img-slot" style="aspect-ratio:3/4;">
+          <div class="img-slot">
             <img src="images/wellness/10-lounge-w-people.webp" alt="Lounge with people" data-gallery="wellness" data-index="11">
           </div>
         </div>
@@ -1296,14 +1321,11 @@ backToTop.addEventListener('click', () => {
 
 // ============================================================
 // COLLAPSIBLE PROJECTS
-// Builds a toggle header above each proj-section automatically
 // ============================================================
 document.querySelectorAll('.proj-section').forEach((section, i) => {
-  // Gather metadata from existing content
-  const titleEl    = section.querySelector('.proj-section-title');
-  const badgeType  = section.querySelector('.badge-type');
-  const badgeAcad  = section.querySelector('.badge-academic');
-  const backLink   = section.querySelector('.back-link');
+  const titleEl   = section.querySelector('.proj-section-title');
+  const badgeType = section.querySelector('.badge-type');
+  const badgeAcad = section.querySelector('.badge-academic');
   if (!titleEl) return;
 
   const num      = String(i + 1).padStart(2, '0');
@@ -1323,36 +1345,43 @@ document.querySelectorAll('.proj-section').forEach((section, i) => {
     <span class="proj-toggle-arrow">&#8964;</span>
   `;
 
-  // Wrap all children after the back-link in a collapsible div
+  // Wrap all content in collapsible — hide back-link, badges, title heading inside it
   const collapsible = document.createElement('div');
   collapsible.className = 'proj-collapsible';
+  collapsible.style.paddingTop = '2rem';
+  collapsible.style.paddingBottom = '3rem';
 
-  // Move all children except back-link into collapsible
-  const children = Array.from(section.children);
-  children.forEach(child => {
-    if (!child.classList.contains('back-link') && !child.classList.contains('proj-toggle')) {
-      collapsible.appendChild(child);
-    }
+  Array.from(section.children).forEach(child => {
+    collapsible.appendChild(child);
   });
 
-  // Set initial natural height so transition works
+  // Hide the redundant elements inside the collapsible
+  const backLink = collapsible.querySelector('.back-link');
+  if (backLink) backLink.style.display = 'none';
+  const introHeader = collapsible.querySelector('.proj-intro-header');
+  if (introHeader) introHeader.style.display = 'none';
+  titleEl.style.display = 'none';
+  // Hide the subtitle address line (first p with text-muted style)
+  const subtitle = collapsible.querySelector('p[style*="text-muted"]');
+  if (subtitle) subtitle.style.display = 'none';
+
   section.appendChild(toggle);
   section.appendChild(collapsible);
 
-  // Measure and store natural height
-  const naturalHeight = collapsible.scrollHeight + 'px';
-  collapsible.style.maxHeight = naturalHeight;
+  // Set initial height
+  requestAnimationFrame(() => {
+    collapsible.style.maxHeight = collapsible.scrollHeight + 'px';
+  });
 
-  // Toggle behaviour
   toggle.addEventListener('click', () => {
     const isCollapsed = toggle.classList.contains('collapsed');
     if (isCollapsed) {
       collapsible.style.maxHeight = collapsible.scrollHeight + 'px';
       toggle.classList.remove('collapsed');
+      collapsible.classList.remove('collapsed');
     } else {
-      collapsible.style.maxHeight = collapsible.scrollHeight + 'px'; // set explicit before animating
+      collapsible.style.maxHeight = collapsible.scrollHeight + 'px';
       requestAnimationFrame(() => {
-        collapsible.style.maxHeight = collapsible.scrollHeight + 'px';
         requestAnimationFrame(() => {
           collapsible.classList.add('collapsed');
           toggle.classList.add('collapsed');
@@ -1361,7 +1390,6 @@ document.querySelectorAll('.proj-section').forEach((section, i) => {
     }
   });
 
-  // Re-measure on expand end so content added dynamically (journal) doesn't clip
   collapsible.addEventListener('transitionend', () => {
     if (!toggle.classList.contains('collapsed')) {
       collapsible.style.maxHeight = 'none';
