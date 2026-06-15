@@ -140,7 +140,11 @@
     gap: 1.5px;
     background: var(--border);
     border: 0.5px solid var(--border);
+    overflow: visible;
   }
+
+  /* Hidden on desktop, shown only on mobile */
+  .mobile-only { display: none; }
 
   .sidebar-row {
     background: var(--bg-card);
@@ -320,6 +324,10 @@
     .about-grid { grid-template-columns: 1fr; gap: 3rem; }
     .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
     .contact-band { padding: 4rem 1.5rem; }
+    /* Show the Interested in / Open to rows only on mobile */
+    .mobile-only { display: block; }
+    .nav-hamburger { display: flex; }
+    .nav-links { display: none; }
   }
 
   .nav-mobile-menu { display: none; position: fixed; top: 60px; left: 0; right: 0; background: rgba(242,237,230,0.99); backdrop-filter: blur(16px); border-bottom: 0.5px solid var(--border); z-index: 99; flex-direction: column; }
@@ -453,9 +461,14 @@
         <div class="sidebar-label">Knowledge</div>
         <div class="sidebar-value">Residential Design · Commercial Design · Technical Documentation · NCC & BAL Compliance</div>
       </div>
-      <div class="sidebar-row">
-        <div class="sidebar-label">Location</div>
-        <div class="sidebar-value">Melbourne, Victoria</div>
+      <!-- Shown only on mobile — mirrors hero-right panel which is hidden on small screens -->
+      <div class="sidebar-row mobile-only">
+        <div class="sidebar-label">Interested in</div>
+        <div class="sidebar-value">Spatial planning, interiors, custom modelling and visualisation, with a passion for creating well-considered spaces that balance creativity with practical design</div>
+      </div>
+      <div class="sidebar-row mobile-only">
+        <div class="sidebar-label">Open to</div>
+        <div class="sidebar-value">Work experience, junior roles, collaborative projects</div>
       </div>
     </div>
   </div>
@@ -627,6 +640,7 @@
   <!-- SECTION LINKS -->
   <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:2.5rem;">
     <a href="concept-works.html" class="btn btn-outline" style="font-size:11px;">Concept Works →</a>
+    <a href="concept-works.html#custom-objects" class="btn btn-outline" style="font-size:11px;">Custom Objects →</a>
     <a href="professional-works.html" class="btn btn-outline" style="font-size:11px;">Professional Works →</a>
   </div>
 </div>
