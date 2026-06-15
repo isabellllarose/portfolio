@@ -283,6 +283,25 @@
   .h4-serif-bold { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin: 1.75rem 0 0.75rem; }
 
   @media (max-width: 1000px) { .proj-nav { padding: 1.5rem 0; } }
+  /* Mobile menu */
+  .nav-mobile-menu { display: none; position: fixed; top: 60px; left: 0; right: 0; background: rgba(242,237,230,0.99); backdrop-filter: blur(16px); border-bottom: 0.5px solid var(--border); z-index: 99; flex-direction: column; }
+  .nav-mobile-menu.open { display: flex; }
+  .nav-mobile-item { font-size: 13px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; padding: 1rem 1.5rem; border-bottom: 0.5px solid var(--border); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: color 0.2s, background 0.2s; }
+  .nav-mobile-item:hover { color: var(--accent); background: var(--accent-light); }
+  .nav-mobile-item a { color: inherit; text-decoration: none; flex: 1; }
+  .nav-mobile-arrow { font-size: 0.8rem; transition: transform 0.25s; }
+  .nav-mobile-arrow.open { transform: rotate(180deg); }
+  .nav-mobile-sub { display: none; flex-direction: column; background: var(--bg-mid); }
+  .nav-mobile-sub.open { display: flex; }
+  .nav-mobile-sub a { font-size: 11px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; padding: 0.85rem 2.5rem; border-bottom: 0.5px solid var(--border); transition: color 0.2s; }
+  .nav-mobile-sub a:last-child { border-bottom: none; }
+  .nav-mobile-sub a:hover { color: var(--accent); }
+  /* Course meta — wrap on small screens */
+  @media (max-width: 600px) {
+    .course-meta { flex-wrap: wrap; }
+    .course-meta-cell { flex: 1 1 auto; min-width: 80px; }
+    .course-inner { padding: 2rem 1.5rem; gap: 2rem; }
+  }
   @media (max-width: 900px) { .course-inner { grid-template-columns: 1fr; } .proj-detail { grid-template-columns: 1fr; } .proj-sidebar { position: static; } .img-grid-2 { grid-template-columns: 1fr; } .img-grid-3 { grid-template-columns: 1fr 1fr; } .plan-legend-wrap, .plan-legend-wrap-lg { grid-template-columns: 1fr; } .page-header-inner { padding: 3rem 1.5rem 2.5rem; } }
 </style>
 </head>
@@ -308,7 +327,22 @@
   </button>
 </nav>
 
-<div class="page-header">
+<!-- MOBILE MENU -->
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <!-- Work with sub-items -->
+  <div class="nav-mobile-item" id="mobileWorkToggle">
+    <a href="index.html#work">Work</a>
+    <span class="nav-mobile-arrow" id="mobileWorkArrow">&#8964;</span>
+  </div>
+  <div class="nav-mobile-sub" id="mobileWorkSub">
+    <a href="qualifications.html">Academic Work</a>
+    <a href="concept-works.html">Concept Works</a>
+    <a href="professional-works.html">Professional Works</a>
+  </div>
+  <a href="qualifications.html" class="nav-mobile-item">Qualifications</a>
+  <a href="index.html#about" class="nav-mobile-item">About</a>
+  <a href="index.html#contact" class="nav-mobile-item">Contact</a>
+</div>
   <div class="page-header-inner">
     <div class="breadcrumb"><a href="index.html">Home</a><span>/</span>Qualifications</div>
     <h1 class="page-title">Advanced Diploma of<br>Building Design</h1>
@@ -706,7 +740,7 @@
 
         <!-- INTERIOR — reception lounge (with people first, ArchiCAD second) -->
         <span class="img-label" style="margin-top:1rem; display:block;">Interior — reception &amp; lounge</span>
-        <img src="images/wellness/03-reception-w-people.webp" alt="Reception" class="img-hero" data-gallery="wellness" data-index="6">
+        <img src="images/wellness/03-reception-w-people.webp" alt="Lounge" class="img-hero" data-gallery="wellness" data-index="6">
 
         <!-- STUDIO — hero then 2 below -->
         <span class="img-label" style="margin-top:0.25rem; display:block;">Interior — studio</span>
@@ -725,17 +759,16 @@
         <div class="img-grid-2" style="margin-top:1.5px;">
           <div class="img-slot" style="aspect-ratio:16/9; overflow:hidden; background:transparent;">
             <img src="images/wellness/09-stairs.webp" alt="Stairs" data-gallery="wellness" data-index="10"
-                 style="width:100%; height:100%; object-fit:cover; transform-origin:center center; display:block; background:transparent;">
+                 style="width:100%; height:100%; object-fit:cover; transform:rotate(-90deg) scale(1.4); transform-origin:center center; display:block; background:transparent;">
           </div>
           <div class="img-slot" style="aspect-ratio:16/9; background:transparent;">
-            <img src="images/wellness/10-lounge-w-people.webp" alt="Lounge" data-gallery="wellness" data-index="11"
-            style="width:100%; height:100%; object-fit:cover; display:block;">
+            <img src="images/wellness/10-lounge-w-people.webp" alt="Lounge" data-gallery="wellness" data-index="11">
           </div>
         </div>
 
         <!-- GROUND FLOOR PLAN — full width -->
         <span class="img-label" style="margin-top:1.5rem; display:block;">Ground floor &amp; landscaping plan</span>
-        <img src="images/wellness/20-01-ground-floor-landscaping-plan.webp" alt="Ground Floor & Landscaping Plan" class="img-hero" data-gallery="wellness" data-index="12">
+        <img src="images/wellness/20-01-ground-floor-landscaping-plan.webp" alt="Ground Floor Plan" class="img-hero" data-gallery="wellness" data-index="12">
 
         <!-- FIRST FLOOR PLAN — with legend beside it -->
         <span class="img-label" style="margin-top:0.5rem; display:block;">Level one floor plan</span>
@@ -831,6 +864,42 @@
               <button class="journal-fullscreen-btn" id="devFsPrev" disabled>← Prev</button>
               <span class="journal-fullscreen-counter" id="devFsCounter">Pages 1–2</span>
               <button class="journal-fullscreen-btn" id="devFsNext">Next →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CUSTOM BIM OBJECTS -->
+        <div style="margin-top:2.5rem; padding-top:2rem; border-top:0.5px solid var(--border);">
+          <h4 class="h4-serif-bold" style="margin-top:0;">Custom BIM Objects — Reception Desk</h4>
+          <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.8; margin-bottom:1.5rem;">The reception desk was modelled as a custom ArchiCAD object to meet the specific curved form and material requirements of the design — no existing library component could achieve the right geometry. Shown below in context and from multiple angles.</p>
+
+          <!-- In context — full width hero -->
+          <span class="img-label">In context</span>
+          <div class="img-hero-placeholder" style="margin-bottom:1.5rem;">
+            <!-- REPLACE WITH: <img src="images/wellness/bim-01-context.webp" alt="Reception desk in context" class="img-hero" data-gallery="bim" data-index="0"> -->
+            <span class="img-placeholder-label">01 — In context<br>images/wellness/bim-01-context.webp</span>
+          </div>
+
+          <!-- 4 object views in 2x2 grid -->
+          <span class="img-label">Object views</span>
+          <div class="img-grid-2" style="margin-top:0.5rem;">
+            <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+              <!-- REPLACE DIV CONTENTS WITH: <img src="images/wellness/bim-02-three-quarter-a.webp" alt="Three-quarter view A" data-gallery="bim" data-index="1"> -->
+              <span class="img-placeholder-label">02 — Three-quarter A<br>images/wellness/bim-02-three-quarter-a.webp</span>
+            </div>
+            <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+              <!-- REPLACE DIV CONTENTS WITH: <img src="images/wellness/bim-03-three-quarter-b.webp" alt="Three-quarter view B" data-gallery="bim" data-index="2"> -->
+              <span class="img-placeholder-label">03 — Three-quarter B<br>images/wellness/bim-03-three-quarter-b.webp</span>
+            </div>
+          </div>
+          <div class="img-grid-2" style="margin-top:1.5px;">
+            <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+              <!-- REPLACE DIV CONTENTS WITH: <img src="images/wellness/bim-04-front.webp" alt="Front perspective" data-gallery="bim" data-index="3"> -->
+              <span class="img-placeholder-label">04 — Front perspective<br>images/wellness/bim-04-front.webp</span>
+            </div>
+            <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+              <!-- REPLACE DIV CONTENTS WITH: <img src="images/wellness/bim-05-detail.webp" alt="Detail" data-gallery="bim" data-index="4"> -->
+              <span class="img-placeholder-label">05 — Detail<br>images/wellness/bim-05-detail.webp</span>
             </div>
           </div>
         </div>
@@ -1551,6 +1620,90 @@ if (track && prevBtn2 && nextBtn2) {
 
   updateCarousel();
 }
+
+// ============================================================
+// MOBILE NAV
+// ============================================================
+const hamburger    = document.getElementById('navHamburger');
+const mobileMenu   = document.getElementById('navMobileMenu');
+const workToggle   = document.getElementById('mobileWorkToggle');
+const workArrow    = document.getElementById('mobileWorkArrow');
+const workSub      = document.getElementById('mobileWorkSub');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+
+// Work sub-menu toggle — arrow click opens sub, link click navigates
+workArrow.addEventListener('click', e => {
+  e.preventDefault();
+  e.stopPropagation();
+  workArrow.classList.toggle('open');
+  workSub.classList.toggle('open');
+});
+
+// Close menu when any link inside it is tapped
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    workArrow.classList.remove('open');
+    workSub.classList.remove('open');
+  });
+});
+
+// Close on outside tap
+document.addEventListener('click', e => {
+  if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+});
+
+// ============================================================
+// TOUCH ZOOM FIX — disable custom tap-to-zoom on touch devices
+// Use native pinch zoom instead
+// ============================================================
+if ('ontouchstart' in window) {
+  // Remove the mousedown/mouseup zoom handlers by flagging touch mode
+  // Re-bind lbImg click to do nothing (let native pinch work)
+  document.getElementById('lbImg').style.cursor = 'default';
+  // Prevent the zoom toggle on touch — only close on tap of dark area
+  document.getElementById('lbImg').addEventListener('touchend', e => {
+    e.stopPropagation();
+    // Single tap on image does nothing — pinch zoom is native
+  }, { passive: true });
+}
+
+// ============================================================
+// JUMP-TO-PROJECT from index.html anchor hash
+// If page loaded with a hash like #proj-beach-house,
+// open that project and collapse the rest
+// ============================================================
+function openProjectById(id) {
+  const entry = allToggles.get(id);
+  if (!entry) return;
+  allToggles.forEach(({ open: o, close: c }, key) => {
+    if (key === id) o(); else c();
+  });
+  setTimeout(() => {
+    entry.section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 80);
+}
+
+// Check hash on load
+if (window.location.hash) {
+  const hashId = window.location.hash.replace('#', '');
+  // Wait for collapsible script to finish setting up
+  setTimeout(() => openProjectById(hashId), 150);
+}
+
+// Also handle hash changes (back/forward navigation)
+window.addEventListener('hashchange', () => {
+  const hashId = window.location.hash.replace('#', '');
+  openProjectById(hashId);
+});
 </script>
 </body>
 </html>
