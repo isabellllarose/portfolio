@@ -274,7 +274,34 @@
   .journal-close.ui-hidden { opacity: 0; pointer-events: none; }
   .journal-close:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); opacity: 1 !important; }
 
-  /* Elevation 4-grid with labels */
+  /* QBIM card hover */
+  .qbim-card:hover { border-color: var(--accent) !important; box-shadow: 0 4px 20px rgba(74,31,26,0.1); }
+  .qbim-card:hover .qbim-default { opacity: 0 !important; }
+  .qbim-card:hover .qbim-hover { opacity: 1 !important; }
+  /* Object panel (shared with concept works) */
+  .qbim-overlay { position: fixed; inset: 0; background: rgba(26,20,16,0.5); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+  .qbim-overlay.open { opacity: 1; pointer-events: all; }
+  .qbim-panel { position: fixed; top: 60px; left: 50%; transform: translateX(-50%) translateY(20px); width: min(1100px, 92vw); max-height: calc(100vh - 80px); background: var(--bg-card); border: 0.5px solid var(--border-strong); z-index: 201; display: flex; flex-direction: column; opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.3s; overflow: hidden; }
+  .qbim-panel.open { opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); }
+  .qbim-panel-inner { display: grid; grid-template-columns: 1fr 1fr; flex: 1; min-height: 0; }
+  .qbim-panel-left { display: flex; flex-direction: column; border-right: 0.5px solid var(--border); }
+  .qbim-panel-hero { flex: 1; background: var(--bg-mid); display: flex; align-items: center; justify-content: center; overflow: hidden; min-height: 0; }
+  .qbim-panel-hero img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; background: transparent; }
+  .qbim-panel-thumbs { display: flex; gap: 1.5px; padding: 0.75rem; background: var(--bg); overflow-x: auto; flex-shrink: 0; }
+  .qbim-panel-thumb { width: 70px; height: 52px; flex-shrink: 0; cursor: pointer; border: 1.5px solid transparent; overflow: hidden; background: var(--bg-mid); transition: border-color 0.2s; }
+  .qbim-panel-thumb img { width: 100%; height: 100%; object-fit: contain; background: transparent; }
+  .qbim-panel-thumb.active { border-color: var(--accent); }
+  .qbim-panel-right { padding: 2rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1.25rem; }
+  .qbim-panel-close { position: absolute; top: 0.75rem; right: 1rem; background: none; border: none; font-size: 1.1rem; cursor: pointer; color: var(--text-muted); padding: 0.25rem 0.5rem; z-index: 202; }
+  .qbim-panel-close:hover { color: var(--accent); }
+  @media (max-width: 768px) {
+    .qbim-panel { top: auto; bottom: 0; left: 0; right: 0; transform: translateY(100%); width: 100%; max-width: 100%; max-height: 90vh; }
+    .qbim-panel.open { transform: translateY(0); }
+    .qbim-panel-inner { grid-template-columns: 1fr; overflow-y: auto; }
+    .qbim-panel-left { border-right: none; border-bottom: 0.5px solid var(--border); }
+    .qbim-panel-hero { min-height: 220px; max-height: 38vh; }
+    .qbim-panel-right { padding: 1.25rem 1.25rem 2rem; }
+  }
   .img-grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1.5px; background: var(--border); margin-bottom: 1.5rem; }
   .img-grid-4 .img-slot { background: var(--bg-mid); display: flex; flex-direction: column; align-items: center; overflow: hidden; }
   .img-grid-4 .img-slot img { width: 100%; object-fit: contain; display: block; background: var(--bg-card); cursor: zoom-in; }
@@ -310,11 +337,17 @@
 <nav>
   <a href="index.html" class="nav-logo">Isabella Heath</a>
   <ul class="nav-links">
-    <li class="nav-dropdown">
+        <li class="nav-dropdown">
       <a href="index.html#work">Work</a>
       <div class="nav-dropdown-menu">
         <a href="qualifications.html">Academic Work</a>
-        <a href="concept-works.html">Concept Works</a>
+        <div class="nav-sub">
+          <span class="nav-sub-trigger">Concept Works</span>
+          <div class="nav-sub-menu">
+            <a href="concept-works.html">All Concept Works</a>
+            <a href="concept-works.html#custom-objects">Custom Objects</a>
+          </div>
+        </div>
         <a href="professional-works.html">Professional Works</a>
       </div>
     </li>
@@ -330,13 +363,14 @@
 <!-- MOBILE MENU -->
 <div class="nav-mobile-menu" id="navMobileMenu">
   <!-- Work with sub-items -->
-  <div class="nav-mobile-item" id="mobileWorkToggle">
+    <div class="nav-mobile-item" id="mobileWorkToggle">
     <a href="index.html#work">Work</a>
     <span class="nav-mobile-arrow" id="mobileWorkArrow">&#8964;</span>
   </div>
   <div class="nav-mobile-sub" id="mobileWorkSub">
     <a href="qualifications.html">Academic Work</a>
     <a href="concept-works.html">Concept Works</a>
+    <a href="concept-works.html#custom-objects">&#8627; Custom Objects</a>
     <a href="professional-works.html">Professional Works</a>
   </div>
   <a href="qualifications.html" class="nav-mobile-item">Qualifications</a>
@@ -755,14 +789,15 @@
           </div>
         </div>
 
-        <!-- STAIRS + LOUNGE — stairs rotated -90deg, both same height -->
+        <!-- STAIRS + LOUNGE — matching aspect ratio, both fill flush -->
         <div class="img-grid-2" style="margin-top:1.5px;">
           <div class="img-slot" style="aspect-ratio:16/9; overflow:hidden; background:transparent;">
             <img src="images/wellness/09-stairs.webp" alt="Stairs" data-gallery="wellness" data-index="10"
-                 style="width:100%; height:100%; object-fit:cover; transform:rotate(-90deg) scale(1.4); transform-origin:center center; display:block; background:transparent;">
+                 style="width:100%; height:100%; object-fit:cover; display:block; background:transparent;">
           </div>
-          <div class="img-slot" style="aspect-ratio:16/9; background:transparent;">
-            <img src="images/wellness/10-lounge-w-people.webp" alt="Lounge" data-gallery="wellness" data-index="11">
+          <div class="img-slot" style="aspect-ratio:16/9; overflow:hidden; background:transparent;">
+            <img src="images/wellness/10-lounge-w-people.webp" alt="Lounge" data-gallery="wellness" data-index="11"
+                 style="width:100%; height:100%; object-fit:cover; display:block; background:transparent;">
           </div>
         </div>
 
@@ -868,30 +903,24 @@
           </div>
         </div>
 
-        <!-- CUSTOM BIM OBJECTS -->
+        <!-- CUSTOM BIM OBJECTS — thumbnail cards, same viewer as concept works page -->
         <div style="margin-top:2.5rem; padding-top:2rem; border-top:0.5px solid var(--border);">
-          <h4 class="h4-serif-bold" style="margin-top:0;">Custom BIM Objects — Reception Desk</h4>
-          <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.8; margin-bottom:1.25rem;">Modelled from scratch in ArchiCAD to meet the specific curved form of the design. Click any image to enlarge.</p>
+          <h4 class="h4-serif-bold" style="margin-top:0;">Custom BIM Objects</h4>
+          <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.8; margin-bottom:1.5rem;">Objects modelled from scratch in ArchiCAD for this project. Hover to preview, click to view in detail.</p>
 
-          <!-- Compact 3-column grid for in-context + two three-quarter views -->
-          <div class="img-grid-3" style="margin-bottom:1.5px;">
-            <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-              <img src="images/wellness/bim-01-context.webp" alt="Reception desk in context" data-gallery="bim" data-index="0" style="object-fit:contain; background:transparent;">
-            </div>
-            <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-              <img src="images/wellness/bim-02-three-quarter-a.webp" alt="Three-quarter view A" data-gallery="bim" data-index="1" style="object-fit:contain; background:transparent;">
-            </div>
-            <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-              <img src="images/wellness/bim-03-three-quarter-b.webp" alt="Three-quarter view B" data-gallery="bim" data-index="2" style="object-fit:contain; background:transparent;">
-            </div>
-          </div>
-          <!-- Front + detail -->
-          <div class="img-grid-2" style="margin-top:1.5px;">
-            <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-              <img src="images/wellness/bim-04-front.webp" alt="Front perspective" data-gallery="bim" data-index="3" style="object-fit:contain; background:transparent;">
-            </div>
-            <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-              <img src="images/wellness/bim-05-detail.webp" alt="Detail" data-gallery="bim" data-index="4" style="object-fit:contain; background:transparent;">
+          <!-- Reception Desk card -->
+          <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:1.5rem;">
+            <div class="qbim-card" data-obj="reception" style="cursor:pointer; border:0.5px solid var(--border); background:var(--bg-card); transition:border-color 0.25s, box-shadow 0.25s;">
+              <div style="position:relative; aspect-ratio:4/3; overflow:hidden; background:var(--bg-mid);">
+                <img src="images/wellness/bim-01-context.webp" alt="Reception Desk" class="qbim-default"
+                     style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:transparent; transition:opacity 0.35s;">
+                <img src="images/wellness/bim-02-three-quarter-a.webp" alt="Reception Desk three-quarter" class="qbim-hover"
+                     style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:transparent; transition:opacity 0.35s; opacity:0;">
+              </div>
+              <div style="padding:0.75rem 1rem 1rem;">
+                <div style="font-family:'Playfair Display',serif; font-size:0.95rem; color:var(--text-primary); margin-bottom:0.15rem;">Reception Desk</div>
+                <div style="font-size:9px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted);">Dune Wellness Centre</div>
+              </div>
             </div>
           </div>
         </div>
@@ -974,6 +1003,32 @@
     </div>
   </div>
 
+</div>
+
+<!-- QBIM OBJECT PANEL -->
+<div class="qbim-overlay" id="qbimOverlay"></div>
+<div class="qbim-panel" id="qbimPanel">
+  <button class="qbim-panel-close" id="qbimClose">✕</button>
+  <div class="qbim-panel-inner">
+    <div class="qbim-panel-left">
+      <div class="qbim-panel-hero"><img id="qbimHero" src="" alt=""></div>
+      <div class="qbim-panel-thumbs" id="qbimThumbs"></div>
+    </div>
+    <div class="qbim-panel-right">
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.4rem,2.5vw,2rem);line-height:1.15;color:var(--text-primary);margin:0;padding-top:1.5rem;" id="qbimTitle"></h2>
+      <p style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin:0;" id="qbimProject"></p>
+      <hr style="border:none;border-top:0.5px solid var(--border);margin:0;">
+      <div>
+        <span style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.5rem;display:block;">Description</span>
+        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;margin:0;" id="qbimDesc"></p>
+      </div>
+      <hr style="border:none;border-top:0.5px solid var(--border);margin:0;">
+      <div>
+        <span style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.5rem;display:block;">Dimensions</span>
+        <div style="display:grid;grid-template-columns:auto 1fr;gap:0.35rem 1rem;align-items:baseline;" id="qbimDims"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- BACK TO TOP -->
@@ -1439,6 +1494,84 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeFs();
   if (e.key === 'ArrowLeft') fsPrev.click();
   if (e.key === 'ArrowRight') fsNext.click();
+});
+
+// ============================================================
+// QBIM — custom object thumbnail cards in qualifications
+// ============================================================
+const qbimObjects = {
+  'reception': {
+    title:   'Reception Desk',
+    project: 'Dune Wellness Centre',
+    desc:    'A custom curved reception desk modelled in ArchiCAD to suit the organic, flowing spatial language of the Dune Wellness Centre. The curved front face and integrated shelf could not be achieved with standard library components, so the object was built from scratch.',
+    dims: [
+      { label: 'Material', value: 'Thermolaminated panels and doors' }
+    ],
+    images: [
+      { src: 'images/wellness/bim-01-context.webp',         alt: 'In context' },
+      { src: 'images/wellness/bim-02-three-quarter-a.webp', alt: 'Three-quarter A' },
+      { src: 'images/wellness/bim-03-three-quarter-b.webp', alt: 'Three-quarter B' },
+      { src: 'images/wellness/bim-04-front.webp',           alt: 'Front perspective' },
+      { src: 'images/wellness/bim-05-detail.webp',          alt: 'Detail' }
+    ]
+  }
+};
+
+const qOverlay = document.getElementById('qbimOverlay');
+const qPanel   = document.getElementById('qbimPanel');
+const qClose   = document.getElementById('qbimClose');
+const qHero    = document.getElementById('qbimHero');
+const qThumbs  = document.getElementById('qbimThumbs');
+const qTitle   = document.getElementById('qbimTitle');
+const qProject = document.getElementById('qbimProject');
+const qDesc    = document.getElementById('qbimDesc');
+const qDims    = document.getElementById('qbimDims');
+let qImages    = [];
+
+function qSetHero(i) {
+  qHero.src = qImages[i].src;
+  qHero.alt = qImages[i].alt;
+  qThumbs.querySelectorAll('.qbim-panel-thumb').forEach((t, idx) => t.classList.toggle('active', idx === i));
+}
+
+function qOpen(key) {
+  const obj = qbimObjects[key];
+  if (!obj) return;
+  qImages = obj.images;
+  qTitle.textContent   = obj.title;
+  qProject.textContent = obj.project;
+  qDesc.textContent    = obj.desc;
+  qDims.innerHTML = obj.dims.map(d =>
+    `<span style="font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-muted);white-space:nowrap;">${d.label}</span><span style="font-size:0.875rem;color:var(--text-primary);">${d.value}</span>`
+  ).join('');
+  qThumbs.innerHTML = '';
+  obj.images.forEach((img, i) => {
+    const t = document.createElement('div');
+    t.className = 'qbim-panel-thumb' + (i === 0 ? ' active' : '');
+    const ti = document.createElement('img'); ti.src = img.src; ti.alt = img.alt;
+    t.appendChild(ti);
+    t.addEventListener('click', () => qSetHero(i));
+    qThumbs.appendChild(t);
+  });
+  qSetHero(0);
+  qOverlay.classList.add('open');
+  qPanel.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function qClose2() {
+  qOverlay.classList.remove('open');
+  qPanel.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.qbim-card').forEach(card => {
+  card.addEventListener('click', () => qOpen(card.dataset.obj));
+});
+if (qClose)   qClose.addEventListener('click', qClose2);
+if (qOverlay) qOverlay.addEventListener('click', qClose2);
+document.addEventListener('keydown', e => {
+  if (qPanel && qPanel.classList.contains('open') && e.key === 'Escape') qClose2();
 });
 
 // ============================================================
