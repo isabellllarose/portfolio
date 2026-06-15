@@ -11,34 +11,90 @@
   .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.75rem; }
   .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
   .breadcrumb a:hover { color: var(--accent); }
-  .breadcrumb span { color: var(--border-strong); }
   .page-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 1rem; }
   .page-subtitle { font-size: 1rem; color: var(--text-secondary); max-width: 580px; line-height: 1.75; }
-  .coming-band {
-    background: var(--bg-card);
-    border: 0.5px solid var(--border);
-    max-width: 1160px;
-    margin: 4rem auto;
-    padding: 4rem 3rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.5rem;
-  }
-  .coming-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
-  .coming-title { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3vw, 2.2rem); color: var(--text-primary); line-height: 1.2; }
-  .coming-body { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.8; max-width: 540px; }
-  .coming-divider { width: 40px; height: 1px; background: var(--accent); }
 
-  /* Empty card grid — placeholder slots -->
-  .concept-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5px; background: var(--border); border: 0.5px solid var(--border); max-width: 1160px; margin: 0 3rem 4rem; }
-  .concept-card-placeholder { background: var(--bg); border: 1.5px dashed var(--border-strong); min-height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem; padding: 2rem; }
-  .concept-card-placeholder .icon { width: 40px; height: 40px; border: 0.5px solid var(--border-strong); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 1.2rem; }
-  .concept-card-placeholder p { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); text-align: center; }
+  /* SECTION */
+  .section-wrap-cw { max-width: 1160px; margin: 0 auto; padding: 4rem 3rem; }
+  .section-eyebrow-cw { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 1rem; }
+  .section-title-cw { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem,3vw,2.4rem); margin-bottom: 0.75rem; }
+  .section-body-cw { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.8; max-width: 580px; margin-bottom: 3rem; }
+
+  /* OBJECT THUMBNAIL GRID */
+  .obj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2rem; }
+  .obj-card { cursor: pointer; border: 0.5px solid var(--border); background: var(--bg-card); transition: box-shadow 0.25s, border-color 0.25s; }
+  .obj-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(74,31,26,0.1); }
+  .obj-thumb { position: relative; aspect-ratio: 4/3; overflow: hidden; background: var(--bg-mid); }
+  .obj-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: opacity 0.35s; background: transparent; }
+  .obj-thumb .thumb-default { opacity: 1; }
+  .obj-thumb .thumb-hover { opacity: 0; }
+  .obj-card:hover .thumb-default { opacity: 0; }
+  .obj-card:hover .thumb-hover { opacity: 1; }
+  .obj-card-info { padding: 1rem 1.25rem 1.25rem; }
+  .obj-card-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--text-primary); margin-bottom: 0.2rem; }
+  .obj-card-project { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+
+  /* OBJECT DETAIL PANEL — desktop: overlay modal; mobile: bottom drawer */
+  .obj-overlay {
+    position: fixed; inset: 0; background: rgba(26,20,16,0.5);
+    z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+  }
+  .obj-overlay.open { opacity: 1; pointer-events: all; }
+
+  .obj-panel {
+    position: fixed; top: 60px; left: 50%; transform: translateX(-50%) translateY(20px);
+    width: min(1100px, 92vw); max-height: calc(100vh - 80px);
+    background: var(--bg-card); border: 0.5px solid var(--border-strong);
+    z-index: 201; display: flex; flex-direction: column;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    overflow: hidden;
+  }
+  .obj-panel.open { opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); }
+
+  /* Panel inner — two columns */
+  .obj-panel-inner { display: grid; grid-template-columns: 1fr 1fr; flex: 1; min-height: 0; }
+
+  /* Left col — large image + thumbnail strip */
+  .obj-panel-left { display: flex; flex-direction: column; border-right: 0.5px solid var(--border); }
+  .obj-panel-hero { flex: 1; background: var(--bg-mid); display: flex; align-items: center; justify-content: center; overflow: hidden; min-height: 0; }
+  .obj-panel-hero img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; background: transparent; }
+  .obj-panel-thumbs { display: flex; gap: 1.5px; padding: 0.75rem; background: var(--bg); overflow-x: auto; flex-shrink: 0; }
+  .obj-panel-thumb { width: 70px; height: 52px; flex-shrink: 0; cursor: pointer; border: 1.5px solid transparent; overflow: hidden; background: var(--bg-mid); transition: border-color 0.2s; }
+  .obj-panel-thumb img { width: 100%; height: 100%; object-fit: contain; background: transparent; }
+  .obj-panel-thumb.active { border-color: var(--accent); }
+
+  /* Right col — info */
+  .obj-panel-right { padding: 2rem 2rem 1.5rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1.25rem; }
+  .obj-panel-close { position: absolute; top: 0.75rem; right: 1rem; background: none; border: none; font-size: 1.1rem; cursor: pointer; color: var(--text-muted); padding: 0.25rem 0.5rem; transition: color 0.2s; z-index: 202; }
+  .obj-panel-close:hover { color: var(--accent); }
+  .obj-panel-title { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 2.5vw, 2rem); line-height: 1.15; color: var(--text-primary); margin: 0; padding-top: 1.5rem; }
+  .obj-panel-project { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+  .obj-panel-divider { border: none; border-top: 0.5px solid var(--border); margin: 0; }
+  .obj-panel-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; display: block; }
+  .obj-panel-desc { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8; }
+  .obj-dims { display: grid; grid-template-columns: auto 1fr; gap: 0.35rem 1rem; align-items: baseline; }
+  .obj-dim-label { font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+  .obj-dim-value { font-size: 0.875rem; color: var(--text-primary); font-family: 'Inter', sans-serif; }
+
+  /* Mobile bottom drawer */
   @media (max-width: 768px) {
-    .page-header-inner { padding: 3rem 1.5rem 2.5rem; }
-    .coming-band { margin: 2rem 1.5rem; padding: 2.5rem 1.5rem; }
-    .concept-grid { margin: 0 1.5rem 3rem; }
+    .obj-panel {
+      top: auto; bottom: 0; left: 0; right: 0;
+      transform: translateY(100%);
+      width: 100%; max-width: 100%; max-height: 90vh;
+      border-radius: 0; border-left: none; border-right: none; border-bottom: none;
+    }
+    .obj-panel.open { transform: translateY(0); }
+    .obj-panel-inner { grid-template-columns: 1fr; overflow-y: auto; }
+    .obj-panel-left { border-right: none; border-bottom: 0.5px solid var(--border); }
+    .obj-panel-hero { min-height: 240px; max-height: 40vh; }
+    .obj-panel-right { padding: 1.25rem 1.25rem 2rem; }
+    .obj-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .section-wrap-cw { padding: 2.5rem 1.5rem; }
+  }
+  @media (max-width: 480px) {
+    .obj-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -47,7 +103,14 @@
 <nav>
   <a href="index.html" class="nav-logo">Isabella Heath</a>
   <ul class="nav-links">
-    <li><a href="index.html#work">Work</a></li>
+    <li class="nav-dropdown">
+      <a href="index.html#work">Work</a>
+      <div class="nav-dropdown-menu">
+        <a href="qualifications.html">Academic Work</a>
+        <a href="concept-works.html">Concept Works</a>
+        <a href="professional-works.html">Professional Works</a>
+      </div>
+    </li>
     <li><a href="qualifications.html">Qualifications</a></li>
     <li><a href="index.html#about">About</a></li>
     <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
@@ -58,81 +121,104 @@
 </nav>
 
 <div class="nav-mobile-menu" id="navMobileMenu">
-  <a href="index.html#work" onclick="closeMobileMenu()">Work</a>
-  <a href="qualifications.html" onclick="closeMobileMenu()">Qualifications</a>
-  <a href="concept-works.html" onclick="closeMobileMenu()">Concept Works</a>
-  <a href="professional-works.html" onclick="closeMobileMenu()">Professional Works</a>
-  <a href="index.html#about" onclick="closeMobileMenu()">About</a>
-  <a href="index.html#contact" onclick="closeMobileMenu()">Contact</a>
+  <div class="nav-mobile-item" id="mobileWorkToggle">
+    <a href="index.html#work">Work</a>
+    <span class="nav-mobile-arrow" id="mobileWorkArrow">&#8964;</span>
+  </div>
+  <div class="nav-mobile-sub" id="mobileWorkSub">
+    <a href="qualifications.html">Academic Work</a>
+    <a href="concept-works.html">Concept Works</a>
+    <a href="professional-works.html">Professional Works</a>
+  </div>
+  <a href="qualifications.html" class="nav-mobile-item">Qualifications</a>
+  <a href="index.html#about" class="nav-mobile-item">About</a>
+  <a href="index.html#contact" class="nav-mobile-item">Contact</a>
 </div>
 
 <div class="page-header">
   <div class="page-header-inner">
     <div class="breadcrumb"><a href="index.html">Home</a><span>/</span>Concept Works</div>
     <h1 class="page-title">Concept Works</h1>
-    <p class="page-subtitle">Self-initiated design explorations, speculative projects, and work produced outside of formal study. A space for ideas that sit outside the brief — creative, curious, and ongoing.</p>
+    <p class="page-subtitle">Self-initiated design explorations, speculative projects, and work produced outside of formal study — including custom BIM objects built to meet specific design requirements.</p>
   </div>
 </div>
 
-<div class="coming-band">
-  <div class="coming-eyebrow">In development</div>
-  <div class="coming-divider"></div>
-  <h2 class="coming-title">Projects being prepared<br>for this page.</h2>
-  <p class="coming-body">
-    This section will grow to include self-directed design concepts, personal explorations in materiality and space, and any work that doesn't fit neatly into an academic or professional category. Check back soon.
-  </p>
-  <a href="index.html#work" class="btn btn-outline" style="margin-top:0.5rem;">← Back to all work</a>
+<!-- COMING SOON BAND for future concept projects -->
+<div style="background:var(--bg-card); border:0.5px solid var(--border); max-width:1160px; margin:3rem auto 0; padding:3rem; display:flex; flex-direction:column; gap:1rem;">
+  <span style="font-size:10px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-muted);">In development</span>
+  <div style="width:40px; height:1px; background:var(--accent);"></div>
+  <h2 style="font-family:'Playfair Display',serif; font-size:clamp(1.4rem,3vw,2rem); margin:0;">Concept projects being<br>prepared for this page.</h2>
+  <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.8; max-width:500px; margin:0;">Self-directed design explorations will be added here as they develop. Check back soon.</p>
+  <a href="index.html#work" class="btn btn-outline" style="margin-top:0.25rem; align-self:flex-start;">← Back to all work</a>
 </div>
 
-<!-- CUSTOM BIM OBJECTS SECTION -->
-<div style="max-width:1160px; margin:0 auto 4rem; padding:0 3rem;">
-  <div style="border-top:0.5px solid var(--border); padding-top:3rem;">
-    <span style="font-size:10px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-muted); display:block; margin-bottom:1rem;">Custom objects</span>
-    <h2 style="font-family:'Playfair Display',serif; font-size:clamp(1.6rem,3vw,2.2rem); margin-bottom:1rem;">Custom BIM Objects</h2>
-    <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.8; max-width:580px; margin-bottom:2.5rem;">
-      Custom components modelled in ArchiCAD from scratch — built to meet specific design requirements that existing library objects couldn't fulfil. Each object is documented in context and from multiple angles.
-    </p>
+<!-- CUSTOM BIM OBJECTS -->
+<div class="section-wrap-cw">
+  <span class="section-eyebrow-cw">Custom objects</span>
+  <h2 class="section-title-cw">Custom BIM Objects</h2>
+  <p class="section-body-cw">Components modelled from scratch in ArchiCAD — built to meet specific design requirements that existing library objects couldn't fulfil. Hover to preview, click to view in detail.</p>
 
-    <!-- Reception Desk -->
-    <p style="font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:1rem; padding-bottom:0.5rem; border-bottom:0.5px solid var(--border);">Dune Wellness Centre — Reception Desk</p>
+  <div class="obj-grid">
 
-    <span style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted); margin-bottom:0.5rem; display:block;">In context</span>
-    <img src="images/wellness/bim-01-context.webp" alt="Reception desk in context"
-         style="width:100%; display:block; margin-bottom:1.5rem; cursor:zoom-in; background:transparent;"
-         data-gallery="bim-concept" data-index="0">
-
-    <span style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted); margin-bottom:0.5rem; display:block;">Object views</span>
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5px; background:var(--border); margin-bottom:1.5px;">
-      <div style="aspect-ratio:4/3; overflow:hidden; background:transparent; display:flex; align-items:center;">
-        <img src="images/wellness/bim-02-three-quarter-a.webp" alt="Three-quarter view A"
-             style="width:100%; height:100%; object-fit:contain; display:block; background:transparent; cursor:zoom-in;"
-             data-gallery="bim-concept" data-index="1">
+    <!-- OBJECT 1: Reception Desk -->
+    <div class="obj-card" data-obj="reception">
+      <div class="obj-thumb">
+        <img class="thumb-default" src="images/wellness/bim-01-context.webp" alt="Reception Desk in context">
+        <img class="thumb-hover"   src="images/wellness/bim-02-three-quarter-a.webp" alt="Reception Desk three-quarter view">
       </div>
-      <div style="aspect-ratio:4/3; overflow:hidden; background:transparent; display:flex; align-items:center;">
-        <img src="images/wellness/bim-03-three-quarter-b.webp" alt="Three-quarter view B"
-             style="width:100%; height:100%; object-fit:contain; display:block; background:transparent; cursor:zoom-in;"
-             data-gallery="bim-concept" data-index="2">
+      <div class="obj-card-info">
+        <div class="obj-card-title">Reception Desk</div>
+        <div class="obj-card-project">Dune Wellness Centre</div>
       </div>
     </div>
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5px; background:var(--border);">
-      <div style="aspect-ratio:4/3; overflow:hidden; background:transparent; display:flex; align-items:center;">
-        <img src="images/wellness/bim-04-front.webp" alt="Front perspective"
-             style="width:100%; height:100%; object-fit:contain; display:block; background:transparent; cursor:zoom-in;"
-             data-gallery="bim-concept" data-index="3">
+
+    <!-- OBJECT 2: Coffee Table -->
+    <div class="obj-card" data-obj="coffee-table">
+      <div class="obj-thumb">
+        <img class="thumb-default" src="images/personal/coffee-table-01-context.webp" alt="Coffee Table in context">
+        <img class="thumb-hover"   src="images/personal/coffee-table-02-three-quarter-a.webp" alt="Coffee Table three-quarter view">
       </div>
-      <div style="aspect-ratio:4/3; overflow:hidden; background:transparent; display:flex; align-items:center;">
-        <img src="images/wellness/bim-05-detail.webp" alt="Detail"
-             style="width:100%; height:100%; object-fit:contain; display:block; background:transparent; cursor:zoom-in;"
-             data-gallery="bim-concept" data-index="4">
+      <div class="obj-card-info">
+        <div class="obj-card-title">Travertine Coffee Table</div>
+        <div class="obj-card-project">Personal Project</div>
       </div>
     </div>
+
   </div>
 </div>
 
-<div class="concept-grid">
-  <div class="concept-card-placeholder"><div class="icon">+</div><p>Concept project<br>coming soon</p></div>
-  <div class="concept-card-placeholder"><div class="icon">+</div><p>Concept project<br>coming soon</p></div>
-  <div class="concept-card-placeholder"><div class="icon">+</div><p>Concept project<br>coming soon</p></div>
+<!-- OBJECT DETAIL OVERLAY -->
+<div class="obj-overlay" id="objOverlay"></div>
+
+<!-- OBJECT DETAIL PANEL -->
+<div class="obj-panel" id="objPanel">
+  <button class="obj-panel-close" id="objPanelClose">✕</button>
+
+  <div class="obj-panel-inner">
+    <!-- LEFT: image viewer -->
+    <div class="obj-panel-left">
+      <div class="obj-panel-hero">
+        <img id="objHeroImg" src="" alt="">
+      </div>
+      <div class="obj-panel-thumbs" id="objThumbs"></div>
+    </div>
+
+    <!-- RIGHT: info -->
+    <div class="obj-panel-right" id="objInfo">
+      <h2 class="obj-panel-title" id="objTitle"></h2>
+      <p class="obj-panel-project" id="objProject"></p>
+      <hr class="obj-panel-divider">
+      <div>
+        <span class="obj-panel-label">Description</span>
+        <p class="obj-panel-desc" id="objDesc"></p>
+      </div>
+      <hr class="obj-panel-divider">
+      <div>
+        <span class="obj-panel-label">Dimensions</span>
+        <div class="obj-dims" id="objDims"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <footer>
@@ -146,62 +232,144 @@
   <span class="footer-text">Melbourne, VIC · Building Designer</span>
 </footer>
 
-<!-- LIGHTBOX -->
-<div id="conceptLightbox" style="position:fixed;inset:0;z-index:400;background:rgba(26,20,16,0.96);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;opacity:0;pointer-events:none;transition:opacity 0.25s;">
-  <button id="conceptLbClose" style="position:fixed;top:1.25rem;right:1.5rem;background:rgba(26,20,16,0.65);border:0.5px solid rgba(255,255,255,0.15);color:rgba(242,237,230,0.7);font-size:1rem;cursor:pointer;padding:0.4rem 0.7rem;line-height:1;z-index:401;">✕</button>
-  <img id="conceptLbImg" src="" alt="" style="max-width:100%;max-height:calc(100vh - 120px);object-fit:contain;display:block;">
-  <div style="display:flex;align-items:center;gap:1rem;margin-top:1rem;">
-    <button id="conceptLbPrev" style="background:rgba(255,255,255,0.08);border:0.5px solid rgba(255,255,255,0.18);padding:0.4rem 1rem;color:rgba(242,237,230,0.8);cursor:pointer;font-size:13px;">←</button>
-    <span id="conceptLbCounter" style="font-size:12px;color:rgba(242,237,230,0.45);min-width:60px;text-align:center;"></span>
-    <button id="conceptLbNext" style="background:rgba(255,255,255,0.08);border:0.5px solid rgba(255,255,255,0.18);padding:0.4rem 1rem;color:rgba(242,237,230,0.8);cursor:pointer;font-size:13px;">→</button>
-  </div>
-</div>
-
 <style>
-  .nav-mobile-menu { display: none; position: fixed; top: 60px; left: 0; right: 0; background: rgba(242,237,230,0.98); backdrop-filter: blur(16px); border-bottom: 0.5px solid var(--border); padding: 1.5rem 1.5rem 2rem; z-index: 99; flex-direction: column; gap: 0; }
+  .nav-mobile-menu { display: none; position: fixed; top: 60px; left: 0; right: 0; background: rgba(242,237,230,0.99); backdrop-filter: blur(16px); border-bottom: 0.5px solid var(--border); z-index: 99; flex-direction: column; }
   .nav-mobile-menu.open { display: flex; }
-  .nav-mobile-menu a { font-size: 13px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; padding: 1rem 0; border-bottom: 0.5px solid var(--border); transition: color 0.2s; }
-  .nav-mobile-menu a:last-child { border-bottom: none; }
-  .nav-mobile-menu a:hover { color: var(--accent); }
+  .nav-mobile-item { font-size: 13px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; padding: 1rem 1.5rem; border-bottom: 0.5px solid var(--border); display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: color 0.2s; }
+  .nav-mobile-item a { color: inherit; text-decoration: none; flex: 1; }
+  .nav-mobile-arrow { font-size: 0.8rem; transition: transform 0.25s; padding: 0.25rem 0.5rem; }
+  .nav-mobile-arrow.open { transform: rotate(180deg); }
+  .nav-mobile-sub { display: none; flex-direction: column; background: var(--bg-mid); }
+  .nav-mobile-sub.open { display: flex; }
+  .nav-mobile-sub a { font-size: 11px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; padding: 0.85rem 2.5rem; border-bottom: 0.5px solid var(--border); }
+  .nav-mobile-sub a:last-child { border-bottom: none; }
   .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
   .nav-hamburger.open span:nth-child(2) { opacity: 0; }
   .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-  @media (max-width: 768px) { .nav-hamburger { display: flex; } }
 </style>
 
 <script>
-  const hamburger = document.getElementById('navHamburger');
-  const mobileMenu = document.getElementById('navMobileMenu');
-  hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
-  function closeMobileMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); }
-  document.addEventListener('click', e => { if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) closeMobileMenu(); });
+// Mobile nav
+const hamburger    = document.getElementById('navHamburger');
+const mobileMenu   = document.getElementById('navMobileMenu');
+const workToggle   = document.getElementById('mobileWorkToggle');
+const workArrow    = document.getElementById('mobileWorkArrow');
+const workSub      = document.getElementById('mobileWorkSub');
+hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
+workArrow.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); workArrow.classList.toggle('open'); workSub.classList.toggle('open'); });
+mobileMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); workArrow.classList.remove('open'); workSub.classList.remove('open'); }); });
+document.addEventListener('click', e => { if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); } });
 
-  // Lightbox for BIM images
-  const galleries = {};
-  document.querySelectorAll('[data-gallery]').forEach(img => {
-    const g = img.dataset.gallery;
-    const i = parseInt(img.dataset.index);
-    if (!galleries[g]) galleries[g] = [];
-    galleries[g][i] = { src: img.src, alt: img.alt };
+// ============================================================
+// CUSTOM OBJECT DATA
+// ============================================================
+const objects = {
+  'reception': {
+    title:   'Reception Desk',
+    project: 'Dune Wellness Centre',
+    desc:    'A custom curved reception desk modelled in ArchiCAD to suit the organic, flowing spatial language of the Dune Wellness Centre. The curved front face and integrated lighting shelf could not be achieved with standard library components, so the object was built from scratch to the exact geometry required by the design.',
+    dims: [
+      { label: 'Overall width',  value: '— mm' },
+      { label: 'Overall depth',  value: '— mm' },
+      { label: 'Counter height', value: '— mm' },
+      { label: 'Material',       value: 'Travertine-look render, timber veneer top' }
+    ],
+    images: [
+      { src: 'images/wellness/bim-01-context.webp',         alt: 'In context' },
+      { src: 'images/wellness/bim-02-three-quarter-a.webp', alt: 'Three-quarter A' },
+      { src: 'images/wellness/bim-03-three-quarter-b.webp', alt: 'Three-quarter B' },
+      { src: 'images/wellness/bim-04-front.webp',           alt: 'Front perspective' },
+      { src: 'images/wellness/bim-05-detail.webp',          alt: 'Detail' }
+    ]
+  },
+  'coffee-table': {
+    title:   'Travertine Coffee Table',
+    project: 'Personal Project',
+    desc:    'A travertine-look coffee table modelled in ArchiCAD for use in a personal interior design project. The slim profile and stone-effect finish required a custom object to accurately represent the materiality and proportions intended for the space.',
+    dims: [
+      { label: 'Overall height',      value: '355 mm' },
+      { label: 'Overall width',       value: '1200 mm' },
+      { label: 'Overall depth',       value: '600 mm' },
+      { label: 'Top width',           value: '1200 mm' },
+      { label: 'Top depth',           value: '600 mm' },
+      { label: 'Tabletop thickness',  value: '18 mm' },
+      { label: 'Material',            value: 'Travertine-look composite' }
+    ],
+    images: [
+      { src: 'images/personal/coffee-table-01-context.webp',         alt: 'In context' },
+      { src: 'images/personal/coffee-table-02-three-quarter-a.webp', alt: 'Three-quarter A' },
+      { src: 'images/personal/coffee-table-03-three-quarter-b.webp', alt: 'Three-quarter B' },
+      { src: 'images/personal/coffee-table-04-front.webp',           alt: 'Front perspective' },
+      { src: 'images/personal/coffee-table-05-detail.webp',          alt: 'Detail' }
+    ]
+  }
+};
+
+// ============================================================
+// PANEL LOGIC
+// ============================================================
+const overlay    = document.getElementById('objOverlay');
+const panel      = document.getElementById('objPanel');
+const closeBtn   = document.getElementById('objPanelClose');
+const heroImg    = document.getElementById('objHeroImg');
+const thumbsWrap = document.getElementById('objThumbs');
+const titleEl    = document.getElementById('objTitle');
+const projectEl  = document.getElementById('objProject');
+const descEl     = document.getElementById('objDesc');
+const dimsEl     = document.getElementById('objDims');
+
+let currentImages = [];
+
+function setHero(index) {
+  heroImg.src = currentImages[index].src;
+  heroImg.alt = currentImages[index].alt;
+  thumbsWrap.querySelectorAll('.obj-panel-thumb').forEach((t, i) => {
+    t.classList.toggle('active', i === index);
   });
-  let lbGallery = null, lbIndex = 0;
-  const lb = document.getElementById('conceptLightbox');
-  const lbImg = document.getElementById('conceptLbImg');
-  const lbPrev = document.getElementById('conceptLbPrev');
-  const lbNext = document.getElementById('conceptLbNext');
-  const lbCounter = document.getElementById('conceptLbCounter');
-  const lbClose = document.getElementById('conceptLbClose');
+}
 
-  function openLb(g, i) { lbGallery = g; lbIndex = i; showLb(); lb.style.opacity = '1'; lb.style.pointerEvents = 'all'; document.body.style.overflow = 'hidden'; }
-  function showLb() { const item = galleries[lbGallery][lbIndex]; lbImg.src = item.src; lbImg.alt = item.alt; lbCounter.textContent = (lbIndex+1)+' / '+galleries[lbGallery].length; lbPrev.disabled = lbIndex===0; lbNext.disabled = lbIndex===galleries[lbGallery].length-1; }
-  function closeLb() { lb.style.opacity = '0'; lb.style.pointerEvents = 'none'; document.body.style.overflow = ''; }
+function openPanel(objKey) {
+  const obj = objects[objKey];
+  if (!obj) return;
+  currentImages = obj.images;
 
-  document.querySelectorAll('[data-gallery]').forEach(img => { img.addEventListener('click', () => openLb(img.dataset.gallery, parseInt(img.dataset.index))); });
-  lbClose.addEventListener('click', closeLb);
-  lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
-  lbPrev.addEventListener('click', e => { e.stopPropagation(); if (lbIndex > 0) { lbIndex--; showLb(); } });
-  lbNext.addEventListener('click', e => { e.stopPropagation(); if (lbIndex < galleries[lbGallery].length-1) { lbIndex++; showLb(); } });
-  document.addEventListener('keydown', e => { if (lb.style.pointerEvents !== 'all') return; if (e.key==='Escape') closeLb(); if (e.key==='ArrowLeft') lbPrev.click(); if (e.key==='ArrowRight') lbNext.click(); });
+  titleEl.textContent   = obj.title;
+  projectEl.textContent = obj.project;
+  descEl.textContent    = obj.desc;
+
+  dimsEl.innerHTML = obj.dims.map(d =>
+    `<span class="obj-dim-label">${d.label}</span><span class="obj-dim-value">${d.value}</span>`
+  ).join('');
+
+  thumbsWrap.innerHTML = '';
+  obj.images.forEach((img, i) => {
+    const thumb = document.createElement('div');
+    thumb.className = 'obj-panel-thumb' + (i === 0 ? ' active' : '');
+    const tImg = document.createElement('img');
+    tImg.src = img.src; tImg.alt = img.alt;
+    thumb.appendChild(tImg);
+    thumb.addEventListener('click', () => setHero(i));
+    thumbsWrap.appendChild(thumb);
+  });
+
+  setHero(0);
+  overlay.classList.add('open');
+  panel.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePanel() {
+  overlay.classList.remove('open');
+  panel.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.obj-card').forEach(card => {
+  card.addEventListener('click', () => openPanel(card.dataset.obj));
+});
+closeBtn.addEventListener('click', closePanel);
+overlay.addEventListener('click', closePanel);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
 </script>
 </body>
 </html>
