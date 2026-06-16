@@ -20,6 +20,55 @@
   .section-title-cw { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem,3vw,2.4rem); margin-bottom: 0.75rem; }
   .section-body-cw { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.8; max-width: 580px; margin-bottom: 3rem; }
 
+  /* Shared classes used by kitchen renovation section */
+  .img-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5px; background: var(--border); margin-bottom: 1.5rem; }
+  .img-slot { background: transparent; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .img-slot img { width: 100%; height: 100%; object-fit: contain; display: block; cursor: zoom-in; background: transparent; }
+  .img-placeholder-label { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-align: center; padding: 1rem; line-height: 1.7; background: var(--bg-mid); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+  .img-hero { width: 100%; display: block; margin-bottom: 1.5rem; cursor: zoom-in; }
+  .img-label { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; margin-top: 0.25rem; display: block; }
+  .outcomes-list { list-style: none; margin-top: 1rem; }
+  .outcomes-list li { font-size: 0.9rem; color: var(--text-secondary); padding: 0.5rem 0; border-bottom: 0.5px solid var(--border); display: flex; align-items: flex-start; gap: 0.75rem; line-height: 1.5; }
+  .outcomes-list li:last-child { border-bottom: none; }
+  .outcomes-list li::before { content: '→'; color: var(--accent); font-size: 0.75rem; margin-top: 0.2rem; flex-shrink: 0; }
+  .badge { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3rem 0.7rem; }
+  .badge-type { background: var(--accent-light); color: var(--accent); }
+  .badge-academic { background: var(--bg-mid); color: var(--text-secondary); }
+  .img-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5px; background: var(--border); margin-bottom: 1.5rem; }
+  .img-hero-placeholder { width: 100%; aspect-ratio: 297/210; background: var(--bg-mid); border: 0.5px solid var(--border-strong); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; }
+
+  /* JOURNAL — design development flip viewer */
+  .journal-wrap { margin-bottom: 1rem; }
+  .journal-viewer { background: var(--bg-mid); border: 0.5px solid var(--border-strong); padding: 1.5rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+  .journal-spread { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; width: 100%; max-width: 780px; background: var(--border); }
+  .journal-spread-slot { background: var(--bg-card); overflow: hidden; aspect-ratio: 297/210; display: flex; align-items: center; justify-content: center; }
+  .journal-spread-slot img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .journal-controls { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+  .journal-btn { background: var(--bg-card); border: 0.5px solid var(--border-strong); padding: 0.45rem 1.1rem; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; }
+  .journal-btn:hover { background: var(--accent); color: var(--bg-card); border-color: var(--accent); }
+  .journal-btn:disabled { opacity: 0.3; cursor: default; background: var(--bg-card); color: var(--text-muted); border-color: var(--border); }
+  .journal-btn-full { background: transparent; border: 0.5px solid var(--border-strong); padding: 0.45rem 1rem; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
+  .journal-btn-full:hover { color: var(--accent); border-color: var(--accent); }
+  .journal-counter { font-size: 12px; letter-spacing: 0.06em; color: var(--text-muted); min-width: 100px; text-align: center; }
+  .journal-note { font-size: 11px; color: var(--text-muted); font-style: italic; text-align: center; }
+  .journal-fullscreen { position: fixed; inset: 0; z-index: 300; background: rgba(26,20,16,0.97); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+  .journal-fullscreen.open { opacity: 1; pointer-events: all; }
+  .journal-fullscreen-spread { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; background: rgba(255,255,255,0.08); max-width: min(1200px, 90vw); width: 100%; }
+  .journal-fullscreen-slot { background: var(--bg-card); overflow: hidden; aspect-ratio: 297/210; display: flex; align-items: center; justify-content: center; }
+  .journal-fullscreen-slot img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .journal-fullscreen-controls { position: fixed; bottom: 1.75rem; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 1rem; background: rgba(26,20,16,0.78); backdrop-filter: blur(10px); border: 0.5px solid rgba(255,255,255,0.12); padding: 0.55rem 1.5rem; z-index: 301; }
+  .journal-fullscreen-btn { background: transparent; border: 0.5px solid rgba(255,255,255,0.2); padding: 0.35rem 0.9rem; font-family: 'Inter', sans-serif; font-size: 14px; color: rgba(242,237,230,0.85); cursor: pointer; }
+  .journal-fullscreen-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+  .journal-fullscreen-btn:disabled { opacity: 0.22; cursor: default; }
+  .journal-fullscreen-counter { font-size: 12px; letter-spacing: 0.06em; color: rgba(242,237,230,0.5); min-width: 100px; text-align: center; }
+  .journal-close { position: fixed; top: 1.25rem; right: 1.5rem; z-index: 302; background: rgba(26,20,16,0.65); border: 0.5px solid rgba(255,255,255,0.15); color: rgba(242,237,230,0.7); font-size: 1rem; cursor: pointer; padding: 0.4rem 0.7rem; }
+  .journal-close:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+
+  @media (max-width: 768px) {
+    .img-grid-2 { grid-template-columns: 1fr; }
+    .img-grid-3 { grid-template-columns: 1fr; }
+  }
+
   /* OBJECT THUMBNAIL GRID */
   .obj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2rem; }
   .obj-card { cursor: pointer; border: 0.5px solid var(--border); background: var(--bg-card); transition: box-shadow 0.25s, border-color 0.25s; }
@@ -150,13 +199,166 @@
   </div>
 </div>
 
-<!-- COMING SOON BAND for future concept projects -->
-<div style="background:var(--bg-card); border:0.5px solid var(--border); max-width:1160px; margin:3rem auto 0; padding:3rem; display:flex; flex-direction:column; gap:1rem;">
-  <span style="font-size:10px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-muted);">In development</span>
-  <div style="width:40px; height:1px; background:var(--accent);"></div>
-  <h2 style="font-family:'Playfair Display',serif; font-size:clamp(1.4rem,3vw,2rem); margin:0;">Concept projects being<br>prepared for this page.</h2>
-  <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.8; max-width:500px; margin:0;">Self-directed design explorations will be added here as they develop. Check back soon.</p>
-  <a href="index.html#work" class="btn btn-outline" style="margin-top:0.25rem; align-self:flex-start;">← Back to all work</a>
+<!-- CONCEPT PROJECTS -->
+<div class="section-wrap-cw">
+  <span class="section-eyebrow-cw">Self-initiated</span>
+  <h2 class="section-title-cw">Concept Projects</h2>
+  <p class="section-body-cw">Design work undertaken outside of formal study and professional practice — self-directed projects where I've developed the brief, explored options, and carried the design through to a resolved outcome.</p>
+
+  <!-- ============================================================ -->
+  <!-- KITCHEN RENOVATION                                            -->
+  <!-- ============================================================ -->
+  <div style="border:0.5px solid var(--border); background:var(--bg-card); padding:2.5rem;">
+    <div style="display:flex; gap:0.5rem; margin-bottom:0.75rem; flex-wrap:wrap;">
+      <span class="badge badge-type">Residential</span>
+      <span class="badge badge-academic" style="background:var(--bg-mid); color:var(--text-secondary);">Concept · Self-Initiated</span>
+    </div>
+    <h3 style="font-family:'Playfair Display',serif; font-size:clamp(1.5rem,3vw,2rem); margin-bottom:0.5rem;">Kitchen Renovation</h3>
+    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:2rem; letter-spacing:0.04em;">Full kitchen redesign — layout reconfiguration through to final detailing</p>
+
+    <!-- HERO IMAGES — finished kitchen, before any explanation -->
+    <div class="img-grid-2" style="margin-bottom:0.5px;">
+      <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+        <!-- REPLACE: <img src="images/personal/kitchen-final-01.webp" alt="Completed kitchen" data-gallery="kitchen" data-index="0"> -->
+        <span class="img-placeholder-label">Final kitchen — angle 1<br>images/personal/kitchen-final-01.webp</span>
+      </div>
+      <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+        <!-- REPLACE: <img src="images/personal/kitchen-final-02.webp" alt="Completed kitchen" data-gallery="kitchen" data-index="1"> -->
+        <span class="img-placeholder-label">Final kitchen — angle 2<br>images/personal/kitchen-final-02.webp</span>
+      </div>
+    </div>
+
+    <!-- INTRO -->
+    <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.8; margin:1.75rem 0 1.25rem;">A full kitchen redesign that began as a brief to refresh finishes and developed into a complete reconfiguration of the layout. Working through the existing space revealed an opportunity to improve flow, storage, and ergonomics by rethinking the floor plan rather than working within the original footprint.</p>
+
+    <!-- BEFORE -->
+    <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2rem 0 0.75rem;">Before</h4>
+    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem; max-width:680px;">The existing kitchen prior to renovation.</p>
+    <div class="img-grid-3" style="margin-bottom:1.5rem;">
+      <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+        <!-- REPLACE: <img src="images/personal/kitchen-before-01.webp" alt="Before — angle 1" data-gallery="kitchen" data-index="2"> -->
+        <span class="img-placeholder-label">Before — angle 1<br>images/personal/kitchen-before-01.webp</span>
+      </div>
+      <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+        <!-- REPLACE: <img src="images/personal/kitchen-before-02.webp" alt="Before — angle 2" data-gallery="kitchen" data-index="3"> -->
+        <span class="img-placeholder-label">Before — angle 2<br>images/personal/kitchen-before-02.webp</span>
+      </div>
+      <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+        <!-- REPLACE: <img src="images/personal/kitchen-before-03.webp" alt="Before — angle 3" data-gallery="kitchen" data-index="4"> -->
+        <span class="img-placeholder-label">Before — angle 3<br>images/personal/kitchen-before-03.webp</span>
+      </div>
+    </div>
+
+    <span class="img-label">Original floor plan — general measurements, not to scale</span>
+    <div class="img-hero-placeholder" style="aspect-ratio:4/3; max-width:600px;">
+      <!-- REPLACE: <img src="images/personal/kitchen-original-floorplan.webp" alt="Original floor plan" class="img-hero" style="max-width:600px;" data-gallery="kitchen" data-index="5"> -->
+      <span class="img-placeholder-label">Original floor plan<br>images/personal/kitchen-original-floorplan.webp</span>
+    </div>
+
+    <!-- DESIGN DEVELOPMENT JOURNAL -->
+    <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Design Development</h4>
+    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.25rem; max-width:680px;">Inspiration, sketches, and refinement notes documenting how the concept evolved — flip through to see the development process.</p>
+    <div class="journal-wrap">
+      <div class="journal-viewer">
+        <div class="journal-spread" id="kitchenSpread">
+          <div class="journal-spread-slot" id="kitchenSpreadLeft"></div>
+          <div class="journal-spread-slot" id="kitchenSpreadRight"></div>
+        </div>
+        <div class="journal-controls">
+          <button class="journal-btn" id="kitchenPrev" disabled>← Prev</button>
+          <span class="journal-counter" id="kitchenCounter">Pages 1–2</span>
+          <button class="journal-btn" id="kitchenNext">Next →</button>
+          <button class="journal-btn-full" id="kitchenFullBtn">⛶ Full screen</button>
+        </div>
+        <p class="journal-note">Brainstorm &amp; refinement book — inspiration, sketches and material exploration</p>
+      </div>
+    </div>
+    <div class="journal-fullscreen" id="kitchenFullscreen">
+      <button class="journal-close" id="kitchenClose">✕</button>
+      <div class="journal-fullscreen-spread">
+        <div class="journal-fullscreen-slot" id="kitchenFsLeft"></div>
+        <div class="journal-fullscreen-slot" id="kitchenFsRight"></div>
+      </div>
+      <div class="journal-fullscreen-controls">
+        <button class="journal-fullscreen-btn" id="kitchenFsPrev" disabled>← Prev</button>
+        <span class="journal-fullscreen-counter" id="kitchenFsCounter">Pages 1–2</span>
+        <button class="journal-fullscreen-btn" id="kitchenFsNext">Next →</button>
+      </div>
+    </div>
+
+    <!-- LAYOUT RECONFIGURATION -->
+    <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Layout Reconfiguration</h4>
+    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.25rem; max-width:680px;">As part of the design development I proposed adjusting the floor plan to make better use of the available space, including relocating key appliances to improve ergonomics and workflow through the kitchen.</p>
+
+    <!-- DEVELOPMENTAL DRAWINGS -->
+    <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2rem 0 0.75rem;">Developmental Drawings</h4>
+    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem; max-width:680px;">Floor plan and joinery drawings produced as the design was refined.</p>
+    <div class="img-grid-2" style="margin-bottom:1.5px;">
+      <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+        <!-- REPLACE: <img src="images/personal/kitchen-dev-floorplan.webp" alt="Developmental floor plan" data-gallery="kitchen" data-index="6"> -->
+        <span class="img-placeholder-label">Developmental floor plan<br>images/personal/kitchen-dev-floorplan.webp</span>
+      </div>
+      <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+        <!-- REPLACE: <img src="images/personal/kitchen-dev-joinery.webp" alt="Joinery drawing" data-gallery="kitchen" data-index="7"> -->
+        <span class="img-placeholder-label">Joinery drawing<br>images/personal/kitchen-dev-joinery.webp</span>
+      </div>
+    </div>
+
+    <!-- MATERIAL PALETTE -->
+    <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 1rem;">Material Palette</h4>
+    <div style="display:flex; gap:2rem; flex-wrap:wrap;">
+      <div style="text-align:center;">
+        <div style="width:90px; height:90px; border-radius:50%; overflow:hidden; background:var(--bg-mid); margin:0 auto 0.6rem; border:0.5px solid var(--border-strong);">
+          <!-- REPLACE: <img src="images/personal/kitchen-mat-benchtop.webp" alt="Benchtop stone" style="width:100%;height:100%;object-fit:cover;"> -->
+          <span style="display:flex; align-items:center; justify-content:center; height:100%; font-size:8px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em;">Benchtop</span>
+        </div>
+        <span style="font-size:10px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted);">Benchtop Stone</span>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:90px; height:90px; border-radius:50%; overflow:hidden; background:var(--bg-mid); margin:0 auto 0.6rem; border:0.5px solid var(--border-strong);">
+          <!-- REPLACE: <img src="images/personal/kitchen-mat-cabinetry.webp" alt="Cabinetry colour" style="width:100%;height:100%;object-fit:cover;"> -->
+          <span style="display:flex; align-items:center; justify-content:center; height:100%; font-size:8px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em;">Cabinetry</span>
+        </div>
+        <span style="font-size:10px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted);">Cabinetry Colour</span>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:90px; height:90px; border-radius:50%; overflow:hidden; background:var(--bg-mid); margin:0 auto 0.6rem; border:0.5px solid var(--border-strong);">
+          <!-- REPLACE: <img src="images/personal/kitchen-mat-sink.webp" alt="Sink finish" style="width:100%;height:100%;object-fit:cover;"> -->
+          <span style="display:flex; align-items:center; justify-content:center; height:100%; font-size:8px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em;">Sink</span>
+        </div>
+        <span style="font-size:10px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted);">Sink</span>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:90px; height:90px; border-radius:50%; overflow:hidden; background:var(--bg-mid); margin:0 auto 0.6rem; border:0.5px solid var(--border-strong);">
+          <!-- REPLACE: <img src="images/personal/kitchen-mat-tap.webp" alt="Tap finish" style="width:100%;height:100%;object-fit:cover;"> -->
+          <span style="display:flex; align-items:center; justify-content:center; height:100%; font-size:8px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em;">Tap</span>
+        </div>
+        <span style="font-size:10px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted);">Tap Finish</span>
+      </div>
+    </div>
+
+    <!-- FINAL DETAIL IMAGES -->
+    <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Final Details</h4>
+    <div class="img-grid-2" style="margin-bottom:1.5px;">
+      <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+        <!-- REPLACE: <img src="images/personal/kitchen-final-detail-01.webp" alt="Final detail 1" data-gallery="kitchen" data-index="8"> -->
+        <span class="img-placeholder-label">Detail — joinery / hardware<br>images/personal/kitchen-final-detail-01.webp</span>
+      </div>
+      <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+        <!-- REPLACE: <img src="images/personal/kitchen-final-detail-02.webp" alt="Final detail 2" data-gallery="kitchen" data-index="9"> -->
+        <span class="img-placeholder-label">Detail — benchtop / splashback<br>images/personal/kitchen-final-detail-02.webp</span>
+      </div>
+    </div>
+
+    <h4 class="h4-serif-bold" style="font-family:'Playfair Display',serif; font-size:1.05rem; margin:1.75rem 0 0.75rem;">Key outcomes</h4>
+    <ul class="outcomes-list">
+      <li>Reassessed the original brief and identified a full layout reconfiguration as the stronger design solution</li>
+      <li>Proposed relocating key appliances to improve ergonomics and workflow through the space</li>
+      <li>Developed the design from early inspiration and sketches through to resolved floor plan and joinery drawings</li>
+      <li>Selected and coordinated a cohesive material and finish palette across benchtop, cabinetry, and fittings</li>
+      <li>Carried the design through to completion, from concept to finished kitchen</li>
+    </ul>
+  </div>
 </div>
 
 <!-- CUSTOM BIM OBJECTS -->
@@ -378,6 +580,72 @@ document.querySelectorAll('.obj-card').forEach(card => {
 closeBtn.addEventListener('click', closePanel);
 overlay.addEventListener('click', closePanel);
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
+
+// ============================================================
+// KITCHEN DESIGN DEVELOPMENT — flip book viewer
+// Add your brainstorm/inspiration/sketch pages here as you create them
+// ============================================================
+const kitchenSrcs = [
+  'images/personal/kitchen-dev-01.webp',
+  'images/personal/kitchen-dev-02.webp',
+  'images/personal/kitchen-dev-03.webp',
+  'images/personal/kitchen-dev-04.webp'
+  // add more entries as pages are created
+];
+const K_TOTAL   = kitchenSrcs.length;
+const K_SPREADS = Math.ceil(K_TOTAL / 2);
+let kSpread   = 0;
+let kFsSpread = 0;
+
+function kLabel(s) {
+  const l = s * 2 + 1, r = s * 2 + 2;
+  return r > K_TOTAL ? 'Page ' + l : 'Pages ' + l + '–' + r;
+}
+function kImg(src, alt) {
+  const img = new Image(); img.src = src; img.alt = alt;
+  img.style.cssText = 'width:100%;height:100%;object-fit:contain;display:block;';
+  return img;
+}
+function kRender(s, L, R, ctr, prev, next) {
+  L.innerHTML = ''; R.innerHTML = '';
+  const li = s * 2, ri = s * 2 + 1;
+  if (li < K_TOTAL) L.appendChild(kImg(kitchenSrcs[li], 'Page ' + (li + 1)));
+  if (ri < K_TOTAL) R.appendChild(kImg(kitchenSrcs[ri], 'Page ' + (ri + 1)));
+  else R.style.background = 'var(--bg-mid)';
+  ctr.textContent = kLabel(s);
+  prev.disabled = s === 0;
+  next.disabled = s === K_SPREADS - 1;
+}
+
+const kL = document.getElementById('kitchenSpreadLeft');
+const kR = document.getElementById('kitchenSpreadRight');
+const kPrev = document.getElementById('kitchenPrev');
+const kNext = document.getElementById('kitchenNext');
+const kCtr  = document.getElementById('kitchenCounter');
+const kFullBtn = document.getElementById('kitchenFullBtn');
+const kFs = document.getElementById('kitchenFullscreen');
+const kFsL = document.getElementById('kitchenFsLeft');
+const kFsR = document.getElementById('kitchenFsRight');
+const kFsP = document.getElementById('kitchenFsPrev');
+const kFsN = document.getElementById('kitchenFsNext');
+const kFsCtr = document.getElementById('kitchenFsCounter');
+const kClose = document.getElementById('kitchenClose');
+
+if (kL && K_TOTAL > 0) {
+  kRender(kSpread, kL, kR, kCtr, kPrev, kNext);
+  kPrev.addEventListener('click', () => { if (kSpread > 0) { kSpread--; kRender(kSpread, kL, kR, kCtr, kPrev, kNext); } });
+  kNext.addEventListener('click', () => { if (kSpread < K_SPREADS - 1) { kSpread++; kRender(kSpread, kL, kR, kCtr, kPrev, kNext); } });
+  kFullBtn.addEventListener('click', () => {
+    kFsSpread = kSpread;
+    kRender(kFsSpread, kFsL, kFsR, kFsCtr, kFsP, kFsN);
+    kFs.classList.add('open'); document.body.style.overflow = 'hidden';
+  });
+  kFsP.addEventListener('click', () => { if (kFsSpread > 0) { kFsSpread--; kRender(kFsSpread, kFsL, kFsR, kFsCtr, kFsP, kFsN); } });
+  kFsN.addEventListener('click', () => { if (kFsSpread < K_SPREADS - 1) { kFsSpread++; kRender(kFsSpread, kFsL, kFsR, kFsCtr, kFsP, kFsN); } });
+  function kCloseFs() { kFs.classList.remove('open'); document.body.style.overflow = ''; kSpread = kFsSpread; kRender(kSpread, kL, kR, kCtr, kPrev, kNext); }
+  kClose.addEventListener('click', kCloseFs);
+  kFs.addEventListener('click', e => { if (e.target === kFs) kCloseFs(); });
+}
 </script>
 </body>
 </html>
