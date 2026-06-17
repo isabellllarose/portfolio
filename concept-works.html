@@ -34,8 +34,50 @@
   .badge { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3rem 0.7rem; }
   .badge-type { background: var(--accent-light); color: var(--accent); }
   .badge-academic { background: var(--bg-mid); color: var(--text-secondary); }
-  .img-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5px; background: var(--border); margin-bottom: 1.5rem; }
-  .img-hero-placeholder { width: 100%; aspect-ratio: 297/210; background: var(--bg-mid); border: 0.5px solid var(--border-strong); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; }
+  /* MATERIAL PALETTE — clickable swatches with sideways-expanding detail panel */
+  .mat-palette-row { display: flex; align-items: flex-start; gap: 2rem; flex-wrap: wrap; }
+  .mat-swatch-item { text-align: center; cursor: pointer; flex-shrink: 0; transition: opacity 0.2s; }
+  .mat-swatch-item:hover { opacity: 0.8; }
+  .mat-swatch-circle { width: 90px; height: 90px; border-radius: 50%; overflow: hidden; background: var(--bg-mid); margin: 0 auto 0.6rem; border: 0.5px solid var(--border-strong); transition: border-color 0.2s; }
+  .mat-swatch-item.active .mat-swatch-circle { border-color: var(--accent); border-width: 1.5px; }
+  .mat-swatch-fallback { display: flex; align-items: center; justify-content: center; height: 100%; font-size: 8px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .mat-swatch-label { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); display: block; }
+
+  /* Detail panel — collapsed by default, expands sideways (width) when active */
+  .mat-detail-panel {
+    width: 0;
+    max-width: 0;
+    overflow: hidden;
+    opacity: 0;
+    background: var(--bg-mid);
+    border: 0.5px solid var(--border-strong);
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0;
+    position: relative;
+    transition: width 0.35s ease, max-width 0.35s ease, opacity 0.25s ease, padding 0.35s ease;
+    flex-shrink: 0;
+  }
+  .mat-detail-panel.open {
+    width: 260px;
+    max-width: 260px;
+    opacity: 1;
+    padding: 1.5rem 1.75rem;
+  }
+  .mat-detail-close { position: absolute; top: 0.5rem; right: 0.6rem; background: none; border: none; font-size: 0.85rem; color: var(--text-muted); cursor: pointer; padding: 0.2rem 0.4rem; }
+  .mat-detail-close:hover { color: var(--accent); }
+  .mat-detail-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--text-primary); white-space: nowrap; }
+  .mat-detail-text { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.65; margin: 0; white-space: normal; }
+
+  @media (max-width: 768px) {
+    .mat-palette-row { flex-direction: column; align-items: center; gap: 1.5rem; }
+    .mat-detail-panel { width: 100%; max-width: 100%; align-self: center; }
+    .mat-detail-panel.open { width: 100%; max-width: 100%; }
+    .mat-detail-title, .mat-detail-text { white-space: normal; }
+  }
 
   /* JOURNAL — design development flip viewer */
   .journal-wrap { margin-bottom: 1rem; }
@@ -249,10 +291,16 @@
       </div>
     </div>
 
-    <span class="img-label">Original floor plan — general measurements, not to scale</span>
-    <div class="img-hero-placeholder" style="aspect-ratio:4/3; max-width:600px;">
-      <!-- REPLACE: <img src="images/personal/kitchen-original-floorplan.webp" alt="Original floor plan" class="img-hero" style="max-width:600px;" data-gallery="kitchen" data-index="5"> -->
-      <span class="img-placeholder-label">Original floor plan<br>images/personal/kitchen-original-floorplan.webp</span>
+    <span class="img-label">Original house floor plan &amp; existing kitchen measurements</span>
+    <div class="img-grid-2" style="margin-bottom:1.5rem;">
+      <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+        <!-- REPLACE: <img src="images/personal/kitchen-original-floorplan.webp" alt="Original house floor plan from real estate listing" data-gallery="kitchen" data-index="5"> -->
+        <span class="img-placeholder-label">Original house floor plan (real estate listing)<br>images/personal/kitchen-original-floorplan.webp</span>
+      </div>
+      <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+        <!-- REPLACE: <img src="images/personal/kitchen-measurement-mockup.webp" alt="Existing kitchen measurement mockup" data-gallery="kitchen" data-index="6"> -->
+        <span class="img-placeholder-label">Existing kitchen — measurement mock-up<br>images/personal/kitchen-measurement-mockup.webp</span>
+      </div>
     </div>
 
     <!-- DESIGN DEVELOPMENT JOURNAL -->
@@ -288,64 +336,102 @@
 
     <!-- LAYOUT RECONFIGURATION -->
     <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Layout Reconfiguration</h4>
-    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.25rem; max-width:680px;">As part of the design development I proposed adjusting the floor plan to make better use of the available space, including relocating key appliances to improve ergonomics and workflow through the kitchen.</p>
+    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.25rem; max-width:680px;">As part of the design development I proposed adjusting the floor plan to make better use of the available space.</p>
+
+    <div class="img-grid-2" style="margin-bottom:1.5rem;">
+      <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+        <!-- REPLACE: <img src="images/personal/kitchen-layout-original.webp" alt="Original floor plan with furniture layout" data-gallery="kitchen" data-index="7"> -->
+        <span class="img-placeholder-label">Original layout — living / meals / kitchen as intended<br>images/personal/kitchen-layout-original.webp</span>
+      </div>
+      <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+        <!-- REPLACE: <img src="images/personal/kitchen-layout-reconfigured.webp" alt="Proposed reconfigured layout" data-gallery="kitchen" data-index="8"> -->
+        <span class="img-placeholder-label">Proposed reconfiguration — mock-up<br>images/personal/kitchen-layout-reconfigured.webp</span>
+      </div>
+    </div>
+
+    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:0.75rem; max-width:680px;">I suggested this reconfiguration for several reasons:</p>
+    <ul class="outcomes-list" style="margin-bottom:1.5rem;">
+      <li>Made use of the empty space separating the kitchen from the living area, which was previously an ineffective use of floor space</li>
+      <li>Relocated the meals area into that space, freeing up the original meals area to become additional kitchen floor space</li>
+      <li>Created the opportunity for a proper pantry, which the original layout did not allow for</li>
+      <li>Added bench space and reorganised the appliance layout so the oven is no longer positioned beneath the benchtop and cooktop</li>
+      <li>Gave the microwave its own dedicated position, rather than sitting on the benchtop</li>
+      <li>Allowed drawers to replace cabinets wherever applicable in the lower cabinetry, improving everyday accessibility</li>
+    </ul>
 
     <!-- DEVELOPMENTAL DRAWINGS -->
     <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2rem 0 0.75rem;">Developmental Drawings</h4>
     <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem; max-width:680px;">Floor plan and joinery drawings produced as the design was refined.</p>
     <div class="img-grid-2" style="margin-bottom:1.5px;">
       <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-        <!-- REPLACE: <img src="images/personal/kitchen-dev-floorplan.webp" alt="Developmental floor plan" data-gallery="kitchen" data-index="6"> -->
+        <!-- REPLACE: <img src="images/personal/kitchen-dev-floorplan.webp" alt="Developmental floor plan" data-gallery="kitchen" data-index="9"> -->
         <span class="img-placeholder-label">Developmental floor plan<br>images/personal/kitchen-dev-floorplan.webp</span>
       </div>
       <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-        <!-- REPLACE: <img src="images/personal/kitchen-dev-joinery.webp" alt="Joinery drawing" data-gallery="kitchen" data-index="7"> -->
+        <!-- REPLACE: <img src="images/personal/kitchen-dev-joinery.webp" alt="Joinery drawing" data-gallery="kitchen" data-index="10"> -->
         <span class="img-placeholder-label">Joinery drawing<br>images/personal/kitchen-dev-joinery.webp</span>
       </div>
     </div>
 
     <!-- MATERIAL PALETTE -->
     <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 1rem;">Material Palette</h4>
-    <div style="display:flex; gap:2rem; flex-wrap:wrap;">
-      <div style="text-align:center;">
-        <div style="width:90px; height:90px; border-radius:50%; overflow:hidden; background:var(--bg-mid); margin:0 auto 0.6rem; border:0.5px solid var(--border-strong);">
+    <div class="mat-palette-row" id="matPaletteRow">
+
+      <div class="mat-swatch-item" data-mat="benchtop">
+        <div class="mat-swatch-circle">
           <!-- REPLACE: <img src="images/personal/kitchen-mat-benchtop.webp" alt="Benchtop stone" style="width:100%;height:100%;object-fit:cover;"> -->
-          <span style="display:flex; align-items:center; justify-content:center; height:100%; font-size:8px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em;">Benchtop</span>
+          <span class="mat-swatch-fallback">Benchtop</span>
         </div>
-        <span style="font-size:10px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted);">Benchtop Stone</span>
+        <span class="mat-swatch-label">Benchtop Stone</span>
       </div>
-      <div style="text-align:center;">
-        <div style="width:90px; height:90px; border-radius:50%; overflow:hidden; background:var(--bg-mid); margin:0 auto 0.6rem; border:0.5px solid var(--border-strong);">
+
+      <!-- Detail panel for benchtop — hidden by default, opens inline -->
+      <div class="mat-detail-panel" id="matDetail-benchtop">
+        <button class="mat-detail-close" data-close-mat>✕</button>
+        <span class="mat-detail-title">Benchtop Stone</span>
+        <p class="mat-detail-text">A travertine-look engineered stone benchtop, chosen to bring a soft, natural texture to the space while remaining practical for everyday kitchen use.</p>
+      </div>
+
+      <div class="mat-swatch-item" data-mat="cabinetry">
+        <div class="mat-swatch-circle">
           <!-- REPLACE: <img src="images/personal/kitchen-mat-cabinetry.webp" alt="Cabinetry colour" style="width:100%;height:100%;object-fit:cover;"> -->
-          <span style="display:flex; align-items:center; justify-content:center; height:100%; font-size:8px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em;">Cabinetry</span>
+          <span class="mat-swatch-fallback">Cabinetry</span>
         </div>
-        <span style="font-size:10px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted);">Cabinetry Colour</span>
+        <span class="mat-swatch-label">Cabinetry Colour</span>
       </div>
-      <div style="text-align:center;">
-        <div style="width:90px; height:90px; border-radius:50%; overflow:hidden; background:var(--bg-mid); margin:0 auto 0.6rem; border:0.5px solid var(--border-strong);">
-          <!-- REPLACE: <img src="images/personal/kitchen-mat-sink.webp" alt="Sink finish" style="width:100%;height:100%;object-fit:cover;"> -->
-          <span style="display:flex; align-items:center; justify-content:center; height:100%; font-size:8px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em;">Sink</span>
+
+      <div class="mat-detail-panel" id="matDetail-cabinetry">
+        <button class="mat-detail-close" data-close-mat>✕</button>
+        <span class="mat-detail-title">Cabinetry Colour</span>
+        <p class="mat-detail-text">A bevelled-edge finger-pull profile was specified for all cupboard doors, removing the need for handles. All drawers and cupboard doors are fitted with soft-close mechanisms.</p>
+      </div>
+
+      <div class="mat-swatch-item" data-mat="sinktap">
+        <div class="mat-swatch-circle">
+          <!-- REPLACE: <img src="images/personal/kitchen-mat-sink-tap.webp" alt="Sink and tap finish" style="width:100%;height:100%;object-fit:cover;"> -->
+          <span class="mat-swatch-fallback">Sink &amp; Tap</span>
         </div>
-        <span style="font-size:10px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted);">Sink</span>
+        <span class="mat-swatch-label">Sink &amp; Tap</span>
       </div>
-      <div style="text-align:center;">
-        <div style="width:90px; height:90px; border-radius:50%; overflow:hidden; background:var(--bg-mid); margin:0 auto 0.6rem; border:0.5px solid var(--border-strong);">
-          <!-- REPLACE: <img src="images/personal/kitchen-mat-tap.webp" alt="Tap finish" style="width:100%;height:100%;object-fit:cover;"> -->
-          <span style="display:flex; align-items:center; justify-content:center; height:100%; font-size:8px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em;">Tap</span>
-        </div>
-        <span style="font-size:10px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted);">Tap Finish</span>
+
+      <div class="mat-detail-panel" id="matDetail-sinktap">
+        <button class="mat-detail-close" data-close-mat>✕</button>
+        <span class="mat-detail-title">Sink &amp; Tap</span>
+        <p class="mat-detail-text">A matching matte black finish was selected for both the sink and tap, chosen to coordinate with the cabinetry hardware and provide a cohesive, contemporary look.</p>
       </div>
+
     </div>
+    <p style="font-size:9px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-top:0.75rem;">Click for details</p>
 
     <!-- FINAL DETAIL IMAGES -->
     <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Final Details</h4>
     <div class="img-grid-2" style="margin-bottom:1.5px;">
       <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-        <!-- REPLACE: <img src="images/personal/kitchen-final-detail-01.webp" alt="Final detail 1" data-gallery="kitchen" data-index="8"> -->
+        <!-- REPLACE: <img src="images/personal/kitchen-final-detail-01.webp" alt="Final detail 1" data-gallery="kitchen" data-index="11"> -->
         <span class="img-placeholder-label">Detail — joinery / hardware<br>images/personal/kitchen-final-detail-01.webp</span>
       </div>
       <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-        <!-- REPLACE: <img src="images/personal/kitchen-final-detail-02.webp" alt="Final detail 2" data-gallery="kitchen" data-index="9"> -->
+        <!-- REPLACE: <img src="images/personal/kitchen-final-detail-02.webp" alt="Final detail 2" data-gallery="kitchen" data-index="12"> -->
         <span class="img-placeholder-label">Detail — benchtop / splashback<br>images/personal/kitchen-final-detail-02.webp</span>
       </div>
     </div>
@@ -580,6 +666,36 @@ document.querySelectorAll('.obj-card').forEach(card => {
 closeBtn.addEventListener('click', closePanel);
 overlay.addEventListener('click', closePanel);
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
+
+// ============================================================
+// MATERIAL PALETTE — click swatch to expand detail panel sideways
+// ============================================================
+document.querySelectorAll('.mat-swatch-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const key = item.dataset.mat;
+    const panel = document.getElementById('matDetail-' + key);
+    const isOpen = panel.classList.contains('open');
+
+    // Close all panels first
+    document.querySelectorAll('.mat-detail-panel').forEach(p => p.classList.remove('open'));
+    document.querySelectorAll('.mat-swatch-item').forEach(s => s.classList.remove('active'));
+
+    // Open this one if it wasn't already open
+    if (!isOpen) {
+      panel.classList.add('open');
+      item.classList.add('active');
+    }
+  });
+});
+
+document.querySelectorAll('[data-close-mat]').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    const panel = btn.closest('.mat-detail-panel');
+    panel.classList.remove('open');
+    document.querySelectorAll('.mat-swatch-item').forEach(s => s.classList.remove('active'));
+  });
+});
 
 // ============================================================
 // KITCHEN DESIGN DEVELOPMENT — flip book viewer
