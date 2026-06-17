@@ -34,8 +34,36 @@
   .badge { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3rem 0.7rem; }
   .badge-type { background: var(--accent-light); color: var(--accent); }
   .badge-academic { background: var(--bg-mid); color: var(--text-secondary); }
+  /* LIGHTBOX */
+  .cw-lightbox { position: fixed; inset: 0; z-index: 400; background: rgba(26,20,16,0.96); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem 1.5rem 1.5rem; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+  .cw-lightbox.open { opacity: 1; pointer-events: all; }
+  .cw-lb-img-wrap { flex: 1; display: flex; align-items: center; justify-content: center; width: 100%; overflow: hidden; max-height: calc(100vh - 80px); }
+  .cw-lb-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; transition: transform 0.25s ease; cursor: zoom-in; transform-origin: center center; user-select: none; -webkit-user-drag: none; }
+  .cw-lb-img-wrap img.zoomed { cursor: grab; }
+  .cw-lb-img-wrap img.zoomed:active { cursor: grabbing; }
+  .cw-lb-controls { position: fixed; bottom: 1.75rem; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 0.75rem; background: rgba(26,20,16,0.78); backdrop-filter: blur(10px); border: 0.5px solid rgba(255,255,255,0.12); padding: 0.55rem 1.25rem; z-index: 401; }
+  .cw-lb-btn { background: transparent; border: 0.5px solid rgba(255,255,255,0.2); padding: 0.35rem 0.9rem; font-family:'Inter',sans-serif; font-size: 14px; color: rgba(242,237,230,0.85); cursor: pointer; transition: all 0.2s; }
+  .cw-lb-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+  .cw-lb-counter { font-size: 11px; letter-spacing: 0.06em; color: rgba(242,237,230,0.5); min-width: 54px; text-align: center; }
+  .cw-lb-close { position: fixed; top: 1.25rem; right: 1.5rem; z-index: 402; background: rgba(26,20,16,0.65); border: 0.5px solid rgba(255,255,255,0.15); color: rgba(242,237,230,0.7); font-size: 1rem; cursor: pointer; padding: 0.4rem 0.7rem; }
+  .cw-lb-close:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+  .cw-lb-label { position: fixed; bottom: 5.25rem; left: 50%; transform: translateX(-50%); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(242,237,230,0.3); z-index: 401; }
+
+  /* BEFORE VIEWER — compact main image + thumbnail carousel */
+  .before-viewer { max-width: 480px; margin-bottom: 1.5rem; }
+  .before-main { position: relative; aspect-ratio: 4/3; background: var(--bg-mid); border: 0.5px solid var(--border-strong); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .before-main img { width: 100%; height: 100%; object-fit: contain; display: block; cursor: zoom-in; }
+  .before-placeholder-text { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); text-align: center; padding: 1rem; line-height: 1.7; }
+  .before-expand { position: absolute; top: 0.5rem; right: 0.5rem; background: rgba(26,20,16,0.5); border: none; color: var(--bg); font-size: 0.9rem; cursor: pointer; padding: 0.35rem 0.55rem; line-height: 1; transition: background 0.2s; }
+  .before-expand:hover { background: var(--accent); }
+  .before-thumbs { display: flex; gap: 1.5px; margin-top: 0.5px; background: var(--border); }
+  .before-thumb { flex: 1; aspect-ratio: 4/3; background: var(--bg-mid); cursor: pointer; overflow: hidden; border: 1.5px solid transparent; transition: border-color 0.2s; display: flex; align-items: center; justify-content: center; }
+  .before-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .before-thumb.active { border-color: var(--accent); }
+  .before-thumb-fallback { font-size: 11px; color: var(--text-muted); }
+
   /* MATERIAL PALETTE — clickable swatches with sideways-expanding detail panel */
-  .mat-palette-row { display: flex; align-items: flex-start; gap: 2rem; flex-wrap: wrap; }
+  .mat-palette-row { display: flex; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap; }
   .mat-swatch-item { text-align: center; cursor: pointer; flex-shrink: 0; transition: opacity 0.2s; }
   .mat-swatch-item:hover { opacity: 0.8; }
   .mat-swatch-circle { width: 90px; height: 90px; border-radius: 50%; overflow: hidden; background: var(--bg-mid); margin: 0 auto 0.6rem; border: 0.5px solid var(--border-strong); transition: border-color 0.2s; }
@@ -43,7 +71,7 @@
   .mat-swatch-fallback { display: flex; align-items: center; justify-content: center; height: 100%; font-size: 8px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
   .mat-swatch-label { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); display: block; }
 
-  /* Detail panel — collapsed by default, expands sideways (width) when active */
+  /* Detail panel — same compact height as a swatch (circle + label), expands sideways only */
   .mat-detail-panel {
     width: 0;
     max-width: 0;
@@ -51,30 +79,31 @@
     opacity: 0;
     background: var(--bg-mid);
     border: 0.5px solid var(--border-strong);
-    align-self: stretch;
+    height: 90px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.3rem;
     padding: 0;
     position: relative;
     transition: width 0.35s ease, max-width 0.35s ease, opacity 0.25s ease, padding 0.35s ease;
-    flex-shrink: 0;
+    flex-shrink: 1;
+    flex-grow: 1;
   }
   .mat-detail-panel.open {
-    width: 260px;
-    max-width: 260px;
+    width: auto;
+    max-width: 100%;
     opacity: 1;
-    padding: 1.5rem 1.75rem;
+    padding: 0.75rem 2.5rem 0.75rem 1.25rem;
   }
-  .mat-detail-close { position: absolute; top: 0.5rem; right: 0.6rem; background: none; border: none; font-size: 0.85rem; color: var(--text-muted); cursor: pointer; padding: 0.2rem 0.4rem; }
+  .mat-detail-close { position: absolute; top: 0.35rem; right: 0.5rem; background: none; border: none; font-size: 0.75rem; color: var(--text-muted); cursor: pointer; padding: 0.2rem 0.4rem; }
   .mat-detail-close:hover { color: var(--accent); }
-  .mat-detail-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--text-primary); white-space: nowrap; }
-  .mat-detail-text { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.65; margin: 0; white-space: normal; }
+  .mat-detail-title { font-family: 'Playfair Display', serif; font-size: 0.85rem; color: var(--text-primary); white-space: nowrap; }
+  .mat-detail-text { font-size: 0.75rem; color: var(--text-secondary); line-height: 1.5; margin: 0; white-space: normal; overflow-y: auto; max-height: 60px; }
 
   @media (max-width: 768px) {
-    .mat-palette-row { flex-direction: column; align-items: center; gap: 1.5rem; }
-    .mat-detail-panel { width: 100%; max-width: 100%; align-self: center; }
+    .mat-palette-row { flex-wrap: wrap; }
+    .mat-detail-panel { height: auto; min-height: 90px; flex-basis: 100%; order: 99; }
     .mat-detail-panel.open { width: 100%; max-width: 100%; }
     .mat-detail-title, .mat-detail-text { white-space: normal; }
   }
@@ -111,7 +140,37 @@
     .img-grid-3 { grid-template-columns: 1fr; }
   }
 
-  /* OBJECT THUMBNAIL GRID */
+  /* CONCEPT PROJECT WRAPPER — collapsed preview by default, expands on click */
+  .concept-proj-wrap { margin-bottom: 2rem; }
+  .concept-preview-card {
+    display: grid; grid-template-columns: 280px 1fr; gap: 0;
+    border: 0.5px solid var(--border); background: var(--bg-card);
+    cursor: pointer; transition: border-color 0.25s, box-shadow 0.25s;
+  }
+  .concept-preview-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(74,31,26,0.1); }
+  .concept-preview-img { position: relative; aspect-ratio: 4/3; overflow: hidden; background: var(--bg-mid); }
+  .concept-preview-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .concept-preview-fallback { display: flex; align-items: center; justify-content: center; height: 100%; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); text-align: center; padding: 1rem; line-height: 1.7; }
+  .concept-preview-info { padding: 1.5rem 1.75rem; display: flex; flex-direction: column; justify-content: center; gap: 0.5rem; }
+  .concept-preview-title { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 2.5vw, 1.6rem); color: var(--text-primary); margin: 0; }
+  .concept-preview-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+  .concept-preview-cta { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-top: 0.4rem; }
+
+  .concept-full-content { display: none; }
+  .concept-full-content.open { display: block; }
+  .concept-proj-wrap.expanded .concept-preview-card { display: none; }
+
+  .concept-collapse-btn {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 12px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--text-muted); background: none; border: none; cursor: pointer;
+    padding: 0; margin-bottom: 1.5rem; transition: color 0.2s;
+  }
+  .concept-collapse-btn:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .concept-preview-card { grid-template-columns: 1fr; }
+  }
   .obj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2rem; }
   .obj-card { cursor: pointer; border: 0.5px solid var(--border); background: var(--bg-card); transition: box-shadow 0.25s, border-color 0.25s; }
   .obj-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(74,31,26,0.1); }
@@ -248,22 +307,45 @@
   <p class="section-body-cw">Design work undertaken outside of formal study and professional practice — self-directed projects where I've developed the brief, explored options, and carried the design through to a resolved outcome.</p>
 
   <!-- ============================================================ -->
-  <!-- KITCHEN RENOVATION                                            -->
+  <!-- KITCHEN RENOVATION — collapsed preview card by default        -->
   <!-- ============================================================ -->
-  <div style="border:0.5px solid var(--border); background:var(--bg-card); padding:2.5rem;">
-    <div style="display:flex; gap:0.5rem; margin-bottom:0.75rem; flex-wrap:wrap;">
-      <span class="badge badge-type">Residential</span>
-      <span class="badge badge-academic" style="background:var(--bg-mid); color:var(--text-secondary);">Concept · Self-Initiated</span>
-    </div>
-    <h3 style="font-family:'Playfair Display',serif; font-size:clamp(1.5rem,3vw,2rem); margin-bottom:0.5rem;">Kitchen Renovation</h3>
-    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:2rem; letter-spacing:0.04em;">Full kitchen redesign — layout reconfiguration through to final detailing</p>
+  <div class="concept-proj-wrap" id="concept-kitchen">
 
-    <!-- HERO IMAGES — finished kitchen, before any explanation -->
-    <div class="img-grid-2" style="margin-bottom:0.5px;">
-      <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-        <!-- REPLACE: <img src="images/personal/kitchen-final-01.webp" alt="Completed kitchen" data-gallery="kitchen" data-index="0"> -->
-        <span class="img-placeholder-label">Final kitchen — angle 1<br>images/personal/kitchen-final-01.webp</span>
+    <!-- PREVIEW CARD — shown by default, click to expand -->
+    <div class="concept-preview-card" id="kitchenPreviewCard">
+      <div class="concept-preview-img">
+        <!-- REPLACE: <img src="images/personal/kitchen-final-01.webp" alt="Kitchen Renovation"> -->
+        <span class="concept-preview-fallback">Kitchen Renovation<br>images/personal/kitchen-final-01.webp</span>
       </div>
+      <div class="concept-preview-info">
+        <div style="display:flex; gap:0.5rem; margin-bottom:0.6rem; flex-wrap:wrap;">
+          <span class="badge badge-type">Residential</span>
+          <span class="badge badge-academic" style="background:var(--bg-mid); color:var(--text-secondary);">Concept · Self-Initiated</span>
+        </div>
+        <h3 class="concept-preview-title">Kitchen Renovation</h3>
+        <p class="concept-preview-desc">A full kitchen redesign — layout reconfiguration, material selection, and detailing through to final completion.</p>
+        <span class="concept-preview-cta">View project →</span>
+      </div>
+    </div>
+
+    <!-- FULL CONTENT — hidden by default, expands on click -->
+    <div class="concept-full-content" id="kitchenFullContent">
+      <button class="concept-collapse-btn" id="kitchenCollapseBtn">← Back to all concept projects</button>
+
+      <div style="border:0.5px solid var(--border); background:var(--bg-card); padding:2.5rem;">
+        <div style="display:flex; gap:0.5rem; margin-bottom:0.75rem; flex-wrap:wrap;">
+          <span class="badge badge-type">Residential</span>
+          <span class="badge badge-academic" style="background:var(--bg-mid); color:var(--text-secondary);">Concept · Self-Initiated</span>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:clamp(1.5rem,3vw,2rem); margin-bottom:0.5rem;">Kitchen Renovation</h3>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:2rem; letter-spacing:0.04em;">Full kitchen redesign — layout reconfiguration through to final detailing</p>
+
+        <!-- HERO IMAGES — finished kitchen, before any explanation -->
+        <div class="img-grid-2" style="margin-bottom:0.5px;">
+          <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+            <!-- REPLACE: <img src="images/personal/kitchen-final-01.webp" alt="Completed kitchen" data-gallery="kitchen" data-index="0"> -->
+            <span class="img-placeholder-label">Final kitchen — angle 1<br>images/personal/kitchen-final-01.webp</span>
+          </div>
       <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
         <!-- REPLACE: <img src="images/personal/kitchen-final-02.webp" alt="Completed kitchen" data-gallery="kitchen" data-index="1"> -->
         <span class="img-placeholder-label">Final kitchen — angle 2<br>images/personal/kitchen-final-02.webp</span>
@@ -273,32 +355,40 @@
     <!-- INTRO -->
     <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.8; margin:1.75rem 0 1.25rem;">A full kitchen redesign that began as a brief to refresh finishes and developed into a complete reconfiguration of the layout. Working through the existing space revealed an opportunity to improve flow, storage, and ergonomics by rethinking the floor plan rather than working within the original footprint.</p>
 
-    <!-- BEFORE -->
+    <!-- BEFORE — compact main image + thumbnail strip -->
     <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2rem 0 0.75rem;">Before</h4>
     <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem; max-width:680px;">The existing kitchen prior to renovation.</p>
-    <div class="img-grid-3" style="margin-bottom:1.5rem;">
-      <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-        <!-- REPLACE: <img src="images/personal/kitchen-before-01.webp" alt="Before — angle 1" data-gallery="kitchen" data-index="2"> -->
-        <span class="img-placeholder-label">Before — angle 1<br>images/personal/kitchen-before-01.webp</span>
+    <div class="before-viewer">
+      <div class="before-main" id="beforeMain">
+        <img id="beforeMainImg" src="" alt="Before kitchen">
+        <button class="before-expand" id="beforeExpand" title="View full screen">⛶</button>
+        <span class="before-placeholder-text" id="beforePlaceholderText">Before — angle 1<br>images/personal/kitchen-before-01.webp</span>
       </div>
-      <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-        <!-- REPLACE: <img src="images/personal/kitchen-before-02.webp" alt="Before — angle 2" data-gallery="kitchen" data-index="3"> -->
-        <span class="img-placeholder-label">Before — angle 2<br>images/personal/kitchen-before-02.webp</span>
-      </div>
-      <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-        <!-- REPLACE: <img src="images/personal/kitchen-before-03.webp" alt="Before — angle 3" data-gallery="kitchen" data-index="4"> -->
-        <span class="img-placeholder-label">Before — angle 3<br>images/personal/kitchen-before-03.webp</span>
+      <div class="before-thumbs" id="beforeThumbs">
+        <div class="before-thumb active" data-src="images/personal/kitchen-before-01.webp" data-alt="Before — angle 1">
+          <span class="before-thumb-fallback">1</span>
+        </div>
+        <div class="before-thumb" data-src="images/personal/kitchen-before-02.webp" data-alt="Before — angle 2">
+          <span class="before-thumb-fallback">2</span>
+        </div>
+        <div class="before-thumb" data-src="images/personal/kitchen-before-03.webp" data-alt="Before — angle 3">
+          <span class="before-thumb-fallback">3</span>
+        </div>
       </div>
     </div>
+    <!--
+      Once images/personal/kitchen-before-0X.webp files exist, this viewer will display them automatically —
+      no code change needed. The data-src attributes above already point to the correct paths.
+    -->
 
     <span class="img-label">Original house floor plan &amp; existing kitchen measurements</span>
     <div class="img-grid-2" style="margin-bottom:1.5rem;">
       <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-        <!-- REPLACE: <img src="images/personal/kitchen-original-floorplan.webp" alt="Original house floor plan from real estate listing" data-gallery="kitchen" data-index="5"> -->
+        <!-- REPLACE: <img src="images/personal/kitchen-original-floorplan.webp" alt="Original house floor plan from real estate listing" data-gallery="kitchen" data-index="2"> -->
         <span class="img-placeholder-label">Original house floor plan (real estate listing)<br>images/personal/kitchen-original-floorplan.webp</span>
       </div>
       <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-        <!-- REPLACE: <img src="images/personal/kitchen-measurement-mockup.webp" alt="Existing kitchen measurement mockup" data-gallery="kitchen" data-index="6"> -->
+        <!-- REPLACE: <img src="images/personal/kitchen-measurement-mockup.webp" alt="Existing kitchen measurement mockup" data-gallery="kitchen" data-index="3"> -->
         <span class="img-placeholder-label">Existing kitchen — measurement mock-up<br>images/personal/kitchen-measurement-mockup.webp</span>
       </div>
     </div>
@@ -340,11 +430,11 @@
 
     <div class="img-grid-2" style="margin-bottom:1.5rem;">
       <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-        <!-- REPLACE: <img src="images/personal/kitchen-layout-original.webp" alt="Original floor plan with furniture layout" data-gallery="kitchen" data-index="7"> -->
+        <!-- REPLACE: <img src="images/personal/kitchen-layout-original.webp" alt="Original floor plan with furniture layout" data-gallery="kitchen" data-index="4"> -->
         <span class="img-placeholder-label">Original layout — living / meals / kitchen as intended<br>images/personal/kitchen-layout-original.webp</span>
       </div>
       <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-        <!-- REPLACE: <img src="images/personal/kitchen-layout-reconfigured.webp" alt="Proposed reconfigured layout" data-gallery="kitchen" data-index="8"> -->
+        <!-- REPLACE: <img src="images/personal/kitchen-layout-reconfigured.webp" alt="Proposed reconfigured layout" data-gallery="kitchen" data-index="5"> -->
         <span class="img-placeholder-label">Proposed reconfiguration — mock-up<br>images/personal/kitchen-layout-reconfigured.webp</span>
       </div>
     </div>
@@ -364,11 +454,11 @@
     <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem; max-width:680px;">Floor plan and joinery drawings produced as the design was refined.</p>
     <div class="img-grid-2" style="margin-bottom:1.5px;">
       <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-        <!-- REPLACE: <img src="images/personal/kitchen-dev-floorplan.webp" alt="Developmental floor plan" data-gallery="kitchen" data-index="9"> -->
+        <!-- REPLACE: <img src="images/personal/kitchen-dev-floorplan.webp" alt="Developmental floor plan" data-gallery="kitchen" data-index="6"> -->
         <span class="img-placeholder-label">Developmental floor plan<br>images/personal/kitchen-dev-floorplan.webp</span>
       </div>
       <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-        <!-- REPLACE: <img src="images/personal/kitchen-dev-joinery.webp" alt="Joinery drawing" data-gallery="kitchen" data-index="10"> -->
+        <!-- REPLACE: <img src="images/personal/kitchen-dev-joinery.webp" alt="Joinery drawing" data-gallery="kitchen" data-index="7"> -->
         <span class="img-placeholder-label">Joinery drawing<br>images/personal/kitchen-dev-joinery.webp</span>
       </div>
     </div>
@@ -379,17 +469,17 @@
 
       <div class="mat-swatch-item" data-mat="benchtop">
         <div class="mat-swatch-circle">
-          <!-- REPLACE: <img src="images/personal/kitchen-mat-benchtop.webp" alt="Benchtop stone" style="width:100%;height:100%;object-fit:cover;"> -->
+          <!-- REPLACE: <img src="images/personal/kitchen-mat-benchtop.webp" alt="Benchtop and splashback stone" style="width:100%;height:100%;object-fit:cover;"> -->
           <span class="mat-swatch-fallback">Benchtop</span>
         </div>
-        <span class="mat-swatch-label">Benchtop Stone</span>
+        <span class="mat-swatch-label">Benchtop &amp; Splashback</span>
       </div>
 
       <!-- Detail panel for benchtop — hidden by default, opens inline -->
       <div class="mat-detail-panel" id="matDetail-benchtop">
         <button class="mat-detail-close" data-close-mat>✕</button>
-        <span class="mat-detail-title">Benchtop Stone</span>
-        <p class="mat-detail-text">A travertine-look engineered stone benchtop, chosen to bring a soft, natural texture to the space while remaining practical for everyday kitchen use.</p>
+        <span class="mat-detail-title">Benchtop &amp; Splashback Stone</span>
+        <p class="mat-detail-text">'Travertino' 12mm porcelain by Stone Ambassador, from the Vasari Porcelain Surfaces range. Natural surface finish.</p>
       </div>
 
       <div class="mat-swatch-item" data-mat="cabinetry">
@@ -402,8 +492,8 @@
 
       <div class="mat-detail-panel" id="matDetail-cabinetry">
         <button class="mat-detail-close" data-close-mat>✕</button>
-        <span class="mat-detail-title">Cabinetry Colour</span>
-        <p class="mat-detail-text">A bevelled-edge finger-pull profile was specified for all cupboard doors, removing the need for handles. All drawers and cupboard doors are fitted with soft-close mechanisms.</p>
+        <span class="mat-detail-title">Cabinetry — Rubra Oak</span>
+        <p class="mat-detail-text">'Rubra Oak' Woodmatt finish by Polytec, 18mm thick thermolaminated doors and panels. Subtle woodgrain embossing with an overall matt finish — a deep red-brown undertone with dark brown grain in a solid oak woodgrain with subtle crown cuts. Bevelled-edge finger-pull profile, no handles, soft-close drawers and doors throughout.</p>
       </div>
 
       <div class="mat-swatch-item" data-mat="sinktap">
@@ -417,21 +507,21 @@
       <div class="mat-detail-panel" id="matDetail-sinktap">
         <button class="mat-detail-close" data-close-mat>✕</button>
         <span class="mat-detail-title">Sink &amp; Tap</span>
-        <p class="mat-detail-text">A matching matte black finish was selected for both the sink and tap, chosen to coordinate with the cabinetry hardware and provide a cohesive, contemporary look.</p>
+        <p class="mat-detail-text">Gunmetal grey finish on both the sink and tap, coordinated for a cohesive look throughout the kitchen.</p>
       </div>
 
     </div>
-    <p style="font-size:9px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-top:0.75rem;">Click for details</p>
+    <p style="font-size:9px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-top:0.6rem; margin-bottom:0;">Click for details</p>
 
     <!-- FINAL DETAIL IMAGES -->
     <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Final Details</h4>
     <div class="img-grid-2" style="margin-bottom:1.5px;">
       <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-        <!-- REPLACE: <img src="images/personal/kitchen-final-detail-01.webp" alt="Final detail 1" data-gallery="kitchen" data-index="11"> -->
+        <!-- REPLACE: <img src="images/personal/kitchen-final-detail-01.webp" alt="Final detail 1" data-gallery="kitchen" data-index="8"> -->
         <span class="img-placeholder-label">Detail — joinery / hardware<br>images/personal/kitchen-final-detail-01.webp</span>
       </div>
       <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-        <!-- REPLACE: <img src="images/personal/kitchen-final-detail-02.webp" alt="Final detail 2" data-gallery="kitchen" data-index="12"> -->
+        <!-- REPLACE: <img src="images/personal/kitchen-final-detail-02.webp" alt="Final detail 2" data-gallery="kitchen" data-index="9"> -->
         <span class="img-placeholder-label">Detail — benchtop / splashback<br>images/personal/kitchen-final-detail-02.webp</span>
       </div>
     </div>
@@ -444,7 +534,13 @@
       <li>Selected and coordinated a cohesive material and finish palette across benchtop, cabinetry, and fittings</li>
       <li>Carried the design through to completion, from concept to finished kitchen</li>
     </ul>
+      </div>
+      <!-- end inner card -->
+    </div>
+    <!-- end concept-full-content -->
   </div>
+  <!-- end concept-proj-wrap -->
+
 </div>
 
 <!-- CUSTOM BIM OBJECTS -->
@@ -514,6 +610,20 @@
       </div>
     </div>
   </div>
+</div>
+
+<!-- LIGHTBOX — handles all [data-gallery] images plus the before-viewer fullscreen -->
+<div class="cw-lightbox" id="cwLightbox">
+  <button class="cw-lb-close" id="cwLbClose">✕</button>
+  <div class="cw-lb-img-wrap" id="cwLbImgWrap">
+    <img id="cwLbImg" src="" alt="">
+  </div>
+  <div class="cw-lb-controls" id="cwLbControls">
+    <button class="cw-lb-btn" id="cwLbPrev">&#8592;</button>
+    <span class="cw-lb-counter" id="cwLbCounter"></span>
+    <button class="cw-lb-btn" id="cwLbNext">&#8594;</button>
+  </div>
+  <div class="cw-lb-label" id="cwLbLabel"></div>
 </div>
 
 <footer>
@@ -666,6 +776,155 @@ document.querySelectorAll('.obj-card').forEach(card => {
 closeBtn.addEventListener('click', closePanel);
 overlay.addEventListener('click', closePanel);
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
+
+// ============================================================
+// CONCEPT PROJECT EXPAND/COLLAPSE — kitchen renovation preview
+// ============================================================
+const kitchenPreviewCard  = document.getElementById('kitchenPreviewCard');
+const kitchenFullContent  = document.getElementById('kitchenFullContent');
+const kitchenCollapseBtn  = document.getElementById('kitchenCollapseBtn');
+const kitchenWrap         = document.getElementById('concept-kitchen');
+
+if (kitchenPreviewCard) {
+  kitchenPreviewCard.addEventListener('click', () => {
+    kitchenWrap.classList.add('expanded');
+    kitchenFullContent.classList.add('open');
+    kitchenWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+if (kitchenCollapseBtn) {
+  kitchenCollapseBtn.addEventListener('click', () => {
+    kitchenWrap.classList.remove('expanded');
+    kitchenFullContent.classList.remove('open');
+    kitchenWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+// Open directly if page is loaded with #concept-kitchen hash (e.g. linked from index.html)
+if (window.location.hash === '#concept-kitchen' && kitchenPreviewCard) {
+  kitchenWrap.classList.add('expanded');
+  kitchenFullContent.classList.add('open');
+}
+
+// ============================================================
+// LIGHTBOX — handles all [data-gallery] images on the page
+// ============================================================
+const cwGalleries = {};
+document.querySelectorAll('[data-gallery]').forEach(img => {
+  const g = img.dataset.gallery;
+  const i = parseInt(img.dataset.index);
+  if (!cwGalleries[g]) cwGalleries[g] = [];
+  cwGalleries[g][i] = { src: img.src, alt: img.alt };
+});
+
+let cwLbGallery = null, cwLbIndex = 0, cwLbZoomed = false;
+const cwLightbox  = document.getElementById('cwLightbox');
+const cwLbImg     = document.getElementById('cwLbImg');
+const cwLbPrev    = document.getElementById('cwLbPrev');
+const cwLbNext    = document.getElementById('cwLbNext');
+const cwLbCounter = document.getElementById('cwLbCounter');
+const cwLbLabel   = document.getElementById('cwLbLabel');
+const cwLbClose   = document.getElementById('cwLbClose');
+
+function cwOpenLb(gallery, index) {
+  cwLbGallery = gallery; cwLbIndex = index; cwLbZoomed = false;
+  cwLbImg.classList.remove('zoomed');
+  cwShowLb();
+  cwLightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function cwShowLb() {
+  const item = cwGalleries[cwLbGallery][cwLbIndex];
+  cwLbImg.src = item.src; cwLbImg.alt = item.alt;
+  cwLbLabel.textContent = item.alt;
+  cwLbCounter.textContent = (cwLbIndex + 1) + ' / ' + cwGalleries[cwLbGallery].length;
+  cwLbZoomed = false;
+  cwLbImg.classList.remove('zoomed');
+  cwLbImg.style.transform = 'none';
+}
+function cwCloseLb() {
+  cwLightbox.classList.remove('open');
+  document.body.style.overflow = '';
+  cwLbZoomed = false;
+  cwLbImg.classList.remove('zoomed');
+}
+document.querySelectorAll('[data-gallery]').forEach(img => {
+  img.addEventListener('click', () => cwOpenLb(img.dataset.gallery, parseInt(img.dataset.index)));
+});
+cwLbImg.addEventListener('click', e => {
+  e.stopPropagation();
+  cwLbZoomed = !cwLbZoomed;
+  cwLbImg.classList.toggle('zoomed', cwLbZoomed);
+  cwLbImg.style.transform = cwLbZoomed ? 'scale(2.2)' : 'none';
+});
+cwLightbox.addEventListener('click', e => { if (e.target === cwLightbox || e.target.id === 'cwLbImgWrap') cwCloseLb(); });
+cwLbClose.addEventListener('click', cwCloseLb);
+cwLbPrev.addEventListener('click', e => { e.stopPropagation(); cwLbIndex = cwLbIndex > 0 ? cwLbIndex - 1 : cwGalleries[cwLbGallery].length - 1; cwShowLb(); });
+cwLbNext.addEventListener('click', e => { e.stopPropagation(); cwLbIndex = cwLbIndex < cwGalleries[cwLbGallery].length - 1 ? cwLbIndex + 1 : 0; cwShowLb(); });
+document.addEventListener('keydown', e => {
+  if (!cwLightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') cwCloseLb();
+  if (e.key === 'ArrowLeft') cwLbPrev.click();
+  if (e.key === 'ArrowRight') cwLbNext.click();
+});
+
+// ============================================================
+// BEFORE VIEWER — main image + thumbnail strip + fullscreen expand
+// ============================================================
+const beforeMainImg   = document.getElementById('beforeMainImg');
+const beforePlaceholderText = document.getElementById('beforePlaceholderText');
+const beforeThumbs    = document.querySelectorAll('.before-thumb');
+const beforeExpandBtn = document.getElementById('beforeExpand');
+
+function loadBeforeImage(src, alt) {
+  const testImg = new Image();
+  testImg.onload = () => {
+    beforeMainImg.src = src;
+    beforeMainImg.alt = alt;
+    beforeMainImg.style.display = 'block';
+    beforePlaceholderText.style.display = 'none';
+  };
+  testImg.onerror = () => {
+    beforeMainImg.style.display = 'none';
+    beforePlaceholderText.style.display = 'block';
+    beforePlaceholderText.innerHTML = alt + '<br>' + src;
+  };
+  testImg.src = src;
+}
+
+if (beforeThumbs.length > 0) {
+  const first = beforeThumbs[0];
+  loadBeforeImage(first.dataset.src, first.dataset.alt);
+
+  beforeThumbs.forEach(thumb => {
+    const tImg = new Image();
+    tImg.onload = () => {
+      thumb.innerHTML = '';
+      const img = document.createElement('img');
+      img.src = thumb.dataset.src;
+      img.alt = thumb.dataset.alt;
+      thumb.appendChild(img);
+    };
+    tImg.src = thumb.dataset.src;
+
+    thumb.addEventListener('click', () => {
+      beforeThumbs.forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+      loadBeforeImage(thumb.dataset.src, thumb.dataset.alt);
+    });
+  });
+}
+
+if (beforeExpandBtn) {
+  beforeExpandBtn.addEventListener('click', () => {
+    if (beforeMainImg.style.display === 'none') return;
+    const activeThumb = document.querySelector('.before-thumb.active');
+    const allBeforeImages = Array.from(beforeThumbs).map(t => ({ src: t.dataset.src, alt: t.dataset.alt }));
+    cwGalleries['before-fullscreen'] = allBeforeImages;
+    const idx = Array.from(beforeThumbs).indexOf(activeThumb);
+    cwOpenLb('before-fullscreen', idx >= 0 ? idx : 0);
+  });
+}
 
 // ============================================================
 // MATERIAL PALETTE — click swatch to expand detail panel sideways
