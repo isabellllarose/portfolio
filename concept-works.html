@@ -62,50 +62,42 @@
   .before-thumb.active { border-color: var(--accent); }
   .before-thumb-fallback { font-size: 11px; color: var(--text-muted); }
 
-  /* MATERIAL PALETTE — clickable swatches with sideways-expanding detail panel */
-  .mat-palette-row { display: flex; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap; }
-  .mat-swatch-item { text-align: center; cursor: pointer; flex-shrink: 0; transition: opacity 0.2s; }
+  /* MATERIAL PALETTE — even 3-column grid, each swatch expands its own panel directly below it */
+  .mat-palette-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .mat-swatch-col { display: flex; flex-direction: column; align-items: center; }
+  .mat-swatch-item { text-align: center; cursor: pointer; transition: opacity 0.2s; width: 100%; }
   .mat-swatch-item:hover { opacity: 0.8; }
-  .mat-swatch-circle { width: 90px; height: 90px; border-radius: 50%; overflow: hidden; background: var(--bg-mid); margin: 0 auto 0.6rem; border: 0.5px solid var(--border-strong); transition: border-color 0.2s; }
-  .mat-swatch-item.active .mat-swatch-circle { border-color: var(--accent); border-width: 1.5px; }
-  .mat-swatch-fallback { display: flex; align-items: center; justify-content: center; height: 100%; font-size: 8px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
-  .mat-swatch-label { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); display: block; }
+  .mat-swatch-circle { width: 130px; height: 130px; border-radius: 50%; overflow: hidden; background: var(--bg-mid); margin: 0 auto 0.75rem; border: 0.5px solid var(--border-strong); transition: border-color 0.2s; }
+  .mat-swatch-item.active .mat-swatch-circle { border-color: var(--accent); border-width: 2px; }
+  .mat-swatch-fallback { display: flex; align-items: center; justify-content: center; height: 100%; font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .mat-swatch-label { font-size: 10.5px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); display: block; }
 
-  /* Detail panel — same compact height as a swatch (circle + label), expands sideways only */
+  /* Detail panel — expands DOWN below its own swatch, no horizontal rearranging */
   .mat-detail-panel {
-    width: 0;
-    max-width: 0;
+    width: 100%;
+    max-height: 0;
     overflow: hidden;
     opacity: 0;
     background: var(--bg-mid);
     border: 0.5px solid var(--border-strong);
-    height: 90px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.3rem;
-    padding: 0;
+    margin-top: 0;
     position: relative;
-    transition: width 0.35s ease, max-width 0.35s ease, opacity 0.25s ease, padding 0.35s ease;
-    flex-shrink: 1;
-    flex-grow: 1;
+    transition: max-height 0.3s ease, opacity 0.25s ease, margin-top 0.3s ease;
   }
   .mat-detail-panel.open {
-    width: auto;
-    max-width: 100%;
+    max-height: 260px;
     opacity: 1;
-    padding: 0.75rem 2.5rem 0.75rem 1.25rem;
+    margin-top: 1rem;
+    padding: 1.25rem 1.5rem;
   }
-  .mat-detail-close { position: absolute; top: 0.35rem; right: 0.5rem; background: none; border: none; font-size: 0.75rem; color: var(--text-muted); cursor: pointer; padding: 0.2rem 0.4rem; }
+  .mat-detail-close { position: absolute; top: 0.5rem; right: 0.65rem; background: none; border: none; font-size: 0.8rem; color: var(--text-muted); cursor: pointer; padding: 0.2rem 0.4rem; }
   .mat-detail-close:hover { color: var(--accent); }
-  .mat-detail-title { font-family: 'Playfair Display', serif; font-size: 0.85rem; color: var(--text-primary); white-space: nowrap; }
-  .mat-detail-text { font-size: 0.75rem; color: var(--text-secondary); line-height: 1.5; margin: 0; white-space: normal; overflow-y: auto; max-height: 60px; }
+  .mat-detail-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--text-primary); display: block; margin-bottom: 0.5rem; }
+  .mat-detail-text { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.65; margin: 0; }
 
   @media (max-width: 768px) {
-    .mat-palette-row { flex-wrap: wrap; }
-    .mat-detail-panel { height: auto; min-height: 90px; flex-basis: 100%; order: 99; }
-    .mat-detail-panel.open { width: 100%; max-width: 100%; }
-    .mat-detail-title, .mat-detail-text { white-space: normal; }
+    .mat-palette-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .mat-swatch-circle { width: 110px; height: 110px; }
   }
 
   /* JOURNAL — design development flip viewer */
@@ -171,6 +163,32 @@
   @media (max-width: 600px) {
     .concept-preview-card { grid-template-columns: 1fr; }
   }
+
+  /* FINAL DETAILS CAROUSEL */
+  .kitchen-carousel-wrap { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .kitchen-carousel-track-wrap { overflow: hidden; flex: 1; }
+  .kitchen-carousel-track { display: flex; gap: 1.5px; transition: transform 0.35s ease; }
+  .kitchen-carousel-slide { flex: 0 0 calc(33.333% - 1px); aspect-ratio: 4/3; background: var(--bg-mid); overflow: hidden; display: flex; align-items: center; justify-content: center; border: 0.5px solid var(--border); }
+  .kitchen-carousel-slide img { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; }
+  .kitchen-carousel-arrow { background: none; border: none; cursor: pointer; padding: 0.5rem 0.5rem; font-size: 1.2rem; color: var(--accent); transition: color 0.2s, opacity 0.2s; flex-shrink: 0; }
+  .kitchen-carousel-arrow:disabled { color: var(--text-muted); opacity: 0.25; cursor: default; }
+  .kitchen-carousel-arrow:not(:disabled):hover { color: var(--text-primary); }
+  @media (max-width: 600px) {
+    .kitchen-carousel-slide { flex: 0 0 calc(50% - 1px); }
+  }
+
+  /* BACK TO TOP */
+  .back-to-top {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 500;
+    width: 44px; height: 44px; background: var(--accent); color: var(--bg);
+    border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; line-height: 1; opacity: 0; pointer-events: none;
+    transition: opacity 0.3s, background 0.2s, transform 0.2s;
+    box-shadow: 0 2px 12px rgba(74,31,26,0.25);
+  }
+  .back-to-top.visible { opacity: 1; pointer-events: all; }
+  .back-to-top:hover { background: var(--text-primary); transform: translateY(-2px); }
+
   .obj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2rem; }
   .obj-card { cursor: pointer; border: 0.5px solid var(--border); background: var(--bg-card); transition: box-shadow 0.25s, border-color 0.25s; }
   .obj-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(74,31,26,0.1); }
@@ -444,7 +462,7 @@
       <li>Made use of the empty space separating the kitchen from the living area, which was previously an ineffective use of floor space</li>
       <li>Relocated the meals area into that space, freeing up the original meals area to become additional kitchen floor space</li>
       <li>Created the opportunity for a proper pantry, which the original layout did not allow for</li>
-      <li>Added bench space and reorganised the appliance layout so the oven is no longer positioned beneath the benchtop and cooktop</li>
+      <li>Added bench space and reorganised the appliance layout so the oven is no longer positioned beneath the cooktop</li>
       <li>Gave the microwave its own dedicated position, rather than sitting on the benchtop</li>
       <li>Allowed drawers to replace cabinets wherever applicable in the lower cabinetry, improving everyday accessibility</li>
     </ul>
@@ -464,54 +482,60 @@
     </div>
 
     <!-- MATERIAL PALETTE -->
-    <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 1rem;">Material Palette</h4>
-    <div class="mat-palette-row" id="matPaletteRow">
+    <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.4rem;">Material Palette</h4>
+    <p style="font-size:9px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:1.25rem;">Click a swatch for details</p>
 
-      <div class="mat-swatch-item" data-mat="benchtop">
-        <div class="mat-swatch-circle">
-          <!-- REPLACE: <img src="images/personal/kitchen-mat-benchtop.webp" alt="Benchtop and splashback stone" style="width:100%;height:100%;object-fit:cover;"> -->
-          <span class="mat-swatch-fallback">Benchtop</span>
+    <div class="mat-palette-grid" id="matPaletteRow">
+
+      <div class="mat-swatch-col">
+        <div class="mat-swatch-item" data-mat="benchtop">
+          <div class="mat-swatch-circle">
+            <!-- REPLACE: <img src="images/personal/kitchen-mat-benchtop.webp" alt="Benchtop and splashback stone" style="width:100%;height:100%;object-fit:cover;"> -->
+            <span class="mat-swatch-fallback">Benchtop</span>
+          </div>
+          <span class="mat-swatch-label">Benchtop &amp; Splashback</span>
         </div>
-        <span class="mat-swatch-label">Benchtop &amp; Splashback</span>
-      </div>
-
-      <!-- Detail panel for benchtop — hidden by default, opens inline -->
-      <div class="mat-detail-panel" id="matDetail-benchtop">
-        <button class="mat-detail-close" data-close-mat>✕</button>
-        <span class="mat-detail-title">Benchtop &amp; Splashback Stone</span>
-        <p class="mat-detail-text">'Travertino' 12mm porcelain by Stone Ambassador, from the Vasari Porcelain Surfaces range. Natural surface finish.</p>
-      </div>
-
-      <div class="mat-swatch-item" data-mat="cabinetry">
-        <div class="mat-swatch-circle">
-          <!-- REPLACE: <img src="images/personal/kitchen-mat-cabinetry.webp" alt="Cabinetry colour" style="width:100%;height:100%;object-fit:cover;"> -->
-          <span class="mat-swatch-fallback">Cabinetry</span>
+        <div class="mat-detail-panel" id="matDetail-benchtop">
+          <button class="mat-detail-close" data-close-mat>✕</button>
+          <span class="mat-detail-title">Benchtop &amp; Splashback</span>
+          <p class="mat-detail-text">'Travertino' 12mm porcelain by Stone Ambassador, from the Vasari Porcelain Surfaces range. Natural surface finish.</p>
         </div>
-        <span class="mat-swatch-label">Cabinetry Colour</span>
       </div>
 
-      <div class="mat-detail-panel" id="matDetail-cabinetry">
-        <button class="mat-detail-close" data-close-mat>✕</button>
-        <span class="mat-detail-title">Cabinetry — Rubra Oak</span>
-        <p class="mat-detail-text">'Rubra Oak' Woodmatt finish by Polytec, 18mm thick thermolaminated doors and panels. Subtle woodgrain embossing with an overall matt finish — a deep red-brown undertone with dark brown grain in a solid oak woodgrain with subtle crown cuts. Bevelled-edge finger-pull profile, no handles, soft-close drawers and doors throughout.</p>
-      </div>
-
-      <div class="mat-swatch-item" data-mat="sinktap">
-        <div class="mat-swatch-circle">
-          <!-- REPLACE: <img src="images/personal/kitchen-mat-sink-tap.webp" alt="Sink and tap finish" style="width:100%;height:100%;object-fit:cover;"> -->
-          <span class="mat-swatch-fallback">Sink &amp; Tap</span>
+      <div class="mat-swatch-col">
+        <div class="mat-swatch-item" data-mat="cabinetry">
+          <div class="mat-swatch-circle">
+            <!-- REPLACE: <img src="images/personal/kitchen-mat-cabinetry.webp" alt="Cabinetry" style="width:100%;height:100%;object-fit:cover;"> -->
+            <span class="mat-swatch-fallback">Cabinetry</span>
+          </div>
+          <span class="mat-swatch-label">Cabinetry</span>
         </div>
-        <span class="mat-swatch-label">Sink &amp; Tap</span>
+        <div class="mat-detail-panel" id="matDetail-cabinetry">
+          <button class="mat-detail-close" data-close-mat>✕</button>
+          <span class="mat-detail-title">Cabinetry</span>
+          <p class="mat-detail-text">'Rubra Oak' Woodmatt finish by Polytec, 18mm thick thermolaminated doors and panels. Subtle woodgrain embossing with an overall matt finish — a deep red-brown undertone with dark brown grain in a solid oak woodgrain with subtle crown cuts. Bevelled-edge finger-pull profile, no handles, soft-close drawers and doors throughout.</p>
+        </div>
       </div>
 
-      <div class="mat-detail-panel" id="matDetail-sinktap">
-        <button class="mat-detail-close" data-close-mat>✕</button>
-        <span class="mat-detail-title">Sink &amp; Tap</span>
-        <p class="mat-detail-text">Gunmetal grey finish on both the sink and tap, coordinated for a cohesive look throughout the kitchen.</p>
+      <div class="mat-swatch-col">
+        <div class="mat-swatch-item" data-mat="sinktap">
+          <div class="mat-swatch-circle">
+            <!-- REPLACE: <img src="images/personal/kitchen-mat-sink-tap.webp" alt="Sink and tap finish" style="width:100%;height:100%;object-fit:cover;"> -->
+            <span class="mat-swatch-fallback">Sink &amp; Tap</span>
+          </div>
+          <span class="mat-swatch-label">Sink &amp; Tap</span>
+        </div>
+        <div class="mat-detail-panel" id="matDetail-sinktap">
+          <button class="mat-detail-close" data-close-mat>✕</button>
+          <span class="mat-detail-title">Sink &amp; Tap</span>
+          <p class="mat-detail-text">Gunmetal grey finish on both the sink and tap, coordinated for a cohesive look throughout the kitchen.</p>
+        </div>
       </div>
 
     </div>
-    <p style="font-size:9px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-top:0.6rem; margin-bottom:0;">Click for details</p>
+
+    <!-- LIGHTING NOTE -->
+    <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.75; margin-top:1.75rem; max-width:680px;">Under-cabinet LED track lighting was added — not purely for aesthetics, but as appropriate task lighting for this area of the house, which receives the least natural light of any room.</p>
 
     <!-- FINAL DETAIL IMAGES -->
     <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Final Details</h4>
@@ -524,6 +548,34 @@
         <!-- REPLACE: <img src="images/personal/kitchen-final-detail-02.webp" alt="Final detail 2" data-gallery="kitchen" data-index="9"> -->
         <span class="img-placeholder-label">Detail — benchtop / splashback<br>images/personal/kitchen-final-detail-02.webp</span>
       </div>
+    </div>
+
+    <!-- ADDITIONAL ANGLES CAROUSEL -->
+    <span class="img-label" style="margin-top:1.5rem; display:block;">More angles</span>
+    <div class="kitchen-carousel-wrap">
+      <button class="kitchen-carousel-arrow" id="kitchenCarPrev">&#8249;</button>
+      <div class="kitchen-carousel-track-wrap">
+        <div class="kitchen-carousel-track" id="kitchenCarTrack">
+          <!-- Add as many slides as needed — each one needs a unique data-index continuing the kitchen gallery sequence -->
+          <div class="kitchen-carousel-slide">
+            <!-- REPLACE: <img src="images/personal/kitchen-angle-01.webp" alt="Kitchen angle 1" data-gallery="kitchen" data-index="10"> -->
+            <span class="img-placeholder-label">Angle 1<br>images/personal/kitchen-angle-01.webp</span>
+          </div>
+          <div class="kitchen-carousel-slide">
+            <!-- REPLACE: <img src="images/personal/kitchen-angle-02.webp" alt="Kitchen angle 2" data-gallery="kitchen" data-index="11"> -->
+            <span class="img-placeholder-label">Angle 2<br>images/personal/kitchen-angle-02.webp</span>
+          </div>
+          <div class="kitchen-carousel-slide">
+            <!-- REPLACE: <img src="images/personal/kitchen-angle-03.webp" alt="Kitchen angle 3" data-gallery="kitchen" data-index="12"> -->
+            <span class="img-placeholder-label">Angle 3<br>images/personal/kitchen-angle-03.webp</span>
+          </div>
+          <div class="kitchen-carousel-slide">
+            <!-- REPLACE: <img src="images/personal/kitchen-angle-04.webp" alt="Kitchen angle 4" data-gallery="kitchen" data-index="13"> -->
+            <span class="img-placeholder-label">Angle 4<br>images/personal/kitchen-angle-04.webp</span>
+          </div>
+        </div>
+      </div>
+      <button class="kitchen-carousel-arrow" id="kitchenCarNext">&#8250;</button>
     </div>
 
     <h4 class="h4-serif-bold" style="font-family:'Playfair Display',serif; font-size:1.05rem; margin:1.75rem 0 0.75rem;">Key outcomes</h4>
@@ -611,6 +663,9 @@
     </div>
   </div>
 </div>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
 
 <!-- LIGHTBOX — handles all [data-gallery] images plus the before-viewer fullscreen -->
 <div class="cw-lightbox" id="cwLightbox">
@@ -778,6 +833,54 @@ overlay.addEventListener('click', closePanel);
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
 
 // ============================================================
+// BACK TO TOP
+// ============================================================
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  backToTop.classList.toggle('visible', window.scrollY > 400);
+});
+backToTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ============================================================
+// FINAL DETAILS CAROUSEL — kitchen additional angles
+// ============================================================
+const kCarTrack = document.getElementById('kitchenCarTrack');
+const kCarPrev  = document.getElementById('kitchenCarPrev');
+const kCarNext  = document.getElementById('kitchenCarNext');
+
+if (kCarTrack && kCarPrev && kCarNext) {
+  const kSlides = kCarTrack.querySelectorAll('.kitchen-carousel-slide');
+  const kTotal  = kSlides.length;
+  let kCarPos   = 0;
+
+  function kCarVisible() {
+    const w = window.innerWidth;
+    return w <= 600 ? 2 : 3;
+  }
+  function kCarUpdate() {
+    const visible = kCarVisible();
+    const slideW  = kCarTrack.parentElement.offsetWidth / visible;
+    kSlides.forEach(s => { s.style.flex = `0 0 ${slideW - 1}px`; });
+    kCarTrack.style.transform = `translateX(-${kCarPos * slideW}px)`;
+    kCarPrev.disabled = kCarPos === 0;
+    kCarNext.disabled = kCarPos >= kTotal - visible;
+  }
+  kCarPrev.addEventListener('click', () => { if (kCarPos > 0) { kCarPos--; kCarUpdate(); } });
+  kCarNext.addEventListener('click', () => {
+    const visible = kCarVisible();
+    if (kCarPos < kTotal - visible) { kCarPos++; kCarUpdate(); }
+  });
+  window.addEventListener('resize', () => {
+    const visible = kCarVisible();
+    if (kCarPos > kTotal - visible) kCarPos = Math.max(0, kTotal - visible);
+    kCarUpdate();
+  });
+  kCarUpdate();
+}
+
+// ============================================================
 // CONCEPT PROJECT EXPAND/COLLAPSE — kitchen renovation preview
 // ============================================================
 const kitchenPreviewCard  = document.getElementById('kitchenPreviewCard');
@@ -927,23 +1030,15 @@ if (beforeExpandBtn) {
 }
 
 // ============================================================
-// MATERIAL PALETTE — click swatch to expand detail panel sideways
+// MATERIAL PALETTE — click swatch to expand its own panel directly below
 // ============================================================
 document.querySelectorAll('.mat-swatch-item').forEach(item => {
   item.addEventListener('click', () => {
     const key = item.dataset.mat;
     const panel = document.getElementById('matDetail-' + key);
     const isOpen = panel.classList.contains('open');
-
-    // Close all panels first
-    document.querySelectorAll('.mat-detail-panel').forEach(p => p.classList.remove('open'));
-    document.querySelectorAll('.mat-swatch-item').forEach(s => s.classList.remove('active'));
-
-    // Open this one if it wasn't already open
-    if (!isOpen) {
-      panel.classList.add('open');
-      item.classList.add('active');
-    }
+    panel.classList.toggle('open', !isOpen);
+    item.classList.toggle('active', !isOpen);
   });
 });
 
@@ -952,7 +1047,8 @@ document.querySelectorAll('[data-close-mat]').forEach(btn => {
     e.stopPropagation();
     const panel = btn.closest('.mat-detail-panel');
     panel.classList.remove('open');
-    document.querySelectorAll('.mat-swatch-item').forEach(s => s.classList.remove('active'));
+    const col = panel.closest('.mat-swatch-col');
+    if (col) col.querySelector('.mat-swatch-item').classList.remove('active');
   });
 });
 
