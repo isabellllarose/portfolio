@@ -65,6 +65,10 @@
   .before-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .before-thumb.active { border-color: var(--accent); }
   .before-thumb-fallback { font-size: 11px; color: var(--text-muted); }
+  @media (max-width: 700px) {
+    .before-two-col { grid-template-columns: 1fr !important; }
+    .before-two-col > div:last-child { align-self: auto !important; }
+  }
 
   /* MATERIAL PALETTE — even 3-column grid, each swatch expands its own panel directly below it */
   .mat-palette-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
@@ -374,30 +378,47 @@
     <!-- INTRO -->
     <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.8; margin:1.75rem 0 1.25rem;">A full kitchen redesign that began as a brief to refresh finishes and developed into a complete reconfiguration of the layout. Working through the existing space revealed an opportunity to improve flow, storage, and ergonomics by rethinking the floor plan rather than working within the original footprint.</p>
 
-    <!-- BEFORE — compact main image + thumbnail strip -->
+    <!-- BEFORE — compact main image + thumbnail strip + design critique callout -->
     <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2rem 0 0.75rem;">Before</h4>
-    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem; max-width:680px;">The existing kitchen prior to renovation.</p>
-    <div class="before-viewer">
-      <div class="before-main" id="beforeMain">
-        <img id="beforeMainImg" src="" alt="Before kitchen">
-        <button class="before-expand" id="beforeExpand" title="View full screen">⛶</button>
-        <span class="before-placeholder-text" id="beforePlaceholderText">Before — angle 1<br>images/personal/kitchen-before-01.webp</span>
+    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem; max-width:680px;">The existing kitchen and meals area prior to renovation. The first two images were taken at the time of purchase with the original styling in place; the remaining two show the space once vacated — with the meals furniture removed, the spatial constraints of the original layout become more apparent.</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; align-items:start; margin-bottom:1.5rem;" class="before-two-col">
+      <div class="before-viewer" style="max-width:100%; margin-bottom:0;">
+        <div class="before-main" id="beforeMain">
+          <img id="beforeMainImg" src="" alt="Before kitchen">
+          <button class="before-expand" id="beforeExpand" title="View full screen">⛶</button>
+          <span class="before-placeholder-text" id="beforePlaceholderText">Before — angle 1<br>images/personal/kitchen-before-01.webp</span>
+        </div>
+        <div class="before-thumbs" id="beforeThumbs">
+          <div class="before-thumb active" data-src="images/personal/kitchen-before-01.webp" data-alt="Before — kitchen close-up">
+            <span class="before-thumb-fallback">1</span>
+          </div>
+          <div class="before-thumb" data-src="images/personal/kitchen-before-02.webp" data-alt="Before — kitchen and meals, styled">
+            <span class="before-thumb-fallback">2</span>
+          </div>
+          <div class="before-thumb" data-src="images/personal/kitchen-before-dining.webp" data-alt="Before — meals area, styled">
+            <span class="before-thumb-fallback">3</span>
+          </div>
+          <div class="before-thumb" data-src="images/personal/kitchen-before-03.webp" data-alt="Before — vacated space">
+            <span class="before-thumb-fallback">4</span>
+          </div>
+        </div>
       </div>
-      <div class="before-thumbs" id="beforeThumbs">
-        <div class="before-thumb active" data-src="images/personal/kitchen-before-01.webp" data-alt="Before — angle 1">
-          <span class="before-thumb-fallback">1</span>
-        </div>
-        <div class="before-thumb" data-src="images/personal/kitchen-before-02.webp" data-alt="Before — angle 2">
-          <span class="before-thumb-fallback">2</span>
-        </div>
-        <div class="before-thumb" data-src="images/personal/kitchen-before-03.webp" data-alt="Before — angle 3">
-          <span class="before-thumb-fallback">3</span>
-        </div>
+      <div style="border:0.5px solid var(--border-strong); padding:1.5rem; background:var(--bg-card); align-self:stretch;">
+        <p style="font-size:9px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-muted); margin-bottom:0.75rem;">Existing conditions</p>
+        <div style="width:30px; height:1px; background:var(--accent); margin-bottom:1rem;"></div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.65rem;">
+          <li style="font-size:0.82rem; color:var(--text-secondary); line-height:1.6; padding-left:1rem; position:relative;"><span style="position:absolute; left:0; color:var(--accent);">—</span>Bold red ceramic tile splashback and black laminate benchtop with a dated bullnose edge profile — a colour scheme that significantly ages the space</li>
+          <li style="font-size:0.82rem; color:var(--text-secondary); line-height:1.6; padding-left:1rem; position:relative;"><span style="position:absolute; left:0; color:var(--accent);">—</span>No designated pantry; storage limited to standard overhead and below-bench cabinetry with poor capacity</li>
+          <li style="font-size:0.82rem; color:var(--text-secondary); line-height:1.6; padding-left:1rem; position:relative;"><span style="position:absolute; left:0; color:var(--accent);">—</span>Restricted bench run with minimal usable preparation space</li>
+          <li style="font-size:0.82rem; color:var(--text-secondary); line-height:1.6; padding-left:1rem; position:relative;"><span style="position:absolute; left:0; color:var(--accent);">—</span>Dated 1¼ bowl stainless steel sink with drainer, top-mounted to the laminate benchtop — a functional and aesthetic liability</li>
+          <li style="font-size:0.82rem; color:var(--text-secondary); line-height:1.6; padding-left:1rem; position:relative;"><span style="position:absolute; left:0; color:var(--accent);">—</span>Oven positioned under the benchtop rather than at a comfortable working height</li>
+          <li style="font-size:0.82rem; color:var(--text-secondary); line-height:1.6; padding-left:1rem; position:relative;"><span style="position:absolute; left:0; color:var(--accent);">—</span>Meals area confined to a small corner — the footprint accommodated only a compact round table for four</li>
+        </ul>
       </div>
     </div>
     <!--
-      Once images/personal/kitchen-before-0X.webp files exist, this viewer will display them automatically —
-      no code change needed. The data-src attributes above already point to the correct paths.
+      Before images load automatically once files exist at images/personal/.
+      kitchen-before-dining.webp = the styled dining nook shot (your upload: kitchen-before-dining_to_use.jpg, converted to webp).
     -->
 
     <span class="img-label">Original house floor plan &amp; existing kitchen measurements</span>
