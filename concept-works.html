@@ -168,17 +168,17 @@
     .concept-preview-card { grid-template-columns: 1fr; }
   }
 
-  /* FINAL DETAILS CAROUSEL */
+  /* FINAL DETAILS CAROUSEL — fixed height row, natural width per image */
   .kitchen-carousel-wrap { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; }
   .kitchen-carousel-track-wrap { overflow: hidden; flex: 1; }
-  .kitchen-carousel-track { display: flex; gap: 1.5px; transition: transform 0.35s ease; }
-  .kitchen-carousel-slide { flex: 0 0 calc(33.333% - 1px); aspect-ratio: 4/3; background: var(--bg-mid); overflow: hidden; display: flex; align-items: center; justify-content: center; border: 0.5px solid var(--border); }
-  .kitchen-carousel-slide img { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; }
+  .kitchen-carousel-track { display: flex; gap: 1.5px; transition: transform 0.35s ease; align-items: stretch; }
+  .kitchen-carousel-slide { flex: 0 0 auto; height: 260px; background: var(--bg-mid); overflow: hidden; display: flex; align-items: center; justify-content: center; border: 0.5px solid var(--border); }
+  .kitchen-carousel-slide img { height: 100%; width: auto; display: block; object-fit: contain; cursor: zoom-in; }
   .kitchen-carousel-arrow { background: none; border: none; cursor: pointer; padding: 0.5rem 0.5rem; font-size: 1.2rem; color: var(--accent); transition: color 0.2s, opacity 0.2s; flex-shrink: 0; }
   .kitchen-carousel-arrow:disabled { color: var(--text-muted); opacity: 0.25; cursor: default; }
   .kitchen-carousel-arrow:not(:disabled):hover { color: var(--text-primary); }
   @media (max-width: 600px) {
-    .kitchen-carousel-slide { flex: 0 0 calc(50% - 1px); }
+    .kitchen-carousel-slide { height: 180px; }
   }
 
   /* BACK TO TOP */
@@ -858,31 +858,60 @@ const kCarNext  = document.getElementById('kitchenCarNext');
 if (kCarTrack && kCarPrev && kCarNext) {
   const kSlides = kCarTrack.querySelectorAll('.kitchen-carousel-slide');
   const kTotal  = kSlides.length;
-  let kCarPos   = 0;
+  let kCarPos   = 0; // index of the leftmost fully-visible slide
 
-  function kCarVisible() {
-    const w = window.innerWidth;
-    return w <= 600 ? 2 : 3;
+  function kCarSlideOffset(index) {
+    // sum of widths + gaps for all slides before `index`
+    let offset = 0;
+    for (let i = 0; i < index; i++) {
+      offset += kSlides[i].getBoundingClientRect().width + 1.5;
+    }
+    return offset;
+  }
+  function kCarMaxPos() {
+    // furthest position where the last slide still sits flush against the right edge
+    const trackWrapWidth = kCarTrack.parentElement.offsetWidth;
+    let totalWidth = 0;
+    kSlides.forEach(s => { totalWidth += s.getBoundingClientRect().width + 1.5; });
+    let pos = kTotal - 1;
+    let widthFromEnd = 0;
+    while (pos > 0) {
+      widthFromEnd += kSlides[pos].getBoundingClientRect().width + 1.5;
+      if (widthFromEnd >= trackWrapWidth) break;
+      pos--;
+    }
+    return pos;
   }
   function kCarUpdate() {
-    const visible = kCarVisible();
-    const slideW  = kCarTrack.parentElement.offsetWidth / visible;
-    kSlides.forEach(s => { s.style.flex = `0 0 ${slideW - 1}px`; });
-    kCarTrack.style.transform = `translateX(-${kCarPos * slideW}px)`;
+    const offset = kCarSlideOffset(kCarPos);
+    kCarTrack.style.transform = `translateX(-${offset}px)`;
     kCarPrev.disabled = kCarPos === 0;
-    kCarNext.disabled = kCarPos >= kTotal - visible;
+    kCarNext.disabled = kCarPos >= kCarMaxPos();
   }
   kCarPrev.addEventListener('click', () => { if (kCarPos > 0) { kCarPos--; kCarUpdate(); } });
   kCarNext.addEventListener('click', () => {
-    const visible = kCarVisible();
-    if (kCarPos < kTotal - visible) { kCarPos++; kCarUpdate(); }
+    if (kCarPos < kCarMaxPos()) { kCarPos++; kCarUpdate(); }
   });
   window.addEventListener('resize', () => {
-    const visible = kCarVisible();
-    if (kCarPos > kTotal - visible) kCarPos = Math.max(0, kTotal - visible);
+    const maxPos = kCarMaxPos();
+    if (kCarPos > maxPos) kCarPos = maxPos;
     kCarUpdate();
   });
-  kCarUpdate();
+  // wait for images to load so widths are measured correctly before first layout
+  let kCarImgsToLoad = kCarTrack.querySelectorAll('img').length;
+  if (kCarImgsToLoad === 0) {
+    kCarUpdate();
+  } else {
+    kCarTrack.querySelectorAll('img').forEach(img => {
+      if (img.complete) {
+        kCarImgsToLoad--;
+        if (kCarImgsToLoad === 0) kCarUpdate();
+      } else {
+        img.addEventListener('load', () => { kCarImgsToLoad--; if (kCarImgsToLoad === 0) kCarUpdate(); });
+        img.addEventListener('error', () => { kCarImgsToLoad--; if (kCarImgsToLoad === 0) kCarUpdate(); });
+      }
+    });
+  }
 }
 
 // ============================================================
