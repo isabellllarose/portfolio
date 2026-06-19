@@ -172,17 +172,24 @@
     .concept-preview-card { grid-template-columns: 1fr; }
   }
 
-  /* FINAL DETAILS CAROUSEL — fixed height row, natural width per image */
-  .kitchen-carousel-wrap { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; }
-  .kitchen-carousel-track-wrap { overflow: hidden; flex: 1; }
-  .kitchen-carousel-track { display: flex; gap: 1.5px; transition: transform 0.35s ease; align-items: stretch; }
-  .kitchen-carousel-slide { flex: 0 0 auto; height: 260px; background: var(--bg-mid); overflow: hidden; display: flex; align-items: center; justify-content: center; border: 0.5px solid var(--border); }
-  .kitchen-carousel-slide img { height: 100%; width: auto; display: block; object-fit: contain; cursor: zoom-in; }
-  .kitchen-carousel-arrow { background: none; border: none; cursor: pointer; padding: 0.5rem 0.5rem; font-size: 1.2rem; color: var(--accent); transition: color 0.2s, opacity 0.2s; flex-shrink: 0; }
-  .kitchen-carousel-arrow:disabled { color: var(--text-muted); opacity: 0.25; cursor: default; }
-  .kitchen-carousel-arrow:not(:disabled):hover { color: var(--text-primary); }
+  /* FINISHED KITCHEN CAROUSEL — large viewer + thumbnail strip */
+  .kitchen-carousel-outer { margin-bottom: 2rem; }
+  .kitchen-carousel-viewer { position: relative; width: 100%; aspect-ratio: 3/2; background: var(--bg-mid); overflow: hidden; border: 0.5px solid var(--border); margin-bottom: 4px; cursor: zoom-in; }
+  .kitchen-carousel-viewer img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .kitchen-carousel-viewer-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(42,31,26,0.45); border: none; color: #fff; font-size: 1.4rem; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; z-index: 2; }
+  .kitchen-carousel-viewer-arrow:hover { background: rgba(42,31,26,0.75); }
+  .kitchen-carousel-viewer-arrow.prev { left: 0.75rem; }
+  .kitchen-carousel-viewer-arrow.next { right: 0.75rem; }
+  .kitchen-carousel-viewer-arrow:disabled { opacity: 0.2; cursor: default; }
+  .kitchen-carousel-counter { position: absolute; bottom: 0.6rem; right: 0.75rem; font-size: 10px; letter-spacing: 0.08em; color: rgba(255,255,255,0.75); background: rgba(42,31,26,0.4); padding: 2px 7px; }
+  .kitchen-thumb-strip { display: flex; gap: 3px; overflow-x: auto; scrollbar-width: none; }
+  .kitchen-thumb-strip::-webkit-scrollbar { display: none; }
+  .kitchen-thumb { flex: 0 0 auto; width: 100px; aspect-ratio: 3/2; overflow: hidden; border: 1.5px solid transparent; cursor: pointer; background: var(--bg-mid); transition: border-color 0.2s; }
+  .kitchen-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .kitchen-thumb.active { border-color: var(--accent); }
+  .kitchen-thumb-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 9px; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; }
   @media (max-width: 600px) {
-    .kitchen-carousel-slide { height: 180px; }
+    .kitchen-thumb { width: 72px; }
   }
 
   /* BACK TO TOP */
@@ -551,18 +558,9 @@
     <!-- LIGHTING NOTE -->
     <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.75; margin-top:1.75rem; max-width:680px;">Under-cabinet LED track lighting was added — not purely for aesthetics, but as appropriate task lighting for this area of the house, which receives the least natural light of any room.</p>
 
-    <!-- LEHMANN'S CORNER -->
-    <span class="img-label" style="margin-top:2rem; display:block;">Corner Storage</span>
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; align-items:start; margin:0.75rem 0 2rem;">
-      <div class="img-slot" style="background:transparent;">
-        <img src="images/personal/lehmans_corner.webp" alt="Lehmann's corner unit open" data-gallery="kitchen" data-index="7">
-      </div>
-      <p style="font-size:0.875rem; color:var(--text-secondary); line-height:1.8; padding-top:0.25rem;">The lower corner cabinet presented a common problem — the geometry of an internal corner makes drawers impractical, leaving a standard hinged door as the only option and the space largely inaccessible. A <strong style="font-weight:500; color:var(--text-primary);">Lehmann's corner unit</strong> was specified here: a swing-out carousel system that brings the full depth of the cabinet out to the user on open, eliminating the need to reach into a dark corner. The result is a practical appliance cupboard — slow cooker, rice cooker, and blender all stored at bench height and fully accessible without bending or rummaging.</p>
-    </div>
-
-    <!-- FINAL DETAIL IMAGES -->
+    <!-- FINAL DETAILS -->
     <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Final Details</h4>
-    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem; max-width:680px;">The completed kitchen — an above plan view of the final layout, alongside two corner perspectives showing the design in use.</p>
+    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem; max-width:680px;">The completed kitchen — an above plan view of the final layout, followed by photographs of the finished space.</p>
 
     <span class="img-label">Above plan view — final layout</span>
     <div style="max-width:480px; margin-bottom:1.5rem;">
@@ -572,44 +570,44 @@
       </div>
     </div>
 
-    <span class="img-label">Corner perspectives</span>
-    <div class="img-grid-2" style="margin-bottom:1.5px;">
-      <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-        <!-- REPLACE: <img src="images/personal/kitchen-final-detail-01.webp" alt="Corner perspective 1" data-gallery="kitchen" data-index="9"> -->
-        <span class="img-placeholder-label">Corner perspective 1</span>
+    <!-- FINISHED KITCHEN CAROUSEL — large viewer + thumbnail strip -->
+    <span class="img-label" style="margin-top:1.5rem; display:block;">Finished Kitchen</span>
+    <div class="kitchen-carousel-outer">
+      <div class="kitchen-carousel-viewer" id="kViewer">
+        <img id="kViewerImg" src="images/personal/kitchen-final-01.webp" alt="Finished kitchen">
+        <button class="kitchen-carousel-viewer-arrow prev" id="kPrev">&#8249;</button>
+        <button class="kitchen-carousel-viewer-arrow next" id="kNext">&#8250;</button>
+        <span class="kitchen-carousel-counter" id="kCounter">1 / 6</span>
       </div>
-      <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-        <!-- REPLACE: <img src="images/personal/kitchen-final-detail-02.webp" alt="Corner perspective 2" data-gallery="kitchen" data-index="10"> -->
-        <span class="img-placeholder-label">Corner perspective 2</span>
+      <div class="kitchen-thumb-strip" id="kThumbStrip">
+        <div class="kitchen-thumb active" data-src="images/personal/kitchen-final-01.webp">
+          <img src="images/personal/kitchen-final-01.webp" alt="Finished kitchen">
+        </div>
+        <div class="kitchen-thumb" data-src="images/personal/kitchen-final-02.webp">
+          <img src="images/personal/kitchen-final-02.webp" alt="Finished kitchen">
+        </div>
+        <div class="kitchen-thumb" data-src="images/personal/kitchen-angle-01.webp">
+          <span class="kitchen-thumb-placeholder">3</span>
+        </div>
+        <div class="kitchen-thumb" data-src="images/personal/kitchen-angle-02.webp">
+          <span class="kitchen-thumb-placeholder">4</span>
+        </div>
+        <div class="kitchen-thumb" data-src="images/personal/kitchen-angle-03.webp">
+          <span class="kitchen-thumb-placeholder">5</span>
+        </div>
+        <div class="kitchen-thumb" data-src="images/personal/kitchen-angle-04.webp">
+          <span class="kitchen-thumb-placeholder">6</span>
+        </div>
       </div>
     </div>
 
-    <!-- ADDITIONAL ANGLES CAROUSEL -->
-    <span class="img-label" style="margin-top:1.5rem; display:block;">Finished Kitchen Photos</span>
-    <div class="kitchen-carousel-wrap">
-      <button class="kitchen-carousel-arrow" id="kitchenCarPrev">&#8249;</button>
-      <div class="kitchen-carousel-track-wrap">
-        <div class="kitchen-carousel-track" id="kitchenCarTrack">
-          <!-- Add as many slides as needed — each one needs a unique data-index continuing the kitchen gallery sequence -->
-          <div class="kitchen-carousel-slide">
-            <!-- REPLACE: <img src="images/personal/kitchen-angle-01.webp" alt="Kitchen angle 1" data-gallery="kitchen" data-index="11"> -->
-            <span class="img-placeholder-label">Angle 1</span>
-          </div>
-          <div class="kitchen-carousel-slide">
-            <!-- REPLACE: <img src="images/personal/kitchen-angle-02.webp" alt="Kitchen angle 2" data-gallery="kitchen" data-index="12"> -->
-            <span class="img-placeholder-label">Angle 2</span>
-          </div>
-          <div class="kitchen-carousel-slide">
-            <!-- REPLACE: <img src="images/personal/kitchen-angle-03.webp" alt="Kitchen angle 3" data-gallery="kitchen" data-index="13"> -->
-            <span class="img-placeholder-label">Angle 3</span>
-          </div>
-          <div class="kitchen-carousel-slide">
-            <!-- REPLACE: <img src="images/personal/kitchen-angle-04.webp" alt="Kitchen angle 4" data-gallery="kitchen" data-index="14"> -->
-            <span class="img-placeholder-label">Angle 4</span>
-          </div>
-        </div>
+    <!-- CORNER STORAGE — Lehmann's unit -->
+    <span class="img-label" style="margin-top:0.5rem; display:block;">Corner Storage</span>
+    <div style="display:grid; grid-template-columns:280px 1fr; gap:1.5rem; align-items:start; margin:0.75rem 0 2rem;">
+      <div class="img-slot" style="aspect-ratio:3/4; background:transparent;">
+        <img src="images/personal/lehmans_corner.webp" alt="Lehmann's corner unit open" data-gallery="kitchen" data-index="7">
       </div>
-      <button class="kitchen-carousel-arrow" id="kitchenCarNext">&#8250;</button>
+      <p style="font-size:0.875rem; color:var(--text-secondary); line-height:1.8; padding-top:0.25rem;">The lower corner cabinet presented a common problem — the geometry of an internal corner makes drawers impractical, leaving a standard hinged door as the only option and the space largely inaccessible. A <strong style="font-weight:500; color:var(--text-primary);">Lehmann's corner unit</strong> was specified here: a swing-out carousel system that brings the full depth of the cabinet out to the user on open, eliminating the need to reach into a dark corner. The result is a practical appliance cupboard — slow cooker, rice cooker, and blender all stored at bench height and fully accessible without bending or rummaging.</p>
     </div>
 
     <h4 class="h4-serif-bold" style="font-family:'Playfair Display',serif; font-size:1.05rem; margin:1.75rem 0 0.75rem;">Key outcomes</h4>
@@ -878,70 +876,45 @@ backToTop.addEventListener('click', () => {
 });
 
 // ============================================================
-// FINAL DETAILS CAROUSEL — kitchen additional angles
+// FINISHED KITCHEN CAROUSEL — large viewer + thumbnail strip
 // ============================================================
-const kCarTrack = document.getElementById('kitchenCarTrack');
-const kCarPrev  = document.getElementById('kitchenCarPrev');
-const kCarNext  = document.getElementById('kitchenCarNext');
+(function() {
+  const viewerImg  = document.getElementById('kViewerImg');
+  const prevBtn    = document.getElementById('kPrev');
+  const nextBtn    = document.getElementById('kNext');
+  const counter    = document.getElementById('kCounter');
+  const thumbStrip = document.getElementById('kThumbStrip');
+  if (!viewerImg || !thumbStrip) return;
 
-if (kCarTrack && kCarPrev && kCarNext) {
-  const kSlides = kCarTrack.querySelectorAll('.kitchen-carousel-slide');
-  const kTotal  = kSlides.length;
-  let kCarPos   = 0; // index of the leftmost fully-visible slide
+  const thumbs = Array.from(thumbStrip.querySelectorAll('.kitchen-thumb'));
+  const srcs   = thumbs.map(t => t.dataset.src);
+  const total  = srcs.length;
+  let current  = 0;
 
-  function kCarSlideOffset(index) {
-    // sum of widths + gaps for all slides before `index`
-    let offset = 0;
-    for (let i = 0; i < index; i++) {
-      offset += kSlides[i].getBoundingClientRect().width + 1.5;
-    }
-    return offset;
+  function goTo(index) {
+    current = index;
+    viewerImg.src = srcs[current];
+    counter.textContent = (current + 1) + ' / ' + total;
+    thumbs.forEach((t, i) => t.classList.toggle('active', i === current));
+    if (prevBtn) prevBtn.disabled = current === 0;
+    if (nextBtn) nextBtn.disabled = current === total - 1;
   }
-  function kCarMaxPos() {
-    // furthest position where the last slide still sits flush against the right edge
-    const trackWrapWidth = kCarTrack.parentElement.offsetWidth;
-    let totalWidth = 0;
-    kSlides.forEach(s => { totalWidth += s.getBoundingClientRect().width + 1.5; });
-    let pos = kTotal - 1;
-    let widthFromEnd = 0;
-    while (pos > 0) {
-      widthFromEnd += kSlides[pos].getBoundingClientRect().width + 1.5;
-      if (widthFromEnd >= trackWrapWidth) break;
-      pos--;
-    }
-    return pos;
-  }
-  function kCarUpdate() {
-    const offset = kCarSlideOffset(kCarPos);
-    kCarTrack.style.transform = `translateX(-${offset}px)`;
-    kCarPrev.disabled = kCarPos === 0;
-    kCarNext.disabled = kCarPos >= kCarMaxPos();
-  }
-  kCarPrev.addEventListener('click', () => { if (kCarPos > 0) { kCarPos--; kCarUpdate(); } });
-  kCarNext.addEventListener('click', () => {
-    if (kCarPos < kCarMaxPos()) { kCarPos++; kCarUpdate(); }
+
+  thumbs.forEach((thumb, i) => {
+    thumb.addEventListener('click', () => goTo(i));
   });
-  window.addEventListener('resize', () => {
-    const maxPos = kCarMaxPos();
-    if (kCarPos > maxPos) kCarPos = maxPos;
-    kCarUpdate();
-  });
-  // wait for images to load so widths are measured correctly before first layout
-  let kCarImgsToLoad = kCarTrack.querySelectorAll('img').length;
-  if (kCarImgsToLoad === 0) {
-    kCarUpdate();
-  } else {
-    kCarTrack.querySelectorAll('img').forEach(img => {
-      if (img.complete) {
-        kCarImgsToLoad--;
-        if (kCarImgsToLoad === 0) kCarUpdate();
-      } else {
-        img.addEventListener('load', () => { kCarImgsToLoad--; if (kCarImgsToLoad === 0) kCarUpdate(); });
-        img.addEventListener('error', () => { kCarImgsToLoad--; if (kCarImgsToLoad === 0) kCarUpdate(); });
-      }
+  if (prevBtn) prevBtn.addEventListener('click', () => { if (current > 0) goTo(current - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', () => { if (current < total - 1) goTo(current + 1); });
+
+  // click viewer to open lightbox if cwOpenLb is available
+  if (viewerImg) {
+    viewerImg.addEventListener('click', () => {
+      if (typeof cwOpenLb === 'function') cwOpenLb('kitchen', current);
     });
   }
-}
+
+  goTo(0);
+})();
 
 // ============================================================
 // CONCEPT PROJECT EXPAND/COLLAPSE — kitchen renovation preview
