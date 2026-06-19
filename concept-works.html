@@ -173,16 +173,21 @@
   }
 
   /* KITCHEN HERO IMAGE PAIR */
-  .kitchen-hero-pair { display:flex; gap:1.5px; width:100%; margin-bottom:0.5px; background:var(--border); overflow:hidden; align-items:flex-start; }
-  .kitchen-hero-img { flex:0 0 auto; overflow:hidden; }
-  .kitchen-hero-img img { display:block; height:440px; width:auto; cursor:zoom-in; }
+  .kitchen-hero-pair { display:flex; gap:1.5px; width:100%; margin-bottom:0.5px; background:var(--border); }
+  .kitchen-hero-img { overflow:hidden; }
+  .kitchen-hero-img img { display:block; width:100%; height:100%; object-fit:cover; cursor:zoom-in; }
+  /* flex proportional to each image's natural aspect ratio so they share height perfectly */
+  .kitchen-hero-img:nth-child(1) { flex:1.500 1 0; max-height:380px; }
+  .kitchen-hero-img:nth-child(2) { flex:0.974 1 0; max-height:380px; }
   @media (max-width:900px) {
-    .kitchen-hero-img img { height:300px; }
+    .kitchen-hero-img:nth-child(1),
+    .kitchen-hero-img:nth-child(2) { max-height:280px; }
   }
   @media (max-width:600px) {
     .kitchen-hero-pair { flex-direction:column; gap:1.5px; }
-    .kitchen-hero-img { flex:none; width:100%; }
-    .kitchen-hero-img img { height:auto; width:100%; }
+    .kitchen-hero-img:nth-child(1),
+    .kitchen-hero-img:nth-child(2) { flex:none; width:100%; max-height:none; }
+    .kitchen-hero-img img { height:auto; object-fit:contain; }
     .corner-storage-grid { grid-template-columns: 1fr !important; }
   }
   .kitchen-carousel-outer { margin-bottom: 2rem; }
@@ -589,7 +594,7 @@
         <img id="kViewerImg" src="images/personal/kitchen-final-01.webp" alt="Finished kitchen">
         <button class="kitchen-carousel-viewer-arrow prev" id="kPrev">&#8249;</button>
         <button class="kitchen-carousel-viewer-arrow next" id="kNext">&#8250;</button>
-        <span class="kitchen-carousel-counter" id="kCounter">1 / 6</span>
+        <span class="kitchen-carousel-counter" id="kCounter">1 / 8</span>
       </div>
       <div class="kitchen-thumb-strip" id="kThumbStrip">
         <div class="kitchen-thumb active" data-src="images/personal/kitchen-final-01.webp">
@@ -609,6 +614,12 @@
         </div>
         <div class="kitchen-thumb" data-src="images/personal/kitchen-angle-04.webp">
           <span class="kitchen-thumb-placeholder">6</span>
+        </div>
+        <div class="kitchen-thumb" data-src="images/personal/kitchen-angle-05.webp">
+          <span class="kitchen-thumb-placeholder">7</span>
+        </div>
+        <div class="kitchen-thumb" data-src="images/personal/kitchen-angle-06.webp">
+          <span class="kitchen-thumb-placeholder">8</span>
         </div>
       </div>
     </div>
