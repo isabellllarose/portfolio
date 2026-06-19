@@ -180,6 +180,7 @@
     .kitchen-hero-pair { flex-direction:column; gap:1.5px; }
     .kitchen-hero-img { flex:none; width:100%; }
     .kitchen-hero-img img { height:auto; width:100%; object-fit:contain; }
+    .corner-storage-grid { grid-template-columns: 1fr !important; }
   }
   .kitchen-carousel-outer { margin-bottom: 2rem; }
   .kitchen-carousel-viewer { position: relative; width: 100%; aspect-ratio: 3/2; background: var(--bg-mid); overflow: hidden; border: 0.5px solid var(--border); margin-bottom: 4px; cursor: zoom-in; }
@@ -611,7 +612,7 @@
 
     <!-- CORNER STORAGE — Lehmann's unit -->
     <span class="img-label" style="margin-top:0.5rem; display:block;">Corner Storage</span>
-    <div style="display:grid; grid-template-columns:280px 1fr; gap:1.5rem; align-items:start; margin:0.75rem 0 2rem;">
+    <div class="corner-storage-grid" style="display:grid; grid-template-columns:280px 1fr; gap:1.5rem; align-items:start; margin:0.75rem 0 2rem;">
       <div class="img-slot" style="aspect-ratio:3/4; background:transparent;">
         <img src="images/personal/lehmans_corner.webp" alt="Lehmann's corner unit open" data-gallery="kitchen" data-index="7">
       </div>
@@ -921,6 +922,15 @@ backToTop.addEventListener('click', () => {
     });
   }
 
+  // swipe left/right on the large viewer
+  const viewerEl = document.getElementById('kViewer');
+  if (viewerEl) {
+    addSwipe(viewerEl,
+      () => { if (current < total - 1) goTo(current + 1); },
+      () => { if (current > 0) goTo(current - 1); }
+    );
+  }
+
   goTo(0);
 })();
 
@@ -1016,6 +1026,28 @@ document.addEventListener('keydown', e => {
 });
 
 // ============================================================
+// TOUCH SWIPE HELPER — used by before viewer and kitchen carousel
+// ============================================================
+function addSwipe(el, onLeft, onRight) {
+  let startX = null;
+  let startY = null;
+  el.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  }, { passive: true });
+  el.addEventListener('touchend', e => {
+    if (startX === null) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    const dy = e.changedTouches[0].clientY - startY;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+      if (dx < 0) onLeft();
+      else onRight();
+    }
+    startX = null; startY = null;
+  }, { passive: true });
+}
+
+// ============================================================
 // BEFORE VIEWER — main image + thumbnail strip + fullscreen expand
 // ============================================================
 const beforeMainImg   = document.getElementById('beforeMainImg');
@@ -1071,6 +1103,23 @@ if (beforeExpandBtn) {
     const idx = Array.from(beforeThumbs).indexOf(activeThumb);
     cwOpenLb('before-fullscreen', idx >= 0 ? idx : 0);
   });
+}
+
+// Swipe on before viewer main image
+const beforeMainEl = document.getElementById('beforeMain');
+if (beforeMainEl && beforeThumbs.length > 0) {
+  const thumbArr = Array.from(beforeThumbs);
+  function beforeActiveIndex() { return thumbArr.findIndex(t => t.classList.contains('active')); }
+  function beforeGoTo(i) {
+    if (i < 0 || i >= thumbArr.length) return;
+    thumbArr.forEach(t => t.classList.remove('active'));
+    thumbArr[i].classList.add('active');
+    loadBeforeImage(thumbArr[i].dataset.src, thumbArr[i].dataset.alt);
+  }
+  addSwipe(beforeMainEl,
+    () => beforeGoTo(beforeActiveIndex() + 1),
+    () => beforeGoTo(beforeActiveIndex() - 1)
+  );
 }
 
 // ============================================================
