@@ -172,7 +172,15 @@
     .concept-preview-card { grid-template-columns: 1fr; }
   }
 
-  /* FINISHED KITCHEN CAROUSEL — large viewer + thumbnail strip */
+  /* KITCHEN HERO IMAGE PAIR */
+  .kitchen-hero-pair { display:flex; gap:1.5px; align-items:flex-start; margin-bottom:0.5px; background:var(--border); }
+  .kitchen-hero-img { flex:0 0 auto; background:var(--bg-card); }
+  .kitchen-hero-img img { height:420px; width:auto; display:block; cursor:zoom-in; }
+  @media (max-width:600px) {
+    .kitchen-hero-pair { flex-direction:column; gap:1.5px; }
+    .kitchen-hero-img { flex:none; width:100%; }
+    .kitchen-hero-img img { height:auto; width:100%; object-fit:contain; }
+  }
   .kitchen-carousel-outer { margin-bottom: 2rem; }
   .kitchen-carousel-viewer { position: relative; width: 100%; aspect-ratio: 3/2; background: var(--bg-mid); overflow: hidden; border: 0.5px solid var(--border); margin-bottom: 4px; cursor: zoom-in; }
   .kitchen-carousel-viewer img { width: 100%; height: 100%; object-fit: contain; display: block; }
@@ -373,12 +381,12 @@
         <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:2rem; letter-spacing:0.04em;">Full kitchen redesign — layout reconfiguration through to final detailing</p>
 
         <!-- HERO IMAGES — finished kitchen, before any explanation -->
-        <div style="display:flex; gap:1.5px; align-items:stretch; margin-bottom:0.5px; background:var(--border);">
-          <div style="flex:0 0 auto; display:flex; align-items:center; background:var(--bg-card);">
-            <img src="images/personal/kitchen-final-01.webp" alt="Completed kitchen" data-gallery="kitchen" data-index="0" style="height:420px; width:auto; display:block; cursor:zoom-in;">
+        <div class="kitchen-hero-pair">
+          <div class="kitchen-hero-img">
+            <img src="images/personal/kitchen-final-01.webp" alt="Completed kitchen" data-gallery="kitchen" data-index="0">
           </div>
-          <div style="flex:0 0 auto; display:flex; align-items:center; background:var(--bg-card);">
-            <img src="images/personal/kitchen-final-02.webp" alt="Completed kitchen" data-gallery="kitchen" data-index="1" style="height:420px; width:auto; display:block; cursor:zoom-in;">
+          <div class="kitchen-hero-img">
+            <img src="images/personal/kitchen-final-02.webp" alt="Completed kitchen" data-gallery="kitchen" data-index="1">
           </div>
         </div>
 
