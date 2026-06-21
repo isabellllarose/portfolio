@@ -351,7 +351,7 @@
 </div>
 
 <!-- CONCEPT PROJECTS -->
-<div class="section-wrap-cw">
+<div class="section-wrap-cw" id="concept-projects-top">
   <span class="section-eyebrow-cw">Self-initiated</span>
   <h2 class="section-title-cw">Concept Projects</h2>
   <p class="section-body-cw">Design work undertaken outside of formal study and professional practice — self-directed projects where I've developed the brief, explored options, and carried the design through to a resolved outcome.</p>
@@ -379,7 +379,7 @@
 
     <!-- FULL CONTENT — hidden by default, expands on click -->
     <div class="concept-full-content" id="kitchenFullContent">
-      <button class="concept-collapse-btn" id="kitchenCollapseBtn">← Back to all concept projects</button>
+      <button class="concept-collapse-btn" id="kitchenCollapseBtn">✕ Close section</button>
 
       <div style="border:0.5px solid var(--border); background:var(--bg-card); padding:2.5rem;">
         <div style="display:flex; gap:0.5rem; margin-bottom:0.75rem; flex-wrap:wrap;">
@@ -642,6 +642,9 @@
       <li>Carried the design through to completion, from concept to finished kitchen</li>
     </ul>
       </div>
+
+      <button class="concept-collapse-btn" id="kitchenCollapseBtnBottom" style="margin-top:2.5rem;">✕ Close section</button>
+
       <!-- end inner card -->
     </div>
     <!-- end concept-full-content -->
@@ -672,7 +675,7 @@
 
     <!-- FULL CONTENT — hidden by default, expands on click -->
     <div class="concept-full-content" id="laundryFullContent">
-      <button class="concept-collapse-btn" id="laundryCollapseBtn">← Back to all concept projects</button>
+      <button class="concept-collapse-btn" id="laundryCollapseBtn">✕ Close section</button>
 
       <div style="border:0.5px solid var(--border); background:var(--bg-card); padding:2.5rem;">
         <div style="display:flex; gap:0.5rem; margin-bottom:0.75rem; flex-wrap:wrap;">
@@ -713,8 +716,8 @@
             <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.65rem;">
               <li style="font-size:0.82rem; color:var(--text-secondary); line-height:1.6; padding-left:1.1rem; position:relative;"><span style="position:absolute; left:0; top:0.45em; width:5px; height:5px; border-radius:50%; background:var(--accent); display:inline-block;"></span>Dryer does not properly fit its allocated space within the existing footprint</li>
               <li style="font-size:0.82rem; color:var(--text-secondary); line-height:1.6; padding-left:1.1rem; position:relative;"><span style="position:absolute; left:0; top:0.45em; width:5px; height:5px; border-radius:50%; background:var(--accent); display:inline-block;"></span>No dedicated storage for linen, cleaning supplies, or general laundry essentials</li>
+              <li style="font-size:0.82rem; color:var(--text-secondary); line-height:1.6; padding-left:1.1rem; position:relative;"><span style="position:absolute; left:0; top:0.45em; width:5px; height:5px; border-radius:50%; background:var(--accent); display:inline-block;"></span>Round laundry trough is impractical — poor functionality for soaking, scrubbing, or filling larger items compared to a standard rectangular bowl</li>
               <li style="font-size:0.82rem; color:var(--text-secondary); line-height:1.6; padding-left:1.1rem; position:relative;"><span style="position:absolute; left:0; top:0.45em; width:5px; height:5px; border-radius:50%; background:var(--accent); display:inline-block;"></span>Dated finishes throughout, inconsistent with the rest of the home's renovated areas</li>
-              <li style="font-size:0.82rem; color:var(--text-secondary); line-height:1.6; padding-left:1.1rem; position:relative;"><span style="position:absolute; left:0; top:0.45em; width:5px; height:5px; border-radius:50%; background:var(--accent); display:inline-block;"></span>Limited bench space for folding and sorting</li>
             </ul>
           </div>
         </div>
@@ -744,6 +747,8 @@
         </div>
 
         <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.75; margin-top:1.75rem; max-width:680px;">Full concept renders, rationale, and detailed material specification to be added as the proposal develops.</p>
+
+        <button class="concept-collapse-btn" id="laundryCollapseBtnBottom" style="margin-top:2.5rem;">✕ Close section</button>
 
       </div>
       <!-- end inner card -->
@@ -1058,7 +1063,15 @@ backToTop.addEventListener('click', () => {
 const kitchenPreviewCard  = document.getElementById('kitchenPreviewCard');
 const kitchenFullContent  = document.getElementById('kitchenFullContent');
 const kitchenCollapseBtn  = document.getElementById('kitchenCollapseBtn');
+const kitchenCollapseBtnBottom = document.getElementById('kitchenCollapseBtnBottom');
 const kitchenWrap         = document.getElementById('concept-kitchen');
+const conceptProjectsTop  = document.getElementById('concept-projects-top');
+
+function closeKitchenSection() {
+  kitchenWrap.classList.remove('expanded');
+  kitchenFullContent.classList.remove('open');
+  if (conceptProjectsTop) conceptProjectsTop.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 
 if (kitchenPreviewCard) {
   kitchenPreviewCard.addEventListener('click', () => {
@@ -1067,13 +1080,8 @@ if (kitchenPreviewCard) {
     kitchenWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 }
-if (kitchenCollapseBtn) {
-  kitchenCollapseBtn.addEventListener('click', () => {
-    kitchenWrap.classList.remove('expanded');
-    kitchenFullContent.classList.remove('open');
-    kitchenWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-}
+if (kitchenCollapseBtn) kitchenCollapseBtn.addEventListener('click', closeKitchenSection);
+if (kitchenCollapseBtnBottom) kitchenCollapseBtnBottom.addEventListener('click', closeKitchenSection);
 
 // Open directly if page is loaded with #concept-kitchen hash (e.g. linked from index.html)
 if (window.location.hash === '#concept-kitchen' && kitchenPreviewCard) {
@@ -1084,7 +1092,14 @@ if (window.location.hash === '#concept-kitchen' && kitchenPreviewCard) {
 const laundryPreviewCard  = document.getElementById('laundryPreviewCard');
 const laundryFullContent  = document.getElementById('laundryFullContent');
 const laundryCollapseBtn  = document.getElementById('laundryCollapseBtn');
+const laundryCollapseBtnBottom = document.getElementById('laundryCollapseBtnBottom');
 const laundryWrap         = document.getElementById('concept-laundry');
+
+function closeLaundrySection() {
+  laundryWrap.classList.remove('expanded');
+  laundryFullContent.classList.remove('open');
+  if (conceptProjectsTop) conceptProjectsTop.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 
 if (laundryPreviewCard) {
   laundryPreviewCard.addEventListener('click', () => {
@@ -1093,13 +1108,8 @@ if (laundryPreviewCard) {
     laundryWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 }
-if (laundryCollapseBtn) {
-  laundryCollapseBtn.addEventListener('click', () => {
-    laundryWrap.classList.remove('expanded');
-    laundryFullContent.classList.remove('open');
-    laundryWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-}
+if (laundryCollapseBtn) laundryCollapseBtn.addEventListener('click', closeLaundrySection);
+if (laundryCollapseBtnBottom) laundryCollapseBtnBottom.addEventListener('click', closeLaundrySection);
 
 // Open directly if page is loaded with #concept-laundry hash
 if (window.location.hash === '#concept-laundry' && laundryPreviewCard) {
