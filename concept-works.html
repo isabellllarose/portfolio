@@ -1425,7 +1425,7 @@ function addSwipe(el, onLeft, onRight) {
 // ============================================================
 const beforeMainImg   = document.getElementById('beforeMainImg');
 const beforePlaceholderText = document.getElementById('beforePlaceholderText');
-const beforeThumbs    = document.querySelectorAll('.before-thumb');
+const beforeThumbs    = document.querySelectorAll('#beforeThumbs .before-thumb');
 const beforeExpandBtn = document.getElementById('beforeExpand');
 
 function loadBeforeImage(src, alt) {
@@ -1475,18 +1475,22 @@ if (beforeThumbs.length > 0) {
   });
 }
 
+// Register kitchen before gallery upfront so clicking main image works from first load
+if (beforeThumbs.length > 0) {
+  cwGalleries['before-fullscreen'] = Array.from(beforeThumbs).map(t => ({ src: t.dataset.src, alt: t.dataset.alt }));
+}
+
 if (beforeExpandBtn) {
   beforeExpandBtn.addEventListener('click', () => {
     if (beforeMainImg.style.display === 'none') return;
-    const activeThumb = document.querySelector('.before-thumb.active');
-    const allBeforeImages = Array.from(beforeThumbs).map(t => ({ src: t.dataset.src, alt: t.dataset.alt }));
-    cwGalleries['before-fullscreen'] = allBeforeImages;
+    const activeThumb = document.querySelector('#beforeThumbs .before-thumb.active');
+    cwGalleries['before-fullscreen'] = Array.from(beforeThumbs).map(t => ({ src: t.dataset.src, alt: t.dataset.alt }));
     const idx = Array.from(beforeThumbs).indexOf(activeThumb);
     cwOpenLb('before-fullscreen', idx >= 0 ? idx : 0);
   });
 }
 
-// Swipe on before viewer main image
+// Click main image to open fullscreen
 const beforeMainEl = document.getElementById('beforeMain');
 if (beforeMainEl && beforeThumbs.length > 0) {
   const thumbArr = Array.from(beforeThumbs);
@@ -1497,6 +1501,10 @@ if (beforeMainEl && beforeThumbs.length > 0) {
     thumbArr[i].classList.add('active');
     loadBeforeImage(thumbArr[i].dataset.src, thumbArr[i].dataset.alt);
   }
+  beforeMainImg.addEventListener('click', () => {
+    if (beforeMainImg.style.display === 'none') return;
+    cwOpenLb('before-fullscreen', beforeActiveIndex());
+  });
   addSwipe(beforeMainEl,
     () => beforeGoTo(beforeActiveIndex() + 1),
     () => beforeGoTo(beforeActiveIndex() - 1)
