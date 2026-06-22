@@ -46,10 +46,24 @@
   .cw-lb-img-wrap img.zoomed { cursor: grab; }
   .cw-lb-img-wrap img.zoomed:active { cursor: grabbing; }
   .cw-lb-controls { position: fixed; bottom: 1.75rem; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 0.75rem; background: rgba(26,20,16,0.78); backdrop-filter: blur(10px); border: 0.5px solid rgba(255,255,255,0.12); padding: 0.55rem 1.25rem; z-index: 401; }
-  .cw-lb-btn { background: transparent; border: 0.5px solid rgba(255,255,255,0.2); padding: 0.35rem 0.9rem; font-family:'Inter',sans-serif; font-size: 14px; color: rgba(242,237,230,0.85); cursor: pointer; transition: all 0.2s; }
+  .cw-lb-btn { background: rgba(42,31,26,0.4); border: 0.5px solid rgba(255,255,255,0.25); padding: 0.5rem 1.1rem; font-family:'Inter',sans-serif; font-size: 18px; color: rgba(242,237,230,0.9); cursor: pointer; transition: all 0.2s; min-width: 48px; min-height: 48px; display: flex; align-items: center; justify-content: center; }
   .cw-lb-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
   .cw-lb-counter { font-size: 11px; letter-spacing: 0.06em; color: rgba(242,237,230,0.5); min-width: 54px; text-align: center; }
   .cw-lb-close { position: fixed; top: 1.25rem; right: 1.5rem; z-index: 402; background: rgba(26,20,16,0.65); border: 0.5px solid rgba(255,255,255,0.15); color: rgba(242,237,230,0.7); font-size: 1rem; cursor: pointer; padding: 0.4rem 0.7rem; }
+  @media (max-width: 700px) {
+    .cw-lb-btn { font-size: 26px; padding: 1rem 1.6rem; min-width: 70px; min-height: 70px; }
+    .cw-lb-controls { padding: 0.75rem 1.5rem; gap: 1rem; bottom: 1.25rem; }
+  }
+  /* BEFORE VIEWER — inline prev/next navigation arrows */
+  .before-nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(42,31,26,0.45); border: none; color: rgba(242,237,230,0.9); font-size: 1.3rem; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; z-index: 2; padding: 0; }
+  .before-nav-arrow:hover { background: rgba(42,31,26,0.8); }
+  .before-nav-arrow:disabled { opacity: 0.15; cursor: default; }
+  .before-nav-arrow.prev { left: 0.4rem; }
+  .before-nav-arrow.next { right: 2.4rem; }
+  @media (max-width: 700px) {
+    .before-nav-arrow { width: 44px; height: 44px; font-size: 1.6rem; }
+    .before-nav-arrow.next { right: 3rem; }
+  }
   .cw-lb-close:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
   .cw-lb-label { position: fixed; bottom: 5.25rem; left: 50%; transform: translateX(-50%); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(242,237,230,0.3); z-index: 401; }
 
@@ -708,6 +722,8 @@
             <div class="before-main">
               <img id="laundryBeforeMainImg" src="images/personal/laundry-before-empty.webp" alt="Laundry — vacant" data-gallery="laundry-before" data-index="0" style="width:100%; height:100%; object-fit:contain; display:block; cursor:zoom-in;">
               <button class="before-expand" id="laundryBeforeExpand" title="View full screen">⛶</button>
+              <button class="before-nav-arrow prev" id="laundryBeforePrev" aria-label="Previous">&#8249;</button>
+              <button class="before-nav-arrow next" id="laundryBeforeNext" aria-label="Next">&#8250;</button>
             </div>
             <div class="before-thumbs" id="laundryBeforeThumbs">
               <div class="before-thumb active" data-src="images/personal/laundry-before-empty.webp" data-alt="Laundry — vacant">
@@ -753,6 +769,30 @@
           <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
             <!-- REPLACE: <img src="images/personal/laundry-materials-02.webp" alt="Material selections 2" data-gallery="laundry-proposed" data-index="2"> -->
             <span class="img-placeholder-label">Material selections 2</span>
+          </div>
+        </div>
+
+
+        <!-- DESIGN DEVELOPMENT / INSPIRATION -->
+        <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Design Development</h4>
+        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.5rem; max-width:680px;">Inspiration imagery, mood boards, and early concept direction developed to guide the material and finish selections.</p>
+
+        <div class="img-grid-2" style="margin-bottom:1.5px;">
+          <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+            <!-- REPLACE: <img src="images/personal/laundry-inspiration-01.webp" alt="Inspiration 1" data-gallery="laundry-inspiration" data-index="0"> -->
+            <span class="img-placeholder-label">Inspiration / mood board 1</span>
+          </div>
+          <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+            <!-- REPLACE: <img src="images/personal/laundry-inspiration-02.webp" alt="Inspiration 2" data-gallery="laundry-inspiration" data-index="1"> -->
+            <span class="img-placeholder-label">Inspiration / mood board 2</span>
+          </div>
+          <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+            <!-- REPLACE: <img src="images/personal/laundry-inspiration-03.webp" alt="Inspiration 3" data-gallery="laundry-inspiration" data-index="2"> -->
+            <span class="img-placeholder-label">Inspiration / mood board 3</span>
+          </div>
+          <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+            <!-- REPLACE: <img src="images/personal/laundry-inspiration-04.webp" alt="Inspiration 4" data-gallery="laundry-inspiration" data-index="3"> -->
+            <span class="img-placeholder-label">Inspiration / mood board 4</span>
           </div>
         </div>
 
@@ -814,6 +854,8 @@
             <div class="before-main">
               <img id="bathroomBeforeMainImg" src="images/personal/bathroom-before-sale.webp" alt="Bathroom — sale listing" data-gallery="bathroom-before" data-index="0" style="width:100%; height:100%; object-fit:contain; display:block; cursor:zoom-in;">
               <button class="before-expand" id="bathroomBeforeExpand" title="View full screen">⛶</button>
+              <button class="before-nav-arrow prev" id="bathroomBeforePrev" aria-label="Previous">&#8249;</button>
+              <button class="before-nav-arrow next" id="bathroomBeforeNext" aria-label="Next">&#8250;</button>
             </div>
             <div class="before-thumbs" id="bathroomBeforeThumbs">
               <div class="before-thumb active" data-src="images/personal/bathroom-before-sale.webp" data-alt="Bathroom — sale listing">
@@ -864,6 +906,30 @@
           <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
             <!-- REPLACE: <img src="images/personal/bathroom-materials-02.webp" alt="Material selections 2" data-gallery="bathroom-proposed" data-index="2"> -->
             <span class="img-placeholder-label">Material selections 2</span>
+          </div>
+        </div>
+
+
+        <!-- DESIGN DEVELOPMENT / INSPIRATION -->
+        <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Design Development</h4>
+        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.5rem; max-width:680px;">Inspiration imagery, mood boards, and early concept direction developed to guide the material and finish selections.</p>
+
+        <div class="img-grid-2" style="margin-bottom:1.5px;">
+          <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+            <!-- REPLACE: <img src="images/personal/bathroom-inspiration-01.webp" alt="Inspiration 1" data-gallery="bathroom-inspiration" data-index="0"> -->
+            <span class="img-placeholder-label">Inspiration / mood board 1</span>
+          </div>
+          <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+            <!-- REPLACE: <img src="images/personal/bathroom-inspiration-02.webp" alt="Inspiration 2" data-gallery="bathroom-inspiration" data-index="1"> -->
+            <span class="img-placeholder-label">Inspiration / mood board 2</span>
+          </div>
+          <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+            <!-- REPLACE: <img src="images/personal/bathroom-inspiration-03.webp" alt="Inspiration 3" data-gallery="bathroom-inspiration" data-index="2"> -->
+            <span class="img-placeholder-label">Inspiration / mood board 3</span>
+          </div>
+          <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
+            <!-- REPLACE: <img src="images/personal/bathroom-inspiration-04.webp" alt="Inspiration 4" data-gallery="bathroom-inspiration" data-index="3"> -->
+            <span class="img-placeholder-label">Inspiration / mood board 4</span>
           </div>
         </div>
 
@@ -1022,7 +1088,6 @@ const objects = {
     images: [
       { src: 'images/wellness/bim-01-context.webp',         alt: 'In context' },
       { src: 'images/wellness/bim-02-three-quarter-a.webp', alt: 'Three-quarter A' },
-      { src: 'images/wellness/bim-03-three-quarter-b.webp', alt: 'Three-quarter B' },
       { src: 'images/wellness/bim-04-front.webp',           alt: 'Front perspective' },
       { src: 'images/wellness/bim-05-detail.webp',          alt: 'Detail' }
     ]
@@ -1321,6 +1386,11 @@ cwLightbox.addEventListener('click', e => { if (e.target === cwLightbox || e.tar
 cwLbClose.addEventListener('click', cwCloseLb);
 cwLbPrev.addEventListener('click', e => { e.stopPropagation(); cwLbIndex = cwLbIndex > 0 ? cwLbIndex - 1 : cwGalleries[cwLbGallery].length - 1; cwShowLb(); });
 cwLbNext.addEventListener('click', e => { e.stopPropagation(); cwLbIndex = cwLbIndex < cwGalleries[cwLbGallery].length - 1 ? cwLbIndex + 1 : 0; cwShowLb(); });
+// Swipe to navigate the lightbox
+addSwipe(cwLightbox,
+  () => { cwLbIndex = cwLbIndex < cwGalleries[cwLbGallery].length - 1 ? cwLbIndex + 1 : 0; cwShowLb(); },
+  () => { cwLbIndex = cwLbIndex > 0 ? cwLbIndex - 1 : cwGalleries[cwLbGallery].length - 1; cwShowLb(); }
+);
 document.addEventListener('keydown', e => {
   if (!cwLightbox.classList.contains('open')) return;
   if (e.key === 'Escape') cwCloseLb();
@@ -1434,106 +1504,90 @@ if (beforeMainEl && beforeThumbs.length > 0) {
 }
 
 // ============================================================
-// LAUNDRY BEFORE VIEWER — thumbnail strip + fullscreen
+// LAUNDRY BEFORE VIEWER — thumbnail strip, inline arrows, fullscreen
 // ============================================================
-const laundryBeforeMainImg = document.getElementById('laundryBeforeMainImg');
-const laundryBeforeThumbs  = document.querySelectorAll('#laundryBeforeThumbs .before-thumb');
-const laundryBeforeExpand  = document.getElementById('laundryBeforeExpand');
-const laundryBeforeMainEl  = document.getElementById('laundryBeforeMain');
+(function() {
+  const mainImg   = document.getElementById('laundryBeforeMainImg');
+  const thumbEls  = document.querySelectorAll('#laundryBeforeThumbs .before-thumb');
+  const expandBtn = document.getElementById('laundryBeforeExpand');
+  const prevBtn   = document.getElementById('laundryBeforePrev');
+  const nextBtn   = document.getElementById('laundryBeforeNext');
+  const wrapEl    = document.getElementById('laundryBeforeMain');
+  if (!mainImg || thumbEls.length === 0) return;
 
-if (laundryBeforeThumbs.length > 0) {
-  laundryBeforeThumbs.forEach((thumb, i) => {
+  const thumbArr = Array.from(thumbEls);
+  const allImgs  = thumbArr.map(t => ({ src: t.dataset.src, alt: t.dataset.alt }));
+  cwGalleries['laundry-before-fullscreen'] = allImgs;
+
+  function lActiveIdx() { return thumbArr.findIndex(t => t.classList.contains('active')); }
+  function lGoTo(i) {
+    if (i < 0 || i >= thumbArr.length) return;
+    thumbArr.forEach(t => t.classList.remove('active'));
+    thumbArr[i].classList.add('active');
+    mainImg.src = thumbArr[i].dataset.src;
+    mainImg.alt = thumbArr[i].dataset.alt;
+    if (prevBtn) prevBtn.disabled = i === 0;
+    if (nextBtn) nextBtn.disabled = i === thumbArr.length - 1;
+  }
+
+  thumbEls.forEach((thumb, i) => {
     thumb.addEventListener('click', () => {
-      laundryBeforeThumbs.forEach(t => t.classList.remove('active'));
-      thumb.classList.add('active');
-      laundryBeforeMainImg.src = thumb.dataset.src;
-      laundryBeforeMainImg.alt = thumb.dataset.alt;
-
-      if (window.innerWidth <= 700 && typeof cwOpenLb === 'function') {
-        const allLaundryBefore = Array.from(laundryBeforeThumbs).map(t => ({ src: t.dataset.src, alt: t.dataset.alt }));
-        cwGalleries['laundry-before-fullscreen'] = allLaundryBefore;
-        cwOpenLb('laundry-before-fullscreen', i);
-      }
+      lGoTo(i);
+      if (window.innerWidth <= 700) cwOpenLb('laundry-before-fullscreen', i);
     });
   });
-}
 
-if (laundryBeforeExpand) {
-  laundryBeforeExpand.addEventListener('click', () => {
-    const activeThumb = document.querySelector('#laundryBeforeThumbs .before-thumb.active');
-    const allLaundryBefore = Array.from(laundryBeforeThumbs).map(t => ({ src: t.dataset.src, alt: t.dataset.alt }));
-    cwGalleries['laundry-before-fullscreen'] = allLaundryBefore;
-    const idx = Array.from(laundryBeforeThumbs).indexOf(activeThumb);
-    cwOpenLb('laundry-before-fullscreen', idx >= 0 ? idx : 0);
-  });
-}
+  if (expandBtn) expandBtn.addEventListener('click', () => cwOpenLb('laundry-before-fullscreen', lActiveIdx()));
+  if (mainImg)   mainImg.addEventListener('click', () => cwOpenLb('laundry-before-fullscreen', lActiveIdx()));
+  if (prevBtn)   prevBtn.addEventListener('click', () => lGoTo(lActiveIdx() - 1));
+  if (nextBtn)   nextBtn.addEventListener('click', () => lGoTo(lActiveIdx() + 1));
+  if (wrapEl)    addSwipe(wrapEl, () => lGoTo(lActiveIdx() + 1), () => lGoTo(lActiveIdx() - 1));
 
-if (laundryBeforeMainEl && laundryBeforeThumbs.length > 0) {
-  const lThumbArr = Array.from(laundryBeforeThumbs);
-  function laundryActiveIndex() { return lThumbArr.findIndex(t => t.classList.contains('active')); }
-  function laundryGoTo(i) {
-    if (i < 0 || i >= lThumbArr.length) return;
-    lThumbArr.forEach(t => t.classList.remove('active'));
-    lThumbArr[i].classList.add('active');
-    laundryBeforeMainImg.src = lThumbArr[i].dataset.src;
-    laundryBeforeMainImg.alt = lThumbArr[i].dataset.alt;
+  lGoTo(0); // set initial state
+})();
+
+// ============================================================
+// BATHROOM BEFORE VIEWER — thumbnail strip, inline arrows, fullscreen
+// ============================================================
+(function() {
+  const mainImg   = document.getElementById('bathroomBeforeMainImg');
+  const thumbEls  = document.querySelectorAll('#bathroomBeforeThumbs .before-thumb');
+  const expandBtn = document.getElementById('bathroomBeforeExpand');
+  const prevBtn   = document.getElementById('bathroomBeforePrev');
+  const nextBtn   = document.getElementById('bathroomBeforeNext');
+  const wrapEl    = document.getElementById('bathroomBeforeMain');
+  if (!mainImg || thumbEls.length === 0) return;
+
+  const thumbArr = Array.from(thumbEls);
+  const allImgs  = thumbArr.map(t => ({ src: t.dataset.src, alt: t.dataset.alt }));
+  cwGalleries['bathroom-before-fullscreen'] = allImgs;
+
+  function bActiveIdx() { return thumbArr.findIndex(t => t.classList.contains('active')); }
+  function bGoTo(i) {
+    if (i < 0 || i >= thumbArr.length) return;
+    thumbArr.forEach(t => t.classList.remove('active'));
+    thumbArr[i].classList.add('active');
+    mainImg.src = thumbArr[i].dataset.src;
+    mainImg.alt = thumbArr[i].dataset.alt;
+    if (prevBtn) prevBtn.disabled = i === 0;
+    if (nextBtn) nextBtn.disabled = i === thumbArr.length - 1;
   }
-  addSwipe(laundryBeforeMainEl,
-    () => laundryGoTo(laundryActiveIndex() + 1),
-    () => laundryGoTo(laundryActiveIndex() - 1)
-  );
-}
 
-// ============================================================
-// BATHROOM BEFORE VIEWER — thumbnail strip + fullscreen
-// ============================================================
-const bathroomBeforeMainImg = document.getElementById('bathroomBeforeMainImg');
-const bathroomBeforeThumbs  = document.querySelectorAll('#bathroomBeforeThumbs .before-thumb');
-const bathroomBeforeExpand  = document.getElementById('bathroomBeforeExpand');
-const bathroomBeforeMainEl  = document.getElementById('bathroomBeforeMain');
-
-if (bathroomBeforeThumbs.length > 0) {
-  bathroomBeforeThumbs.forEach((thumb, i) => {
+  thumbEls.forEach((thumb, i) => {
     thumb.addEventListener('click', () => {
-      bathroomBeforeThumbs.forEach(t => t.classList.remove('active'));
-      thumb.classList.add('active');
-      bathroomBeforeMainImg.src = thumb.dataset.src;
-      bathroomBeforeMainImg.alt = thumb.dataset.alt;
-
-      if (window.innerWidth <= 700 && typeof cwOpenLb === 'function') {
-        const allBathroomBefore = Array.from(bathroomBeforeThumbs).map(t => ({ src: t.dataset.src, alt: t.dataset.alt }));
-        cwGalleries['bathroom-before-fullscreen'] = allBathroomBefore;
-        cwOpenLb('bathroom-before-fullscreen', i);
-      }
+      bGoTo(i);
+      if (window.innerWidth <= 700) cwOpenLb('bathroom-before-fullscreen', i);
     });
   });
-}
 
-if (bathroomBeforeExpand) {
-  bathroomBeforeExpand.addEventListener('click', () => {
-    const activeThumb = document.querySelector('#bathroomBeforeThumbs .before-thumb.active');
-    const allBathroomBefore = Array.from(bathroomBeforeThumbs).map(t => ({ src: t.dataset.src, alt: t.dataset.alt }));
-    cwGalleries['bathroom-before-fullscreen'] = allBathroomBefore;
-    const idx = Array.from(bathroomBeforeThumbs).indexOf(activeThumb);
-    cwOpenLb('bathroom-before-fullscreen', idx >= 0 ? idx : 0);
-  });
-}
+  if (expandBtn) expandBtn.addEventListener('click', () => cwOpenLb('bathroom-before-fullscreen', bActiveIdx()));
+  if (mainImg)   mainImg.addEventListener('click', () => cwOpenLb('bathroom-before-fullscreen', bActiveIdx()));
+  if (prevBtn)   prevBtn.addEventListener('click', () => bGoTo(bActiveIdx() - 1));
+  if (nextBtn)   nextBtn.addEventListener('click', () => bGoTo(bActiveIdx() + 1));
+  if (wrapEl)    addSwipe(wrapEl, () => bGoTo(bActiveIdx() + 1), () => bGoTo(bActiveIdx() - 1));
 
-if (bathroomBeforeMainEl && bathroomBeforeThumbs.length > 0) {
-  const bThumbArr = Array.from(bathroomBeforeThumbs);
-  function bathroomActiveIndex() { return bThumbArr.findIndex(t => t.classList.contains('active')); }
-  function bathroomGoTo(i) {
-    if (i < 0 || i >= bThumbArr.length) return;
-    bThumbArr.forEach(t => t.classList.remove('active'));
-    bThumbArr[i].classList.add('active');
-    bathroomBeforeMainImg.src = bThumbArr[i].dataset.src;
-    bathroomBeforeMainImg.alt = bThumbArr[i].dataset.alt;
-  }
-  addSwipe(bathroomBeforeMainEl,
-    () => bathroomGoTo(bathroomActiveIndex() + 1),
-    () => bathroomGoTo(bathroomActiveIndex() - 1)
-  );
-}
+  bGoTo(0); // set initial state
+})();
 
 // ============================================================
 // MATERIAL PALETTE — click swatch to expand its own panel directly below
