@@ -1371,9 +1371,10 @@ function cwShowLb() {
   cwLbImg.classList.remove('zoomed');
   cwLbImg.style.transform = 'none';
   // Add light background for transparent images (floor plans etc)
-  const srcEl = document.querySelector(`img.lb-transparent-bg[src="${item.src}"]`);
+  const allTransparent = document.querySelectorAll('img.lb-transparent-bg');
+  const isTransparent = Array.from(allTransparent).some(el => el.getAttribute('src') === item.src || el.src.endsWith(item.src));
   const wrap = document.getElementById('cwLbImgWrap');
-  if (wrap) wrap.classList.toggle('has-transparent-bg', !!srcEl);
+  if (wrap) wrap.classList.toggle('has-transparent-bg', isTransparent);
 }
 function cwCloseLb() {
   cwLightbox.classList.remove('open');
