@@ -45,6 +45,8 @@
   .cw-lb-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; transition: transform 0.25s ease; cursor: zoom-in; transform-origin: center center; user-select: none; -webkit-user-drag: none; }
   .cw-lb-img-wrap img.zoomed { cursor: grab; }
   .cw-lb-img-wrap img.zoomed:active { cursor: grabbing; }
+  /* Transparent-background images get a light box in the lightbox */
+  .cw-lb-img-wrap.has-transparent-bg { background: #F2EDE6; padding: 1.5rem; border-radius: 2px; max-width: 80vw; max-height: 75vh; }
   .cw-lb-controls { position: fixed; bottom: 1.75rem; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 0.75rem; background: rgba(26,20,16,0.78); backdrop-filter: blur(10px); border: 0.5px solid rgba(255,255,255,0.12); padding: 0.55rem 1.25rem; z-index: 401; }
   .cw-lb-btn { background: rgba(42,31,26,0.4); border: 0.5px solid rgba(255,255,255,0.25); padding: 0.5rem 1.1rem; font-family:'Inter',sans-serif; font-size: 18px; color: rgba(242,237,230,0.9); cursor: pointer; transition: all 0.2s; min-width: 48px; min-height: 48px; display: flex; align-items: center; justify-content: center; }
   .cw-lb-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
@@ -469,13 +471,11 @@
 
     <span class="img-label">Original house floor plan &amp; existing kitchen measurements</span>
     <div class="img-grid-2" style="margin-bottom:1.5rem;">
-      <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-        <img src="images/personal/kitchen-original-floorplan.webp" alt="Original house floor plan from real estate listing" data-gallery="kitchen-reference" data-index="0">
-        <span class="img-placeholder-label">Floor plan — original</span>
+      <div class="img-slot" style="aspect-ratio:4/3; background:var(--bg-card);">
+        <img src="images/personal/kitchen-original-floorplan.webp" alt="Original Floor Plan — NTS" data-gallery="kitchen-reference" data-index="0" class="lb-transparent-bg">
       </div>
-      <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-        <img src="images/personal/kitchen-measurement-mockup.webp" alt="Existing kitchen measurement mockup" data-gallery="kitchen-reference" data-index="1">
-        <span class="img-placeholder-label">Measurement mock-up</span>
+      <div class="img-slot" style="aspect-ratio:4/3; background:var(--bg-card);">
+        <img src="images/personal/kitchen-measurement-mockup.webp" alt="Existing kitchen measurement mockup" data-gallery="kitchen-reference" data-index="1" class="lb-transparent-bg">
       </div>
     </div>
 
@@ -1257,6 +1257,7 @@ const conceptProjectsTop  = document.getElementById('concept-projects-top');
 function closeKitchenSection() {
   kitchenWrap.classList.remove('expanded');
   kitchenFullContent.classList.remove('open');
+  history.replaceState(null, '', window.location.pathname);
   if (conceptProjectsTop) conceptProjectsTop.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
@@ -1285,6 +1286,7 @@ const laundryWrap         = document.getElementById('concept-laundry');
 function closeLaundrySection() {
   laundryWrap.classList.remove('expanded');
   laundryFullContent.classList.remove('open');
+  history.replaceState(null, '', window.location.pathname);
   if (conceptProjectsTop) conceptProjectsTop.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
@@ -1313,6 +1315,7 @@ const bathroomWrap         = document.getElementById('concept-bathroom');
 function closeBathroomSection() {
   bathroomWrap.classList.remove('expanded');
   bathroomFullContent.classList.remove('open');
+  history.replaceState(null, '', window.location.pathname);
   if (conceptProjectsTop) conceptProjectsTop.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
@@ -1367,6 +1370,10 @@ function cwShowLb() {
   cwLbZoomed = false;
   cwLbImg.classList.remove('zoomed');
   cwLbImg.style.transform = 'none';
+  // Add light background for transparent images (floor plans etc)
+  const srcEl = document.querySelector(`img.lb-transparent-bg[src="${item.src}"]`);
+  const wrap = document.getElementById('cwLbImgWrap');
+  if (wrap) wrap.classList.toggle('has-transparent-bg', !!srcEl);
 }
 function cwCloseLb() {
   cwLightbox.classList.remove('open');
