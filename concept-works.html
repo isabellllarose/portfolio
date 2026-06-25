@@ -96,6 +96,13 @@
   .mat-swatch-fallback { display: flex; align-items: center; justify-content: center; height: 100%; font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
   .mat-swatch-label { font-size: 10.5px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); display: block; }
 
+
+  /* SMALL MATERIAL SWATCHES — for laundry and bathroom */
+  .small-swatch-row { display: flex; gap: 1.5rem; flex-wrap: wrap; margin: 0.75rem 0 1.5rem; }
+  .small-swatch { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+  .small-swatch-circle { width: 70px; height: 70px; border-radius: 50%; overflow: hidden; background: var(--bg-mid); border: 0.5px solid var(--border-strong); }
+  .small-swatch-circle img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .small-swatch-label { font-size: 9px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-muted); text-align: center; max-width: 80px; }
   /* Detail panel — expands DOWN below its own swatch, no horizontal rearranging */
   .mat-detail-panel {
     width: 100%;
@@ -750,47 +757,44 @@
         <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Proposed Design</h4>
         <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.5rem; max-width:680px;">Concept direction for the fit-out — layout intent, material selections, and rationale. This section will be replaced with finished photography once the project is built.</p>
 
+        <!-- DESIGN DEVELOPMENT / INSPIRATION — 2 images -->
+        <h5 style="font-family:'Playfair Display',serif; font-size:1rem; margin:0 0 0.75rem; color:var(--text-secondary);">Design Development</h5>
+        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem; max-width:680px;">Inspiration imagery and mood board direction developed to guide the material and finish selections.</p>
+
+        <div class="img-grid-2" style="margin-bottom:1.5rem;">
+          <div class="img-slot" style="aspect-ratio:4/3; background:var(--bg-mid);">
+            <!-- REPLACE: <img src="images/personal/laundry-inspiration-01.webp" alt="Inspiration 1" data-gallery="laundry-inspiration" data-index="0"> -->
+            <span class="img-placeholder-label">Inspiration / mood board 1</span>
+          </div>
+          <div class="img-slot" style="aspect-ratio:4/3; background:var(--bg-mid);">
+            <!-- REPLACE: <img src="images/personal/laundry-inspiration-02.webp" alt="Inspiration 2" data-gallery="laundry-inspiration" data-index="1"> -->
+            <span class="img-placeholder-label">Inspiration / mood board 2</span>
+          </div>
+        </div>
+
+        <!-- PROPOSED LAYOUT -->
         <span class="img-label">Proposed layout</span>
         <div style="max-width:480px; margin-bottom:1.5rem;">
-          <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-            <!-- REPLACE: <img src="images/personal/laundry-proposed-layout.webp" alt="Proposed laundry layout" data-gallery="laundry-proposed" data-index="0"> -->
+          <div class="img-slot" style="aspect-ratio:4/3; background:var(--bg-card);">
+            <!-- REPLACE: <img src="images/personal/laundry-proposed-layout.webp" alt="Proposed laundry layout" data-gallery="laundry-proposed" data-index="0" class="lb-transparent-bg"> -->
             <span class="img-placeholder-label">Proposed layout</span>
           </div>
         </div>
 
-        <span class="img-label">Material & finish selections</span>
-        <div class="img-grid-2" style="margin-bottom:1.5px;">
-          <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-            <!-- REPLACE: <img src="images/personal/laundry-materials-01.webp" alt="Material selections 1" data-gallery="laundry-proposed" data-index="1"> -->
-            <span class="img-placeholder-label">Material selections 1</span>
+        <!-- MATERIAL SWATCHES — small circles -->
+        <span class="img-label">Material &amp; finish selections</span>
+        <div class="small-swatch-row">
+          <div class="small-swatch">
+            <div class="small-swatch-circle">
+              <!-- REPLACE: <img src="images/personal/laundry-materials-01.webp" alt="Material 1"> -->
+            </div>
+            <span class="small-swatch-label">Material 1</span>
           </div>
-          <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-            <!-- REPLACE: <img src="images/personal/laundry-materials-02.webp" alt="Material selections 2" data-gallery="laundry-proposed" data-index="2"> -->
-            <span class="img-placeholder-label">Material selections 2</span>
-          </div>
-        </div>
-
-
-        <!-- DESIGN DEVELOPMENT / INSPIRATION -->
-        <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Design Development</h4>
-        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.5rem; max-width:680px;">Inspiration imagery, mood boards, and early concept direction developed to guide the material and finish selections.</p>
-
-        <div class="img-grid-2" style="margin-bottom:1.5px;">
-          <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-            <!-- REPLACE: <img src="images/personal/laundry-inspiration-01.webp" alt="Inspiration 1" data-gallery="laundry-inspiration" data-index="0"> -->
-            <span class="img-placeholder-label">Inspiration / mood board 1</span>
-          </div>
-          <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-            <!-- REPLACE: <img src="images/personal/laundry-inspiration-02.webp" alt="Inspiration 2" data-gallery="laundry-inspiration" data-index="1"> -->
-            <span class="img-placeholder-label">Inspiration / mood board 2</span>
-          </div>
-          <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-            <!-- REPLACE: <img src="images/personal/laundry-inspiration-03.webp" alt="Inspiration 3" data-gallery="laundry-inspiration" data-index="2"> -->
-            <span class="img-placeholder-label">Inspiration / mood board 3</span>
-          </div>
-          <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-            <!-- REPLACE: <img src="images/personal/laundry-inspiration-04.webp" alt="Inspiration 4" data-gallery="laundry-inspiration" data-index="3"> -->
-            <span class="img-placeholder-label">Inspiration / mood board 4</span>
+          <div class="small-swatch">
+            <div class="small-swatch-circle">
+              <!-- REPLACE: <img src="images/personal/laundry-materials-02.webp" alt="Material 2"> -->
+            </div>
+            <span class="small-swatch-label">Material 2</span>
           </div>
         </div>
 
@@ -884,51 +888,49 @@
           </div>
         </div>
 
+
         <!-- PROPOSED DESIGN — concept stage, no final build yet -->
         <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Proposed Design</h4>
         <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.5rem; max-width:680px;">Concept direction for the refresh — layout intent, material selections, and rationale. This section will be replaced with finished photography once the project is built.</p>
 
+        <!-- DESIGN DEVELOPMENT / INSPIRATION — 2 images -->
+        <h5 style="font-family:'Playfair Display',serif; font-size:1rem; margin:0 0 0.75rem; color:var(--text-secondary);">Design Development</h5>
+        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem; max-width:680px;">Inspiration imagery and mood board direction developed to guide the material and finish selections.</p>
+
+        <div class="img-grid-2" style="margin-bottom:1.5rem;">
+          <div class="img-slot" style="aspect-ratio:4/3; background:var(--bg-mid);">
+            <!-- REPLACE: <img src="images/personal/bathroom-inspiration-01.webp" alt="Inspiration 1" data-gallery="bathroom-inspiration" data-index="0"> -->
+            <span class="img-placeholder-label">Inspiration / mood board 1</span>
+          </div>
+          <div class="img-slot" style="aspect-ratio:4/3; background:var(--bg-mid);">
+            <!-- REPLACE: <img src="images/personal/bathroom-inspiration-02.webp" alt="Inspiration 2" data-gallery="bathroom-inspiration" data-index="1"> -->
+            <span class="img-placeholder-label">Inspiration / mood board 2</span>
+          </div>
+        </div>
+
+        <!-- PROPOSED LAYOUT -->
         <span class="img-label">Proposed layout</span>
         <div style="max-width:480px; margin-bottom:1.5rem;">
-          <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-            <!-- REPLACE: <img src="images/personal/bathroom-proposed-layout.webp" alt="Proposed bathroom layout" data-gallery="bathroom-proposed" data-index="0"> -->
+          <div class="img-slot" style="aspect-ratio:4/3; background:var(--bg-card);">
+            <!-- REPLACE: <img src="images/personal/bathroom-proposed-layout.webp" alt="Proposed bathroom layout" data-gallery="bathroom-proposed" data-index="0" class="lb-transparent-bg"> -->
             <span class="img-placeholder-label">Proposed layout</span>
           </div>
         </div>
 
-        <span class="img-label">Material & finish selections</span>
-        <div class="img-grid-2" style="margin-bottom:1.5px;">
-          <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-            <!-- REPLACE: <img src="images/personal/bathroom-materials-01.webp" alt="Material selections 1" data-gallery="bathroom-proposed" data-index="1"> -->
-            <span class="img-placeholder-label">Material selections 1</span>
+        <!-- MATERIAL SWATCHES — small circles -->
+        <span class="img-label">Material &amp; finish selections</span>
+        <div class="small-swatch-row">
+          <div class="small-swatch">
+            <div class="small-swatch-circle">
+              <!-- REPLACE: <img src="images/personal/bathroom-materials-01.webp" alt="Material 1"> -->
+            </div>
+            <span class="small-swatch-label">Material 1</span>
           </div>
-          <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-            <!-- REPLACE: <img src="images/personal/bathroom-materials-02.webp" alt="Material selections 2" data-gallery="bathroom-proposed" data-index="2"> -->
-            <span class="img-placeholder-label">Material selections 2</span>
-          </div>
-        </div>
-
-
-        <!-- DESIGN DEVELOPMENT / INSPIRATION -->
-        <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Design Development</h4>
-        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.5rem; max-width:680px;">Inspiration imagery, mood boards, and early concept direction developed to guide the material and finish selections.</p>
-
-        <div class="img-grid-2" style="margin-bottom:1.5px;">
-          <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-            <!-- REPLACE: <img src="images/personal/bathroom-inspiration-01.webp" alt="Inspiration 1" data-gallery="bathroom-inspiration" data-index="0"> -->
-            <span class="img-placeholder-label">Inspiration / mood board 1</span>
-          </div>
-          <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-            <!-- REPLACE: <img src="images/personal/bathroom-inspiration-02.webp" alt="Inspiration 2" data-gallery="bathroom-inspiration" data-index="1"> -->
-            <span class="img-placeholder-label">Inspiration / mood board 2</span>
-          </div>
-          <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-            <!-- REPLACE: <img src="images/personal/bathroom-inspiration-03.webp" alt="Inspiration 3" data-gallery="bathroom-inspiration" data-index="2"> -->
-            <span class="img-placeholder-label">Inspiration / mood board 3</span>
-          </div>
-          <div class="img-slot" style="aspect-ratio:4/3; background:transparent;">
-            <!-- REPLACE: <img src="images/personal/bathroom-inspiration-04.webp" alt="Inspiration 4" data-gallery="bathroom-inspiration" data-index="3"> -->
-            <span class="img-placeholder-label">Inspiration / mood board 4</span>
+          <div class="small-swatch">
+            <div class="small-swatch-circle">
+              <!-- REPLACE: <img src="images/personal/bathroom-materials-02.webp" alt="Material 2"> -->
+            </div>
+            <span class="small-swatch-label">Material 2</span>
           </div>
         </div>
 
@@ -938,6 +940,7 @@
 
       </div>
       <!-- end inner card -->
+
     </div>
     <!-- end concept-full-content -->
   </div>
