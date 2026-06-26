@@ -92,6 +92,15 @@
   .tapestry-track { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -webkit-overflow-scrolling: touch; cursor: grab; }
   .tapestry-track:active { cursor: grabbing; }
   .tapestry-track::-webkit-scrollbar { display: none; }
+  /* Right-edge fade — permanent subtle indicator */
+  .tapestry-fade { position: absolute; top: 0; right: 0; width: 80px; height: calc(100% - 36px); background: linear-gradient(to right, transparent, var(--bg-card)); pointer-events: none; z-index: 1; transition: opacity 0.4s; }
+  .tapestry-wrap.scrolled .tapestry-fade { opacity: 0.3; }
+  /* Scroll hint overlay — fades out on first interaction */
+  .tapestry-hint { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; pointer-events: none; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: opacity 0.5s ease; }
+  .tapestry-hint-text { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-primary); background: rgba(242,237,230,0.82); backdrop-filter: blur(6px); padding: 0.5rem 1.1rem; border: 0.5px solid var(--border-strong); white-space: nowrap; }
+  .tapestry-hint-arrow { font-size: 18px; color: var(--accent); opacity: 0.7; animation: tapestry-nudge 1.8s ease-in-out infinite; }
+  @keyframes tapestry-nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+  .tapestry-wrap.scrolled .tapestry-hint { opacity: 0; }
   .tapestry-img { height: 420px; width: auto; display: block; user-select: none; -webkit-user-drag: none; }
   .tapestry-scrollbar-wrap { padding: 0.75rem 0 0; }
   .tapestry-scrollbar-track { height: 3px; background: var(--border); border-radius: 2px; position: relative; cursor: pointer; }
@@ -490,6 +499,13 @@
     <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.25rem; max-width:680px;">A continuous development timeline — inspiration, colour direction, product research, and material exploration across the design process.</p>
 
     <div class="tapestry-wrap" id="kitchenTapestryWrap">
+      <!-- Right-edge fade gradient -->
+      <div class="tapestry-fade" id="kitchenTapestryFade"></div>
+      <!-- Scroll hint — disappears on first interaction -->
+      <div class="tapestry-hint" id="kitchenTapestryHint">
+        <span class="tapestry-hint-text">Drag to explore</span>
+        <span class="tapestry-hint-arrow">→</span>
+      </div>
       <!-- ARROWS — mobile only -->
       <button class="tapestry-arrow tapestry-prev" id="kitchenTapestryPrev" aria-label="Scroll left">&#8249;</button>
       <button class="tapestry-arrow tapestry-next" id="kitchenTapestryNext" aria-label="Scroll right">&#8250;</button>
@@ -1692,7 +1708,14 @@ document.querySelectorAll('[data-close-mat]').forEach(btn => {
   const sbWrap = document.getElementById('kitchenScrollbarWrap');
   const prevBtn = document.getElementById('kitchenTapestryPrev');
   const nextBtn = document.getElementById('kitchenTapestryNext');
+  const wrap   = document.getElementById('kitchenTapestryWrap');
   if (!track || !img) return;
+
+  // Mark as interacted — hides hint, softens fade
+  function markScrolled() { if (wrap) wrap.classList.add('scrolled'); }
+  track.addEventListener('scroll', markScrolled, { once: true, passive: true });
+  track.addEventListener('mousedown', markScrolled, { once: true });
+  track.addEventListener('touchstart', markScrolled, { once: true, passive: true });
 
   // --- Scrollbar sync ---
   function updateThumb() {
@@ -1723,6 +1746,7 @@ document.querySelectorAll('[data-close-mat]').forEach(btn => {
       dragging = true; startX = e.clientX;
       startScroll = track.scrollLeft;
       document.body.style.userSelect = 'none';
+      markScrolled();
       e.preventDefault();
     });
     document.addEventListener('mousemove', e => {
@@ -1757,8 +1781,8 @@ document.querySelectorAll('[data-close-mat]').forEach(btn => {
 
   // --- Mobile arrow nudge ---
   const NUDGE = 160;
-  if (prevBtn) prevBtn.addEventListener('click', () => { track.scrollBy({ left: -NUDGE, behavior: 'smooth' }); });
-  if (nextBtn) nextBtn.addEventListener('click', () => { track.scrollBy({ left: NUDGE, behavior: 'smooth' }); });
+  if (prevBtn) prevBtn.addEventListener('click', () => { markScrolled(); track.scrollBy({ left: -NUDGE, behavior: 'smooth' }); });
+  if (nextBtn) nextBtn.addEventListener('click', () => { markScrolled(); track.scrollBy({ left: NUDGE, behavior: 'smooth' }); });
 
   // --- Touch swipe (already handled natively by overflow-x:auto, but update thumb on touch) ---
   track.addEventListener('touchmove', updateThumb, { passive: true });
