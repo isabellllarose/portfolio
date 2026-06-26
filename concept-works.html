@@ -96,20 +96,20 @@
   .tapestry-fade { position: absolute; top: 0; right: 0; width: 80px; height: calc(100% - 36px); background: linear-gradient(to right, transparent, var(--bg-card)); pointer-events: none; z-index: 1; transition: opacity 0.4s; }
   .tapestry-wrap.scrolled .tapestry-fade { opacity: 0.3; }
   /* Scroll hint overlay — fades out on first interaction */
-  .tapestry-hint { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; pointer-events: none; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: opacity 0.5s ease; }
-  .tapestry-hint-text { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-primary); background: rgba(242,237,230,0.82); backdrop-filter: blur(6px); padding: 0.5rem 1.1rem; border: 0.5px solid var(--border-strong); white-space: nowrap; }
-  .tapestry-hint-arrow { font-size: 18px; color: var(--accent); opacity: 0.7; animation: tapestry-nudge 1.8s ease-in-out infinite; }
-  @keyframes tapestry-nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+  .tapestry-hint { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; pointer-events: none; display: flex; flex-direction: column; align-items: center; gap: 0.75rem; transition: opacity 0.5s ease; }
+  .tapestry-hint-text { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-primary); background: rgba(242,237,230,0.88); backdrop-filter: blur(6px); padding: 0.65rem 1.5rem; border: 0.5px solid var(--border-strong); white-space: nowrap; }
+  .tapestry-hint-arrow { font-size: 52px; color: var(--accent); line-height: 1; animation: tapestry-nudge 1.8s ease-in-out infinite; }
+  @keyframes tapestry-nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(12px); } }
   .tapestry-wrap.scrolled .tapestry-hint { opacity: 0; }
-  .tapestry-img { height: 420px; width: auto; display: block; user-select: none; -webkit-user-drag: none; }
+  /* Scrollbar — always visible, slightly thicker for discoverability */
   .tapestry-scrollbar-wrap { padding: 0.75rem 0 0; }
-  .tapestry-scrollbar-track { height: 3px; background: var(--border); border-radius: 2px; position: relative; cursor: pointer; }
-  .tapestry-scrollbar-thumb { height: 100%; background: var(--accent); border-radius: 2px; position: absolute; left: 0; top: 0; min-width: 40px; transition: background 0.15s; cursor: grab; }
+  .tapestry-scrollbar-track { height: 4px; background: var(--border-strong); border-radius: 2px; position: relative; cursor: pointer; }
+  .tapestry-scrollbar-thumb { height: 100%; background: var(--accent); border-radius: 2px; position: absolute; left: 0; top: 0; min-width: 48px; transition: background 0.15s; cursor: grab; }
   .tapestry-scrollbar-thumb:active { cursor: grabbing; background: var(--text-primary); }
+  .tapestry-img { height: 420px; width: auto; display: block; user-select: none; -webkit-user-drag: none; }
   .tapestry-arrow { display: none; }
   @media (max-width: 700px) {
     .tapestry-img { height: 280px; }
-    .tapestry-scrollbar-wrap { display: none; }
     .tapestry-arrow { display: flex; align-items: center; justify-content: center; position: absolute; top: 50%; transform: translateY(-60%); z-index: 2; background: rgba(42,31,26,0.55); border: none; color: #F2EDE6; font-size: 1.8rem; width: 40px; height: 40px; cursor: pointer; transition: background 0.2s; }
     .tapestry-arrow:hover { background: rgba(42,31,26,0.85); }
     .tapestry-arrow:disabled { opacity: 0.2; cursor: default; }
