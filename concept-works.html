@@ -84,7 +84,7 @@
   @media (max-width: 700px) {
     .before-two-col { grid-template-columns: 1fr !important; }
     .before-two-col > div:last-child { align-self: auto !important; }
-    .layout-plans-grid { gap: 0.75rem !important; }
+    .layout-plans-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
   }
 
   /* DESIGN DEVELOPMENT TAPESTRY — horizontal scroll */
@@ -97,7 +97,7 @@
   .tapestry-wrap.scrolled .tapestry-fade { opacity: 0.3; }
   /* Scroll hint overlay — fades out on first interaction */
   .tapestry-hint { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; pointer-events: none; display: flex; flex-direction: column; align-items: center; gap: 0.75rem; transition: opacity 0.5s ease; }
-  .tapestry-hint-text { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-primary); background: rgba(242,237,230,0.88); backdrop-filter: blur(6px); padding: 0.65rem 1.5rem; border: 0.5px solid var(--border-strong); white-space: nowrap; }
+  .tapestry-hint-text { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #F2EDE6; background: rgba(58,31,20,0.88); backdrop-filter: blur(6px); padding: 0.65rem 1.5rem; white-space: nowrap; }
   .tapestry-hint-arrow { font-size: 52px; color: var(--accent); line-height: 1; animation: tapestry-nudge 1.8s ease-in-out infinite; }
   @keyframes tapestry-nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(12px); } }
   .tapestry-wrap.scrolled .tapestry-hint { opacity: 0; }
@@ -109,13 +109,27 @@
   .tapestry-img { height: 420px; width: auto; display: block; user-select: none; -webkit-user-drag: none; }
   .tapestry-arrow { display: none; }
   @media (max-width: 700px) {
-    .tapestry-img { height: 280px; }
+    .tapestry-img { height: 500px; }
     .tapestry-arrow { display: flex; align-items: center; justify-content: center; position: absolute; top: 50%; transform: translateY(-60%); z-index: 2; background: rgba(42,31,26,0.55); border: none; color: #F2EDE6; font-size: 1.8rem; width: 40px; height: 40px; cursor: pointer; transition: background 0.2s; }
     .tapestry-arrow:hover { background: rgba(42,31,26,0.85); }
     .tapestry-arrow:disabled { opacity: 0.2; cursor: default; }
     .tapestry-prev { left: 0.25rem; }
     .tapestry-next { right: 0.25rem; }
   }
+
+  /* Tapestry fullscreen button */
+  .tapestry-fs-btn { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.6rem; background: none; border: 0.5px solid var(--border-strong); padding: 0.4rem 0.9rem; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; transition: color 0.2s, border-color 0.2s; }
+  .tapestry-fs-btn:hover { color: var(--accent); border-color: var(--accent); }
+  /* Tapestry fullscreen overlay */
+  .tapestry-fullscreen { position: fixed; inset: 0; z-index: 400; background: rgba(26,20,16,0.97); display: flex; flex-direction: column; align-items: stretch; justify-content: center; padding: 3rem 0 2rem; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+  .tapestry-fullscreen.open { opacity: 1; pointer-events: all; }
+  .tapestry-fs-close { position: fixed; top: 1.25rem; right: 1.5rem; z-index: 402; background: rgba(26,20,16,0.65); border: 0.5px solid rgba(255,255,255,0.15); color: rgba(242,237,230,0.7); font-size: 1rem; cursor: pointer; padding: 0.4rem 0.7rem; transition: background 0.2s; }
+  .tapestry-fs-close:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+  .tapestry-fs-track { overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; cursor: grab; flex: 1; display: flex; align-items: center; }
+  .tapestry-fs-track:active { cursor: grabbing; }
+  .tapestry-fs-track::-webkit-scrollbar { display: none; }
+  .tapestry-fs-img { height: min(70vh, 600px); width: auto; display: block; flex-shrink: 0; }
+  @media (max-width: 700px) { .tapestry-fs-img { height: min(60vh, 400px); } }
 
   /* MATERIAL PALETTE — even 3-column grid, each swatch expands its own panel directly below it */
   .mat-palette-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
@@ -558,11 +572,59 @@
           <text x="1200" y="400" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" letter-spacing="1.5" fill="#C4AFA8">REPLACE WITH kitchen-dev-tapestry.webp</text>
         </svg>
       </div>
-      <!-- CUSTOM SCROLLBAR — desktop only -->
+      <!-- CUSTOM SCROLLBAR -->
       <div class="tapestry-scrollbar-wrap" id="kitchenScrollbarWrap">
         <div class="tapestry-scrollbar-track">
           <div class="tapestry-scrollbar-thumb" id="kitchenScrollbarThumb"></div>
         </div>
+      </div>
+      <!-- FULLSCREEN BUTTON -->
+      <button class="tapestry-fs-btn" id="kitchenTapestryFsBtn">⛶ Full screen</button>
+    </div>
+
+    <!-- TAPESTRY FULLSCREEN OVERLAY -->
+    <div class="tapestry-fullscreen" id="kitchenTapestryFullscreen">
+      <button class="tapestry-fs-close" id="kitchenTapestryFsClose">✕</button>
+      <div class="tapestry-fs-track" id="kitchenTapestryFsTrack">
+        <svg class="tapestry-fs-img" viewBox="0 0 2400 420" width="2400" height="420" xmlns="http://www.w3.org/2000/svg" style="display:block; flex-shrink:0;">
+          <rect width="2400" height="420" fill="#F2EDE6"/>
+          <line x1="480" y1="30" x2="480" y2="390" stroke="#D4C4BC" stroke-width="1" stroke-dasharray="6,4"/>
+          <line x1="960" y1="30" x2="960" y2="390" stroke="#D4C4BC" stroke-width="1" stroke-dasharray="6,4"/>
+          <line x1="1440" y1="30" x2="1440" y2="390" stroke="#D4C4BC" stroke-width="1" stroke-dasharray="6,4"/>
+          <line x1="1920" y1="30" x2="1920" y2="390" stroke="#D4C4BC" stroke-width="1" stroke-dasharray="6,4"/>
+          <line x1="40" y1="210" x2="2360" y2="210" stroke="#C4AFA8" stroke-width="1.5"/>
+          <text x="240" y="56" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" letter-spacing="2" fill="#9C8577">COLOUR DIRECTION</text>
+          <text x="720" y="56" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" letter-spacing="2" fill="#9C8577">INSPIRATION</text>
+          <text x="1200" y="56" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" letter-spacing="2" fill="#9C8577">COMPONENTS</text>
+          <text x="1680" y="56" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" letter-spacing="2" fill="#9C8577">PRODUCT RESEARCH</text>
+          <text x="2160" y="56" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" letter-spacing="2" fill="#9C8577">MATERIAL SELECTION</text>
+          <rect x="60" y="80" width="180" height="110" rx="2" fill="#EAE3D9" stroke="#C4AFA8" stroke-width="0.5"/>
+          <rect x="260" y="80" width="140" height="110" rx="2" fill="#EAE3D9" stroke="#C4AFA8" stroke-width="0.5"/>
+          <rect x="540" y="80" width="160" height="110" rx="2" fill="#EAE3D9" stroke="#C4AFA8" stroke-width="0.5"/>
+          <rect x="720" y="80" width="180" height="110" rx="2" fill="#EAE3D9" stroke="#C4AFA8" stroke-width="0.5"/>
+          <rect x="1020" y="80" width="150" height="110" rx="2" fill="#EAE3D9" stroke="#C4AFA8" stroke-width="0.5"/>
+          <rect x="1190" y="80" width="150" height="110" rx="2" fill="#EAE3D9" stroke="#C4AFA8" stroke-width="0.5"/>
+          <rect x="1500" y="80" width="170" height="110" rx="2" fill="#EAE3D9" stroke="#C4AFA8" stroke-width="0.5"/>
+          <rect x="1690" y="80" width="170" height="110" rx="2" fill="#EAE3D9" stroke="#C4AFA8" stroke-width="0.5"/>
+          <rect x="1960" y="80" width="150" height="110" rx="2" fill="#EAE3D9" stroke="#C4AFA8" stroke-width="0.5"/>
+          <rect x="2130" y="80" width="200" height="110" rx="2" fill="#EAE3D9" stroke="#C4AFA8" stroke-width="0.5"/>
+          <rect x="100" y="240" width="160" height="110" rx="2" fill="#EAE3D9" stroke="#C4AFA8" stroke-width="0.5"/>
+          <rect x="280" y="250" width="130" height="100" rx="2" fill="#EAE3D9" stroke="#C4AFA8" stroke-width="0.5"/>
+          <rect x="560" y="240" width="150" height="110" rx="2" fill="#EAE3D9" stroke="#C4AFA8" stroke-width="0.5"/>
+          <rect x="730" y="250" width="160" height="100" rx="2" fill="#EAE3D9" stroke="#C4AFA8" stroke-width="0.5"/>
+          <rect x="1040" y="240" width="130" height="110" rx="2" fill="#EAE3D9" stroke="#C4AFA8" stroke-width="0.5"/>
+          <rect x="1200" y="250" width="160" height="100" rx="2" fill="#EAE3D9" stroke="#C4AFA8" stroke-width="0.5"/>
+          <rect x="1520" y="240" width="150" height="110" rx="2" fill="#EAE3D9" stroke="#C4AFA8" stroke-width="0.5"/>
+          <rect x="1700" y="250" width="140" height="100" rx="2" fill="#EAE3D9" stroke="#C4AFA8" stroke-width="0.5"/>
+          <rect x="1980" y="240" width="160" height="110" rx="2" fill="#EAE3D9" stroke="#C4AFA8" stroke-width="0.5"/>
+          <rect x="2160" y="250" width="150" height="100" rx="2" fill="#EAE3D9" stroke="#C4AFA8" stroke-width="0.5"/>
+          <circle cx="240" cy="210" r="5" fill="#4A1F1A"/>
+          <circle cx="720" cy="210" r="5" fill="#4A1F1A"/>
+          <circle cx="1200" cy="210" r="5" fill="#4A1F1A"/>
+          <circle cx="1680" cy="210" r="5" fill="#4A1F1A"/>
+          <circle cx="2160" cy="210" r="5" fill="#4A1F1A"/>
+          <text x="1200" y="400" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" letter-spacing="1.5" fill="#C4AFA8">REPLACE WITH kitchen-dev-tapestry.webp</text>
+        </svg>
       </div>
     </div>
 
@@ -1783,6 +1845,46 @@ document.querySelectorAll('[data-close-mat]').forEach(btn => {
   const NUDGE = 160;
   if (prevBtn) prevBtn.addEventListener('click', () => { markScrolled(); track.scrollBy({ left: -NUDGE, behavior: 'smooth' }); });
   if (nextBtn) nextBtn.addEventListener('click', () => { markScrolled(); track.scrollBy({ left: NUDGE, behavior: 'smooth' }); });
+
+  // --- Fullscreen ---
+  const fsBtn   = document.getElementById('kitchenTapestryFsBtn');
+  const fsPanel = document.getElementById('kitchenTapestryFullscreen');
+  const fsClose = document.getElementById('kitchenTapestryFsClose');
+  const fsTrack = document.getElementById('kitchenTapestryFsTrack');
+
+  if (fsBtn && fsPanel) {
+    fsBtn.addEventListener('click', () => {
+      fsPanel.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      // Sync scroll position
+      if (fsTrack && track) {
+        const ratio = track.scrollLeft / Math.max(1, track.scrollWidth - track.clientWidth);
+        setTimeout(() => {
+          fsTrack.scrollLeft = ratio * Math.max(0, fsTrack.scrollWidth - fsTrack.clientWidth);
+        }, 50);
+      }
+    });
+  }
+
+  function closeTapestryFs() {
+    if (fsPanel) fsPanel.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  if (fsClose) fsClose.addEventListener('click', closeTapestryFs);
+  if (fsPanel) fsPanel.addEventListener('click', e => { if (e.target === fsPanel) closeTapestryFs(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && fsPanel && fsPanel.classList.contains('open')) closeTapestryFs(); });
+
+  // Drag scroll inside fullscreen
+  if (fsTrack) {
+    let fsDragging = false, fsDragX = 0, fsDragScroll = 0;
+    fsTrack.addEventListener('mousedown', e => { fsDragging = true; fsDragX = e.clientX; fsDragScroll = fsTrack.scrollLeft; document.body.style.userSelect = 'none'; });
+    document.addEventListener('mousemove', e => { if (!fsDragging) return; fsTrack.scrollLeft = fsDragScroll - (e.clientX - fsDragX); });
+    document.addEventListener('mouseup', () => { fsDragging = false; document.body.style.userSelect = ''; });
+    addSwipe(fsTrack,
+      () => fsTrack.scrollBy({ left: 200, behavior: 'smooth' }),
+      () => fsTrack.scrollBy({ left: -200, behavior: 'smooth' })
+    );
+  }
 
   // --- Touch swipe (already handled natively by overflow-x:auto, but update thumb on touch) ---
   track.addEventListener('touchmove', updateThumb, { passive: true });
