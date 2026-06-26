@@ -84,6 +84,28 @@
   @media (max-width: 700px) {
     .before-two-col { grid-template-columns: 1fr !important; }
     .before-two-col > div:last-child { align-self: auto !important; }
+    .layout-plans-grid { gap: 0.75rem !important; }
+  }
+
+  /* DESIGN DEVELOPMENT TAPESTRY — horizontal scroll */
+  .tapestry-wrap { position: relative; margin-bottom: 2rem; }
+  .tapestry-track { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -webkit-overflow-scrolling: touch; cursor: grab; }
+  .tapestry-track:active { cursor: grabbing; }
+  .tapestry-track::-webkit-scrollbar { display: none; }
+  .tapestry-img { height: 420px; width: auto; display: block; user-select: none; -webkit-user-drag: none; }
+  .tapestry-scrollbar-wrap { padding: 0.75rem 0 0; }
+  .tapestry-scrollbar-track { height: 3px; background: var(--border); border-radius: 2px; position: relative; cursor: pointer; }
+  .tapestry-scrollbar-thumb { height: 100%; background: var(--accent); border-radius: 2px; position: absolute; left: 0; top: 0; min-width: 40px; transition: background 0.15s; cursor: grab; }
+  .tapestry-scrollbar-thumb:active { cursor: grabbing; background: var(--text-primary); }
+  .tapestry-arrow { display: none; }
+  @media (max-width: 700px) {
+    .tapestry-img { height: 280px; }
+    .tapestry-scrollbar-wrap { display: none; }
+    .tapestry-arrow { display: flex; align-items: center; justify-content: center; position: absolute; top: 50%; transform: translateY(-60%); z-index: 2; background: rgba(42,31,26,0.55); border: none; color: #F2EDE6; font-size: 1.8rem; width: 40px; height: 40px; cursor: pointer; transition: background 0.2s; }
+    .tapestry-arrow:hover { background: rgba(42,31,26,0.85); }
+    .tapestry-arrow:disabled { opacity: 0.2; cursor: default; }
+    .tapestry-prev { left: 0.25rem; }
+    .tapestry-next { right: 0.25rem; }
   }
 
   /* MATERIAL PALETTE — even 3-column grid, each swatch expands its own panel directly below it */
@@ -132,29 +154,6 @@
   }
 
   /* JOURNAL — design development flip viewer */
-  .journal-wrap { margin-bottom: 1rem; }
-  .journal-viewer { background: var(--bg-mid); border: 0.5px solid var(--border-strong); padding: 1.5rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
-  .journal-spread { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; width: 100%; max-width: 780px; background: var(--border); }
-  .journal-spread-slot { background: var(--bg-card); overflow: hidden; aspect-ratio: 297/210; display: flex; align-items: center; justify-content: center; }
-  .journal-spread-slot img { width: 100%; height: 100%; object-fit: contain; display: block; }
-  .journal-controls { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; justify-content: center; }
-  .journal-btn { background: var(--bg-card); border: 0.5px solid var(--border-strong); padding: 0.45rem 1.1rem; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; }
-  .journal-btn:hover { background: var(--accent); color: var(--bg-card); border-color: var(--accent); }
-  .journal-btn:disabled { opacity: 0.3; cursor: default; background: var(--bg-card); color: var(--text-muted); border-color: var(--border); }
-  .journal-btn-full { background: transparent; border: 0.5px solid var(--border-strong); padding: 0.45rem 1rem; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
-  .journal-btn-full:hover { color: var(--accent); border-color: var(--accent); }
-  .journal-counter { font-size: 12px; letter-spacing: 0.06em; color: var(--text-muted); min-width: 100px; text-align: center; }
-  .journal-note { font-size: 11px; color: var(--text-muted); font-style: italic; text-align: center; }
-  .journal-fullscreen { position: fixed; inset: 0; z-index: 300; background: rgba(26,20,16,0.97); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
-  .journal-fullscreen.open { opacity: 1; pointer-events: all; }
-  .journal-fullscreen-spread { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; background: rgba(255,255,255,0.08); max-width: min(1200px, 90vw); width: 100%; }
-  .journal-fullscreen-slot { background: var(--bg-card); overflow: hidden; aspect-ratio: 297/210; display: flex; align-items: center; justify-content: center; }
-  .journal-fullscreen-slot img { width: 100%; height: 100%; object-fit: contain; display: block; }
-  .journal-fullscreen-controls { position: fixed; bottom: 1.75rem; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 1rem; background: rgba(26,20,16,0.78); backdrop-filter: blur(10px); border: 0.5px solid rgba(255,255,255,0.12); padding: 0.55rem 1.5rem; z-index: 301; }
-  .journal-fullscreen-btn { background: transparent; border: 0.5px solid rgba(255,255,255,0.2); padding: 0.35rem 0.9rem; font-family: 'Inter', sans-serif; font-size: 14px; color: rgba(242,237,230,0.85); cursor: pointer; }
-  .journal-fullscreen-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
-  .journal-fullscreen-btn:disabled { opacity: 0.22; cursor: default; }
-  .journal-fullscreen-counter { font-size: 12px; letter-spacing: 0.06em; color: rgba(242,237,230,0.5); min-width: 100px; text-align: center; }
   .journal-close { position: fixed; top: 1.25rem; right: 1.5rem; z-index: 302; background: rgba(26,20,16,0.65); border: 0.5px solid rgba(255,255,255,0.15); color: rgba(242,237,230,0.7); font-size: 1rem; cursor: pointer; padding: 0.4rem 0.7rem; }
   .journal-close:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
 
@@ -486,34 +485,23 @@
       </div>
     </div>
 
-    <!-- DESIGN DEVELOPMENT JOURNAL -->
+    <!-- DESIGN DEVELOPMENT TAPESTRY -->
     <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Design Development</h4>
-    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.25rem; max-width:680px;">Inspiration, sketches, and refinement notes documenting how the concept evolved — flip through to see the development process.</p>
-    <div class="journal-wrap">
-      <div class="journal-viewer">
-        <div class="journal-spread" id="kitchenSpread">
-          <div class="journal-spread-slot" id="kitchenSpreadLeft"></div>
-          <div class="journal-spread-slot" id="kitchenSpreadRight"></div>
-        </div>
-        <div class="journal-controls">
-          <button class="journal-btn" id="kitchenPrev" disabled>← Prev</button>
-          <span class="journal-counter" id="kitchenCounter">Pages 1–2</span>
-          <button class="journal-btn" id="kitchenNext">Next →</button>
-          <button class="journal-btn-full" id="kitchenFullBtn">⛶ Full screen</button>
-        </div>
-        <p class="journal-note">Brainstorm &amp; refinement book — inspiration, sketches and material exploration</p>
+    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.25rem; max-width:680px;">A continuous development timeline — inspiration, colour direction, product research, and material exploration across the design process.</p>
+
+    <div class="tapestry-wrap" id="kitchenTapestryWrap">
+      <!-- ARROWS — mobile only -->
+      <button class="tapestry-arrow tapestry-prev" id="kitchenTapestryPrev" aria-label="Scroll left">&#8249;</button>
+      <button class="tapestry-arrow tapestry-next" id="kitchenTapestryNext" aria-label="Scroll right">&#8250;</button>
+      <!-- SCROLL TRACK -->
+      <div class="tapestry-track" id="kitchenTapestryTrack">
+        <img src="images/personal/kitchen-dev-tapestry.webp" alt="Design development timeline" class="tapestry-img" id="kitchenTapestryImg">
       </div>
-    </div>
-    <div class="journal-fullscreen" id="kitchenFullscreen">
-      <button class="journal-close" id="kitchenClose">✕</button>
-      <div class="journal-fullscreen-spread">
-        <div class="journal-fullscreen-slot" id="kitchenFsLeft"></div>
-        <div class="journal-fullscreen-slot" id="kitchenFsRight"></div>
-      </div>
-      <div class="journal-fullscreen-controls">
-        <button class="journal-fullscreen-btn" id="kitchenFsPrev" disabled>← Prev</button>
-        <span class="journal-fullscreen-counter" id="kitchenFsCounter">Pages 1–2</span>
-        <button class="journal-fullscreen-btn" id="kitchenFsNext">Next →</button>
+      <!-- CUSTOM SCROLLBAR — desktop only -->
+      <div class="tapestry-scrollbar-wrap" id="kitchenScrollbarWrap">
+        <div class="tapestry-scrollbar-track">
+          <div class="tapestry-scrollbar-thumb" id="kitchenScrollbarThumb"></div>
+        </div>
       </div>
     </div>
 
@@ -521,7 +509,7 @@
     <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Layout Reconfiguration</h4>
     <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.25rem; max-width:680px;">As part of the design development I proposed adjusting the floor plan to make better use of the available space.</p>
 
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-bottom:1.5rem; align-items:start;">
+    <div class="layout-plans-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-bottom:1.5rem; align-items:start;">
       <div style="background:var(--bg-card); display:flex; align-items:center; justify-content:center; padding:0.75rem;">
         <img src="images/personal/kitchen-layout-original.webp" alt="Original Floor Plan — with furniture" data-gallery="kitchen-reference" data-index="2" class="lb-transparent-bg" style="width:100%; height:auto; display:block; cursor:zoom-in;">
       </div>
@@ -552,7 +540,7 @@
 
     <!-- MATERIAL PALETTE -->
     <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.4rem;">Material Palette</h4>
-    <p style="font-size:9px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:1.25rem;">Click a swatch for details</p>
+    <p style="font-size:11px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); margin-bottom:1.25rem; display:flex; align-items:center; gap:0.5rem;"><span style="font-size:14px;">↓</span> Click a material to explore</p>
 
     <div class="mat-palette-grid" id="matPaletteRow">
 
@@ -663,10 +651,10 @@
 
     <h4 class="h4-serif-bold" style="font-family:'Playfair Display',serif; font-size:1.05rem; margin:1.75rem 0 0.75rem;">Key outcomes</h4>
     <ul class="outcomes-list">
-      <li>Reassessed the original brief and identified a full layout reconfiguration as the stronger design solution</li>
-      <li>Proposed relocating key appliances to improve ergonomics and workflow through the space</li>
-      <li>Developed the design from early inspiration and sketches through to resolved floor plan and joinery drawings</li>
-      <li>Selected and coordinated a cohesive material and finish palette across benchtop, cabinetry, and fittings</li>
+      <li>Reassessed the original brief and identified a full layout reconfiguration as the stronger design solution <span style="font-size:9px; letter-spacing:0.07em; text-transform:uppercase; color:var(--text-muted); margin-left:0.4rem;">↳ responding to: dead space between kitchen and living</span></li>
+      <li>Proposed relocating key appliances to improve ergonomics and workflow through the space <span style="font-size:9px; letter-spacing:0.07em; text-transform:uppercase; color:var(--text-muted); margin-left:0.4rem;">↳ responding to: oven under benchtop, poor prep-to-cook flow</span></li>
+      <li>Developed the design from early inspiration and sketches through to resolved floor plan and joinery drawings <span style="font-size:9px; letter-spacing:0.07em; text-transform:uppercase; color:var(--text-muted); margin-left:0.4rem;">↳ responding to: no designated pantry, limited storage</span></li>
+      <li>Selected and coordinated a cohesive material and finish palette across benchtop, cabinetry, and fittings <span style="font-size:9px; letter-spacing:0.07em; text-transform:uppercase; color:var(--text-muted); margin-left:0.4rem;">↳ responding to: dated red tile splashback, grey laminate benchtop</span></li>
       <li>Carried the design through to completion, from concept to finished kitchen</li>
     </ul>
 
@@ -1277,7 +1265,7 @@ function closeKitchenSection() {
   kitchenWrap.classList.remove('expanded');
   kitchenFullContent.classList.remove('open');
   history.replaceState(null, '', window.location.pathname);
-  if (conceptProjectsTop) conceptProjectsTop.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  setTimeout(() => kitchenWrap.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
 }
 
 if (kitchenPreviewCard) {
@@ -1306,7 +1294,7 @@ function closeLaundrySection() {
   laundryWrap.classList.remove('expanded');
   laundryFullContent.classList.remove('open');
   history.replaceState(null, '', window.location.pathname);
-  if (conceptProjectsTop) conceptProjectsTop.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  setTimeout(() => laundryWrap.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
 }
 
 if (laundryPreviewCard) {
@@ -1335,7 +1323,7 @@ function closeBathroomSection() {
   bathroomWrap.classList.remove('expanded');
   bathroomFullContent.classList.remove('open');
   history.replaceState(null, '', window.location.pathname);
-  if (conceptProjectsTop) conceptProjectsTop.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  setTimeout(() => bathroomWrap.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
 }
 
 if (bathroomPreviewCard) {
@@ -1649,70 +1637,93 @@ document.querySelectorAll('[data-close-mat]').forEach(btn => {
 });
 
 // ============================================================
-// KITCHEN DESIGN DEVELOPMENT — flip book viewer
-// Add your brainstorm/inspiration/sketch pages here as you create them
 // ============================================================
-const kitchenSrcs = [
-  'images/personal/kitchen-dev-01.webp',
-  'images/personal/kitchen-dev-02.webp',
-  'images/personal/kitchen-dev-03.webp',
-  'images/personal/kitchen-dev-04.webp'
-  // add more entries as pages are created
-];
-const K_TOTAL   = kitchenSrcs.length;
-const K_SPREADS = Math.ceil(K_TOTAL / 2);
-let kSpread   = 0;
-let kFsSpread = 0;
+// KITCHEN DESIGN DEVELOPMENT — horizontal scroll tapestry
+// ============================================================
+(function() {
+  const track  = document.getElementById('kitchenTapestryTrack');
+  const img    = document.getElementById('kitchenTapestryImg');
+  const thumb  = document.getElementById('kitchenScrollbarThumb');
+  const sbWrap = document.getElementById('kitchenScrollbarWrap');
+  const prevBtn = document.getElementById('kitchenTapestryPrev');
+  const nextBtn = document.getElementById('kitchenTapestryNext');
+  if (!track || !img) return;
 
-function kLabel(s) {
-  const l = s * 2 + 1, r = s * 2 + 2;
-  return r > K_TOTAL ? 'Page ' + l : 'Pages ' + l + '–' + r;
-}
-function kImg(src, alt) {
-  const img = new Image(); img.src = src; img.alt = alt;
-  img.style.cssText = 'width:100%;height:100%;object-fit:contain;display:block;';
-  return img;
-}
-function kRender(s, L, R, ctr, prev, next) {
-  L.innerHTML = ''; R.innerHTML = '';
-  const li = s * 2, ri = s * 2 + 1;
-  if (li < K_TOTAL) L.appendChild(kImg(kitchenSrcs[li], 'Page ' + (li + 1)));
-  if (ri < K_TOTAL) R.appendChild(kImg(kitchenSrcs[ri], 'Page ' + (ri + 1)));
-  else R.style.background = 'var(--bg-mid)';
-  ctr.textContent = kLabel(s);
-  prev.disabled = s === 0;
-  next.disabled = s === K_SPREADS - 1;
-}
+  // --- Scrollbar sync ---
+  function updateThumb() {
+    if (!thumb || !sbWrap) return;
+    const trackW = track.scrollWidth - track.clientWidth;
+    if (trackW <= 0) { sbWrap.style.display = 'none'; return; }
+    sbWrap.style.display = '';
+    const sbTrackW = sbWrap.querySelector('.tapestry-scrollbar-track').offsetWidth;
+    const ratio = track.clientWidth / track.scrollWidth;
+    const thumbW = Math.max(40, sbTrackW * ratio);
+    const thumbL = (track.scrollLeft / trackW) * (sbTrackW - thumbW);
+    thumb.style.width = thumbW + 'px';
+    thumb.style.left  = thumbL + 'px';
+  }
 
-const kL = document.getElementById('kitchenSpreadLeft');
-const kR = document.getElementById('kitchenSpreadRight');
-const kPrev = document.getElementById('kitchenPrev');
-const kNext = document.getElementById('kitchenNext');
-const kCtr  = document.getElementById('kitchenCounter');
-const kFullBtn = document.getElementById('kitchenFullBtn');
-const kFs = document.getElementById('kitchenFullscreen');
-const kFsL = document.getElementById('kitchenFsLeft');
-const kFsR = document.getElementById('kitchenFsRight');
-const kFsP = document.getElementById('kitchenFsPrev');
-const kFsN = document.getElementById('kitchenFsNext');
-const kFsCtr = document.getElementById('kitchenFsCounter');
-const kClose = document.getElementById('kitchenClose');
+  track.addEventListener('scroll', updateThumb, { passive: true });
+  img.addEventListener('load', updateThumb);
+  window.addEventListener('resize', updateThumb);
+  setTimeout(updateThumb, 300);
 
-if (kL && K_TOTAL > 0) {
-  kRender(kSpread, kL, kR, kCtr, kPrev, kNext);
-  kPrev.addEventListener('click', () => { if (kSpread > 0) { kSpread--; kRender(kSpread, kL, kR, kCtr, kPrev, kNext); } });
-  kNext.addEventListener('click', () => { if (kSpread < K_SPREADS - 1) { kSpread++; kRender(kSpread, kL, kR, kCtr, kPrev, kNext); } });
-  kFullBtn.addEventListener('click', () => {
-    kFsSpread = kSpread;
-    kRender(kFsSpread, kFsL, kFsR, kFsCtr, kFsP, kFsN);
-    kFs.classList.add('open'); document.body.style.overflow = 'hidden';
+  // --- Drag scrollbar thumb ---
+  if (thumb) {
+    let dragging = false, startX = 0, startScroll = 0;
+    thumb.addEventListener('mousedown', e => {
+      dragging = true; startX = e.clientX;
+      startScroll = track.scrollLeft;
+      document.body.style.userSelect = 'none';
+      e.preventDefault();
+    });
+    document.addEventListener('mousemove', e => {
+      if (!dragging) return;
+      const sbTrackW = sbWrap.querySelector('.tapestry-scrollbar-track').offsetWidth;
+      const thumbW = thumb.offsetWidth;
+      const ratio = (track.scrollWidth - track.clientWidth) / (sbTrackW - thumbW);
+      track.scrollLeft = startScroll + (e.clientX - startX) * ratio;
+    });
+    document.addEventListener('mouseup', () => { dragging = false; document.body.style.userSelect = ''; });
+
+    // Click on track (not thumb) — jump to position
+    sbWrap.querySelector('.tapestry-scrollbar-track').addEventListener('click', e => {
+      if (e.target === thumb) return;
+      const sbTrackW = e.currentTarget.offsetWidth;
+      const ratio = e.offsetX / sbTrackW;
+      track.scrollLeft = ratio * (track.scrollWidth - track.clientWidth);
+    });
+  }
+
+  // --- Drag scroll on track (desktop) ---
+  let isDragging = false, dragStartX = 0, dragScrollStart = 0;
+  track.addEventListener('mousedown', e => {
+    isDragging = true; dragStartX = e.clientX; dragScrollStart = track.scrollLeft;
+    document.body.style.userSelect = 'none';
   });
-  kFsP.addEventListener('click', () => { if (kFsSpread > 0) { kFsSpread--; kRender(kFsSpread, kFsL, kFsR, kFsCtr, kFsP, kFsN); } });
-  kFsN.addEventListener('click', () => { if (kFsSpread < K_SPREADS - 1) { kFsSpread++; kRender(kFsSpread, kFsL, kFsR, kFsCtr, kFsP, kFsN); } });
-  function kCloseFs() { kFs.classList.remove('open'); document.body.style.overflow = ''; kSpread = kFsSpread; kRender(kSpread, kL, kR, kCtr, kPrev, kNext); }
-  kClose.addEventListener('click', kCloseFs);
-  kFs.addEventListener('click', e => { if (e.target === kFs) kCloseFs(); });
-}
+  document.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    track.scrollLeft = dragScrollStart - (e.clientX - dragStartX);
+  });
+  document.addEventListener('mouseup', () => { isDragging = false; document.body.style.userSelect = ''; });
+
+  // --- Mobile arrow nudge ---
+  const NUDGE = 160;
+  if (prevBtn) prevBtn.addEventListener('click', () => { track.scrollBy({ left: -NUDGE, behavior: 'smooth' }); });
+  if (nextBtn) nextBtn.addEventListener('click', () => { track.scrollBy({ left: NUDGE, behavior: 'smooth' }); });
+
+  // --- Touch swipe (already handled natively by overflow-x:auto, but update thumb on touch) ---
+  track.addEventListener('touchmove', updateThumb, { passive: true });
+
+  // --- Update arrow disabled states on mobile ---
+  function updateArrows() {
+    if (prevBtn) prevBtn.disabled = track.scrollLeft <= 0;
+    if (nextBtn) nextBtn.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+  }
+  track.addEventListener('scroll', updateArrows, { passive: true });
+  img.addEventListener('load', updateArrows);
+  updateArrows();
+})();
 </script>
 </body>
 </html>
