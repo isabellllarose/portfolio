@@ -141,13 +141,24 @@
   /* Tapestry fullscreen overlay */
   .tapestry-fullscreen { position: fixed; inset: 0; z-index: 400; background: var(--bg-card); display: flex; flex-direction: column; align-items: stretch; justify-content: center; padding: 3rem 0 2rem; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
   .tapestry-fullscreen.open { opacity: 1; pointer-events: all; }
-  .tapestry-fs-close { position: fixed; top: 1.25rem; right: 1.5rem; z-index: 402; background: var(--bg-card); border: 0.5px solid var(--border-strong); color: var(--text-secondary); font-size: 1rem; cursor: pointer; padding: 0.4rem 0.7rem; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+  .tapestry-fs-close { position: fixed; top: 1.25rem; right: 1.5rem; z-index: 410; background: var(--bg-card); border: 0.5px solid var(--border-strong); color: var(--text-secondary); font-size: 1.1rem; cursor: pointer; padding: 0.6rem 0.9rem; transition: background 0.2s, color 0.2s, border-color 0.2s; touch-action: manipulation; }
   .tapestry-fs-close:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+  @media (max-width: 700px) {
+    .tapestry-fs-close { font-size: 1.4rem; padding: 0.8rem 1.1rem; top: 1rem; right: 1rem; min-width: 52px; min-height: 52px; }
+  }
   .tapestry-fs-track { overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; cursor: grab; flex: 1; display: flex; align-items: center; }
   .tapestry-fs-track:active { cursor: grabbing; }
   .tapestry-fs-track::-webkit-scrollbar { display: none; }
-  .tapestry-fs-img { height: min(70vh, 600px); width: auto; display: block; flex-shrink: 0; user-select: none; -webkit-user-drag: none; pointer-events: none; }
-  @media (max-width: 700px) { .tapestry-fs-img { height: min(60vh, 400px); } }
+  .tapestry-fs-img { height: var(--tapestry-fs-zoom, min(70vh, 600px)); width: auto; display: block; flex-shrink: 0; user-select: none; -webkit-user-drag: none; pointer-events: none; transition: height 0.2s ease; }
+  @media (max-width: 700px) { .tapestry-fullscreen { --tapestry-fs-zoom: min(60vh, 400px); } }
+  /* Zoom controls — bottom-left corner of fullscreen tapestry */
+  .tapestry-zoom-controls { position: fixed; bottom: 1.25rem; left: 1.25rem; z-index: 410; display: flex; gap: 0.4rem; }
+  .tapestry-zoom-btn { background: var(--bg-card); border: 0.5px solid var(--border-strong); color: var(--text-secondary); font-size: 1.3rem; font-weight: 500; cursor: pointer; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; transition: background 0.2s, color 0.2s, border-color 0.2s; touch-action: manipulation; line-height: 1; }
+  .tapestry-zoom-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+  .tapestry-zoom-btn:disabled { opacity: 0.3; cursor: default; }
+  @media (max-width: 700px) {
+    .tapestry-zoom-btn { width: 50px; height: 50px; font-size: 1.5rem; }
+  }
 
   /* MATERIAL PALETTE — even 3-column grid, each swatch expands its own panel directly below it */
   .mat-palette-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
@@ -563,6 +574,10 @@
     <!-- TAPESTRY FULLSCREEN OVERLAY -->
     <div class="tapestry-fullscreen" id="kitchenTapestryFullscreen">
       <button class="tapestry-fs-close" id="kitchenTapestryFsClose">✕</button>
+      <div class="tapestry-zoom-controls">
+        <button class="tapestry-zoom-btn" id="kitchenTapestryZoomOut" aria-label="Zoom out">−</button>
+        <button class="tapestry-zoom-btn" id="kitchenTapestryZoomIn" aria-label="Zoom in">+</button>
+      </div>
       <div class="tapestry-fs-track" id="kitchenTapestryFsTrack">
         <img src="images/personal/kitchen-dev-tapestry.webp" alt="Design development timeline" class="tapestry-fs-img">
       </div>
@@ -1864,8 +1879,29 @@ document.querySelectorAll('[data-close-mat]').forEach(btn => {
     if (fsPanel) fsPanel.classList.remove('open');
     document.body.style.overflow = '';
   }
-  if (fsClose) fsClose.addEventListener('click', closeTapestryFs);
-  if (fsPanel) fsPanel.addEventListener('click', e => { if (e.target === fsPanel) closeTapestryFs(); });
+  if (fsClose) {
+    fsClose.addEventListener('click', closeTapestryFs);
+    fsClose.addEventListener('touchend', e => { e.preventDefault(); e.stopPropagation(); closeTapestryFs(); }, { passive: false });
+  }
+  if (fsPanel) {
+    fsPanel.addEventListener('click', e => { if (e.target === fsPanel) closeTapestryFs(); });
+    fsPanel.addEventListener('touchend', e => { if (e.target === fsPanel) closeTapestryFs(); }, { passive: true });
+  }
+
+  // --- Zoom controls ---
+  const zoomInBtn  = document.getElementById('kitchenTapestryZoomIn');
+  const zoomOutBtn = document.getElementById('kitchenTapestryZoomOut');
+  const ZOOM_MIN = 220, ZOOM_MAX = 800, ZOOM_STEP = 60;
+  let zoomLevel = window.innerWidth <= 700 ? 400 : 600;
+
+  function applyZoom() {
+    if (fsPanel) fsPanel.style.setProperty('--tapestry-fs-zoom', zoomLevel + 'px');
+    if (zoomInBtn)  zoomInBtn.disabled  = zoomLevel >= ZOOM_MAX;
+    if (zoomOutBtn) zoomOutBtn.disabled = zoomLevel <= ZOOM_MIN;
+  }
+  if (zoomInBtn)  zoomInBtn.addEventListener('click', () => { zoomLevel = Math.min(ZOOM_MAX, zoomLevel + ZOOM_STEP); applyZoom(); });
+  if (zoomOutBtn) zoomOutBtn.addEventListener('click', () => { zoomLevel = Math.max(ZOOM_MIN, zoomLevel - ZOOM_STEP); applyZoom(); });
+  applyZoom();
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && fsPanel && fsPanel.classList.contains('open')) closeTapestryFs(); });
 
   // Drag scroll inside fullscreen
