@@ -45,29 +45,34 @@
   .cw-lb-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; transition: transform 0.25s ease; cursor: zoom-in; transform-origin: center center; user-select: none; -webkit-user-drag: none; }
   .cw-lb-img-wrap img.zoomed { cursor: grab; }
   .cw-lb-img-wrap img.zoomed:active { cursor: grabbing; }
-  .cw-lb-controls { position: fixed; bottom: 1.75rem; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 0.75rem; background: rgba(250,248,244,0.92); backdrop-filter: blur(10px); border: 0.5px solid var(--border-strong); padding: 0.55rem 1.25rem; z-index: 401; opacity: 0; transition: opacity 0.3s; }
-  .cw-lightbox:hover .cw-lb-controls { opacity: 1; }
+  .cw-lb-controls { position: fixed; bottom: 1.75rem; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 0.75rem; background: rgba(250,248,244,0.92); backdrop-filter: blur(10px); border: 0.5px solid var(--border-strong); padding: 0.55rem 1.25rem; z-index: 401; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+  .cw-lb-controls.zone-active, .cw-lb-controls:hover { opacity: 1; pointer-events: all; }
   @media (hover: none) {
-    .cw-lb-controls { opacity: 1; }
+    .cw-lb-controls { opacity: 1; pointer-events: all; }
   }
   .cw-lb-btn { background: var(--bg-card); border: 0.5px solid var(--border-strong); padding: 0.5rem 1.1rem; font-family:'Inter',sans-serif; font-size: 18px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; min-width: 48px; min-height: 48px; display: flex; align-items: center; justify-content: center; }
   .cw-lb-counter { font-size: 11px; letter-spacing: 0.06em; color: var(--text-muted); min-width: 54px; text-align: center; }
-  .cw-lb-close { position: fixed; top: 1.25rem; right: 1.5rem; z-index: 402; background: var(--bg-card); border: 0.5px solid var(--border-strong); color: var(--text-secondary); font-size: 1rem; cursor: pointer; padding: 0.4rem 0.7rem; opacity: 0; transition: background 0.2s, color 0.2s, border-color 0.2s, opacity 0.3s; }
-  .cw-lightbox:hover .cw-lb-close { opacity: 1; }
+  .cw-lb-close { position: fixed; top: 1.25rem; right: 1.5rem; z-index: 402; background: var(--bg-card); border: 0.5px solid var(--border-strong); color: var(--text-secondary); font-size: 1rem; cursor: pointer; padding: 0.4rem 0.7rem; opacity: 0; transition: background 0.2s, color 0.2s, border-color 0.2s, opacity 0.3s; pointer-events: none; }
+  .cw-lb-close.zone-active, .cw-lb-close:hover { opacity: 1; pointer-events: all; }
   @media (hover: none) {
-    .cw-lb-close { opacity: 1; }
+    .cw-lb-close { opacity: 1; pointer-events: all; }
   }
+  /* Invisible hot zones — large trigger areas, sit BELOW the controls so clicks pass through */
+  .cw-lb-hotzone-bottom { position: fixed; bottom: 0; left: 0; width: 100%; height: 40vh; z-index: 250; }
+  .cw-lb-hotzone-close { position: fixed; top: 0; right: 0; width: 220px; height: 35vh; z-index: 250; }
   @media (max-width: 700px) {
     .cw-lb-btn { font-size: 26px; padding: 1rem 1.6rem; min-width: 70px; min-height: 70px; }
     .cw-lb-controls { padding: 0.75rem 1.5rem; gap: 1rem; bottom: 1.25rem; }
   }
   /* BEFORE VIEWER — inline prev/next navigation arrows */
-  .before-nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(42,31,26,0.45); border: none; color: rgba(242,237,230,0.9); font-size: 1.3rem; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s, opacity 0.25s; z-index: 2; padding: 0; opacity: 0; }
-  .before-main:hover .before-nav-arrow { opacity: 1; }
+  .before-nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(42,31,26,0.45); border: none; color: rgba(242,237,230,0.9); font-size: 1.3rem; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s, opacity 0.25s; z-index: 3; padding: 0; opacity: 0; }
+  .before-main:hover .before-nav-arrow, .before-nav-arrow.zone-active { opacity: 1; }
   .before-nav-arrow:hover { background: rgba(42,31,26,0.8); }
   .before-nav-arrow:disabled { opacity: 0.15 !important; cursor: default; }
   .before-nav-arrow.prev { left: 0.4rem; }
   .before-nav-arrow.next { right: 2.4rem; }
+  /* Wider hot zone — bottom 40% of the image reveals the arrows */
+  .before-nav-hotzone { position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; z-index: 1; }
   @media (hover: none) {
     .before-nav-arrow { opacity: 1; }
   }
@@ -76,7 +81,11 @@
     .before-nav-arrow.next { right: 3rem; }
   }
   .cw-lb-close:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
-  .cw-lb-label { position: fixed; bottom: 5.25rem; left: 50%; transform: translateX(-50%); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(242,237,230,0.3); z-index: 401; }
+  .cw-lb-label { position: fixed; bottom: 5.25rem; left: 50%; transform: translateX(-50%); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); z-index: 401; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+  .cw-lb-label.zone-active { opacity: 1; }
+  @media (hover: none) {
+    .cw-lb-label { opacity: 1; }
+  }
 
   /* BEFORE VIEWER — compact main image + thumbnail carousel */
   .before-viewer { max-width: 480px; margin-bottom: 1.5rem; }
@@ -768,6 +777,7 @@
           <div class="laundry-before-viewer" id="laundryBeforeMain" style="max-width:100%; margin-bottom:0;">
             <div class="before-main">
               <img id="laundryBeforeMainImg" src="images/personal/laundry-before-empty.webp" alt="Laundry — vacant" data-gallery="laundry-before" data-index="0" style="width:100%; height:100%; object-fit:contain; display:block; cursor:zoom-in;">
+              <div class="before-nav-hotzone" id="laundryBeforeHotzone"></div>
               <button class="before-expand" id="laundryBeforeExpand" title="View full screen">⛶</button>
               <button class="before-nav-arrow prev" id="laundryBeforePrev" aria-label="Previous">&#8249;</button>
               <button class="before-nav-arrow next" id="laundryBeforeNext" aria-label="Next">&#8250;</button>
@@ -904,6 +914,7 @@
           <div class="laundry-before-viewer" id="bathroomBeforeMain" style="max-width:100%; margin-bottom:0;">
             <div class="before-main">
               <img id="bathroomBeforeMainImg" src="images/personal/bathroom-before-sale.webp" alt="Bathroom — sale listing" data-gallery="bathroom-before" data-index="0" style="width:100%; height:100%; object-fit:contain; display:block; cursor:zoom-in;">
+              <div class="before-nav-hotzone" id="bathroomBeforeHotzone"></div>
               <button class="before-expand" id="bathroomBeforeExpand" title="View full screen">⛶</button>
               <button class="before-nav-arrow prev" id="bathroomBeforePrev" aria-label="Previous">&#8249;</button>
               <button class="before-nav-arrow next" id="bathroomBeforeNext" aria-label="Next">&#8250;</button>
@@ -1082,6 +1093,8 @@
 
 <!-- LIGHTBOX — handles all [data-gallery] images plus the before-viewer fullscreen -->
 <div class="cw-lightbox" id="cwLightbox">
+  <div class="cw-lb-hotzone-close" id="cwLbHotzoneClose"></div>
+  <div class="cw-lb-hotzone-bottom" id="cwLbHotzoneBottom"></div>
   <button class="cw-lb-close" id="cwLbClose">✕</button>
   <div class="cw-lb-img-wrap" id="cwLbImgWrap">
     <img id="cwLbImg" src="" alt="">
@@ -1456,6 +1469,26 @@ cwLightbox.addEventListener('click', e => { if (e.target === cwLightbox || e.tar
 cwLbClose.addEventListener('click', cwCloseLb);
 cwLbPrev.addEventListener('click', e => { e.stopPropagation(); cwLbIndex = cwLbIndex > 0 ? cwLbIndex - 1 : cwGalleries[cwLbGallery].length - 1; cwShowLb(); });
 cwLbNext.addEventListener('click', e => { e.stopPropagation(); cwLbIndex = cwLbIndex < cwGalleries[cwLbGallery].length - 1 ? cwLbIndex + 1 : 0; cwShowLb(); });
+
+// Hot zones — hovering near where a control actually sits reveals just that control
+const cwLbHotzoneClose  = document.getElementById('cwLbHotzoneClose');
+const cwLbHotzoneBottom = document.getElementById('cwLbHotzoneBottom');
+const cwLbLabelEl       = document.getElementById('cwLbLabel');
+if (cwLbHotzoneClose) {
+  cwLbHotzoneClose.addEventListener('mouseenter', () => cwLbClose.classList.add('zone-active'));
+  cwLbHotzoneClose.addEventListener('mouseleave', () => cwLbClose.classList.remove('zone-active'));
+}
+if (cwLbHotzoneBottom) {
+  cwLbHotzoneBottom.addEventListener('mouseenter', () => {
+    cwLbControls.classList.add('zone-active');
+    if (cwLbLabelEl) cwLbLabelEl.classList.add('zone-active');
+  });
+  cwLbHotzoneBottom.addEventListener('mouseleave', () => {
+    cwLbControls.classList.remove('zone-active');
+    if (cwLbLabelEl) cwLbLabelEl.classList.remove('zone-active');
+  });
+}
+
 // Swipe to navigate the lightbox
 addSwipe(cwLightbox,
   () => { cwLbIndex = cwLbIndex < cwGalleries[cwLbGallery].length - 1 ? cwLbIndex + 1 : 0; cwShowLb(); },
@@ -1621,6 +1654,19 @@ if (beforeMainEl && beforeThumbs.length > 0) {
   if (nextBtn)   nextBtn.addEventListener('click', () => lGoTo(lActiveIdx() + 1));
   if (wrapEl)    addSwipe(wrapEl, () => lGoTo(lActiveIdx() + 1), () => lGoTo(lActiveIdx() - 1));
 
+  // Wider hot zone — bottom 40% of the image reveals the arrows
+  const hotzone = document.getElementById('laundryBeforeHotzone');
+  if (hotzone) {
+    hotzone.addEventListener('mouseenter', () => {
+      if (prevBtn) prevBtn.classList.add('zone-active');
+      if (nextBtn) nextBtn.classList.add('zone-active');
+    });
+    hotzone.addEventListener('mouseleave', () => {
+      if (prevBtn) prevBtn.classList.remove('zone-active');
+      if (nextBtn) nextBtn.classList.remove('zone-active');
+    });
+  }
+
   lGoTo(0); // set initial state
 })();
 
@@ -1663,6 +1709,19 @@ if (beforeMainEl && beforeThumbs.length > 0) {
   if (prevBtn)   prevBtn.addEventListener('click', () => bGoTo(bActiveIdx() - 1));
   if (nextBtn)   nextBtn.addEventListener('click', () => bGoTo(bActiveIdx() + 1));
   if (wrapEl)    addSwipe(wrapEl, () => bGoTo(bActiveIdx() + 1), () => bGoTo(bActiveIdx() - 1));
+
+  // Wider hot zone — bottom 40% of the image reveals the arrows
+  const hotzone = document.getElementById('bathroomBeforeHotzone');
+  if (hotzone) {
+    hotzone.addEventListener('mouseenter', () => {
+      if (prevBtn) prevBtn.classList.add('zone-active');
+      if (nextBtn) nextBtn.classList.add('zone-active');
+    });
+    hotzone.addEventListener('mouseleave', () => {
+      if (prevBtn) prevBtn.classList.remove('zone-active');
+      if (nextBtn) nextBtn.classList.remove('zone-active');
+    });
+  }
 
   bGoTo(0); // set initial state
 })();
