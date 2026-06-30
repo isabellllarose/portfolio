@@ -45,20 +45,32 @@
   .cw-lb-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; transition: transform 0.25s ease; cursor: zoom-in; transform-origin: center center; user-select: none; -webkit-user-drag: none; }
   .cw-lb-img-wrap img.zoomed { cursor: grab; }
   .cw-lb-img-wrap img.zoomed:active { cursor: grabbing; }
-  .cw-lb-controls { position: fixed; bottom: 1.75rem; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 0.75rem; background: rgba(250,248,244,0.92); backdrop-filter: blur(10px); border: 0.5px solid var(--border-strong); padding: 0.55rem 1.25rem; z-index: 401; }
+  .cw-lb-controls { position: fixed; bottom: 1.75rem; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 0.75rem; background: rgba(250,248,244,0.92); backdrop-filter: blur(10px); border: 0.5px solid var(--border-strong); padding: 0.55rem 1.25rem; z-index: 401; opacity: 0; transition: opacity 0.3s; }
+  .cw-lightbox:hover .cw-lb-controls { opacity: 1; }
+  @media (hover: none) {
+    .cw-lb-controls { opacity: 1; }
+  }
   .cw-lb-btn { background: var(--bg-card); border: 0.5px solid var(--border-strong); padding: 0.5rem 1.1rem; font-family:'Inter',sans-serif; font-size: 18px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; min-width: 48px; min-height: 48px; display: flex; align-items: center; justify-content: center; }
   .cw-lb-counter { font-size: 11px; letter-spacing: 0.06em; color: var(--text-muted); min-width: 54px; text-align: center; }
-  .cw-lb-close { position: fixed; top: 1.25rem; right: 1.5rem; z-index: 402; background: var(--bg-card); border: 0.5px solid var(--border-strong); color: var(--text-secondary); font-size: 1rem; cursor: pointer; padding: 0.4rem 0.7rem; }
+  .cw-lb-close { position: fixed; top: 1.25rem; right: 1.5rem; z-index: 402; background: var(--bg-card); border: 0.5px solid var(--border-strong); color: var(--text-secondary); font-size: 1rem; cursor: pointer; padding: 0.4rem 0.7rem; opacity: 0; transition: background 0.2s, color 0.2s, border-color 0.2s, opacity 0.3s; }
+  .cw-lightbox:hover .cw-lb-close { opacity: 1; }
+  @media (hover: none) {
+    .cw-lb-close { opacity: 1; }
+  }
   @media (max-width: 700px) {
     .cw-lb-btn { font-size: 26px; padding: 1rem 1.6rem; min-width: 70px; min-height: 70px; }
     .cw-lb-controls { padding: 0.75rem 1.5rem; gap: 1rem; bottom: 1.25rem; }
   }
   /* BEFORE VIEWER — inline prev/next navigation arrows */
-  .before-nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(42,31,26,0.45); border: none; color: rgba(242,237,230,0.9); font-size: 1.3rem; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; z-index: 2; padding: 0; }
+  .before-nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(42,31,26,0.45); border: none; color: rgba(242,237,230,0.9); font-size: 1.3rem; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s, opacity 0.25s; z-index: 2; padding: 0; opacity: 0; }
+  .before-main:hover .before-nav-arrow { opacity: 1; }
   .before-nav-arrow:hover { background: rgba(42,31,26,0.8); }
-  .before-nav-arrow:disabled { opacity: 0.15; cursor: default; }
+  .before-nav-arrow:disabled { opacity: 0.15 !important; cursor: default; }
   .before-nav-arrow.prev { left: 0.4rem; }
   .before-nav-arrow.next { right: 2.4rem; }
+  @media (hover: none) {
+    .before-nav-arrow { opacity: 1; }
+  }
   @media (max-width: 700px) {
     .before-nav-arrow { width: 44px; height: 44px; font-size: 1.6rem; }
     .before-nav-arrow.next { right: 3rem; }
@@ -235,11 +247,15 @@
   .kitchen-carousel-outer { margin-bottom: 2rem; }
   .kitchen-carousel-viewer { position: relative; width: 100%; aspect-ratio: 3/2; background: var(--bg-mid); overflow: hidden; border: 0.5px solid var(--border); margin-bottom: 4px; cursor: zoom-in; }
   .kitchen-carousel-viewer img { width: 100%; height: 100%; object-fit: contain; display: block; }
-  .kitchen-carousel-viewer-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(42,31,26,0.45); border: none; color: #fff; font-size: 1.4rem; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; z-index: 2; }
+  .kitchen-carousel-viewer-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(42,31,26,0.45); border: none; color: #fff; font-size: 1.4rem; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s, opacity 0.25s; z-index: 2; opacity: 0; }
+  .kitchen-carousel-viewer:hover .kitchen-carousel-viewer-arrow { opacity: 1; }
   .kitchen-carousel-viewer-arrow:hover { background: rgba(42,31,26,0.75); }
   .kitchen-carousel-viewer-arrow.prev { left: 0.75rem; }
   .kitchen-carousel-viewer-arrow.next { right: 0.75rem; }
-  .kitchen-carousel-viewer-arrow:disabled { opacity: 0.2; cursor: default; }
+  .kitchen-carousel-viewer-arrow:disabled { opacity: 0.2 !important; cursor: default; }
+  @media (hover: none) {
+    .kitchen-carousel-viewer-arrow { opacity: 1; }
+  }
   .kitchen-carousel-counter { position: absolute; bottom: 0.6rem; right: 0.75rem; font-size: 10px; letter-spacing: 0.08em; color: rgba(255,255,255,0.75); background: rgba(42,31,26,0.4); padding: 2px 7px; }
   .kitchen-thumb-strip { display: flex; gap: 3px; overflow-x: auto; scrollbar-width: none; }
   .kitchen-thumb-strip::-webkit-scrollbar { display: none; }
