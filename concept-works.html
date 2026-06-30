@@ -121,9 +121,9 @@
   .tapestry-fs-btn { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.6rem; background: none; border: 0.5px solid var(--border-strong); padding: 0.4rem 0.9rem; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; transition: color 0.2s, border-color 0.2s; }
   .tapestry-fs-btn:hover { color: var(--accent); border-color: var(--accent); }
   /* Tapestry fullscreen overlay */
-  .tapestry-fullscreen { position: fixed; inset: 0; z-index: 400; background: rgba(26,20,16,0.97); display: flex; flex-direction: column; align-items: stretch; justify-content: center; padding: 3rem 0 2rem; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+  .tapestry-fullscreen { position: fixed; inset: 0; z-index: 400; background: var(--bg-card); display: flex; flex-direction: column; align-items: stretch; justify-content: center; padding: 3rem 0 2rem; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
   .tapestry-fullscreen.open { opacity: 1; pointer-events: all; }
-  .tapestry-fs-close { position: fixed; top: 1.25rem; right: 1.5rem; z-index: 402; background: rgba(26,20,16,0.65); border: 0.5px solid rgba(255,255,255,0.15); color: rgba(242,237,230,0.7); font-size: 1rem; cursor: pointer; padding: 0.4rem 0.7rem; transition: background 0.2s; }
+  .tapestry-fs-close { position: fixed; top: 1.25rem; right: 1.5rem; z-index: 402; background: var(--bg-card); border: 0.5px solid var(--border-strong); color: var(--text-secondary); font-size: 1rem; cursor: pointer; padding: 0.4rem 0.7rem; transition: background 0.2s, color 0.2s, border-color 0.2s; }
   .tapestry-fs-close:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
   .tapestry-fs-track { overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; cursor: grab; flex: 1; display: flex; align-items: center; }
   .tapestry-fs-track:active { cursor: grabbing; }
@@ -511,7 +511,7 @@
     <!-- DESIGN DEVELOPMENT TAPESTRY -->
     <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Design Development</h4>
     <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.8; margin-bottom:0.9rem; max-width:720px;">The design process began with researching off-the-shelf cabinetry solutions — first through Kaboodle, then IKEA — as a pragmatic starting point for understanding spatial possibilities and product ranges. As the design ideas developed and became more resolved, it became clear that going custom through a cabinet maker was the stronger path forward. Rather than a change of direction, it was an opportunity to take the ideas already developed and refine them without constraint — not being limited to the available product ranges, colourways, or standard modular dimensions meant the design could be executed exactly as intended. In particular, it opened up the material selection considerably: instead of finding the closest match within what either brand offered, the exact Polytec finish and profile could be specified from the outset.</p>
-    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.25rem; max-width:720px;">The tapestry below documents this progression — from early inspiration and product research through to the resolved material and finish direction.</p>
+    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.25rem; max-width:720px;">The tapestry below brings together the research and ideas explored along the way — product research through Kaboodle and IKEA, colour and finish direction, and specific inspiration for details like the coffee corner and pantry organisation.</p>
 
     <div class="tapestry-wrap" id="kitchenTapestryWrap">
       <!-- Right-edge fade gradient -->
