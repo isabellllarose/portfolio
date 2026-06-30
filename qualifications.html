@@ -196,22 +196,24 @@
   .lb-legend-grid { display: grid; grid-template-columns: auto 1fr; gap: 0.35rem 0.6rem; align-items: baseline; }
   .lb-legend-num { font-size: 10px; font-weight: 600; color: var(--accent); white-space: nowrap; }
   .lb-legend-name { font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-secondary); }
-  /* Floating controls — fixed at bottom centre, auto-hide on idle */
+  /* Floating controls — hover to reveal, always visible on touch */
   .lightbox-controls {
     position: fixed; bottom: 1.75rem; left: 50%; transform: translateX(-50%);
     display: flex; align-items: center; gap: 0.75rem;
     background: rgba(250,248,244,0.92); backdrop-filter: blur(10px);
     border: 0.5px solid var(--border-strong); padding: 0.55rem 1.25rem;
-    border-radius: 2px; z-index: 401; transition: opacity 0.5s; opacity: 1;
+    border-radius: 2px; z-index: 401; transition: opacity 0.3s; opacity: 0;
   }
-  .lightbox-controls.ui-hidden { opacity: 0; pointer-events: none; }
+  .lightbox:hover .lightbox-controls { opacity: 1; }
+  @media (hover: none) { .lightbox-controls { opacity: 1; } }
   .lightbox-close {
     position: fixed; top: 1.25rem; right: 1.5rem; z-index: 402;
     background: var(--bg-card); border: 0.5px solid var(--border-strong);
     color: var(--text-secondary); font-size: 1rem; cursor: pointer;
-    padding: 0.4rem 0.7rem; line-height: 1; transition: all 0.3s; opacity: 1;
+    padding: 0.4rem 0.7rem; line-height: 1; transition: all 0.3s; opacity: 0;
   }
-  .lightbox-close.ui-hidden { opacity: 0; pointer-events: none; }
+  .lightbox:hover .lightbox-close { opacity: 1; }
+  @media (hover: none) { .lightbox-close { opacity: 1; } }
   .lightbox-close:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); opacity: 1 !important; }
   .lightbox-btn {
     background: var(--bg-card); border: 0.5px solid var(--border-strong);
@@ -225,9 +227,10 @@
     position: fixed; bottom: 5.25rem; left: 50%; transform: translateX(-50%);
     font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--text-muted); white-space: nowrap; z-index: 401;
-    transition: opacity 0.5s; opacity: 1; pointer-events: none;
+    transition: opacity 0.3s; opacity: 0; pointer-events: none;
   }
-  .lightbox-label.ui-hidden { opacity: 0; }
+  .lightbox:hover .lightbox-label { opacity: 1; }
+  @media (hover: none) { .lightbox-label { opacity: 1; } }
 
   /* PLAN + LEGEND */
   .plan-legend-wrap { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; align-items: start; margin-bottom: 1.5rem; }
@@ -265,9 +268,10 @@
     display: flex; align-items: center; gap: 1rem;
     background: rgba(250,248,244,0.92); backdrop-filter: blur(10px);
     border: 0.5px solid var(--border-strong); padding: 0.55rem 1.5rem;
-    border-radius: 2px; z-index: 301; transition: opacity 0.5s; opacity: 1;
+    border-radius: 2px; z-index: 301; transition: opacity 0.3s; opacity: 0;
   }
-  .journal-fullscreen-controls.ui-hidden { opacity: 0; pointer-events: none; }
+  .journal-fullscreen:hover .journal-fullscreen-controls { opacity: 1; }
+  @media (hover: none) { .journal-fullscreen-controls { opacity: 1; } }
   .journal-fullscreen-btn { background: var(--bg-card); border: 0.5px solid var(--border-strong); padding: 0.35rem 0.9rem; font-family: 'Inter', sans-serif; font-size: 14px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; line-height: 1; }
   .journal-fullscreen-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
   .journal-fullscreen-btn:disabled { opacity: 0.22; cursor: default; pointer-events: none; }
@@ -276,9 +280,10 @@
     position: fixed; top: 1.25rem; right: 1.5rem; z-index: 302;
     background: var(--bg-card); border: 0.5px solid var(--border-strong);
     color: var(--text-secondary); font-size: 1rem; cursor: pointer;
-    padding: 0.4rem 0.7rem; line-height: 1; transition: all 0.3s; opacity: 1;
+    padding: 0.4rem 0.7rem; line-height: 1; transition: all 0.3s; opacity: 0;
   }
-  .journal-close.ui-hidden { opacity: 0; pointer-events: none; }
+  .journal-fullscreen:hover .journal-close { opacity: 1; }
+  @media (hover: none) { .journal-close { opacity: 1; } }
   .journal-close:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); opacity: 1 !important; }
 
   /* QBIM card hover */
