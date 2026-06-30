@@ -203,17 +203,23 @@
     background: rgba(250,248,244,0.92); backdrop-filter: blur(10px);
     border: 0.5px solid var(--border-strong); padding: 0.55rem 1.25rem;
     border-radius: 2px; z-index: 401; transition: opacity 0.3s; opacity: 0;
+    pointer-events: none;
   }
-  .lightbox:hover .lightbox-controls { opacity: 1; }
-  @media (hover: none) { .lightbox-controls { opacity: 1; } }
+  .lightbox-controls.zone-active, .lightbox-controls:hover { opacity: 1; pointer-events: all; }
+  /* Invisible hot zone — bottom strip, hover here reveals the controls bar */
+  .lightbox-hotzone-bottom { position: fixed; bottom: 0; left: 0; width: 100%; height: 90px; z-index: 399; }
+  @media (hover: none) { .lightbox-controls { opacity: 1; pointer-events: all; } }
   .lightbox-close {
     position: fixed; top: 1.25rem; right: 1.5rem; z-index: 402;
     background: var(--bg-card); border: 0.5px solid var(--border-strong);
     color: var(--text-secondary); font-size: 1rem; cursor: pointer;
     padding: 0.4rem 0.7rem; line-height: 1; transition: all 0.3s; opacity: 0;
+    pointer-events: none;
   }
-  .lightbox:hover .lightbox-close { opacity: 1; }
-  @media (hover: none) { .lightbox-close { opacity: 1; } }
+  .lightbox-close.zone-active, .lightbox-close:hover { opacity: 1; pointer-events: all; }
+  /* Invisible hot zone — top-right corner, hover here reveals the close button */
+  .lightbox-hotzone-close { position: fixed; top: 0; right: 0; width: 120px; height: 100px; z-index: 399; }
+  @media (hover: none) { .lightbox-close { opacity: 1; pointer-events: all; } }
   .lightbox-close:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); opacity: 1 !important; }
   .lightbox-btn {
     background: var(--bg-card); border: 0.5px solid var(--border-strong);
@@ -269,9 +275,10 @@
     background: rgba(250,248,244,0.92); backdrop-filter: blur(10px);
     border: 0.5px solid var(--border-strong); padding: 0.55rem 1.5rem;
     border-radius: 2px; z-index: 301; transition: opacity 0.3s; opacity: 0;
+    pointer-events: none;
   }
-  .journal-fullscreen:hover .journal-fullscreen-controls { opacity: 1; }
-  @media (hover: none) { .journal-fullscreen-controls { opacity: 1; } }
+  .journal-fullscreen-controls.zone-active, .journal-fullscreen-controls:hover { opacity: 1; pointer-events: all; }
+  @media (hover: none) { .journal-fullscreen-controls { opacity: 1; pointer-events: all; } }
   .journal-fullscreen-btn { background: var(--bg-card); border: 0.5px solid var(--border-strong); padding: 0.35rem 0.9rem; font-family: 'Inter', sans-serif; font-size: 14px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; line-height: 1; }
   .journal-fullscreen-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
   .journal-fullscreen-btn:disabled { opacity: 0.22; cursor: default; pointer-events: none; }
@@ -281,9 +288,10 @@
     background: var(--bg-card); border: 0.5px solid var(--border-strong);
     color: var(--text-secondary); font-size: 1rem; cursor: pointer;
     padding: 0.4rem 0.7rem; line-height: 1; transition: all 0.3s; opacity: 0;
+    pointer-events: none;
   }
-  .journal-fullscreen:hover .journal-close { opacity: 1; }
-  @media (hover: none) { .journal-close { opacity: 1; } }
+  .journal-close.zone-active, .journal-close:hover { opacity: 1; pointer-events: all; }
+  @media (hover: none) { .journal-close { opacity: 1; pointer-events: all; } }
   .journal-close:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); opacity: 1 !important; }
 
   /* QBIM card hover */
@@ -561,12 +569,14 @@
 
         <!-- Fullscreen journal overlay -->
         <div class="journal-fullscreen" id="journalFullscreen">
+          <div class="lightbox-hotzone-close" id="journalHotzoneClose"></div>
+          <div class="lightbox-hotzone-bottom" id="journalHotzoneBottom"></div>
           <button class="journal-close" id="journalClose">✕</button>
           <div class="journal-fullscreen-spread">
             <div class="journal-fullscreen-slot" id="fsLeft"></div>
             <div class="journal-fullscreen-slot" id="fsRight"></div>
           </div>
-          <div class="journal-fullscreen-controls">
+          <div class="journal-fullscreen-controls" id="journalFsControls">
             <button class="journal-fullscreen-btn" id="fsPrev" disabled>← Prev</button>
             <span class="journal-fullscreen-counter" id="fsCounter">Pages 1–2 of 15</span>
             <button class="journal-fullscreen-btn" id="fsNext">Next →</button>
@@ -903,12 +913,14 @@
 
           <!-- Fullscreen for design development -->
           <div class="journal-fullscreen" id="devFullscreen">
+            <div class="lightbox-hotzone-close" id="devHotzoneClose"></div>
+            <div class="lightbox-hotzone-bottom" id="devHotzoneBottom"></div>
             <button class="journal-close" id="devClose">✕</button>
             <div class="journal-fullscreen-spread" style="aspect-ratio:unset;">
               <div class="journal-fullscreen-slot" id="devFsLeft" style="aspect-ratio:297/210;"></div>
               <div class="journal-fullscreen-slot" id="devFsRight" style="aspect-ratio:297/210;"></div>
             </div>
-            <div class="journal-fullscreen-controls">
+            <div class="journal-fullscreen-controls" id="devFsControls">
               <button class="journal-fullscreen-btn" id="devFsPrev" disabled>← Prev</button>
               <span class="journal-fullscreen-counter" id="devFsCounter">Pages 1–2</span>
               <button class="journal-fullscreen-btn" id="devFsNext">Next →</button>
@@ -1048,6 +1060,8 @@
 <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
 
 <div class="lightbox" id="lightbox">
+  <div class="lightbox-hotzone-close" id="lbHotzoneClose"></div>
+  <div class="lightbox-hotzone-bottom" id="lbHotzoneBottom"></div>
   <button class="lightbox-close" id="lbClose">✕</button>
   <!-- Main content area: image + optional legend side by side -->
   <div class="lightbox-inner">
@@ -1160,6 +1174,19 @@ if (devL && DEV_TOTAL > 0) {
   function closeDevFs() { devFs.classList.remove('open'); document.body.style.overflow = ''; devSpread = devFsSpread; renderDevSpread(devSpread, devL, devR, devCtr, devPrev, devNext); }
   devClose.addEventListener('click', closeDevFs);
   devFs.addEventListener('click', e => { if (e.target === devFs) closeDevFs(); });
+
+  // Hot zones — hovering near where a control actually sits reveals just that control
+  const devHotzoneClose  = document.getElementById('devHotzoneClose');
+  const devHotzoneBottom = document.getElementById('devHotzoneBottom');
+  const devFsControls    = document.getElementById('devFsControls');
+  if (devHotzoneClose) {
+    devHotzoneClose.addEventListener('mouseenter', () => devClose.classList.add('zone-active'));
+    devHotzoneClose.addEventListener('mouseleave', () => devClose.classList.remove('zone-active'));
+  }
+  if (devHotzoneBottom && devFsControls) {
+    devHotzoneBottom.addEventListener('mouseenter', () => devFsControls.classList.add('zone-active'));
+    devHotzoneBottom.addEventListener('mouseleave', () => devFsControls.classList.remove('zone-active'));
+  }
 }
 const unitsToggle = document.getElementById('unitsToggle');
 const unitsGrid   = document.getElementById('unitsGrid');
@@ -1375,6 +1402,18 @@ lbNext.addEventListener('click', e => {
 lightbox.addEventListener('mousemove', lbActivity);
 lightbox.addEventListener('touchstart', lbActivity);
 
+// Hot zones — hovering near where a control actually sits reveals just that control
+const lbHotzoneClose  = document.getElementById('lbHotzoneClose');
+const lbHotzoneBottom = document.getElementById('lbHotzoneBottom');
+if (lbHotzoneClose) {
+  lbHotzoneClose.addEventListener('mouseenter', () => lbClose.classList.add('zone-active'));
+  lbHotzoneClose.addEventListener('mouseleave', () => lbClose.classList.remove('zone-active'));
+}
+if (lbHotzoneBottom) {
+  lbHotzoneBottom.addEventListener('mouseenter', () => lbControls.classList.add('zone-active'));
+  lbHotzoneBottom.addEventListener('mouseleave', () => lbControls.classList.remove('zone-active'));
+}
+
 document.addEventListener('keydown', e => {
   if (!lightbox.classList.contains('open')) return;
   if (e.key === 'Escape') closeLightbox();
@@ -1493,6 +1532,19 @@ fsNext.addEventListener('click', () => {
 
 fs.addEventListener('mousemove', fsActivity);
 fs.addEventListener('touchstart', fsActivity);
+
+// Hot zones — hovering near where a control actually sits reveals just that control
+const journalHotzoneClose  = document.getElementById('journalHotzoneClose');
+const journalHotzoneBottom = document.getElementById('journalHotzoneBottom');
+const journalCloseBtn      = document.getElementById('journalClose');
+if (journalHotzoneClose) {
+  journalHotzoneClose.addEventListener('mouseenter', () => journalCloseBtn.classList.add('zone-active'));
+  journalHotzoneClose.addEventListener('mouseleave', () => journalCloseBtn.classList.remove('zone-active'));
+}
+if (journalHotzoneBottom) {
+  journalHotzoneBottom.addEventListener('mouseenter', () => fsControls.classList.add('zone-active'));
+  journalHotzoneBottom.addEventListener('mouseleave', () => fsControls.classList.remove('zone-active'));
+}
 
 function closeFs() {
   fs.classList.remove('open');
