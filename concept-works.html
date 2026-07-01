@@ -107,7 +107,7 @@
 
   /* DESIGN DEVELOPMENT TAPESTRY — horizontal scroll */
   .tapestry-wrap { position: relative; margin-bottom: 2rem; }
-  .tapestry-track { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -webkit-overflow-scrolling: touch; cursor: grab; height: 420px; background: #EDE7DE; }
+  .tapestry-track { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -webkit-overflow-scrolling: touch; cursor: grab; height: 420px; background: #EDE7DE; display: flex; align-items: center; }
   .tapestry-track:active { cursor: grabbing; }
   .tapestry-track::-webkit-scrollbar { display: none; }
   /* Right-edge fade — permanent subtle indicator */
@@ -124,7 +124,7 @@
   .tapestry-scrollbar-track { height: 4px; background: var(--border-strong); border-radius: 2px; position: relative; cursor: pointer; }
   .tapestry-scrollbar-thumb { height: 100%; background: var(--accent); border-radius: 2px; position: absolute; left: 0; top: 0; min-width: 48px; transition: background 0.15s; cursor: grab; }
   .tapestry-scrollbar-thumb:active { cursor: grabbing; background: var(--text-primary); }
-  .tapestry-img { height: 100%; width: auto; display: block; user-select: none; -webkit-user-drag: none; transform-origin: top left; transition: transform 0.25s ease; flex-shrink: 0; }
+  .tapestry-img { height: 100%; width: auto; display: block; user-select: none; -webkit-user-drag: none; transform-origin: center left; transition: transform 0.25s ease; flex-shrink: 0; }
   .tapestry-arrow { display: none; }
   @media (max-width: 700px) {
     .tapestry-track { height: 500px; }
@@ -1925,7 +1925,7 @@ document.querySelectorAll('[data-close-mat]').forEach(btn => {
   const INLINE_STEP = 0.15;
   const INLINE_MIN  = 0.5;
   const INLINE_MAX  = 2.0;
-  let inlineScale = 1.0;
+  let inlineScale = 0.88;
 
   function applyInlineZoom() {
     if (img) img.style.transform = `scale(${inlineScale})`;
