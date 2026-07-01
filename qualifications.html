@@ -170,12 +170,12 @@
   }
   .lightbox.open { opacity: 1; pointer-events: all; }
   .lightbox-inner {
-    display: flex; align-items: center; justify-content: center;
-    gap: 1.5rem; width: 100%; flex: 1; max-height: calc(100vh - 80px);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 1rem; width: 100%; flex: 1; max-height: calc(100vh - 80px);
   }
   .lightbox-img-wrap {
     flex: 0 1 auto; display: flex; align-items: center; justify-content: center;
-    height: 100%; overflow: hidden; max-height: 100%; min-width: 0;
+    overflow: hidden; min-width: 0; max-width: 100%; max-height: calc(100vh - 160px);
   }
   .lightbox-img-wrap img {
     max-width: 100%; max-height: 100%; object-fit: contain; display: block;
@@ -184,18 +184,19 @@
   }
   .lightbox-img-wrap img.zoomed { cursor: grab; }
   .lightbox-img-wrap img.zoomed:active { cursor: grabbing; }
+  /* Legend — landscape strip below image on all sizes */
   .lightbox-legend {
-    display: none; flex-direction: column;
+    display: none; flex-direction: row; flex-wrap: wrap;
     background: var(--bg-card);
     border: 0.5px solid var(--border-strong);
-    padding: 1.25rem; min-width: 160px; max-width: 190px; flex-shrink: 0;
-    align-self: center; max-height: 80vh; overflow-y: auto;
+    padding: 0.75rem 1rem; width: 100%; max-width: 860px; flex-shrink: 0; gap: 0.25rem 0;
   }
   .lightbox-legend.visible { display: flex; }
-  .lb-legend-title { font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.75rem; padding-bottom: 0.6rem; border-bottom: 0.5px solid var(--border); }
-  .lb-legend-grid { display: grid; grid-template-columns: auto 1fr; gap: 0.35rem 0.6rem; align-items: baseline; }
+  .lb-legend-title { font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.4rem; padding-bottom: 0.4rem; border-bottom: 0.5px solid var(--border); width: 100%; }
+  .lb-legend-grid { display: flex; flex-direction: row; flex-wrap: wrap; gap: 0.25rem 1.25rem; width: 100%; }
+  .lb-legend-item { display: flex; align-items: baseline; gap: 0.35rem; }
   .lb-legend-num { font-size: 10px; font-weight: 600; color: var(--accent); white-space: nowrap; }
-  .lb-legend-name { font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-secondary); }
+  .lb-legend-name { font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-secondary); white-space: nowrap; }
   /* Floating controls — hover to reveal, always visible on touch */
   .lightbox-controls {
     position: fixed; bottom: 1.75rem; left: 50%; transform: translateX(-50%);
@@ -261,6 +262,19 @@
   .journal-btn-full:hover { color: var(--accent); border-color: var(--accent); }
   .journal-counter { font-size: 12px; letter-spacing: 0.06em; color: var(--text-muted); min-width: 100px; text-align: center; }
   .journal-note { font-size: 11px; color: var(--text-muted); font-style: italic; text-align: center; }
+
+  /* DEV JOURNAL (Dune Wellness only) — single page embedded, larger */
+  .dev-journal .journal-spread { grid-template-columns: 1fr; max-width: 640px; background: none; }
+  .dev-journal .dev-journal-slot-right { display: none; }
+  .dev-journal .journal-viewer { background: var(--bg-mid); }
+  /* Fullscreen: double page desktop, single page mobile */
+  #devFullscreen .journal-fullscreen-spread { grid-template-columns: 1fr 1fr; max-width: min(1200px, 94vw); }
+  @media (max-width: 700px) {
+    .dev-journal .journal-spread { max-width: 100%; }
+    #devFullscreen .journal-fullscreen-spread { grid-template-columns: 1fr; max-width: min(560px, 96vw); }
+    #devFullscreen .journal-fullscreen-slot:last-child { display: none; }
+    #devFullscreen .journal-close { font-size: 1.4rem; padding: 0.9rem 1.2rem; min-width: 56px; min-height: 56px; top: 0.75rem; right: 0.75rem; z-index: 410; touch-action: manipulation; }
+  }
 
   /* Journal fullscreen — controls auto-hide on idle */
   .journal-fullscreen { position: fixed; inset: 0; z-index: 300; background: var(--bg-card); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; gap: 0; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
@@ -895,11 +909,11 @@
             Note: This design development work was produced as a concept exploration exercise. As such, it does not necessarily account for all applicable Australian Standards, NCC requirements, or regulatory provisions that would be addressed in a formal design and documentation process.
           </p>
 
-          <div class="journal-wrap">
+          <div class="journal-wrap dev-journal">
             <div class="journal-viewer">
               <div class="journal-spread" id="devSpread">
-                <div class="journal-spread-slot" id="devLeft" style="aspect-ratio:297/210;"></div>
-                <div class="journal-spread-slot" id="devRight" style="aspect-ratio:297/210;"></div>
+                <div class="journal-spread-slot dev-journal-slot-left" id="devLeft" style="aspect-ratio:297/210;"></div>
+                <div class="journal-spread-slot dev-journal-slot-right" id="devRight" style="aspect-ratio:297/210;"></div>
               </div>
               <div class="journal-controls">
                 <button class="journal-btn" id="devPrev" disabled>← Prev</button>
@@ -1072,22 +1086,22 @@
     <div class="lightbox-legend" id="lbLegend">
       <div class="lb-legend-title">Legend</div>
       <div class="lb-legend-grid">
-        <span class="lb-legend-num">1</span><span class="lb-legend-name">Reception</span>
-        <span class="lb-legend-num">2</span><span class="lb-legend-name">Retail Display</span>
-        <span class="lb-legend-num">3</span><span class="lb-legend-name">Sauna</span>
-        <span class="lb-legend-num">4</span><span class="lb-legend-name">Steam Room</span>
-        <span class="lb-legend-num">5</span><span class="lb-legend-name">Lift</span>
-        <span class="lb-legend-num">6</span><span class="lb-legend-name">Showers</span>
-        <span class="lb-legend-num">7</span><span class="lb-legend-name">Bathroom</span>
-        <span class="lb-legend-num">8</span><span class="lb-legend-name">Mineral Pool</span>
-        <span class="lb-legend-num">9</span><span class="lb-legend-name">Garden</span>
-        <span class="lb-legend-num">10</span><span class="lb-legend-name">Cold Plunge</span>
-        <span class="lb-legend-num">11</span><span class="lb-legend-name">Refreshment Bar</span>
-        <span class="lb-legend-num">12</span><span class="lb-legend-name">Bathroom</span>
-        <span class="lb-legend-num">13</span><span class="lb-legend-name">Lounge</span>
-        <span class="lb-legend-num">14</span><span class="lb-legend-name">Studio</span>
-        <span class="lb-legend-num">15</span><span class="lb-legend-name">Laundry / Storage</span>
-        <span class="lb-legend-num">16</span><span class="lb-legend-name">Treatment Room</span>
+        <span class="lb-legend-item"><span class="lb-legend-num">1</span><span class="lb-legend-name">Reception</span></span>
+        <span class="lb-legend-item"><span class="lb-legend-num">2</span><span class="lb-legend-name">Retail Display</span></span>
+        <span class="lb-legend-item"><span class="lb-legend-num">3</span><span class="lb-legend-name">Sauna</span></span>
+        <span class="lb-legend-item"><span class="lb-legend-num">4</span><span class="lb-legend-name">Steam Room</span></span>
+        <span class="lb-legend-item"><span class="lb-legend-num">5</span><span class="lb-legend-name">Lift</span></span>
+        <span class="lb-legend-item"><span class="lb-legend-num">6</span><span class="lb-legend-name">Showers</span></span>
+        <span class="lb-legend-item"><span class="lb-legend-num">7</span><span class="lb-legend-name">Bathroom</span></span>
+        <span class="lb-legend-item"><span class="lb-legend-num">8</span><span class="lb-legend-name">Mineral Pool</span></span>
+        <span class="lb-legend-item"><span class="lb-legend-num">9</span><span class="lb-legend-name">Garden</span></span>
+        <span class="lb-legend-item"><span class="lb-legend-num">10</span><span class="lb-legend-name">Cold Plunge</span></span>
+        <span class="lb-legend-item"><span class="lb-legend-num">11</span><span class="lb-legend-name">Refreshment Bar</span></span>
+        <span class="lb-legend-item"><span class="lb-legend-num">12</span><span class="lb-legend-name">Bathroom</span></span>
+        <span class="lb-legend-item"><span class="lb-legend-num">13</span><span class="lb-legend-name">Lounge</span></span>
+        <span class="lb-legend-item"><span class="lb-legend-num">14</span><span class="lb-legend-name">Studio</span></span>
+        <span class="lb-legend-item"><span class="lb-legend-num">15</span><span class="lb-legend-name">Laundry / Storage</span></span>
+        <span class="lb-legend-item"><span class="lb-legend-num">16</span><span class="lb-legend-name">Treatment Room</span></span>
       </div>
     </div>
   </div>
@@ -1119,21 +1133,21 @@ const devSrcs = [
   'images/wellness/30-dune-03.webp','images/wellness/30-dune-04.webp',
   'images/wellness/30-dune-05.webp','images/wellness/30-dune-06.webp'
 ];
-const DEV_TOTAL  = devSrcs.length;
-const DEV_SPREADS = Math.ceil(DEV_TOTAL / 2);
+const DEV_TOTAL   = devSrcs.length;
+const DEV_SPREADS = DEV_TOTAL; // single page per step
 let devSpread    = 0;
 let devFsSpread  = 0;
 
 function devSpreadLabel(s) {
-  const l = s * 2 + 1, r = s * 2 + 2;
-  return r > DEV_TOTAL ? 'Page ' + l + ' of ' + DEV_TOTAL : 'Pages ' + l + '–' + r + ' of ' + DEV_TOTAL;
+  return 'Page ' + (s + 1) + ' of ' + DEV_TOTAL;
 }
 
 function renderDevSpread(s, L, R, ctr, prev, next) {
   L.innerHTML = ''; R.innerHTML = '';
   L.style.background = '';
   R.style.background = '';
-  const li = s * 2, ri = s * 2 + 1;
+  // Single-page step: left slot shows current page, right slot shows next (for fullscreen double view)
+  const li = s, ri = s + 1;
   if (li < DEV_TOTAL) { const img = new Image(); img.src = devSrcs[li]; img.alt = 'Page ' + (li+1); img.style.cssText = 'width:100%;height:100%;object-fit:contain;display:block;'; L.appendChild(img); }
   if (ri < DEV_TOTAL) { const img = new Image(); img.src = devSrcs[ri]; img.alt = 'Page ' + (ri+1); img.style.cssText = 'width:100%;height:100%;object-fit:contain;display:block;'; R.appendChild(img); }
   else { R.style.background = 'var(--bg-mid)'; }
@@ -1173,7 +1187,19 @@ if (devL && DEV_TOTAL > 0) {
 
   function closeDevFs() { devFs.classList.remove('open'); document.body.style.overflow = ''; devSpread = devFsSpread; renderDevSpread(devSpread, devL, devR, devCtr, devPrev, devNext); }
   devClose.addEventListener('click', closeDevFs);
+  devClose.addEventListener('touchend', e => { e.preventDefault(); e.stopPropagation(); closeDevFs(); }, { passive: false });
   devFs.addEventListener('click', e => { if (e.target === devFs) closeDevFs(); });
+  devFs.addEventListener('touchend', e => { if (e.target === devFs) closeDevFs(); }, { passive: true });
+  // Double-tap anywhere on the spread to close on mobile
+  let devLastTap = 0;
+  const devFsSpreadEl = devFs.querySelector('.journal-fullscreen-spread');
+  if (devFsSpreadEl) {
+    devFsSpreadEl.addEventListener('touchend', () => {
+      const now = Date.now();
+      if (now - devLastTap < 350) closeDevFs();
+      devLastTap = now;
+    }, { passive: true });
+  }
 
   // Hot zones — hovering near where a control actually sits reveals just that control
   const devHotzoneClose  = document.getElementById('devHotzoneClose');
