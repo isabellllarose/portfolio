@@ -1924,11 +1924,20 @@ document.querySelectorAll('[data-close-mat]').forEach(btn => {
   let inlineScale = 0.88;
 
   function applyInlineZoom() {
+    // Preserve the relative scroll position so the view doesn't jump
+    const prevScrollWidth = track.scrollWidth;
+    const ratio = prevScrollWidth > track.clientWidth
+      ? track.scrollLeft / (prevScrollWidth - track.clientWidth)
+      : 0;
     if (img) img.style.transform = `scale(${inlineScale})`;
+    // Restore scroll position after layout settles
+    requestAnimationFrame(() => {
+      const newScrollable = track.scrollWidth - track.clientWidth;
+      if (newScrollable > 0) track.scrollLeft = ratio * newScrollable;
+      updateThumb();
+    });
     if (inlineZoomIn)  inlineZoomIn.disabled  = inlineScale >= INLINE_MAX;
     if (inlineZoomOut) inlineZoomOut.disabled = inlineScale <= INLINE_MIN;
-    // Update scrollbar since image changed apparent width
-    updateThumb();
   }
   if (inlineZoomIn)  inlineZoomIn.addEventListener('click', () => { inlineScale = Math.min(INLINE_MAX, +(inlineScale + INLINE_STEP).toFixed(2)); applyInlineZoom(); });
   if (inlineZoomOut) inlineZoomOut.addEventListener('click', () => { inlineScale = Math.max(INLINE_MIN, +(inlineScale - INLINE_STEP).toFixed(2)); applyInlineZoom(); });

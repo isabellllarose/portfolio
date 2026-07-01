@@ -175,15 +175,25 @@
   }
   .lightbox-img-wrap {
     flex: 0 1 auto; display: flex; align-items: center; justify-content: center;
-    height: 100%; overflow: hidden; max-height: 100%; min-width: 0;
+    overflow: visible; min-width: 0; position: relative;
   }
   .lightbox-img-wrap img {
-    max-width: 100%; max-height: 100%; object-fit: contain; display: block;
-    transition: transform 0.25s ease; cursor: zoom-in; transform-origin: center center;
-    user-select: none; -webkit-user-drag: none;
+    max-width: 100%; max-height: calc(100vh - 120px); object-fit: contain; display: block;
+    transform-origin: center center; user-select: none; -webkit-user-drag: none; cursor: grab;
   }
-  .lightbox-img-wrap img.zoomed { cursor: grab; }
-  .lightbox-img-wrap img.zoomed:active { cursor: grabbing; }
+  .lightbox-img-wrap img:active { cursor: grabbing; }
+  /* Zoom buttons — accent-coloured squares, sit left of image on desktop, bottom-left on mobile */
+  .lb-zoom-controls { position: fixed; left: 1.5rem; top: 50%; transform: translateY(-50%); z-index: 410; display: flex; flex-direction: column; gap: 0.4rem; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+  .lightbox:hover .lb-zoom-controls { opacity: 1; pointer-events: all; }
+  .lb-zoom-controls.zone-active { opacity: 1; pointer-events: all; }
+  @media (hover: none) { .lb-zoom-controls { opacity: 1; pointer-events: all; } }
+  .lb-zoom-btn { background: var(--accent); border: none; color: var(--bg-card); font-size: 1.3rem; font-weight: 500; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; touch-action: manipulation; line-height: 1; }
+  .lb-zoom-btn:hover { background: var(--bg-dark); }
+  .lb-zoom-btn:disabled { opacity: 0.3; cursor: default; }
+  @media (max-width: 700px) {
+    .lb-zoom-controls { left: 1rem; top: auto; bottom: 5.5rem; transform: none; flex-direction: row; }
+    .lb-zoom-btn { width: 48px; height: 48px; font-size: 1.5rem; }
+  }
   /* Legend — vertical sidebar on desktop */
   .lightbox-legend {
     display: none; flex-direction: column;
@@ -293,8 +303,20 @@
   .journal-fullscreen { position: fixed; inset: 0; z-index: 300; background: var(--bg-card); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; gap: 0; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
   .journal-fullscreen.open { opacity: 1; pointer-events: all; }
   .journal-fullscreen-spread { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; background: var(--border); max-width: min(1200px, 90vw); width: 100%; flex-shrink: 0; }
-  .journal-fullscreen-slot { background: var(--bg-card); overflow: hidden; aspect-ratio: 210/297; display: flex; align-items: center; justify-content: center; }
-  .journal-fullscreen-slot img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .journal-fullscreen-slot { background: var(--bg-card); overflow: visible; aspect-ratio: 210/297; display: flex; align-items: center; justify-content: center; }
+  .journal-fullscreen-slot img { width: 100%; height: 100%; object-fit: contain; display: block; transform-origin: center center; user-select: none; -webkit-user-drag: none; cursor: default; }
+  /* Journal zoom buttons — same style as floor plan zoom buttons */
+  .journal-zoom-controls { position: fixed; left: 1.5rem; top: 50%; transform: translateY(-50%); z-index: 410; display: flex; flex-direction: column; gap: 0.4rem; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+  .journal-fullscreen:hover .journal-zoom-controls { opacity: 1; pointer-events: all; }
+  .journal-zoom-controls.zone-active { opacity: 1; pointer-events: all; }
+  @media (hover: none) { .journal-zoom-controls { opacity: 1; pointer-events: all; } }
+  .journal-zoom-btn { background: var(--accent); border: none; color: var(--bg-card); font-size: 1.3rem; font-weight: 500; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; touch-action: manipulation; line-height: 1; }
+  .journal-zoom-btn:hover { background: var(--bg-dark); }
+  .journal-zoom-btn:disabled { opacity: 0.3; cursor: default; }
+  @media (max-width: 700px) {
+    .journal-zoom-controls { left: 1rem; top: auto; bottom: 5.5rem; transform: none; flex-direction: row; }
+    .journal-zoom-btn { width: 48px; height: 48px; font-size: 1.5rem; }
+  }
   /* Floating controls for fullscreen journal */
   .journal-fullscreen-controls {
     position: fixed; bottom: 1.75rem; left: 50%; transform: translateX(-50%);
@@ -599,6 +621,10 @@
           <div class="lightbox-hotzone-close" id="journalHotzoneClose"></div>
           <div class="lightbox-hotzone-bottom" id="journalHotzoneBottom"></div>
           <button class="journal-close" id="journalClose">✕</button>
+          <div class="journal-zoom-controls" id="journalZoomControls">
+            <button class="journal-zoom-btn" id="journalZoomIn" aria-label="Zoom in">+</button>
+            <button class="journal-zoom-btn" id="journalZoomOut" aria-label="Zoom out">−</button>
+          </div>
           <div class="journal-fullscreen-spread">
             <div class="journal-fullscreen-slot" id="fsLeft"></div>
             <div class="journal-fullscreen-slot" id="fsRight"></div>
@@ -943,6 +969,10 @@
             <div class="lightbox-hotzone-close" id="devHotzoneClose"></div>
             <div class="lightbox-hotzone-bottom" id="devHotzoneBottom"></div>
             <button class="journal-close" id="devClose">✕</button>
+            <div class="journal-zoom-controls" id="devZoomControls">
+              <button class="journal-zoom-btn" id="devZoomIn" aria-label="Zoom in">+</button>
+              <button class="journal-zoom-btn" id="devZoomOut" aria-label="Zoom out">−</button>
+            </div>
             <div class="journal-fullscreen-spread" style="aspect-ratio:unset;">
               <div class="journal-fullscreen-slot" id="devFsLeft" style="aspect-ratio:297/210;"></div>
               <div class="journal-fullscreen-slot" id="devFsRight" style="aspect-ratio:297/210;"></div>
@@ -1090,6 +1120,10 @@
   <div class="lightbox-hotzone-close" id="lbHotzoneClose"></div>
   <div class="lightbox-hotzone-bottom" id="lbHotzoneBottom"></div>
   <button class="lightbox-close" id="lbClose">✕</button>
+  <div class="lb-zoom-controls" id="lbZoomControls">
+    <button class="lb-zoom-btn" id="lbZoomIn" aria-label="Zoom in">+</button>
+    <button class="lb-zoom-btn" id="lbZoomOut" aria-label="Zoom out">−</button>
+  </div>
   <!-- Main content area: image + optional legend side by side -->
   <div class="lightbox-inner">
     <div class="lightbox-img-wrap" id="lbImgWrap">
@@ -1146,6 +1180,72 @@ const devSrcs = [
   'images/wellness/30-dune-03.webp','images/wellness/30-dune-04.webp',
   'images/wellness/30-dune-05.webp','images/wellness/30-dune-06.webp'
 ];
+// ============================================================
+// JOURNAL ZOOM + PAN — shared factory, used by both viewers
+// ============================================================
+function makeJournalZoom(fsEl, spreadEl, zoomInBtn, zoomOutBtn) {
+  const ZOOM_MIN = 1, ZOOM_MAX = 4, ZOOM_STEP = 0.5;
+  let scale = 1, panX = 0, panY = 0;
+
+  function getImgs() { return spreadEl ? Array.from(spreadEl.querySelectorAll('img')) : []; }
+
+  function applyTransform(animated) {
+    getImgs().forEach(img => {
+      img.style.transition = animated ? 'transform 0.2s ease' : 'none';
+      img.style.transform = `scale(${scale}) translate(${panX / scale}px, ${panY / scale}px)`;
+      img.style.cursor = scale > 1 ? 'grab' : 'default';
+    });
+    if (zoomInBtn)  zoomInBtn.disabled  = scale >= ZOOM_MAX;
+    if (zoomOutBtn) zoomOutBtn.disabled = scale <= ZOOM_MIN;
+  }
+
+  function resetZoom() { scale = 1; panX = 0; panY = 0; applyTransform(false); }
+
+  if (zoomInBtn)  zoomInBtn.addEventListener('click',  e => { e.stopPropagation(); scale = Math.min(ZOOM_MAX, +(scale + ZOOM_STEP).toFixed(1)); applyTransform(true); });
+  if (zoomOutBtn) zoomOutBtn.addEventListener('click', e => { e.stopPropagation(); scale = Math.max(ZOOM_MIN, +(scale - ZOOM_STEP).toFixed(1)); if (scale === 1) { panX = 0; panY = 0; } applyTransform(true); });
+
+  // Mouse drag
+  let isDragging = false, dragStartX = 0, dragStartY = 0, dragPanX = 0, dragPanY = 0;
+  if (spreadEl) {
+    spreadEl.addEventListener('mousedown', e => {
+      if (scale <= 1) return;
+      e.preventDefault(); e.stopPropagation();
+      isDragging = true; dragStartX = e.clientX; dragStartY = e.clientY;
+      dragPanX = panX; dragPanY = panY;
+      getImgs().forEach(img => img.style.cursor = 'grabbing');
+    });
+  }
+  window.addEventListener('mousemove', e => {
+    if (!isDragging || !fsEl.classList.contains('open')) return;
+    panX = dragPanX + (e.clientX - dragStartX);
+    panY = dragPanY + (e.clientY - dragStartY);
+    applyTransform(false);
+  });
+  window.addEventListener('mouseup', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    getImgs().forEach(img => img.style.cursor = scale > 1 ? 'grab' : 'default');
+  });
+  window.addEventListener('mouseleave', () => { isDragging = false; });
+
+  // Touch drag
+  let tStartX = 0, tStartY = 0, tPanX = 0, tPanY = 0;
+  if (spreadEl) {
+    spreadEl.addEventListener('touchstart', e => {
+      tStartX = e.touches[0].clientX; tStartY = e.touches[0].clientY;
+      tPanX = panX; tPanY = panY;
+    }, { passive: true });
+    spreadEl.addEventListener('touchmove', e => {
+      if (scale <= 1) return;
+      panX = tPanX + (e.touches[0].clientX - tStartX);
+      panY = tPanY + (e.touches[0].clientY - tStartY);
+      applyTransform(false);
+    }, { passive: true });
+  }
+
+  return { resetZoom, applyTransform };
+}
+
 const DEV_TOTAL   = devSrcs.length;
 const DEV_SPREADS = DEV_TOTAL; // single page per step
 let devSpread    = 0;
@@ -1183,6 +1283,15 @@ const devFsN   = document.getElementById('devFsNext');
 const devFsCtr = document.getElementById('devFsCounter');
 const devClose = document.getElementById('devClose');
 
+// Wire zoom+pan for dev journal fullscreen
+const devFsSpreadEl = devFs ? devFs.querySelector('.journal-fullscreen-spread') : null;
+const devZoom = makeJournalZoom(
+  devFs,
+  devFsSpreadEl,
+  document.getElementById('devZoomIn'),
+  document.getElementById('devZoomOut')
+);
+
 if (devL && DEV_TOTAL > 0) {
   function initDev() { renderDevSpread(devSpread, devL, devR, devCtr, devPrev, devNext); }
   if (document.readyState !== 'loading') initDev(); else document.addEventListener('DOMContentLoaded', initDev);
@@ -1194,18 +1303,18 @@ if (devL && DEV_TOTAL > 0) {
     devFsSpread = devSpread;
     renderDevSpread(devFsSpread, devFsL, devFsR, devFsCtr, devFsP, devFsN);
     devFs.classList.add('open'); document.body.style.overflow = 'hidden';
+    devZoom.resetZoom();
   });
-  devFsP.addEventListener('click', () => { if (devFsSpread > 0) { devFsSpread--; renderDevSpread(devFsSpread, devFsL, devFsR, devFsCtr, devFsP, devFsN); } });
-  devFsN.addEventListener('click', () => { if (devFsSpread < DEV_SPREADS - 1) { devFsSpread++; renderDevSpread(devFsSpread, devFsL, devFsR, devFsCtr, devFsP, devFsN); } });
+  devFsP.addEventListener('click', () => { if (devFsSpread > 0) { devFsSpread--; renderDevSpread(devFsSpread, devFsL, devFsR, devFsCtr, devFsP, devFsN); devZoom.resetZoom(); } });
+  devFsN.addEventListener('click', () => { if (devFsSpread < DEV_SPREADS - 1) { devFsSpread++; renderDevSpread(devFsSpread, devFsL, devFsR, devFsCtr, devFsP, devFsN); devZoom.resetZoom(); } });
 
-  function closeDevFs() { devFs.classList.remove('open'); document.body.style.overflow = ''; devSpread = devFsSpread; renderDevSpread(devSpread, devL, devR, devCtr, devPrev, devNext); }
+  function closeDevFs() { devFs.classList.remove('open'); document.body.style.overflow = ''; devZoom.resetZoom(); devSpread = devFsSpread; renderDevSpread(devSpread, devL, devR, devCtr, devPrev, devNext); }
   devClose.addEventListener('click', closeDevFs);
   devClose.addEventListener('touchend', e => { e.preventDefault(); e.stopPropagation(); closeDevFs(); }, { passive: false });
   devFs.addEventListener('click', e => { if (e.target === devFs) closeDevFs(); });
   devFs.addEventListener('touchend', e => { if (e.target === devFs) closeDevFs(); }, { passive: true });
   // Double-tap anywhere on the spread to close on mobile
   let devLastTap = 0;
-  const devFsSpreadEl = devFs.querySelector('.journal-fullscreen-spread');
   if (devFsSpreadEl) {
     devFsSpreadEl.addEventListener('touchend', () => {
       const now = Date.now();
@@ -1214,7 +1323,7 @@ if (devL && DEV_TOTAL > 0) {
     }, { passive: true });
   }
 
-  // Hot zones — hovering near where a control actually sits reveals just that control
+  // Hot zones
   const devHotzoneClose  = document.getElementById('devHotzoneClose');
   const devHotzoneBottom = document.getElementById('devHotzoneBottom');
   const devFsControls    = document.getElementById('devFsControls');
@@ -1267,7 +1376,6 @@ document.querySelectorAll('[data-gallery]').forEach(img => {
 
 let lbGallery = null;
 let lbIndex   = 0;
-let lbZoomed  = false;
 
 const lightbox   = document.getElementById('lightbox');
 const lbImg      = document.getElementById('lbImg');
@@ -1284,8 +1392,7 @@ const lbActivity = makeAutoHide([lbControls, lbClose, lbLabel], 2500);
 function openLightbox(gallery, index) {
   lbGallery = gallery;
   lbIndex   = index;
-  lbZoomed  = false;
-  lbImg.classList.remove('zoomed');
+  resetZoom();
   showLbImage();
   lightbox.classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -1306,8 +1413,7 @@ function showLbImage() {
   lbPrev.disabled = false;
   lbNext.disabled = false;
   // Reset zoom on navigation
-  lbZoomed = false;
-  lbImg.classList.remove('zoomed');
+  resetZoom();
   applyTransform();
   // Show legend only for floor plan images
   if (lbGallery === LEGEND_GALLERY && LEGEND_INDICES.includes(lbIndex)) {
@@ -1320,8 +1426,7 @@ function showLbImage() {
 function closeLightbox() {
   lightbox.classList.remove('open');
   document.body.style.overflow = '';
-  lbZoomed = false;
-  lbImg.classList.remove('zoomed');
+  resetZoom();
   lbLegend.classList.remove('visible');
   applyTransform();
 }
@@ -1331,93 +1436,63 @@ document.querySelectorAll('[data-gallery]').forEach(img => {
   img.addEventListener('click', () => openLightbox(img.dataset.gallery, parseInt(img.dataset.index)));
 });
 
-// Click image = toggle zoom (quick click), drag = pan when zoomed
-let isDragging   = false;
-let dragStartX   = 0;
-let dragStartY   = 0;
-let panX         = 0;
-let panY         = 0;
-let mouseDownTime = 0;
-const DRAG_THRESHOLD = 5; // px — below this = click, above = drag
+// ── Zoom + pan system ──────────────────────────────────────────
+const lbZoomIn  = document.getElementById('lbZoomIn');
+const lbZoomOut = document.getElementById('lbZoomOut');
+const ZOOM_MIN = 1, ZOOM_MAX = 4, ZOOM_STEP = 0.5;
+let lbScale = 1, panX = 0, panY = 0;
 
-function applyTransform() {
-  if (lbZoomed) {
-    lbImg.style.transform = 'scale(2.2) translate(' + (panX / 2.2) + 'px, ' + (panY / 2.2) + 'px)';
-  } else {
-    lbImg.style.transform = 'translate(0,0) scale(1)';
-    panX = 0; panY = 0;
-  }
+function applyTransform(animated) {
+  lbImg.style.transition = animated ? 'transform 0.2s ease' : 'none';
+  lbImg.style.transform = `scale(${lbScale}) translate(${panX / lbScale}px, ${panY / lbScale}px)`;
+  lbImg.style.cursor = lbScale > 1 ? 'grab' : 'default';
+  if (lbZoomIn)  lbZoomIn.disabled  = lbScale >= ZOOM_MAX;
+  if (lbZoomOut) lbZoomOut.disabled = lbScale <= ZOOM_MIN;
 }
 
+function resetZoom() { lbScale = 1; panX = 0; panY = 0; applyTransform(false); }
+
+if (lbZoomIn)  lbZoomIn.addEventListener('click',  e => { e.stopPropagation(); lbScale = Math.min(ZOOM_MAX, +(lbScale + ZOOM_STEP).toFixed(1)); applyTransform(true); });
+if (lbZoomOut) lbZoomOut.addEventListener('click', e => { e.stopPropagation(); lbScale = Math.max(ZOOM_MIN, +(lbScale - ZOOM_STEP).toFixed(1)); if (lbScale === 1) { panX = 0; panY = 0; } applyTransform(true); });
+
+// Mouse drag to pan
+let isDragging = false, dragStartX = 0, dragStartY = 0, dragPanX = 0, dragPanY = 0;
 lbImg.addEventListener('mousedown', e => {
-  e.preventDefault();
-  mouseDownTime = Date.now();
-  isDragging = false;
-  dragStartX = e.clientX - panX;
-  dragStartY = e.clientY - panY;
+  if (lbScale <= 1) return;
+  e.preventDefault(); e.stopPropagation();
+  isDragging = true; dragStartX = e.clientX; dragStartY = e.clientY;
+  dragPanX = panX; dragPanY = panY;
+  lbImg.style.cursor = 'grabbing';
 });
-
 window.addEventListener('mousemove', e => {
-  if (!lightbox.classList.contains('open')) return;
-  if (e.buttons !== 1) return;
-  const dx = e.clientX - dragStartX;
-  const dy = e.clientY - dragStartY;
-  if (!isDragging && (Math.abs(dx - panX) > DRAG_THRESHOLD || Math.abs(dy - panY) > DRAG_THRESHOLD)) {
-    isDragging = true;
-  }
-  if (isDragging && lbZoomed) {
-    panX = dx;
-    panY = dy;
-    applyTransform();
-    lbActivity();
-  }
+  if (!isDragging) return;
+  panX = dragPanX + (e.clientX - dragStartX);
+  panY = dragPanY + (e.clientY - dragStartY);
+  applyTransform(false);
 });
-
-window.addEventListener('mouseup', e => {
-  if (!lightbox.classList.contains('open')) return;
-  const elapsed = Date.now() - mouseDownTime;
-  if (!isDragging && elapsed < 300 && e.target === lbImg) {
-    // Quick click = toggle zoom
-    lbZoomed = !lbZoomed;
-    if (!lbZoomed) { panX = 0; panY = 0; }
-    lbImg.classList.toggle('zoomed', lbZoomed);
-    applyTransform();
-    lbActivity();
-  }
+window.addEventListener('mouseup', () => {
+  if (!isDragging) return;
   isDragging = false;
+  lbImg.style.cursor = lbScale > 1 ? 'grab' : 'default';
 });
+window.addEventListener('mouseleave', () => { isDragging = false; });
 
-// Touch support — pinch not needed, just drag to pan
-let touchStartX = 0;
-let touchStartY = 0;
-let touchMoved  = false;
-
+// Touch drag to pan
+let touchStartX = 0, touchStartY = 0, touchPanX = 0, touchPanY = 0, touchMoved = false;
 lbImg.addEventListener('touchstart', e => {
-  touchStartX = e.touches[0].clientX - panX;
-  touchStartY = e.touches[0].clientY - panY;
-  touchMoved  = false;
+  touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY;
+  touchPanX = panX; touchPanY = panY; touchMoved = false;
 }, { passive: true });
-
 lbImg.addEventListener('touchmove', e => {
-  if (!lbZoomed) return;
+  if (lbScale <= 1) return;
   touchMoved = true;
-  panX = e.touches[0].clientX - touchStartX;
-  panY = e.touches[0].clientY - touchStartY;
-  applyTransform();
-  lbActivity();
+  panX = touchPanX + (e.touches[0].clientX - touchStartX);
+  panY = touchPanY + (e.touches[0].clientY - touchStartY);
+  applyTransform(false);
 }, { passive: true });
+lbImg.addEventListener('touchend', () => { /* no toggle zoom on touch */ });
 
-lbImg.addEventListener('touchend', e => {
-  if (!touchMoved) {
-    lbZoomed = !lbZoomed;
-    if (!lbZoomed) { panX = 0; panY = 0; }
-    lbImg.classList.toggle('zoomed', lbZoomed);
-    applyTransform();
-    lbActivity();
-  }
-});
-
-// Click dark background or wrap = close
+// Click background to close (not image)
 lightbox.addEventListener('click', e => {
   if (e.target === lightbox || e.target === lbWrap) closeLightbox();
 });
@@ -1541,6 +1616,15 @@ const fsActivity  = makeAutoHide(
   2500
 );
 
+// Wire zoom+pan for townhouse journal fullscreen
+const jFsSpreadEl = fs ? fs.querySelector('.journal-fullscreen-spread') : null;
+const jZoom = makeJournalZoom(
+  fs,
+  jFsSpreadEl,
+  document.getElementById('journalZoomIn'),
+  document.getElementById('journalZoomOut')
+);
+
 function initJournal() {
   renderSpread(spread, spreadLeft, spreadRight, counter, prevBtn, nextBtn);
 }
@@ -1559,20 +1643,21 @@ fullBtn.addEventListener('click', () => {
   renderSpread(fsSpread, fsLeft, fsRight, fsCounter, fsPrev, fsNext);
   fs.classList.add('open');
   document.body.style.overflow = 'hidden';
+  jZoom.resetZoom();
   fsActivity();
 });
 
 fsPrev.addEventListener('click', () => {
-  if (fsSpread > 0) { fsSpread--; renderSpread(fsSpread, fsLeft, fsRight, fsCounter, fsPrev, fsNext); fsActivity(); }
+  if (fsSpread > 0) { fsSpread--; renderSpread(fsSpread, fsLeft, fsRight, fsCounter, fsPrev, fsNext); jZoom.resetZoom(); fsActivity(); }
 });
 fsNext.addEventListener('click', () => {
-  if (fsSpread < SPREADS - 1) { fsSpread++; renderSpread(fsSpread, fsLeft, fsRight, fsCounter, fsPrev, fsNext); fsActivity(); }
+  if (fsSpread < SPREADS - 1) { fsSpread++; renderSpread(fsSpread, fsLeft, fsRight, fsCounter, fsPrev, fsNext); jZoom.resetZoom(); fsActivity(); }
 });
 
 fs.addEventListener('mousemove', fsActivity);
 fs.addEventListener('touchstart', fsActivity);
 
-// Hot zones — hovering near where a control actually sits reveals just that control
+// Hot zones
 const journalHotzoneClose  = document.getElementById('journalHotzoneClose');
 const journalHotzoneBottom = document.getElementById('journalHotzoneBottom');
 const journalCloseBtn      = document.getElementById('journalClose');
@@ -1588,6 +1673,7 @@ if (journalHotzoneBottom) {
 function closeFs() {
   fs.classList.remove('open');
   document.body.style.overflow = '';
+  jZoom.resetZoom();
   spread = fsSpread;
   renderSpread(spread, spreadLeft, spreadRight, counter, prevBtn, nextBtn);
 }
