@@ -107,7 +107,7 @@
 
   /* DESIGN DEVELOPMENT TAPESTRY — horizontal scroll */
   .tapestry-wrap { position: relative; margin-bottom: 2rem; }
-  .tapestry-track { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -webkit-overflow-scrolling: touch; cursor: grab; }
+  .tapestry-track { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -webkit-overflow-scrolling: touch; cursor: grab; height: 420px; background: #EDE7DE; }
   .tapestry-track:active { cursor: grabbing; }
   .tapestry-track::-webkit-scrollbar { display: none; }
   /* Right-edge fade — permanent subtle indicator */
@@ -124,10 +124,11 @@
   .tapestry-scrollbar-track { height: 4px; background: var(--border-strong); border-radius: 2px; position: relative; cursor: pointer; }
   .tapestry-scrollbar-thumb { height: 100%; background: var(--accent); border-radius: 2px; position: absolute; left: 0; top: 0; min-width: 48px; transition: background 0.15s; cursor: grab; }
   .tapestry-scrollbar-thumb:active { cursor: grabbing; background: var(--text-primary); }
-  .tapestry-img { height: var(--tapestry-inline-zoom, 420px); width: auto; display: block; user-select: none; -webkit-user-drag: none; transition: height 0.2s ease; }
+  .tapestry-img { height: 100%; width: auto; display: block; user-select: none; -webkit-user-drag: none; transform-origin: top left; transition: transform 0.25s ease; flex-shrink: 0; }
   .tapestry-arrow { display: none; }
   @media (max-width: 700px) {
-    .tapestry-img { height: var(--tapestry-inline-zoom, 500px); }
+    .tapestry-track { height: 500px; }
+    .tapestry-img { height: 100%; }
     .tapestry-arrow { display: flex; align-items: center; justify-content: center; position: absolute; top: 50%; transform: translateY(-60%); z-index: 2; background: rgba(42,31,26,0.55); border: none; color: #F2EDE6; font-size: 1.8rem; width: 40px; height: 40px; cursor: pointer; transition: background 0.2s; }
     .tapestry-arrow:hover { background: rgba(42,31,26,0.85); }
     .tapestry-arrow:disabled { opacity: 0.2; cursor: default; }
@@ -1921,16 +1922,20 @@ document.querySelectorAll('[data-close-mat]').forEach(btn => {
   // --- Inline zoom controls ---
   const inlineZoomIn  = document.getElementById('kitchenInlineZoomIn');
   const inlineZoomOut = document.getElementById('kitchenInlineZoomOut');
-  const INLINE_MIN = 220, INLINE_MAX = 700, INLINE_STEP = 60;
-  let inlineZoom = window.innerWidth <= 700 ? 500 : 420;
+  const INLINE_STEP = 0.15;
+  const INLINE_MIN  = 0.5;
+  const INLINE_MAX  = 2.0;
+  let inlineScale = 1.0;
 
   function applyInlineZoom() {
-    if (wrap) wrap.style.setProperty('--tapestry-inline-zoom', inlineZoom + 'px');
-    if (inlineZoomIn)  inlineZoomIn.disabled  = inlineZoom >= INLINE_MAX;
-    if (inlineZoomOut) inlineZoomOut.disabled = inlineZoom <= INLINE_MIN;
+    if (img) img.style.transform = `scale(${inlineScale})`;
+    if (inlineZoomIn)  inlineZoomIn.disabled  = inlineScale >= INLINE_MAX;
+    if (inlineZoomOut) inlineZoomOut.disabled = inlineScale <= INLINE_MIN;
+    // Update scrollbar since image changed apparent width
+    updateThumb();
   }
-  if (inlineZoomIn)  inlineZoomIn.addEventListener('click', () => { inlineZoom = Math.min(INLINE_MAX, inlineZoom + INLINE_STEP); applyInlineZoom(); });
-  if (inlineZoomOut) inlineZoomOut.addEventListener('click', () => { inlineZoom = Math.max(INLINE_MIN, inlineZoom - INLINE_STEP); applyInlineZoom(); });
+  if (inlineZoomIn)  inlineZoomIn.addEventListener('click', () => { inlineScale = Math.min(INLINE_MAX, +(inlineScale + INLINE_STEP).toFixed(2)); applyInlineZoom(); });
+  if (inlineZoomOut) inlineZoomOut.addEventListener('click', () => { inlineScale = Math.max(INLINE_MIN, +(inlineScale - INLINE_STEP).toFixed(2)); applyInlineZoom(); });
   applyInlineZoom();
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && fsPanel && fsPanel.classList.contains('open')) closeTapestryFs(); });
 
