@@ -170,12 +170,12 @@
   }
   .lightbox.open { opacity: 1; pointer-events: all; }
   .lightbox-inner {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 1rem; width: 100%; flex: 1; max-height: calc(100vh - 80px);
+    display: flex; align-items: center; justify-content: center;
+    gap: 1.5rem; width: 100%; flex: 1; max-height: calc(100vh - 80px);
   }
   .lightbox-img-wrap {
     flex: 0 1 auto; display: flex; align-items: center; justify-content: center;
-    overflow: hidden; min-width: 0; max-width: 100%; max-height: calc(100vh - 160px);
+    height: 100%; overflow: hidden; max-height: 100%; min-width: 0;
   }
   .lightbox-img-wrap img {
     max-width: 100%; max-height: 100%; object-fit: contain; display: block;
@@ -184,19 +184,30 @@
   }
   .lightbox-img-wrap img.zoomed { cursor: grab; }
   .lightbox-img-wrap img.zoomed:active { cursor: grabbing; }
-  /* Legend — landscape strip below image on all sizes */
+  /* Legend — vertical sidebar on desktop */
   .lightbox-legend {
-    display: none; flex-direction: row; flex-wrap: wrap;
+    display: none; flex-direction: column;
     background: var(--bg-card);
     border: 0.5px solid var(--border-strong);
-    padding: 0.75rem 1rem; width: 100%; max-width: 860px; flex-shrink: 0; gap: 0.25rem 0;
+    padding: 1.25rem; min-width: 160px; max-width: 190px; flex-shrink: 0;
+    align-self: center; max-height: 80vh; overflow-y: auto;
   }
   .lightbox-legend.visible { display: flex; }
-  .lb-legend-title { font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.4rem; padding-bottom: 0.4rem; border-bottom: 0.5px solid var(--border); width: 100%; }
-  .lb-legend-grid { display: flex; flex-direction: row; flex-wrap: wrap; gap: 0.25rem 1.25rem; width: 100%; }
-  .lb-legend-item { display: flex; align-items: baseline; gap: 0.35rem; }
+  .lb-legend-title { font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.75rem; padding-bottom: 0.6rem; border-bottom: 0.5px solid var(--border); }
+  .lb-legend-grid { display: grid; grid-template-columns: auto 1fr; gap: 0.35rem 0.6rem; align-items: baseline; }
+  .lb-legend-item { display: contents; }
   .lb-legend-num { font-size: 10px; font-weight: 600; color: var(--accent); white-space: nowrap; }
-  .lb-legend-name { font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-secondary); white-space: nowrap; }
+  .lb-legend-name { font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-secondary); }
+  /* Mobile — legend moves below image as a compact 2-column grid */
+  @media (max-width: 700px) {
+    .lightbox-inner { flex-direction: column; max-height: none; }
+    .lightbox-img-wrap { height: auto; max-height: 55vh; width: 100%; }
+    .lightbox-legend {
+      max-width: 100%; min-width: 0; max-height: none; overflow-y: visible;
+      align-self: stretch; padding: 0.75rem 1rem;
+    }
+    .lb-legend-grid { grid-template-columns: auto 1fr auto 1fr; gap: 0.3rem 0.5rem; }
+  }
   /* Floating controls — hover to reveal, always visible on touch */
   .lightbox-controls {
     position: fixed; bottom: 1.75rem; left: 50%; transform: translateX(-50%);
@@ -231,10 +242,12 @@
   .lightbox-btn:disabled { opacity: 0.22; cursor: default; pointer-events: none; }
   .lightbox-counter { font-size: 11px; letter-spacing: 0.06em; color: var(--text-muted); min-width: 54px; text-align: center; }
   .lightbox-label {
-    position: fixed; bottom: 5.25rem; left: 50%; transform: translateX(-50%);
+    position: fixed; top: 1.25rem; left: 50%; transform: translateX(-50%);
     font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--text-muted); white-space: nowrap; z-index: 401;
     transition: opacity 0.3s; opacity: 0; pointer-events: none;
+    background: var(--bg-card); padding: 0.3rem 0.75rem;
+    border: 0.5px solid var(--border-strong);
   }
   .lightbox:hover .lightbox-label { opacity: 1; }
   @media (hover: none) { .lightbox-label { opacity: 1; } }
