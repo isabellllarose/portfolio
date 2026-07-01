@@ -124,10 +124,10 @@
   .tapestry-scrollbar-track { height: 4px; background: var(--border-strong); border-radius: 2px; position: relative; cursor: pointer; }
   .tapestry-scrollbar-thumb { height: 100%; background: var(--accent); border-radius: 2px; position: absolute; left: 0; top: 0; min-width: 48px; transition: background 0.15s; cursor: grab; }
   .tapestry-scrollbar-thumb:active { cursor: grabbing; background: var(--text-primary); }
-  .tapestry-img { height: 420px; width: auto; display: block; user-select: none; -webkit-user-drag: none; }
+  .tapestry-img { height: var(--tapestry-inline-zoom, 420px); width: auto; display: block; user-select: none; -webkit-user-drag: none; transition: height 0.2s ease; }
   .tapestry-arrow { display: none; }
   @media (max-width: 700px) {
-    .tapestry-img { height: 500px; }
+    .tapestry-img { height: var(--tapestry-inline-zoom, 500px); }
     .tapestry-arrow { display: flex; align-items: center; justify-content: center; position: absolute; top: 50%; transform: translateY(-60%); z-index: 2; background: rgba(42,31,26,0.55); border: none; color: #F2EDE6; font-size: 1.8rem; width: 40px; height: 40px; cursor: pointer; transition: background 0.2s; }
     .tapestry-arrow:hover { background: rgba(42,31,26,0.85); }
     .tapestry-arrow:disabled { opacity: 0.2; cursor: default; }
@@ -136,8 +136,12 @@
   }
 
   /* Tapestry fullscreen button */
-  .tapestry-fs-btn { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.6rem; background: none; border: 0.5px solid var(--border-strong); padding: 0.4rem 0.9rem; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; transition: color 0.2s, border-color 0.2s; }
+  .tapestry-fs-btn { display: inline-flex; align-items: center; gap: 0.4rem; background: none; border: 0.5px solid var(--border-strong); padding: 0.4rem 0.9rem; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; transition: color 0.2s, border-color 0.2s; }
   .tapestry-fs-btn:hover { color: var(--accent); border-color: var(--accent); }
+  /* Inline zoom buttons — accent-coloured, sit left of full screen button */
+  .tapestry-inline-zoom-btn { display: inline-flex; align-items: center; justify-content: center; background: var(--accent); border: none; color: var(--bg-card); font-size: 1rem; font-weight: 500; width: 28px; height: 28px; cursor: pointer; transition: background 0.2s; line-height: 1; flex-shrink: 0; }
+  .tapestry-inline-zoom-btn:hover { background: var(--bg-dark); }
+  .tapestry-inline-zoom-btn:disabled { opacity: 0.3; cursor: default; }
   /* Tapestry fullscreen overlay */
   .tapestry-fullscreen { position: fixed; inset: 0; z-index: 400; background: var(--bg-card); display: flex; flex-direction: column; align-items: stretch; justify-content: center; padding: 3rem 0 2rem; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
   .tapestry-fullscreen.open { opacity: 1; pointer-events: all; }
@@ -482,7 +486,7 @@
 
     <!-- BEFORE — compact main image + thumbnail strip + design critique callout -->
     <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2rem 0 0.75rem;">Before</h4>
-    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem; max-width:680px;">The existing kitchen and meals area prior to renovation. The first two images were taken at the time of purchase with the original styling in place; the next two show the space once vacated — with the meals furniture removed, the spatial constraints of the original layout become more apparent. The final three images are from a previous sale listing dated c. 2013, included to show the condition and layout of the space over a decade earlier — including the dead space adjoining the kitchen that was later reworked into the meals area.</p>
+    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem">The existing kitchen and meals area prior to renovation. The first two images were taken at the time of purchase with the original styling in place; the next two show the space once vacated — with the meals furniture removed, the spatial constraints of the original layout become more apparent. The final three images are from a previous sale listing dated c. 2013, included to show the condition and layout of the space over a decade earlier — including the dead space adjoining the kitchen that was later reworked into the meals area.</p>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; align-items:start; margin-bottom:1.5rem;" class="before-two-col">
       <div class="before-viewer" style="max-width:100%; margin-bottom:0;">
         <div class="before-main" id="beforeMain">
@@ -543,8 +547,8 @@
 
     <!-- DESIGN DEVELOPMENT TAPESTRY -->
     <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Design Development</h4>
-    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.8; margin-bottom:0.9rem; max-width:720px;">The design process began with researching off-the-shelf cabinetry solutions — first through Kaboodle, then IKEA — as a pragmatic starting point for understanding spatial possibilities and product ranges. As the design ideas developed and became more resolved, it became clear that going custom through a cabinet maker was the stronger path forward. Rather than a change of direction, it was an opportunity to take the ideas already developed and refine them without constraint — not being limited to the available product ranges, colourways, or standard modular dimensions meant the design could be executed exactly as intended. In particular, it opened up the material selection considerably: instead of finding the closest match within what either brand offered, the exact Polytec finish and profile could be specified from the outset.</p>
-    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.25rem; max-width:720px;">The tapestry below brings together the research and ideas explored along the way — product research through Kaboodle and IKEA, colour and finish direction, and specific inspiration for details like the coffee corner and pantry organisation.</p>
+    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.8; margin-bottom:0.9rem">The design process began with researching off-the-shelf cabinetry solutions — first through Kaboodle, then IKEA — as a pragmatic starting point for understanding spatial possibilities and product ranges. As the design ideas developed and became more resolved, it became clear that going custom through a cabinet maker was the stronger path forward. Rather than a change of direction, it was an opportunity to take the ideas already developed and refine them without constraint — not being limited to the available product ranges, colourways, or standard modular dimensions meant the design could be executed exactly as intended. In particular, it opened up the material selection considerably: instead of finding the closest match within what either brand offered, the exact Polytec finish and profile could be specified from the outset.</p>
+    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.25rem">The tapestry below brings together the research and ideas explored along the way — product research through Kaboodle and IKEA, colour and finish direction, and specific inspiration for details like the coffee corner and pantry organisation.</p>
 
     <div class="tapestry-wrap" id="kitchenTapestryWrap">
       <!-- Right-edge fade gradient -->
@@ -567,8 +571,12 @@
           <div class="tapestry-scrollbar-thumb" id="kitchenScrollbarThumb"></div>
         </div>
       </div>
-      <!-- FULLSCREEN BUTTON -->
-      <button class="tapestry-fs-btn" id="kitchenTapestryFsBtn">⛶ Full screen</button>
+      <!-- INLINE CONTROLS ROW -->
+      <div style="display:flex; align-items:center; gap:0.5rem; margin-top:0.6rem;">
+        <button class="tapestry-inline-zoom-btn" id="kitchenInlineZoomOut" aria-label="Zoom out">−</button>
+        <button class="tapestry-inline-zoom-btn" id="kitchenInlineZoomIn" aria-label="Zoom in">+</button>
+        <button class="tapestry-fs-btn" id="kitchenTapestryFsBtn">⛶ Full screen</button>
+      </div>
     </div>
 
     <!-- TAPESTRY FULLSCREEN OVERLAY -->
@@ -585,18 +593,24 @@
 
     <!-- LAYOUT RECONFIGURATION -->
     <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Layout Reconfiguration</h4>
-    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.25rem; max-width:680px;">As part of the design development I proposed adjusting the floor plan to make better use of the available space.</p>
+    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.25rem">As part of the design development I proposed adjusting the floor plan to make better use of the available space.</p>
 
     <div class="layout-plans-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-bottom:1.5rem; align-items:start;">
-      <div style="background:var(--bg-card); display:flex; align-items:center; justify-content:center; padding:0.75rem;">
-        <img src="images/personal/kitchen-layout-original.webp" alt="Original Floor Plan — with furniture" data-gallery="kitchen-reference" data-index="2" class="lb-transparent-bg" style="width:100%; height:auto; display:block; cursor:zoom-in;">
+      <div>
+        <p style="font-size:9px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); margin-bottom:0.5rem;">Current floor plan</p>
+        <div style="background:var(--bg-card); display:flex; align-items:center; justify-content:center; padding:0.75rem;">
+          <img src="images/personal/kitchen-layout-original.webp" alt="Original Floor Plan — with furniture" data-gallery="kitchen-reference" data-index="2" class="lb-transparent-bg" style="width:100%; height:auto; display:block; cursor:zoom-in;">
+        </div>
       </div>
-      <div style="background:var(--bg-card); display:flex; align-items:center; justify-content:center; padding:0.75rem;">
-        <img src="images/personal/kitchen-layout-reconfigured.webp" alt="Proposed Reconfigured Layout — NTS" data-gallery="kitchen-reference" data-index="3" class="lb-transparent-bg" style="width:100%; height:auto; display:block; cursor:zoom-in;">
+      <div>
+        <p style="font-size:9px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); margin-bottom:0.5rem;">Visualisation of proposed floor plan</p>
+        <div style="background:var(--bg-card); display:flex; align-items:center; justify-content:center; padding:0.75rem;">
+          <img src="images/personal/kitchen-layout-reconfigured.webp" alt="Proposed Reconfigured Layout — NTS" data-gallery="kitchen-reference" data-index="3" class="lb-transparent-bg" style="width:100%; height:auto; display:block; cursor:zoom-in;">
+        </div>
       </div>
     </div>
 
-    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:0.75rem; max-width:680px;">I suggested this reconfiguration for several reasons:</p>
+    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:0.75rem">I suggested this reconfiguration for several reasons:</p>
     <ul class="outcomes-list" style="margin-bottom:1.5rem;">
       <li>Made use of the empty space separating the kitchen from the living area, which was previously an ineffective use of floor space</li>
       <li>Relocated the meals area into that space, freeing up the original meals area to become additional kitchen floor space</li>
@@ -608,7 +622,7 @@
 
     <!-- DEVELOPMENTAL DRAWINGS -->
     <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2rem 0 0.75rem;">Developmental Drawings</h4>
-    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem; max-width:680px;">My floor plan as the layout was refined. The final cabinetry was produced to manufacture by the cabinet maker from this concept, so detailed joinery drawings shown elsewhere are their own technical documentation rather than mine.</p>
+    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem">My floor plan as the layout was refined. The final cabinetry was produced to manufacture by the cabinet maker from this concept, so detailed joinery drawings shown elsewhere are their own technical documentation rather than mine.</p>
     <div style="max-width:480px; margin-bottom:1.5rem;">
       <div class="img-slot" style="aspect-ratio:4/3; background:var(--bg-card);">
         <!-- REPLACE: <img src="images/personal/kitchen-dev-floorplan.webp" alt="Developmental Floor Plan — NTS" data-gallery="kitchen-reference" data-index="4" class="lb-transparent-bg"> -->
@@ -667,11 +681,11 @@
     </div>
 
     <!-- LIGHTING NOTE -->
-    <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.75; margin-top:1.75rem; max-width:680px;">Under-cabinet LED track lighting was added — not purely for aesthetics, but as appropriate task lighting for this area of the house, which receives the least natural light of any room.</p>
+    <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.75; margin-top:1.75rem">Under-cabinet LED track lighting was added — not purely for aesthetics, but as appropriate task lighting for this area of the house, which receives the least natural light of any room.</p>
 
     <!-- FINAL DETAILS -->
     <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Final Details</h4>
-    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem; max-width:680px;">The completed kitchen — an above plan view of the final layout, followed by photographs of the finished space.</p>
+    <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem">The completed kitchen — an above plan view of the final layout, followed by photographs of the finished space.</p>
 
     <span class="img-label">Above plan view — final layout</span>
     <div style="max-width:480px; margin-bottom:1.5rem;">
@@ -782,11 +796,11 @@
         <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.75rem; letter-spacing:0.04em;">Storage and finish-led fit-out within the existing footprint</p>
         <p style="font-size:0.8rem; color:var(--accent); margin-bottom:2rem; letter-spacing:0.03em;">This project is currently at proposal stage — design and material selections shown below have not yet been built.</p>
 
-        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.8; max-width:680px; margin-bottom:1.5rem;">The existing laundry retains its original plumbing layout — relocating services wasn't justified for this brief, so the design challenge became one of working within a fixed footprint rather than reconfiguring it. The proposal focuses on resolving the room's two biggest functional failures — a dryer that doesn't properly fit its allocated space, and a near-total absence of storage for linen and cleaning supplies — alongside a full finish refresh.</p>
+        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.8; margin-bottom:1.5rem;">The existing laundry retains its original plumbing layout — relocating services wasn't justified for this brief, so the design challenge became one of working within a fixed footprint rather than reconfiguring it. The proposal focuses on resolving the room's two biggest functional failures — a dryer that doesn't properly fit its allocated space, and a near-total absence of storage for linen and cleaning supplies — alongside a full finish refresh.</p>
 
         <!-- BEFORE — empty + lived-in -->
         <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2rem 0 0.75rem;">Before</h4>
-        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem; max-width:680px;">The existing laundry as it stands. The first and second images showing the room vacant, prior to appliances or storage being introduced; the last showing the space in everyday use, where the practical shortcomings of the layout become apparent.</p>
+        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem">The existing laundry as it stands. The first and second images showing the room vacant, prior to appliances or storage being introduced; the last showing the space in everyday use, where the practical shortcomings of the layout become apparent.</p>
 
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; align-items:start; margin-bottom:1.5rem;" class="before-two-col">
           <div class="laundry-before-viewer" id="laundryBeforeMain" style="max-width:100%; margin-bottom:0;">
@@ -823,11 +837,11 @@
 
         <!-- PROPOSED DESIGN — concept stage, no final build yet -->
         <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Proposed Design</h4>
-        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.5rem; max-width:680px;">Concept direction for the fit-out — layout intent, material selections, and rationale. This section will be replaced with finished photography once the project is built.</p>
+        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.5rem">Concept direction for the fit-out — layout intent, material selections, and rationale. This section will be replaced with finished photography once the project is built.</p>
 
         <!-- DESIGN DEVELOPMENT / INSPIRATION — 2 images -->
         <h5 style="font-family:'Playfair Display',serif; font-size:1rem; margin:0 0 0.75rem; color:var(--text-secondary);">Design Development</h5>
-        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem; max-width:680px;">Inspiration imagery and mood board direction developed to guide the material and finish selections.</p>
+        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem">Inspiration imagery and mood board direction developed to guide the material and finish selections.</p>
 
         <div class="img-grid-2" style="margin-bottom:1.5rem;">
           <div class="img-slot" style="aspect-ratio:4/3; background:var(--bg-mid);">
@@ -920,11 +934,11 @@
         <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.75rem; letter-spacing:0.04em;">Finish-led refresh responding to existing functional shortfalls</p>
         <p style="font-size:0.8rem; color:var(--accent); margin-bottom:2rem; letter-spacing:0.03em;">This project is currently at proposal stage — design and material selections shown below have not yet been built.</p>
 
-        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.8; max-width:680px; margin-bottom:1.5rem;">The existing bathroom has required at least one reactive fix since move-in — a shower screen retrofitted after water spray from the open shower was found to be damaging the adjacent vanity. This proposal looks at the bathroom holistically, addressing finish and presentation alongside the functional issues that have already required intervention, rather than treating them as isolated fixes.</p>
+        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.8; margin-bottom:1.5rem;">The existing bathroom has required at least one reactive fix since move-in — a shower screen retrofitted after water spray from the open shower was found to be damaging the adjacent vanity. This proposal looks at the bathroom holistically, addressing finish and presentation alongside the functional issues that have already required intervention, rather than treating them as isolated fixes.</p>
 
         <!-- BEFORE — sale photo + lived-in -->
         <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2rem 0 0.75rem;">Before</h4>
-        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem; max-width:680px;">The existing bathroom. The first image is from the original sale listing; the remaining images were taken since moving in, including the shower screen added after the fact to address water damage to the vanity.</p>
+        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem">The existing bathroom. The first image is from the original sale listing; the remaining images were taken since moving in, including the shower screen added after the fact to address water damage to the vanity.</p>
 
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; align-items:start; margin-bottom:1.5rem;" class="before-two-col">
           <div class="laundry-before-viewer" id="bathroomBeforeMain" style="max-width:100%; margin-bottom:0;">
@@ -967,11 +981,11 @@
 
         <!-- PROPOSED DESIGN — concept stage, no final build yet -->
         <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Proposed Design</h4>
-        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.5rem; max-width:680px;">Concept direction for the refresh — layout intent, material selections, and rationale. This section will be replaced with finished photography once the project is built.</p>
+        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.5rem">Concept direction for the refresh — layout intent, material selections, and rationale. This section will be replaced with finished photography once the project is built.</p>
 
         <!-- DESIGN DEVELOPMENT / INSPIRATION — 2 images -->
         <h5 style="font-family:'Playfair Display',serif; font-size:1rem; margin:0 0 0.75rem; color:var(--text-secondary);">Design Development</h5>
-        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem; max-width:680px;">Inspiration imagery and mood board direction developed to guide the material and finish selections.</p>
+        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem">Inspiration imagery and mood board direction developed to guide the material and finish selections.</p>
 
         <div class="img-grid-2" style="margin-bottom:1.5rem;">
           <div class="img-slot" style="aspect-ratio:4/3; background:var(--bg-mid);">
@@ -1889,7 +1903,7 @@ document.querySelectorAll('[data-close-mat]').forEach(btn => {
     fsPanel.addEventListener('touchend', e => { if (e.target === fsPanel) closeTapestryFs(); }, { passive: true });
   }
 
-  // --- Zoom controls ---
+  // --- Fullscreen zoom controls ---
   const zoomInBtn  = document.getElementById('kitchenTapestryZoomIn');
   const zoomOutBtn = document.getElementById('kitchenTapestryZoomOut');
   const ZOOM_MIN = 220, ZOOM_MAX = 800, ZOOM_STEP = 60;
@@ -1903,12 +1917,34 @@ document.querySelectorAll('[data-close-mat]').forEach(btn => {
   if (zoomInBtn)  zoomInBtn.addEventListener('click', () => { zoomLevel = Math.min(ZOOM_MAX, zoomLevel + ZOOM_STEP); applyZoom(); });
   if (zoomOutBtn) zoomOutBtn.addEventListener('click', () => { zoomLevel = Math.max(ZOOM_MIN, zoomLevel - ZOOM_STEP); applyZoom(); });
   applyZoom();
+
+  // --- Inline zoom controls ---
+  const inlineZoomIn  = document.getElementById('kitchenInlineZoomIn');
+  const inlineZoomOut = document.getElementById('kitchenInlineZoomOut');
+  const INLINE_MIN = 220, INLINE_MAX = 700, INLINE_STEP = 60;
+  let inlineZoom = window.innerWidth <= 700 ? 500 : 420;
+
+  function applyInlineZoom() {
+    if (wrap) wrap.style.setProperty('--tapestry-inline-zoom', inlineZoom + 'px');
+    if (inlineZoomIn)  inlineZoomIn.disabled  = inlineZoom >= INLINE_MAX;
+    if (inlineZoomOut) inlineZoomOut.disabled = inlineZoom <= INLINE_MIN;
+  }
+  if (inlineZoomIn)  inlineZoomIn.addEventListener('click', () => { inlineZoom = Math.min(INLINE_MAX, inlineZoom + INLINE_STEP); applyInlineZoom(); });
+  if (inlineZoomOut) inlineZoomOut.addEventListener('click', () => { inlineZoom = Math.max(INLINE_MIN, inlineZoom - INLINE_STEP); applyInlineZoom(); });
+  applyInlineZoom();
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && fsPanel && fsPanel.classList.contains('open')) closeTapestryFs(); });
 
   // Drag scroll inside fullscreen
   if (fsTrack) {
     let fsDragging = false, fsDragX = 0, fsDragScroll = 0;
     fsTrack.addEventListener('mousedown', e => { fsDragging = true; fsDragX = e.clientX; fsDragScroll = fsTrack.scrollLeft; document.body.style.userSelect = 'none'; e.preventDefault(); });
+    // Double-tap anywhere on the track to close on mobile (fallback when X is hard to hit)
+    let lastTap = 0;
+    fsTrack.addEventListener('touchend', e => {
+      const now = Date.now();
+      if (now - lastTap < 350) { closeTapestryFs(); }
+      lastTap = now;
+    }, { passive: true });
     document.addEventListener('mousemove', e => { if (!fsDragging) return; fsTrack.scrollLeft = fsDragScroll - (e.clientX - fsDragX); });
     function endFsDrag() { fsDragging = false; document.body.style.userSelect = ''; }
     document.addEventListener('mouseup', endFsDrag);
