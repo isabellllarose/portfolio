@@ -290,7 +290,8 @@
   /* DEV JOURNAL (Dune Wellness only) — single page embedded, larger */
   .dev-journal .journal-spread { grid-template-columns: 1fr; max-width: 640px; background: none; }
   .dev-journal .dev-journal-slot-right { display: none; }
-  .dev-journal .journal-viewer { background: var(--bg-mid); }
+  .dev-journal .journal-viewer { background: var(--bg-mid); overflow: hidden; position: relative; }
+  .dev-journal .journal-spread { transform-origin: top center; }
   /* Fullscreen: double page desktop, single page mobile */
   #devFullscreen .journal-fullscreen-spread { grid-template-columns: 1fr; max-width: min(560px, 96vw); }
   @media (max-width: 700px) {
@@ -1191,7 +1192,7 @@ const devSrcs = [
 // Shared drag state — only one viewer active at a time
 let _jzActive = null;
 
-function makeJournalZoom(fsEl, spreadEl, zoomInBtn, zoomOutBtn) {
+function makeJournalZoom(fsEl, spreadEl, zoomInBtn, zoomOutBtn, origin) {
   const ZOOM_MIN = 0.4, ZOOM_MAX = 4, ZOOM_STEP = 0.3;
   let scale = 1, panX = 0, panY = 0;
   let isDragging = false, justDragged = false;
@@ -1201,7 +1202,7 @@ function makeJournalZoom(fsEl, spreadEl, zoomInBtn, zoomOutBtn) {
     if (!spreadEl) return;
     spreadEl.style.transition = animated ? 'transform 0.2s ease' : 'none';
     spreadEl.style.transform = `scale(${scale}) translate(${panX / scale}px, ${panY / scale}px)`;
-    spreadEl.style.transformOrigin = 'center center';
+    spreadEl.style.transformOrigin = origin || 'center center';
     spreadEl.style.cursor = isDragging ? 'grabbing' : (scale > 1 ? 'grab' : 'default');
     if (zoomInBtn)  zoomInBtn.disabled  = scale >= ZOOM_MAX;
     if (zoomOutBtn) zoomOutBtn.disabled = scale <= ZOOM_MIN;
@@ -1300,7 +1301,8 @@ const devEmbedZoom = makeJournalZoom(
   document.getElementById('devSpread')?.closest('.journal-viewer') || document.body,
   devEmbedSpread,
   document.getElementById('devEmbedZoomIn'),
-  document.getElementById('devEmbedZoomOut')
+  document.getElementById('devEmbedZoomOut'),
+  'top center'
 );
 
 if (devL && DEV_TOTAL > 0) {
