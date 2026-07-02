@@ -304,7 +304,8 @@
   /* Journal fullscreen — controls auto-hide on idle */
   .journal-fullscreen { position: fixed; inset: 0; z-index: 300; background: var(--bg-card); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; gap: 0; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
   .journal-fullscreen.open { opacity: 1; pointer-events: all; }
-  .journal-fullscreen-spread { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; background: var(--border); max-width: min(1200px, 90vw); width: 100%; flex-shrink: 0; }
+  .journal-fullscreen-spread { display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: var(--bg-card); max-width: min(1200px, 90vw); width: 100%; flex-shrink: 0; }
+  .journal-fullscreen-slot + .journal-fullscreen-slot { border-left: 2px solid var(--border-strong); }
   .journal-fullscreen-slot { background: var(--bg-card); overflow: visible; display: flex; align-items: center; justify-content: center; max-height: calc(90vh - 80px); }
   .journal-fullscreen-slot img { width: 100%; height: 100%; object-fit: contain; display: block; transform-origin: center center; user-select: none; -webkit-user-drag: none; cursor: default; max-height: calc(90vh - 80px); }
   /* Journal zoom buttons — same style as floor plan zoom buttons */
@@ -960,6 +961,8 @@
                 <button class="journal-btn" id="devPrev" disabled>← Prev</button>
                 <span class="journal-counter" id="devCounter">Pages 1–2</span>
                 <button class="journal-btn" id="devNext">Next →</button>
+                <button class="journal-zoom-btn" id="devEmbedZoomOut" aria-label="Zoom out" style="margin-left:0.5rem;">−</button>
+                <button class="journal-zoom-btn" id="devEmbedZoomIn" aria-label="Zoom in">+</button>
                 <button class="journal-btn-full" id="devFullBtn">⛶ Full screen</button>
               </div>
               <p class="journal-note">Design development sketches and research — flip through to explore the process</p>
@@ -1185,19 +1188,69 @@ const devSrcs = [
 // ============================================================
 // JOURNAL ZOOM + PAN — shared factory, used by both viewers
 // ============================================================
+// Shared drag state — only one viewer active at a time
+let _jzActive = null;
+
 function makeJournalZoom(fsEl, spreadEl, zoomInBtn, zoomOutBtn) {
   const ZOOM_MIN = 0.4, ZOOM_MAX = 4, ZOOM_STEP = 0.3;
   let scale = 1, panX = 0, panY = 0;
+  let isDragging = false, justDragged = false;
+  let dragStartX = 0, dragStartY = 0, dragPanX = 0, dragPanY = 0;
 
   function applyTransform(animated) {
     if (!spreadEl) return;
     spreadEl.style.transition = animated ? 'transform 0.2s ease' : 'none';
     spreadEl.style.transform = `scale(${scale}) translate(${panX / scale}px, ${panY / scale}px)`;
     spreadEl.style.transformOrigin = 'center center';
-    spreadEl.style.cursor = scale > 1 ? 'grab' : 'default';
+    spreadEl.style.cursor = isDragging ? 'grabbing' : (scale > 1 ? 'grab' : 'default');
     if (zoomInBtn)  zoomInBtn.disabled  = scale >= ZOOM_MAX;
     if (zoomOutBtn) zoomOutBtn.disabled = scale <= ZOOM_MIN;
   }
+
+  function resetZoom() { scale = 1; panX = 0; panY = 0; isDragging = false; justDragged = false; applyTransform(false); }
+
+  if (zoomInBtn)  zoomInBtn.addEventListener('click',  e => { e.stopPropagation(); scale = Math.min(ZOOM_MAX, +(scale + ZOOM_STEP).toFixed(1)); applyTransform(true); });
+  if (zoomOutBtn) zoomOutBtn.addEventListener('click', e => { e.stopPropagation(); scale = Math.max(ZOOM_MIN, +(scale - ZOOM_STEP).toFixed(1)); if (scale <= 1) { panX = 0; panY = 0; } applyTransform(true); });
+
+  if (spreadEl) {
+    spreadEl.addEventListener('mousedown', e => {
+      if (scale <= 1) return;
+      e.preventDefault(); e.stopPropagation();
+      _jzActive = instance;
+      isDragging = true; justDragged = false;
+      dragStartX = e.clientX; dragStartY = e.clientY;
+      dragPanX = panX; dragPanY = panY;
+      applyTransform(false);
+    });
+    spreadEl.addEventListener('click', e => { if (justDragged) { justDragged = false; e.stopPropagation(); } });
+
+    let tStartX = 0, tStartY = 0, tPanX = 0, tPanY = 0;
+    spreadEl.addEventListener('touchstart', e => {
+      tStartX = e.touches[0].clientX; tStartY = e.touches[0].clientY;
+      tPanX = panX; tPanY = panY;
+    }, { passive: true });
+    spreadEl.addEventListener('touchmove', e => {
+      if (scale <= 1) return;
+      panX = tPanX + (e.touches[0].clientX - tStartX);
+      panY = tPanY + (e.touches[0].clientY - tStartY);
+      applyTransform(false);
+    }, { passive: true });
+  }
+
+  const instance = {
+    resetZoom, applyTransform,
+    onMouseMove(e) { if (!isDragging) return; panX = dragPanX + (e.clientX - dragStartX); panY = dragPanY + (e.clientY - dragStartY); justDragged = true; applyTransform(false); },
+    onMouseUp()    { if (!isDragging) return; isDragging = false; applyTransform(false); },
+    onMouseLeave() { if (!isDragging) return; isDragging = false; applyTransform(false); }
+  };
+  return instance;
+}
+
+// Single set of window listeners — delegate to whichever journal viewer is active
+window.addEventListener('mousemove', e => { if (_jzActive) _jzActive.onMouseMove(e); });
+window.addEventListener('mouseup',   () => { if (_jzActive) { _jzActive.onMouseUp(); _jzActive = null; } });
+window.addEventListener('mouseleave',() => { if (_jzActive) { _jzActive.onMouseLeave(); _jzActive = null; } });
+
 
   function resetZoom() { scale = 1; panX = 0; panY = 0; applyTransform(false); }
 
@@ -1218,38 +1271,6 @@ function makeJournalZoom(fsEl, spreadEl, zoomInBtn, zoomOutBtn) {
     // Suppress the click that fires after mouseup so it doesn't close the viewer
     spreadEl.addEventListener('click', e => { if (justDragged) { justDragged = false; e.stopPropagation(); } });
   }
-  window.addEventListener('mousemove', e => {
-    if (!isDragging || !fsEl.classList.contains('open')) return;
-    panX = dragPanX + (e.clientX - dragStartX);
-    panY = dragPanY + (e.clientY - dragStartY);
-    applyTransform(false);
-    justDragged = true;
-  });
-  window.addEventListener('mouseup', () => {
-    if (!isDragging) return;
-    isDragging = false;
-    if (spreadEl) spreadEl.style.cursor = scale > 1 ? 'grab' : 'default';
-  });
-  window.addEventListener('mouseleave', () => { isDragging = false; });
-
-  // Touch drag
-  let tStartX = 0, tStartY = 0, tPanX = 0, tPanY = 0;
-  if (spreadEl) {
-    spreadEl.addEventListener('touchstart', e => {
-      tStartX = e.touches[0].clientX; tStartY = e.touches[0].clientY;
-      tPanX = panX; tPanY = panY;
-    }, { passive: true });
-    spreadEl.addEventListener('touchmove', e => {
-      if (scale <= 1) return;
-      panX = tPanX + (e.touches[0].clientX - tStartX);
-      panY = tPanY + (e.touches[0].clientY - tStartY);
-      applyTransform(false);
-    }, { passive: true });
-  }
-
-  return { resetZoom, applyTransform };
-}
-
 const DEV_TOTAL   = devSrcs.length;
 const DEV_SPREADS = DEV_TOTAL; // single page per step
 let devSpread    = 0;
@@ -1290,6 +1311,15 @@ const devZoom = makeJournalZoom(
   devFsSpreadEl,
   document.getElementById('devZoomIn'),
   document.getElementById('devZoomOut')
+);
+
+// Wire zoom for dev journal embedded view (uses the spread element in the page, not fullscreen)
+const devEmbedSpread = document.getElementById('devSpread');
+const devEmbedZoom = makeJournalZoom(
+  document.getElementById('devSpread')?.closest('.journal-viewer') || document.body,
+  devEmbedSpread,
+  document.getElementById('devEmbedZoomIn'),
+  document.getElementById('devEmbedZoomOut')
 );
 
 if (devL && DEV_TOTAL > 0) {
