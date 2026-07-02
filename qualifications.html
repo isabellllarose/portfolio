@@ -1252,25 +1252,6 @@ window.addEventListener('mouseup',   () => { if (_jzActive) { _jzActive.onMouseU
 window.addEventListener('mouseleave',() => { if (_jzActive) { _jzActive.onMouseLeave(); _jzActive = null; } });
 
 
-  function resetZoom() { scale = 1; panX = 0; panY = 0; applyTransform(false); }
-
-  if (zoomInBtn)  zoomInBtn.addEventListener('click',  e => { e.stopPropagation(); scale = Math.min(ZOOM_MAX, +(scale + ZOOM_STEP).toFixed(1)); applyTransform(true); });
-  if (zoomOutBtn) zoomOutBtn.addEventListener('click', e => { e.stopPropagation(); scale = Math.max(ZOOM_MIN, +(scale - ZOOM_STEP).toFixed(1)); if (scale === 1) { panX = 0; panY = 0; } applyTransform(true); });
-
-  // Mouse drag
-  let isDragging = false, justDragged = false, dragStartX = 0, dragStartY = 0, dragPanX = 0, dragPanY = 0;
-  if (spreadEl) {
-    spreadEl.addEventListener('mousedown', e => {
-      if (scale <= 1) return;
-      e.preventDefault(); e.stopPropagation();
-      isDragging = true; justDragged = false;
-      dragStartX = e.clientX; dragStartY = e.clientY;
-      dragPanX = panX; dragPanY = panY;
-      spreadEl.style.cursor = 'grabbing';
-    });
-    // Suppress the click that fires after mouseup so it doesn't close the viewer
-    spreadEl.addEventListener('click', e => { if (justDragged) { justDragged = false; e.stopPropagation(); } });
-  }
 const DEV_TOTAL   = devSrcs.length;
 const DEV_SPREADS = DEV_TOTAL; // single page per step
 let devSpread    = 0;
