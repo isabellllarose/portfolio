@@ -296,7 +296,9 @@
   @media (max-width: 700px) {
     .dev-journal .journal-spread { max-width: 100%; }
     #devFullscreen .journal-fullscreen-slot:last-child { display: none; }
-    #devFullscreen .journal-close { font-size: 1.4rem; padding: 0.9rem 1.2rem; min-width: 56px; min-height: 56px; top: 0.75rem; right: 0.75rem; z-index: 410; touch-action: manipulation; }
+    #devFullscreen .journal-close { font-size: 1.5rem; padding: 1rem 1.3rem; min-width: 60px; min-height: 60px; top: 0.75rem; right: 0.75rem; z-index: 420; touch-action: manipulation; pointer-events: all; }
+    #devFullscreen .journal-zoom-controls { z-index: 420; pointer-events: all; }
+    #devFullscreen .journal-fullscreen-controls { z-index: 420; pointer-events: all; }
   }
 
   /* Journal fullscreen — controls auto-hide on idle */
@@ -1203,21 +1205,25 @@ function makeJournalZoom(fsEl, spreadEl, zoomInBtn, zoomOutBtn) {
   if (zoomOutBtn) zoomOutBtn.addEventListener('click', e => { e.stopPropagation(); scale = Math.max(ZOOM_MIN, +(scale - ZOOM_STEP).toFixed(1)); if (scale === 1) { panX = 0; panY = 0; } applyTransform(true); });
 
   // Mouse drag
-  let isDragging = false, dragStartX = 0, dragStartY = 0, dragPanX = 0, dragPanY = 0;
+  let isDragging = false, justDragged = false, dragStartX = 0, dragStartY = 0, dragPanX = 0, dragPanY = 0;
   if (spreadEl) {
     spreadEl.addEventListener('mousedown', e => {
       if (scale <= 1) return;
       e.preventDefault(); e.stopPropagation();
-      isDragging = true; dragStartX = e.clientX; dragStartY = e.clientY;
+      isDragging = true; justDragged = false;
+      dragStartX = e.clientX; dragStartY = e.clientY;
       dragPanX = panX; dragPanY = panY;
       spreadEl.style.cursor = 'grabbing';
     });
+    // Suppress the click that fires after mouseup so it doesn't close the viewer
+    spreadEl.addEventListener('click', e => { if (justDragged) { justDragged = false; e.stopPropagation(); } });
   }
   window.addEventListener('mousemove', e => {
     if (!isDragging || !fsEl.classList.contains('open')) return;
     panX = dragPanX + (e.clientX - dragStartX);
     panY = dragPanY + (e.clientY - dragStartY);
     applyTransform(false);
+    justDragged = true;
   });
   window.addEventListener('mouseup', () => {
     if (!isDragging) return;
@@ -1254,14 +1260,10 @@ function devSpreadLabel(s) {
 }
 
 function renderDevSpread(s, L, R, ctr, prev, next) {
-  L.innerHTML = ''; R.innerHTML = '';
+  // Single page only — always fill left slot, always clear right
+  L.innerHTML = ''; if (R) { R.innerHTML = ''; R.style.display = 'none'; }
   L.style.background = '';
-  R.style.background = '';
-  // Single-page step: left slot shows current page, right slot shows next (for fullscreen double view)
-  const li = s, ri = s + 1;
-  if (li < DEV_TOTAL) { const img = new Image(); img.src = devSrcs[li]; img.alt = 'Page ' + (li+1); img.style.cssText = 'width:100%;height:100%;object-fit:contain;display:block;'; L.appendChild(img); }
-  if (ri < DEV_TOTAL) { const img = new Image(); img.src = devSrcs[ri]; img.alt = 'Page ' + (ri+1); img.style.cssText = 'width:100%;height:100%;object-fit:contain;display:block;'; R.appendChild(img); }
-  else { R.style.background = 'var(--bg-mid)'; }
+  if (s < DEV_TOTAL) { const img = new Image(); img.src = devSrcs[s]; img.alt = 'Page ' + (s+1); img.style.cssText = 'width:100%;height:100%;object-fit:contain;display:block;'; L.appendChild(img); }
   ctr.textContent = devSpreadLabel(s);
   prev.disabled = s === 0;
   next.disabled = s === DEV_SPREADS - 1;
@@ -1457,10 +1459,12 @@ if (lbZoomOut) lbZoomOut.addEventListener('click', e => { e.stopPropagation(); l
 
 // Mouse drag to pan
 let isDragging = false, dragStartX = 0, dragStartY = 0, dragPanX = 0, dragPanY = 0;
+let lbJustDragged = false;
 lbImg.addEventListener('mousedown', e => {
   if (lbScale <= 1) return;
   e.preventDefault(); e.stopPropagation();
-  isDragging = true; dragStartX = e.clientX; dragStartY = e.clientY;
+  isDragging = true; lbJustDragged = false;
+  dragStartX = e.clientX; dragStartY = e.clientY;
   dragPanX = panX; dragPanY = panY;
   lbImg.style.cursor = 'grabbing';
 });
@@ -1469,6 +1473,7 @@ window.addEventListener('mousemove', e => {
   panX = dragPanX + (e.clientX - dragStartX);
   panY = dragPanY + (e.clientY - dragStartY);
   applyTransform(false);
+  lbJustDragged = true;
 });
 window.addEventListener('mouseup', () => {
   if (!isDragging) return;
@@ -1494,7 +1499,8 @@ lbImg.addEventListener('touchend', () => { /* no toggle zoom on touch */ });
 
 // Click background to close (not image)
 lightbox.addEventListener('click', e => {
-  // Close if clicking the backdrop, the inner wrap, or anywhere not on a button/legend/image
+  // Don't close if we just finished a drag
+  if (lbJustDragged) { lbJustDragged = false; return; }
   const isInteractive = e.target.closest('button, .lightbox-legend, img, .lightbox-controls, .lb-zoom-controls, .lightbox-hotzone-close, .lightbox-hotzone-bottom');
   if (!isInteractive) closeLightbox();
 });
