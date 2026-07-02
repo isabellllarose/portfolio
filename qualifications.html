@@ -292,10 +292,9 @@
   .dev-journal .dev-journal-slot-right { display: none; }
   .dev-journal .journal-viewer { background: var(--bg-mid); }
   /* Fullscreen: double page desktop, single page mobile */
-  #devFullscreen .journal-fullscreen-spread { grid-template-columns: 1fr 1fr; max-width: min(1200px, 94vw); }
+  #devFullscreen .journal-fullscreen-spread { grid-template-columns: 1fr; max-width: min(560px, 96vw); }
   @media (max-width: 700px) {
     .dev-journal .journal-spread { max-width: 100%; }
-    #devFullscreen .journal-fullscreen-spread { grid-template-columns: 1fr; max-width: min(560px, 96vw); }
     #devFullscreen .journal-fullscreen-slot:last-child { display: none; }
     #devFullscreen .journal-close { font-size: 1.4rem; padding: 0.9rem 1.2rem; min-width: 56px; min-height: 56px; top: 0.75rem; right: 0.75rem; z-index: 410; touch-action: manipulation; }
   }
@@ -1188,14 +1187,12 @@ function makeJournalZoom(fsEl, spreadEl, zoomInBtn, zoomOutBtn) {
   const ZOOM_MIN = 0.4, ZOOM_MAX = 4, ZOOM_STEP = 0.3;
   let scale = 1, panX = 0, panY = 0;
 
-  function getImgs() { return spreadEl ? Array.from(spreadEl.querySelectorAll('img')) : []; }
-
   function applyTransform(animated) {
-    getImgs().forEach(img => {
-      img.style.transition = animated ? 'transform 0.2s ease' : 'none';
-      img.style.transform = `scale(${scale}) translate(${panX / scale}px, ${panY / scale}px)`;
-      img.style.cursor = scale > 1 ? 'grab' : 'default';
-    });
+    if (!spreadEl) return;
+    spreadEl.style.transition = animated ? 'transform 0.2s ease' : 'none';
+    spreadEl.style.transform = `scale(${scale}) translate(${panX / scale}px, ${panY / scale}px)`;
+    spreadEl.style.transformOrigin = 'center center';
+    spreadEl.style.cursor = scale > 1 ? 'grab' : 'default';
     if (zoomInBtn)  zoomInBtn.disabled  = scale >= ZOOM_MAX;
     if (zoomOutBtn) zoomOutBtn.disabled = scale <= ZOOM_MIN;
   }
@@ -1213,7 +1210,7 @@ function makeJournalZoom(fsEl, spreadEl, zoomInBtn, zoomOutBtn) {
       e.preventDefault(); e.stopPropagation();
       isDragging = true; dragStartX = e.clientX; dragStartY = e.clientY;
       dragPanX = panX; dragPanY = panY;
-      getImgs().forEach(img => img.style.cursor = 'grabbing');
+      spreadEl.style.cursor = 'grabbing';
     });
   }
   window.addEventListener('mousemove', e => {
@@ -1225,7 +1222,7 @@ function makeJournalZoom(fsEl, spreadEl, zoomInBtn, zoomOutBtn) {
   window.addEventListener('mouseup', () => {
     if (!isDragging) return;
     isDragging = false;
-    getImgs().forEach(img => img.style.cursor = scale > 1 ? 'grab' : 'default');
+    if (spreadEl) spreadEl.style.cursor = scale > 1 ? 'grab' : 'default';
   });
   window.addEventListener('mouseleave', () => { isDragging = false; });
 
