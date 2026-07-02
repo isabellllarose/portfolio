@@ -288,8 +288,9 @@
   .journal-note { font-size: 11px; color: var(--text-muted); font-style: italic; text-align: center; }
 
   /* DEV JOURNAL (Dune Wellness only) — single page embedded, larger */
-  .dev-journal .journal-spread { grid-template-columns: 1fr; max-width: 640px; background: none; }
+  .dev-journal .journal-spread { grid-template-columns: 1fr; max-width: 640px; background: none; overflow: hidden; }
   .dev-journal .dev-journal-slot-right { display: none; }
+  .dev-journal .journal-spread-slot { overflow: hidden; position: relative; }
   .dev-journal .journal-viewer { background: var(--bg-mid); overflow: hidden; position: relative; }
   .dev-journal .journal-spread { transform-origin: top center; }
   /* Fullscreen: double page desktop, single page mobile */
@@ -1296,7 +1297,7 @@ const devZoom = makeJournalZoom(
 );
 
 // Wire zoom for dev journal embedded view (uses the spread element in the page, not fullscreen)
-const devEmbedSpread = document.getElementById('devSpread');
+const devEmbedSpread = document.getElementById('devLeft'); // clip zoom to the slot, not the outer spread
 const devEmbedZoom = makeJournalZoom(
   document.getElementById('devSpread')?.closest('.journal-viewer') || document.body,
   devEmbedSpread,
