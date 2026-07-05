@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Qualifications — Isabella Heath</title>
 <link rel="stylesheet" href="style.css">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -1299,7 +1299,7 @@ const devZoom = makeJournalZoom(
 // Wire zoom for dev journal embedded view (uses the spread element in the page, not fullscreen)
 const devEmbedSpread = document.getElementById('devLeft'); // clip zoom to the slot, not the outer spread
 const devEmbedZoom = makeJournalZoom(
-  document.getElementById('devSpread')?.closest('.journal-viewer') || document.body,
+  (document.getElementById('devSpread') ? document.getElementById('devSpread').closest('.journal-viewer') : null) || document.body,
   devEmbedSpread,
   document.getElementById('devEmbedZoomIn'),
   document.getElementById('devEmbedZoomOut'),
