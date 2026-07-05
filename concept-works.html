@@ -692,6 +692,19 @@
       </div>
     </div>
 
+
+    <span class="img-label">Renders</span>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom:1.5rem;">
+      <div class="img-slot" style="aspect-ratio:4/3; background:var(--bg-mid);">
+        <!-- REPLACE: <img src="images/personal/kitchen-render-01.webp" alt="Kitchen render 1" data-gallery="kitchen" data-index="8"> -->
+        <span class="img-placeholder-label">Render 1</span>
+      </div>
+      <div class="img-slot" style="aspect-ratio:4/3; background:var(--bg-mid);">
+        <!-- REPLACE: <img src="images/personal/kitchen-render-02.webp" alt="Kitchen render 2" data-gallery="kitchen" data-index="9"> -->
+        <span class="img-placeholder-label">Render 2</span>
+      </div>
+    </div>
+
     <!-- FINISHED KITCHEN CAROUSEL — large viewer + thumbnail strip -->
     <span class="img-label" style="margin-top:1.5rem; display:block;">Finished Kitchen</span>
     <div class="kitchen-carousel-outer">
@@ -1169,6 +1182,7 @@ const workToggle   = document.getElementById('mobileWorkToggle');
 const workArrow    = document.getElementById('mobileWorkArrow');
 const workSub      = document.getElementById('mobileWorkSub');
 hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
+hamburger.addEventListener('touchend', e => { e.preventDefault(); hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); }, { passive: false });
 workArrow.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); workArrow.classList.toggle('open'); workSub.classList.toggle('open'); });
 mobileMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); workArrow.classList.remove('open'); workSub.classList.remove('open'); }); });
 document.addEventListener('click', e => { if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); } });

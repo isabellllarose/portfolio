@@ -1973,6 +1973,7 @@ hamburger.addEventListener('click', () => {
   hamburger.classList.toggle('open');
   mobileMenu.classList.toggle('open');
 });
+hamburger.addEventListener('touchend', e => { e.preventDefault(); hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); }, { passive: false });
 
 // Work sub-menu toggle — arrow click opens sub, link click navigates
 workArrow.addEventListener('click', e => {

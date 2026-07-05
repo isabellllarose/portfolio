@@ -533,6 +533,8 @@ footer {
   padding: 0.25rem;
   background: none;
   border: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 .nav-hamburger span {
   display: block;
