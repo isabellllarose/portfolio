@@ -846,18 +846,29 @@
         <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Proposed Design</h4>
         <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.5rem">Concept direction for the fit-out — layout intent, material selections, and rationale. This section will be replaced with finished photography once the project is built.</p>
 
-        <!-- DESIGN DEVELOPMENT / INSPIRATION — 2 images -->
+        <!-- DESIGN DEVELOPMENT / INSPIRATION — horizontal scroll mood board -->
         <h5 style="font-family:'Playfair Display',serif; font-size:1rem; margin:0 0 0.75rem; color:var(--text-secondary);">Design Development</h5>
-        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem">Inspiration imagery and mood board direction developed to guide the material and finish selections.</p>
+        <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem">Mood board exploring colour direction, layout inspiration, cabinetry profile, and considered details — scroll to explore.</p>
 
-        <div class="img-grid-2" style="margin-bottom:1.5rem;">
-          <div class="img-slot" style="aspect-ratio:4/3; background:var(--bg-mid);">
-            <!-- REPLACE: <img src="images/personal/laundry-inspiration-01.webp" alt="Inspiration 1" data-gallery="laundry-inspiration" data-index="0"> -->
-            <span class="img-placeholder-label">Inspiration / mood board 1</span>
+        <div class="tapestry-wrap" id="laundryMoodboardWrap" style="margin-bottom:1.5rem;">
+          <div class="tapestry-fade" id="laundryMoodboardFade"></div>
+          <div class="tapestry-hint" id="laundryMoodboardHint">
+            <span class="tapestry-hint-text">Drag to explore</span>
+            <span class="tapestry-hint-arrow">→</span>
           </div>
-          <div class="img-slot" style="aspect-ratio:4/3; background:var(--bg-mid);">
-            <!-- REPLACE: <img src="images/personal/laundry-inspiration-02.webp" alt="Inspiration 2" data-gallery="laundry-inspiration" data-index="1"> -->
-            <span class="img-placeholder-label">Inspiration / mood board 2</span>
+          <button class="tapestry-arrow tapestry-prev" id="laundryMoodboardPrev" aria-label="Scroll left">&#8249;</button>
+          <button class="tapestry-arrow tapestry-next" id="laundryMoodboardNext" aria-label="Scroll right">&#8250;</button>
+          <div class="tapestry-track" id="laundryMoodboardTrack">
+            <img src="images/personal/laundry-moodboard.webp" alt="Laundry mood board" class="tapestry-img" id="laundryMoodboardImg">
+          </div>
+          <div class="tapestry-scrollbar-wrap" id="laundryMoodboardScrollbarWrap">
+            <div class="tapestry-scrollbar-track">
+              <div class="tapestry-scrollbar-thumb" id="laundryMoodboardThumb"></div>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:0.5rem; margin-top:0.6rem;">
+            <button class="tapestry-inline-zoom-btn" id="laundryMoodboardZoomOut" aria-label="Zoom out">−</button>
+            <button class="tapestry-inline-zoom-btn" id="laundryMoodboardZoomIn" aria-label="Zoom in">+</button>
           </div>
         </div>
 
@@ -1706,6 +1717,102 @@ if (beforeMainEl && beforeThumbs.length > 0) {
   }
 
   lGoTo(0); // set initial state
+})();
+
+
+// ============================================================
+// LAUNDRY MOODBOARD — horizontal scroll tapestry
+// ============================================================
+(function() {
+  const track  = document.getElementById('laundryMoodboardTrack');
+  const img    = document.getElementById('laundryMoodboardImg');
+  const thumb  = document.getElementById('laundryMoodboardThumb');
+  const sbWrap = document.getElementById('laundryMoodboardScrollbarWrap');
+  const prevBtn = document.getElementById('laundryMoodboardPrev');
+  const nextBtn = document.getElementById('laundryMoodboardNext');
+  const wrap   = document.getElementById('laundryMoodboardWrap');
+  const zoomIn  = document.getElementById('laundryMoodboardZoomIn');
+  const zoomOut = document.getElementById('laundryMoodboardZoomOut');
+  if (!track || !img) return;
+
+  let inlineScale = 0.88;
+  const INLINE_MIN = 0.5, INLINE_MAX = 2.0, INLINE_STEP = 0.15;
+
+  function updateThumb() {
+    if (!thumb || !sbWrap) return;
+    const trackW = track.scrollWidth - track.clientWidth;
+    if (trackW <= 0) { sbWrap.style.display = 'none'; return; }
+    sbWrap.style.display = '';
+    const sbTrackW = sbWrap.querySelector('.tapestry-scrollbar-track').offsetWidth;
+    const ratio = track.clientWidth / track.scrollWidth;
+    const thumbW = Math.max(40, sbTrackW * ratio);
+    const thumbL = (track.scrollLeft / trackW) * (sbTrackW - thumbW);
+    thumb.style.width = thumbW + 'px';
+    thumb.style.left  = thumbL + 'px';
+  }
+
+  function applyInlineZoom() {
+    const prevScrollWidth = track.scrollWidth;
+    const ratio = prevScrollWidth > track.clientWidth ? track.scrollLeft / (prevScrollWidth - track.clientWidth) : 0;
+    if (img) img.style.transform = 'scale(' + inlineScale + ')';
+    requestAnimationFrame(() => {
+      const newScrollable = track.scrollWidth - track.clientWidth;
+      if (newScrollable > 0) track.scrollLeft = ratio * newScrollable;
+      updateThumb();
+    });
+    if (zoomIn)  zoomIn.disabled  = inlineScale >= INLINE_MAX;
+    if (zoomOut) zoomOut.disabled = inlineScale <= INLINE_MIN;
+  }
+
+  function markScrolled() { if (wrap) wrap.classList.add('scrolled'); }
+  track.addEventListener('scroll', markScrolled, { once: true, passive: true });
+  track.addEventListener('mousedown', markScrolled, { once: true });
+  track.addEventListener('touchstart', markScrolled, { once: true, passive: true });
+  track.addEventListener('scroll', updateThumb, { passive: true });
+  if (img.tagName === 'IMG') img.addEventListener('load', updateThumb);
+  window.addEventListener('resize', updateThumb);
+  setTimeout(updateThumb, 100);
+
+  // Scrollbar thumb drag
+  let dragging = false, startX = 0, startScroll = 0;
+  if (thumb) {
+    thumb.addEventListener('mousedown', e => {
+      dragging = true; startX = e.clientX; startScroll = track.scrollLeft;
+      markScrolled(); document.body.style.userSelect = 'none'; e.preventDefault();
+    });
+    document.addEventListener('mousemove', e => {
+      if (!dragging) return;
+      const sbTrackW = sbWrap.querySelector('.tapestry-scrollbar-track').offsetWidth;
+      const thumbW = thumb.offsetWidth;
+      const ratio = (track.scrollWidth - track.clientWidth) / (sbTrackW - thumbW);
+      track.scrollLeft = startScroll + (e.clientX - startX) * ratio;
+    });
+    document.addEventListener('mouseup', () => { dragging = false; document.body.style.userSelect = ''; });
+    sbWrap.querySelector('.tapestry-scrollbar-track').addEventListener('click', e => {
+      if (e.target === thumb) return;
+      track.scrollLeft = (e.offsetX / e.currentTarget.offsetWidth) * (track.scrollWidth - track.clientWidth);
+    });
+  }
+
+  // Drag scroll on track
+  let isDragging = false, dragStartX = 0, dragScrollStart = 0;
+  track.addEventListener('mousedown', e => { isDragging = true; dragStartX = e.clientX; dragScrollStart = track.scrollLeft; document.body.style.userSelect = 'none'; e.preventDefault(); });
+  function endDrag() { isDragging = false; document.body.style.userSelect = ''; }
+  document.addEventListener('mousemove', e => { if (!isDragging) return; track.scrollLeft = dragScrollStart - (e.clientX - dragStartX); });
+  document.addEventListener('mouseup', endDrag);
+  document.addEventListener('mouseleave', endDrag);
+
+  // Mobile arrows
+  const NUDGE = 160;
+  if (prevBtn) prevBtn.addEventListener('click', () => { markScrolled(); track.scrollBy({ left: -NUDGE, behavior: 'smooth' }); });
+  if (nextBtn) nextBtn.addEventListener('click', () => { markScrolled(); track.scrollBy({ left: NUDGE, behavior: 'smooth' }); });
+  addSwipe(track, () => track.scrollBy({ left: NUDGE, behavior: 'smooth' }), () => track.scrollBy({ left: -NUDGE, behavior: 'smooth' }));
+
+  // Zoom
+  if (zoomIn)  zoomIn.addEventListener('click', () => { inlineScale = Math.min(INLINE_MAX, +(inlineScale + INLINE_STEP).toFixed(2)); applyInlineZoom(); });
+  if (zoomOut) zoomOut.addEventListener('click', () => { inlineScale = Math.max(INLINE_MIN, +(inlineScale - INLINE_STEP).toFixed(2)); applyInlineZoom(); });
+
+  applyInlineZoom();
 })();
 
 // ============================================================
