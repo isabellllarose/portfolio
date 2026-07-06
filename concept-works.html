@@ -1189,15 +1189,7 @@ const mobileMenu   = document.getElementById('navMobileMenu');
 const workToggle   = document.getElementById('mobileWorkToggle');
 const workArrow    = document.getElementById('mobileWorkArrow');
 const workSub      = document.getElementById('mobileWorkSub');
-let hamburgerTouched = false;
-hamburger.addEventListener('touchend', e => {
-  e.preventDefault();
-  hamburgerTouched = true;
-  hamburger.classList.toggle('open');
-  mobileMenu.classList.toggle('open');
-}, { passive: false });
 hamburger.addEventListener('click', () => {
-  if (hamburgerTouched) { hamburgerTouched = false; return; }
   hamburger.classList.toggle('open');
   mobileMenu.classList.toggle('open');
 });
