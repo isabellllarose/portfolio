@@ -132,7 +132,7 @@
       white-space: nowrap; -webkit-tap-highlight-color: transparent;
     }
   }
-  @media (max-width: 700px) {
+  @media (max-width: 900px) {
     .before-two-col { grid-template-columns: 1fr !important; }
     .before-two-col > div:last-child { align-self: auto !important; }
     .layout-plans-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
@@ -437,17 +437,10 @@
 </nav>
 
 <div class="nav-mobile-menu" id="navMobileMenu">
-    <div class="nav-mobile-item" id="mobileWorkToggle">
-    <a href="index.html#work">Work</a>
-    <span class="nav-mobile-arrow" id="mobileWorkArrow">&#8964;</span>
-  </div>
-  <div class="nav-mobile-sub" id="mobileWorkSub">
-    <a href="qualifications.html">Academic Work</a>
-    <a href="concept-works.html">Concept Works</a>
-    <a href="concept-works.html#custom-objects">&#8627; Custom Objects</a>
-    <a href="professional-works.html">Professional Works</a>
-  </div>
   <a href="qualifications.html" class="nav-mobile-item">Academic Works</a>
+  <a href="concept-works.html" class="nav-mobile-item">Concept Works</a>
+  <a href="concept-works.html#custom-objects" class="nav-mobile-item" style="font-size:11px; padding-left:2.5rem; color:var(--text-muted);">&#8627; Custom Objects</a>
+  <a href="professional-works.html" class="nav-mobile-item">Professional Works</a>
   <a href="index.html#contact" class="nav-mobile-item">Contact</a>
 </div>
 
@@ -1207,15 +1200,11 @@
 // Mobile nav
 const hamburger    = document.getElementById('navHamburger');
 const mobileMenu   = document.getElementById('navMobileMenu');
-const workToggle   = document.getElementById('mobileWorkToggle');
-const workArrow    = document.getElementById('mobileWorkArrow');
-const workSub      = document.getElementById('mobileWorkSub');
 hamburger.addEventListener('click', () => {
   hamburger.classList.toggle('open');
   mobileMenu.classList.toggle('open');
 });
-workArrow.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); workArrow.classList.toggle('open'); workSub.classList.toggle('open'); });
-mobileMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); workArrow.classList.remove('open'); workSub.classList.remove('open'); }); });
+mobileMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); }); });
 document.addEventListener('click', e => { if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); } });
 
 // ============================================================

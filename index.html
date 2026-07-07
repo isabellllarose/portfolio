@@ -372,18 +372,11 @@
 
 <!-- MOBILE MENU -->
 <div class="nav-mobile-menu" id="navMobileMenu">
-    <div class="nav-mobile-item" id="mobileWorkToggle">
-    <a href="index.html#work">Work</a>
-    <span class="nav-mobile-arrow" id="mobileWorkArrow">&#8964;</span>
-  </div>
-  <div class="nav-mobile-sub" id="mobileWorkSub">
-    <a href="qualifications.html">Academic Work</a>
-    <a href="concept-works.html">Concept Works</a>
-    <a href="concept-works.html#custom-objects">&#8627; Custom Objects</a>
-    <a href="professional-works.html">Professional Works</a>
-  </div>
   <a href="qualifications.html" class="nav-mobile-item">Academic Works</a>
-  <a href="#contact" class="nav-mobile-item">Contact</a>
+  <a href="concept-works.html" class="nav-mobile-item">Concept Works</a>
+  <a href="concept-works.html#custom-objects" class="nav-mobile-item" style="font-size:11px; padding-left:2.5rem; color:var(--text-muted);">&#8627; Custom Objects</a>
+  <a href="professional-works.html" class="nav-mobile-item">Professional Works</a>
+  <a href="index.html#contact" class="nav-mobile-item">Contact</a>
 </div>
 
 <!-- HERO -->
@@ -804,28 +797,16 @@ filterBtns.forEach(btn => {
 // Mobile nav
 const hamburger = document.getElementById('navHamburger');
 const mobileMenu = document.getElementById('navMobileMenu');
-const mobileWorkToggle = document.getElementById('mobileWorkToggle');
-const mobileWorkArrow = document.getElementById('mobileWorkArrow');
-const mobileWorkSub = document.getElementById('mobileWorkSub');
 
 hamburger.addEventListener('click', () => {
   hamburger.classList.toggle('open');
   mobileMenu.classList.toggle('open');
 });
 
-mobileWorkArrow.addEventListener('click', e => {
-  e.preventDefault();
-  e.stopPropagation();
-  mobileWorkArrow.classList.toggle('open');
-  mobileWorkSub.classList.toggle('open');
-});
-
 mobileMenu.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => {
     hamburger.classList.remove('open');
     mobileMenu.classList.remove('open');
-    mobileWorkArrow.classList.remove('open');
-    mobileWorkSub.classList.remove('open');
   });
 });
 

@@ -431,25 +431,11 @@
 
 <!-- MOBILE MENU -->
 <div class="nav-mobile-menu" id="navMobileMenu">
-  <!-- Work with sub-items -->
-    <div class="nav-mobile-item" id="mobileWorkToggle">
-    <a href="index.html#work">Work</a>
-    <span class="nav-mobile-arrow" id="mobileWorkArrow">&#8964;</span>
-  </div>
-  <div class="nav-mobile-sub" id="mobileWorkSub">
-    <a href="qualifications.html">Academic Work</a>
-    <a href="concept-works.html">Concept Works</a>
-    <a href="concept-works.html#custom-objects">&#8627; Custom Objects</a>
-    <a href="professional-works.html">Professional Works</a>
-  </div>
   <a href="qualifications.html" class="nav-mobile-item">Academic Works</a>
+  <a href="concept-works.html" class="nav-mobile-item">Concept Works</a>
+  <a href="concept-works.html#custom-objects" class="nav-mobile-item" style="font-size:11px; padding-left:2.5rem; color:var(--text-muted);">&#8627; Custom Objects</a>
+  <a href="professional-works.html" class="nav-mobile-item">Professional Works</a>
   <a href="index.html#contact" class="nav-mobile-item">Contact</a>
-</div>
-  <div class="page-header-inner">
-    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span>Academic Works</div>
-    <h1 class="page-title">Advanced Diploma of<br>Building Design</h1>
-    <p class="page-subtitle">A technical qualification at Holmesglen Institute covering architectural building design, construction documentation, BIM workflows, compliance, and planning — from schematic through to working-drawing standard.</p>
-  </div>
 </div>
 
 <div class="course-band">
@@ -1954,30 +1940,18 @@ if (track && prevBtn2 && nextBtn2) {
 // ============================================================
 const hamburger    = document.getElementById('navHamburger');
 const mobileMenu   = document.getElementById('navMobileMenu');
-const workToggle   = document.getElementById('mobileWorkToggle');
-const workArrow    = document.getElementById('mobileWorkArrow');
-const workSub      = document.getElementById('mobileWorkSub');
 
 hamburger.addEventListener('click', () => {
   hamburger.classList.toggle('open');
   mobileMenu.classList.toggle('open');
 });
 
-// Work sub-menu toggle — arrow click opens sub, link click navigates
-workArrow.addEventListener('click', e => {
-  e.preventDefault();
-  e.stopPropagation();
-  workArrow.classList.toggle('open');
-  workSub.classList.toggle('open');
-});
 
 // Close menu when any link inside it is tapped
 mobileMenu.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => {
     hamburger.classList.remove('open');
     mobileMenu.classList.remove('open');
-    workArrow.classList.remove('open');
-    workSub.classList.remove('open');
   });
 });
 

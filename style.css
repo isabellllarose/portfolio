@@ -113,6 +113,7 @@ nav {
 
 /* Contact CTA — overrides to keep its own style */
 .nav-cta {
+  margin-left: 1.5rem !important;
   padding: 0.4rem 1.2rem !important;
   height: auto !important;
   border: 0.5px solid var(--border-strong) !important;
