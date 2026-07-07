@@ -424,20 +424,9 @@
     <li><a href="professional-works.html">Professional Works</a></li>
     <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
   </ul>
-  <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 
 <!-- MOBILE MENU -->
-<div class="nav-mobile-menu" id="navMobileMenu">
-  <a href="qualifications.html" class="nav-mobile-item">Academic Works</a>
-  <a href="concept-works.html" class="nav-mobile-item">Concept Works</a>
-  <a href="concept-works.html#custom-objects" class="nav-mobile-item" style="font-size:11px; padding-left:2.5rem; color:var(--text-muted);">&#8627; Custom Objects</a>
-  <a href="professional-works.html" class="nav-mobile-item">Professional Works</a>
-  <a href="index.html#contact" class="nav-mobile-item">Contact</a>
-</div>
-
 <div class="course-band">
   <div class="course-inner">
     <div>
@@ -1938,22 +1927,7 @@ if (track && prevBtn2 && nextBtn2) {
 // ============================================================
 // MOBILE NAV
 // ============================================================
-const hamburger    = document.getElementById('navHamburger');
-const mobileMenu   = document.getElementById('navMobileMenu');
 
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('open');
-  mobileMenu.classList.toggle('open');
-});
-
-
-// Close menu when any link inside it is tapped
-mobileMenu.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    hamburger.classList.remove('open');
-    mobileMenu.classList.remove('open');
-  });
-});
 
 // Close on outside tap
 document.addEventListener('click', e => {

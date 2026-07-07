@@ -330,7 +330,6 @@
     .contact-band { padding: 4rem 1.5rem; }
     /* Show the Interested in / Open to rows only on mobile */
     .mobile-only { display: block; }
-    .nav-hamburger { display: flex; }
     .nav-links { display: none !important; }
   }
 
@@ -365,20 +364,9 @@
     <li><a href="professional-works.html">Professional Works</a></li>
     <li><a href="#contact" class="nav-cta">Contact</a></li>
   </ul>
-  <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 
 <!-- MOBILE MENU -->
-<div class="nav-mobile-menu" id="navMobileMenu">
-  <a href="qualifications.html" class="nav-mobile-item">Academic Works</a>
-  <a href="concept-works.html" class="nav-mobile-item">Concept Works</a>
-  <a href="concept-works.html#custom-objects" class="nav-mobile-item" style="font-size:11px; padding-left:2.5rem; color:var(--text-muted);">&#8627; Custom Objects</a>
-  <a href="professional-works.html" class="nav-mobile-item">Professional Works</a>
-  <a href="index.html#contact" class="nav-mobile-item">Contact</a>
-</div>
-
 <!-- HERO -->
 <div class="hero" id="home">
   <canvas class="hero-canvas" id="heroCanvas"></canvas>
@@ -795,20 +783,7 @@ filterBtns.forEach(btn => {
 });
 
 // Mobile nav
-const hamburger = document.getElementById('navHamburger');
-const mobileMenu = document.getElementById('navMobileMenu');
 
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('open');
-  mobileMenu.classList.toggle('open');
-});
-
-mobileMenu.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    hamburger.classList.remove('open');
-    mobileMenu.classList.remove('open');
-  });
-});
 
 document.addEventListener('click', e => {
   if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
