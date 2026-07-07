@@ -101,7 +101,6 @@
   .before-thumb-fallback { font-size: 11px; color: var(--text-muted); }
   @media (max-width: 900px) {
     .nav-hamburger { display: none !important; }
-    .pill-btn {
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       gap: 3px; padding: 0.6rem 1.1rem; background: none; border: none;
       color: rgba(242,237,230,0.65); font-family: 'Inter', sans-serif;
@@ -110,19 +109,12 @@
       text-decoration: none; white-space: nowrap; touch-action: manipulation;
       -webkit-tap-highlight-color: transparent;
     }
-    .pill-btn svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 1.5; fill: none; }
-    .pill-btn:hover, .pill-btn.active { color: var(--bg); background: rgba(242,237,230,0.12); }
-    .pill-btn.pill-work { color: rgba(240,230,226,0.9); }
-    /* Tray — slides up from pill */
-    .pill-tray {
       position: fixed; bottom: 5.5rem; left: 50%; transform: translateX(-50%);
       z-index: 299; background: var(--bg-dark);
       border-radius: 14px; padding: 0.5rem; min-width: 180px;
       box-shadow: 0 4px 24px rgba(42,31,26,0.22);
       display: none; flex-direction: column; gap: 0;
     }
-    .pill-tray.open { display: flex; }
-    .pill-tray-item {
       display: flex; align-items: center; gap: 0.65rem;
       padding: 0.7rem 1rem; border-radius: 10px;
       color: rgba(242,237,230,0.75); font-family: 'Inter', sans-serif;
@@ -130,12 +122,8 @@
       text-decoration: none; cursor: pointer; transition: background 0.15s, color 0.15s;
       white-space: nowrap; -webkit-tap-highlight-color: transparent;
     }
-    .pill-tray-item:hover { background: rgba(242,237,230,0.1); color: var(--bg); }
-    .pill-tray-sub {
       display: none; flex-direction: column; padding-left: 1.5rem;
     }
-    .pill-tray-sub.open { display: flex; }
-    .pill-tray-sub-item {
       display: flex; align-items: center; gap: 0.5rem;
       padding: 0.5rem 0.75rem; border-radius: 8px;
       color: rgba(242,237,230,0.55); font-family: 'Inter', sans-serif;
@@ -143,8 +131,6 @@
       text-decoration: none; cursor: pointer; transition: background 0.15s, color 0.15s;
       white-space: nowrap; -webkit-tap-highlight-color: transparent;
     }
-    .pill-tray-sub-item:hover { color: rgba(242,237,230,0.9); }
-    .pill-tray-divider { height: 0.5px; background: rgba(242,237,230,0.1); margin: 0.25rem 0.5rem; }
   }
   @media (max-width: 700px) {
     .before-two-col { grid-template-columns: 1fr !important; }
@@ -448,7 +434,7 @@
         <a href="professional-works.html">Professional Works</a>
       </div>
     </li>
-    <li><a href="qualifications.html">Qualifications</a></li>
+    <li><a href="qualifications.html">Academic Works</a></li>
     <li><a href="index.html#about">About</a></li>
     <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
   </ul>
@@ -468,7 +454,7 @@
     <a href="concept-works.html#custom-objects">&#8627; Custom Objects</a>
     <a href="professional-works.html">Professional Works</a>
   </div>
-  <a href="qualifications.html" class="nav-mobile-item">Qualifications</a>
+  <a href="qualifications.html" class="nav-mobile-item">Academic Works</a>
   <a href="index.html#about" class="nav-mobile-item">About</a>
   <a href="index.html#contact" class="nav-mobile-item">Contact</a>
 </div>
@@ -2149,19 +2135,13 @@ document.querySelectorAll('[data-close-mat]').forEach(btn => {
 })();
 </script>
 
-  <div class="pill-tray-item" id="pillConceptToggle">Concept Works ›</div>
-  <div class="pill-tray-sub" id="pillConceptSub">
-    <a href="concept-works.html" class="pill-tray-sub-item">All Projects</a>
-    <a href="concept-works.html#custom-objects" class="pill-tray-sub-item">Custom Objects</a>
   </div>
-  <div class="pill-tray-divider"></div>
-  <a href="professional-works.html" class="pill-tray-item">Professional</a>
 </div>
 
 
 
 <!-- MOBILE PILL NAV -->
-<nav class="pill-nav" aria-label="Mobile navigation">
+<nav class="pill-nav">
   <a href="index.html" class="pill-btn"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/><polyline points="9,21 9,12 15,12 15,21"/></svg>Home</a>
   <a href="qualifications.html" class="pill-btn"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>Academic<br>Works</a>
   <a href="concept-works.html" class="pill-btn pill-active"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><circle cx="17.5" cy="17.5" r="3.5"/></svg>Concept<br>Works</a>
