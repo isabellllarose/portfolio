@@ -48,38 +48,40 @@
     .coming-band { margin: 2rem 1.5rem; padding: 2.5rem 1.5rem; }
   }
 
+
   /* ── MOBILE PILL NAV ── */
   @media (max-width: 900px) {
     .nav-hamburger { display: none !important; }
     .pill-nav {
-      display: flex;
       position: fixed;
-      bottom: 1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       z-index: 500;
+      padding: 0.5rem 1rem calc(0.5rem + env(safe-area-inset-bottom));
       background: var(--bg-dark);
-      border-radius: 100px;
-      padding: 0.45rem 0.35rem;
-      gap: 0.1rem;
-      box-shadow: 0 4px 24px rgba(42,31,26,0.28);
-      touch-action: manipulation;
+      box-shadow: 0 -1px 0 rgba(255,255,255,0.06), 0 -8px 32px rgba(42,31,26,0.35);
+      gap: 0;
     }
     .pill-btn {
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 3px; padding: 0.55rem 1rem; background: none; border: none;
-      color: rgba(242,237,230,0.6); font-family: 'Inter', sans-serif;
-      font-size: 8.5px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
-      cursor: pointer; border-radius: 100px; transition: color 0.2s, background 0.2s;
+      gap: 4px; padding: 0.5rem 0.9rem; background: none; border: none;
+      color: rgba(242,237,230,0.55); font-family: 'Inter', sans-serif;
+      font-size: 9px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase;
+      cursor: pointer; border-radius: 8px; transition: color 0.2s, background 0.2s;
       text-decoration: none; white-space: nowrap; touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent; line-height: 1;
+      -webkit-tap-highlight-color: transparent; line-height: 1.2; flex: 1; max-width: 90px;
     }
-    .pill-btn svg { width: 15px; height: 15px; stroke: currentColor; stroke-width: 1.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-    .pill-btn.pill-active { color: rgba(242,237,230,0.95); background: rgba(242,237,230,0.1); }
-    .pill-btn:active { color: rgba(242,237,230,0.95); }
+    .pill-btn svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 1.5; fill: none; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    .pill-btn.pill-active { color: rgba(242,237,230,0.95); }
+    .pill-btn:active { color: rgba(242,237,230,0.95); background: rgba(242,237,230,0.08); }
+    /* Add bottom padding to page so content isn't hidden behind pill */
+    body { padding-bottom: 80px; }
   }
   @media (min-width: 901px) { .pill-nav { display: none !important; } }
-
 </style>
 </head>
 <body>
@@ -130,9 +132,10 @@
 <footer>
   <a href="index.html" class="footer-logo">Isabella Heath</a>
   <ul class="footer-links">
-    <li><a href="index.html#work">Work</a></li>
-    <li><a href="qualifications.html">Qualifications</a></li>
-    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="qualifications.html">Academic Works</a></li>
+    <li><a href="concept-works.html">Concept Works</a></li>
+    <li><a href="professional-works.html">Professional Works</a></li>
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
   <span class="footer-text">Melbourne, VIC · Building Designer</span>
@@ -158,12 +161,13 @@
   document.addEventListener('click', e => { if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) closeMobileMenu(); });
 </script>
 
+
 <!-- MOBILE PILL NAV -->
 <nav class="pill-nav" aria-label="Mobile navigation">
-  <a href="index.html" class="pill-btn" aria-label="Home"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/><polyline points="9,21 9,12 15,12 15,21"/></svg>Home</a>
-  <a href="qualifications.html" class="pill-btn" aria-label="Academic"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>Academic</a>
-  <a href="concept-works.html" class="pill-btn" aria-label="Concept"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><circle cx="17.5" cy="17.5" r="3.5"/></svg>Concept</a>
-  <a href="professional-works.html" class="pill-btn pill-active" aria-label="Professional"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>Professional</a>
+  <a href="index.html" class="pill-btn"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/><polyline points="9,21 9,12 15,12 15,21"/></svg>Home<br></a>
+  <a href="qualifications.html" class="pill-btn"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>Academic<br>Works</a>
+  <a href="concept-works.html" class="pill-btn"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><circle cx="17.5" cy="17.5" r="3.5"/></svg>Concept<br>Works</a>
+  <a href="professional-works.html" class="pill-btn pill-active"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>Professional<br>Works</a>
 </nav>
 </body>
 </html>
