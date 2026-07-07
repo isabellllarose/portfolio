@@ -12,8 +12,9 @@
 <style>
   .page-header { padding-top: 60px; border-bottom: 0.5px solid var(--border); background: var(--bg-card); }
   .page-header-inner { max-width: 1160px; margin: 0 auto; padding: 4rem 3rem 3.5rem; }
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     .page-header-inner { padding: 2.5rem 1.5rem 2.5rem; }
+    .nav-links { display: none !important; }
   }
   .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.75rem; }
   .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
@@ -2039,11 +2040,11 @@ window.addEventListener('hashchange', () => {
 
 
 <!-- MOBILE PILL NAV -->
-<nav class="pill-nav">
+<div class="pill-nav" role="navigation" aria-label="Mobile navigation">
   <a href="index.html" class="pill-btn"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/><polyline points="9,21 9,12 15,12 15,21"/></svg>Home</a>
   <a href="qualifications.html" class="pill-btn pill-active"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>Academic<br>Works</a>
   <a href="concept-works.html" class="pill-btn"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><circle cx="17.5" cy="17.5" r="3.5"/></svg>Concept<br>Works</a>
   <a href="professional-works.html" class="pill-btn"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>Professional<br>Works</a>
-</nav>
+</div>
 </body>
 </html>

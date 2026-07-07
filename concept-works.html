@@ -238,8 +238,9 @@
   .mat-detail-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--text-primary); display: block; margin-bottom: 0.5rem; }
   .mat-detail-text { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.65; margin: 0; }
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     .mat-palette-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .nav-links { display: none !important; }
     .mat-swatch-circle { width: 110px; height: 110px; }
   }
 
@@ -2126,11 +2127,11 @@ document.querySelectorAll('[data-close-mat]').forEach(btn => {
 
 
 <!-- MOBILE PILL NAV -->
-<nav class="pill-nav">
+<div class="pill-nav" role="navigation" aria-label="Mobile navigation">
   <a href="index.html" class="pill-btn"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/><polyline points="9,21 9,12 15,12 15,21"/></svg>Home</a>
   <a href="qualifications.html" class="pill-btn"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>Academic<br>Works</a>
   <a href="concept-works.html" class="pill-btn pill-active"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><circle cx="17.5" cy="17.5" r="3.5"/></svg>Concept<br>Works</a>
   <a href="professional-works.html" class="pill-btn"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>Professional<br>Works</a>
-</nav>
+</div>
 </body>
 </html>
