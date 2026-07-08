@@ -27,8 +27,8 @@
 
   /* Shared classes used by kitchen renovation section */
   .img-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5px; background: var(--border); margin-bottom: 1.5rem; }
-  .before-two-col { grid-template-columns: 1fr 1fr; }
-  .layout-plans-grid { grid-template-columns: 1fr 1fr; }
+  .before-two-col { display: grid; grid-template-columns: 1fr 1fr; }
+  .layout-plans-grid { display: grid; grid-template-columns: 1fr 1fr; }
   .img-slot { background: transparent; display: flex; align-items: center; justify-content: center; overflow: hidden; }
   .img-slot img { width: 100%; height: 100%; object-fit: contain; display: block; cursor: zoom-in; }
   .img-placeholder-label { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-align: center; padding: 1rem; line-height: 1.7; background: var(--bg-mid); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
@@ -135,9 +135,9 @@
     }
   }
   @media (max-width: 900px) {
-    .before-two-col { grid-template-columns: 1fr !important; }
+    .before-two-col { display: grid !important; grid-template-columns: 1fr !important; }
     .before-two-col > div:last-child { align-self: auto !important; }
-    .layout-plans-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
+    .layout-plans-grid { display: grid !important; grid-template-columns: 1fr !important; gap: 1rem !important; }
     .img-grid-2 { grid-template-columns: 1fr !important; }
   }
 
@@ -510,7 +510,7 @@
     <!-- BEFORE — compact main image + thumbnail strip + design critique callout -->
     <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2rem 0 0.75rem;">Before</h4>
     <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem">The existing kitchen and meals area prior to renovation. The first two images were taken at the time of purchase with the original styling in place; the next two show the space once vacated — with the meals furniture removed, the spatial constraints of the original layout become more apparent. The final three images are from a previous sale listing dated c. 2013, included to show the condition and layout of the space over a decade earlier — including the dead space adjoining the kitchen that was later reworked into the meals area.</p>
-    <div style="display:grid; gap:1.5rem; align-items:start; margin-bottom:1.5rem;" class="before-two-col">
+    <div style="gap:1.5rem; align-items:start; margin-bottom:1.5rem;" class="before-two-col">
       <div class="before-viewer" style="max-width:100%; margin-bottom:0;">
         <div class="before-main" id="beforeMain">
           <img id="beforeMainImg" src="" alt="Before kitchen">
@@ -558,7 +558,7 @@
       kitchen-before-dining.webp = the styled dining nook shot (your upload: kitchen-before-dining_to_use.jpg, converted to webp).
     -->
 
-    <div class="layout-plans-grid" style="display:grid; gap:2rem; margin-bottom:1.5rem; align-items:center;">
+    <div class="layout-plans-grid" style="gap:2rem; margin-bottom:1.5rem; align-items:center;">
       <div>
         <p style="font-size:9px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); margin-bottom:0.5rem;">Current floor plan</p>
         <div style="background:var(--bg-card); padding:0.75rem;">
@@ -623,7 +623,7 @@
     <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Layout Reconfiguration</h4>
     <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.25rem">As part of the design development I proposed adjusting the floor plan to make better use of the available space.</p>
 
-    <div class="layout-plans-grid" style="display:grid; gap:2rem; margin-bottom:1.5rem; align-items:start;">
+    <div class="layout-plans-grid" style="gap:2rem; margin-bottom:1.5rem; align-items:start;">
       <div>
         <p style="font-size:9px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); margin-bottom:0.5rem;">Current floor plan</p>
         <div style="background:var(--bg-card); display:flex; align-items:center; justify-content:center; padding:0.75rem;">
@@ -831,7 +831,7 @@
         <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2rem 0 0.75rem;">Before</h4>
         <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem">The existing laundry as it stands. The first and second images showing the room vacant, prior to appliances or storage being introduced; the last showing the space in everyday use, where the practical shortcomings of the layout become apparent.</p>
 
-        <div style="display:grid; gap:1.5rem; align-items:start; margin-bottom:1.5rem;" class="before-two-col">
+        <div style="gap:1.5rem; align-items:start; margin-bottom:1.5rem;" class="before-two-col">
           <div class="laundry-before-viewer" id="laundryBeforeMain" style="max-width:100%; margin-bottom:0;">
             <div class="before-main">
               <img id="laundryBeforeMainImg" src="images/personal/laundry-before-empty.webp" alt="Laundry — vacant" data-gallery="laundry-before" data-index="0" style="width:100%; height:100%; object-fit:contain; display:block; cursor:zoom-in;">
@@ -980,7 +980,7 @@
         <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2rem 0 0.75rem;">Before</h4>
         <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1rem">The existing bathroom. The first image is from the original sale listing; the remaining images were taken since moving in, including the shower screen added after the fact to address water damage to the vanity.</p>
 
-        <div style="display:grid; gap:1.5rem; align-items:start; margin-bottom:1.5rem;" class="before-two-col">
+        <div style="gap:1.5rem; align-items:start; margin-bottom:1.5rem;" class="before-two-col">
           <div class="laundry-before-viewer" id="bathroomBeforeMain" style="max-width:100%; margin-bottom:0;">
             <div class="before-main">
               <img id="bathroomBeforeMainImg" src="images/personal/bathroom-before-sale.webp" alt="Bathroom — sale listing" data-gallery="bathroom-before" data-index="0" style="width:100%; height:100%; object-fit:contain; display:block; cursor:zoom-in;">
