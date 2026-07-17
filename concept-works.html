@@ -833,6 +833,18 @@
           </div>
         </div>
 
+        <!-- LAUNDRY MOODBOARD FULLSCREEN -->
+        <div class="tapestry-fullscreen" id="laundryMoodboardFullscreen">
+          <button class="tapestry-fs-close" id="laundryMoodboardFsClose">✕</button>
+          <div class="tapestry-zoom-controls" id="laundryMoodboardFsZoomControls">
+            <button class="tapestry-zoom-btn" id="laundryMoodboardFsZoomOut" aria-label="Zoom out">−</button>
+            <button class="tapestry-zoom-btn" id="laundryMoodboardFsZoomIn" aria-label="Zoom in">+</button>
+          </div>
+          <div class="tapestry-fs-track" id="laundryMoodboardFsTrack">
+            <img src="images/personal/laundry-moodboard.webp" alt="Laundry mood board" class="tapestry-fs-img">
+          </div>
+        </div>
+
         <!-- PROPOSED DESIGN — concept stage, no final build yet -->
         <h4 style="font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 0.75rem;">Proposed Design</h4>
         <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.75; margin-bottom:1.5rem">Concept direction for the fit-out — layout intent, material selections, and rationale. This section will be replaced with finished photography once the project is built.</p>
@@ -860,6 +872,7 @@
           <div style="display:flex; align-items:center; gap:0.5rem; margin-top:0.6rem;">
             <button class="tapestry-inline-zoom-btn" id="laundryMoodboardZoomOut" aria-label="Zoom out">−</button>
             <button class="tapestry-inline-zoom-btn" id="laundryMoodboardZoomIn" aria-label="Zoom in">+</button>
+            <button class="tapestry-fs-btn" id="laundryMoodboardFsBtn">⛶ Full screen</button>
           </div>
         </div>
 
@@ -1783,9 +1796,150 @@ if (beforeMainEl && beforeThumbs.length > 0) {
   if (nextBtn) nextBtn.addEventListener('click', () => { markScrolled(); track.scrollBy({ left: NUDGE, behavior: 'smooth' }); });
   addSwipe(track, () => track.scrollBy({ left: NUDGE, behavior: 'smooth' }), () => track.scrollBy({ left: -NUDGE, behavior: 'smooth' }));
 
-  // Zoom
+  // Inline zoom — also update cursor and enable drag-to-pan when zoomed
+  let panX = 0, panY = 0;
+
+  function applyInlineZoomAndPan() {
+    const prevScrollWidth = track.scrollWidth;
+    const ratio = prevScrollWidth > track.clientWidth ? track.scrollLeft / (prevScrollWidth - track.clientWidth) : 0;
+    img.style.transform = `scale(${inlineScale}) translate(${panX / inlineScale}px, ${panY / inlineScale}px)`;
+    img.style.cursor = inlineScale > 1 ? 'grab' : 'default';
+    requestAnimationFrame(() => {
+      const newScrollable = track.scrollWidth - track.clientWidth;
+      if (newScrollable > 0) track.scrollLeft = ratio * newScrollable;
+      updateThumb();
+    });
+    if (zoomIn)  zoomIn.disabled  = inlineScale >= INLINE_MAX;
+    if (zoomOut) zoomOut.disabled = inlineScale <= INLINE_MIN;
+  }
+
+  function applyInlineZoom() { applyInlineZoomAndPan(); }
+
+  // Vertical drag-to-pan when zoomed (track already handles horizontal scroll)
+  let panDragging = false, panStartY = 0, panStartPanY = 0;
+  img.addEventListener('mousedown', e => {
+    if (inlineScale <= 1) return;
+    e.preventDefault(); e.stopPropagation();
+    panDragging = true; panStartY = e.clientY; panStartPanY = panY;
+    img.style.cursor = 'grabbing';
+  });
+  window.addEventListener('mousemove', e => {
+    if (!panDragging) return;
+    panY = panStartPanY + (e.clientY - panStartY);
+    applyInlineZoomAndPan();
+  });
+  window.addEventListener('mouseup', () => {
+    if (!panDragging) return;
+    panDragging = false;
+    img.style.cursor = inlineScale > 1 ? 'grab' : 'default';
+  });
+  // Touch vertical pan
+  let tPanStartY = 0, tPanStartPanY = 0;
+  img.addEventListener('touchstart', e => {
+    if (inlineScale <= 1) return;
+    tPanStartY = e.touches[0].clientY; tPanStartPanY = panY;
+  }, { passive: true });
+  img.addEventListener('touchmove', e => {
+    if (inlineScale <= 1) return;
+    panY = tPanStartPanY + (e.touches[0].clientY - tPanStartY);
+    applyInlineZoomAndPan();
+  }, { passive: true });
+
   if (zoomIn)  zoomIn.addEventListener('click', () => { inlineScale = Math.min(INLINE_MAX, +(inlineScale + INLINE_STEP).toFixed(2)); applyInlineZoom(); });
-  if (zoomOut) zoomOut.addEventListener('click', () => { inlineScale = Math.max(INLINE_MIN, +(inlineScale - INLINE_STEP).toFixed(2)); applyInlineZoom(); });
+  if (zoomOut) zoomOut.addEventListener('click', () => { inlineScale = Math.max(INLINE_MIN, +(inlineScale - INLINE_STEP).toFixed(2)); if (inlineScale <= 1) { panX = 0; panY = 0; } applyInlineZoom(); });
+
+  // Fullscreen
+  const fsBtn   = document.getElementById('laundryMoodboardFsBtn');
+  const fsPanel = document.getElementById('laundryMoodboardFullscreen');
+  const fsClose = document.getElementById('laundryMoodboardFsClose');
+  const fsTrack = document.getElementById('laundryMoodboardFsTrack');
+  const fsZoomIn  = document.getElementById('laundryMoodboardFsZoomIn');
+  const fsZoomOut = document.getElementById('laundryMoodboardFsZoomOut');
+
+  let fsScale = 1, fsPanX = 0, fsPanY = 0;
+  const FS_ZOOM_MIN = 0.4, FS_ZOOM_MAX = 4, FS_ZOOM_STEP = 0.5;
+  const fsImg = fsTrack ? fsTrack.querySelector('img') : null;
+
+  function applyFsTransform(animated) {
+    if (!fsImg) return;
+    fsImg.style.transition = animated ? 'transform 0.2s ease' : 'none';
+    fsImg.style.transform = `scale(${fsScale}) translate(${fsPanX / fsScale}px, ${fsPanY / fsScale}px)`;
+    fsImg.style.cursor = fsScale > 1 ? 'grab' : 'default';
+    if (fsZoomIn)  fsZoomIn.disabled  = fsScale >= FS_ZOOM_MAX;
+    if (fsZoomOut) fsZoomOut.disabled = fsScale <= FS_ZOOM_MIN;
+  }
+
+  function closeLaundryFs() {
+    if (fsPanel) fsPanel.classList.remove('open');
+    document.body.style.overflow = '';
+    fsScale = 1; fsPanX = 0; fsPanY = 0;
+    if (fsImg) { fsImg.style.transform = ''; fsImg.style.cursor = ''; }
+  }
+
+  if (fsBtn && fsPanel) {
+    fsBtn.addEventListener('click', () => {
+      fsPanel.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      fsScale = 1; fsPanX = 0; fsPanY = 0;
+      applyFsTransform(false);
+    });
+  }
+  if (fsClose) {
+    fsClose.addEventListener('click', closeLaundryFs);
+    fsClose.addEventListener('touchend', e => { e.preventDefault(); e.stopPropagation(); closeLaundryFs(); }, { passive: false });
+  }
+  if (fsPanel) {
+    fsPanel.addEventListener('click', e => { if (e.target === fsPanel) closeLaundryFs(); });
+    let fsLastTap = 0;
+    if (fsTrack) fsTrack.addEventListener('touchend', () => {
+      const now = Date.now();
+      if (now - fsLastTap < 350) closeLaundryFs();
+      fsLastTap = now;
+    }, { passive: true });
+  }
+  document.addEventListener('keydown', e => {
+    if (fsPanel && fsPanel.classList.contains('open') && e.key === 'Escape') closeLaundryFs();
+  });
+
+  if (fsZoomIn)  fsZoomIn.addEventListener('click',  e => { e.stopPropagation(); fsScale = Math.min(FS_ZOOM_MAX, +(fsScale + FS_ZOOM_STEP).toFixed(1)); applyFsTransform(true); });
+  if (fsZoomOut) fsZoomOut.addEventListener('click', e => { e.stopPropagation(); fsScale = Math.max(FS_ZOOM_MIN, +(fsScale - FS_ZOOM_STEP).toFixed(1)); if (fsScale <= 1) { fsPanX = 0; fsPanY = 0; } applyFsTransform(true); });
+
+  // Fullscreen drag-to-pan
+  let fsDragging = false, fsDragX = 0, fsDragY = 0, fsDragPanX = 0, fsDragPanY = 0, fsJustDragged = false;
+  if (fsTrack) {
+    fsTrack.addEventListener('mousedown', e => {
+      if (fsScale <= 1) return;
+      e.preventDefault(); e.stopPropagation();
+      fsDragging = true; fsJustDragged = false;
+      fsDragX = e.clientX; fsDragY = e.clientY;
+      fsDragPanX = fsPanX; fsDragPanY = fsPanY;
+      if (fsImg) fsImg.style.cursor = 'grabbing';
+    });
+    fsTrack.addEventListener('click', e => { if (fsJustDragged) { fsJustDragged = false; e.stopPropagation(); } });
+    let fsTStartX = 0, fsTStartY = 0, fsTStartPanX = 0, fsTStartPanY = 0;
+    fsTrack.addEventListener('touchstart', e => {
+      fsTStartX = e.touches[0].clientX; fsTStartY = e.touches[0].clientY;
+      fsTStartPanX = fsPanX; fsTStartPanY = fsPanY;
+    }, { passive: true });
+    fsTrack.addEventListener('touchmove', e => {
+      if (fsScale <= 1) return;
+      fsPanX = fsTStartPanX + (e.touches[0].clientX - fsTStartX);
+      fsPanY = fsTStartPanY + (e.touches[0].clientY - fsTStartY);
+      applyFsTransform(false);
+    }, { passive: true });
+  }
+  window.addEventListener('mousemove', e => {
+    if (!fsDragging || !fsPanel || !fsPanel.classList.contains('open')) return;
+    fsPanX = fsDragPanX + (e.clientX - fsDragX);
+    fsPanY = fsDragPanY + (e.clientY - fsDragY);
+    fsJustDragged = true;
+    applyFsTransform(false);
+  });
+  window.addEventListener('mouseup', () => {
+    if (!fsDragging) return;
+    fsDragging = false;
+    if (fsImg) fsImg.style.cursor = fsScale > 1 ? 'grab' : 'default';
+  });
 
   applyInlineZoom();
 })();
