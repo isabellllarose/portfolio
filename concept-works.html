@@ -578,7 +578,6 @@
 
     <!-- TAPESTRY FULLSCREEN OVERLAY -->
     <div class="tapestry-fullscreen" id="kitchenTapestryFullscreen">
-      <button class="tapestry-fs-close" id="kitchenTapestryFsClose">✕</button>
       <div class="tapestry-zoom-controls">
         <button class="tapestry-zoom-btn" id="kitchenTapestryZoomOut" aria-label="Zoom out">−</button>
         <button class="tapestry-zoom-btn" id="kitchenTapestryZoomIn" aria-label="Zoom in">+</button>
@@ -835,7 +834,6 @@
 
         <!-- LAUNDRY MOODBOARD FULLSCREEN -->
         <div class="tapestry-fullscreen" id="laundryMoodboardFullscreen">
-          <button class="tapestry-fs-close" id="laundryMoodboardFsClose">✕</button>
           <div class="tapestry-zoom-controls" id="laundryMoodboardFsZoomControls">
             <button class="tapestry-zoom-btn" id="laundryMoodboardFsZoomOut" aria-label="Zoom out">−</button>
             <button class="tapestry-zoom-btn" id="laundryMoodboardFsZoomIn" aria-label="Zoom in">+</button>
@@ -1872,6 +1870,7 @@ if (beforeMainEl && beforeThumbs.length > 0) {
   function closeLaundryFs() {
     if (fsPanel) fsPanel.classList.remove('open');
     document.body.style.overflow = '';
+    if (fsClose) fsClose.style.display = 'none';
     fsScale = 1; fsPanX = 0; fsPanY = 0;
     if (fsImg) { fsImg.style.transform = ''; fsImg.style.cursor = ''; }
   }
@@ -1880,6 +1879,7 @@ if (beforeMainEl && beforeThumbs.length > 0) {
     fsBtn.addEventListener('click', () => {
       fsPanel.classList.add('open');
       document.body.style.overflow = 'hidden';
+      if (fsClose) fsClose.style.display = '';
       fsScale = 1; fsPanX = 0; fsPanY = 0;
       applyFsTransform(false);
     });
@@ -2124,6 +2124,7 @@ document.querySelectorAll('[data-close-mat]').forEach(btn => {
     fsBtn.addEventListener('click', () => {
       fsPanel.classList.add('open');
       document.body.style.overflow = 'hidden';
+      if (fsClose) fsClose.style.display = '';
       // Sync scroll position
       if (fsTrack && track) {
         const ratio = track.scrollLeft / Math.max(1, track.scrollWidth - track.clientWidth);
@@ -2137,6 +2138,7 @@ document.querySelectorAll('[data-close-mat]').forEach(btn => {
   function closeTapestryFs() {
     if (fsPanel) fsPanel.classList.remove('open');
     document.body.style.overflow = '';
+    if (fsClose) fsClose.style.display = 'none';
   }
   if (fsClose) {
     fsClose.addEventListener('click', closeTapestryFs);
@@ -2239,5 +2241,9 @@ document.querySelectorAll('[data-close-mat]').forEach(btn => {
   <a href="concept-works.html" class="pill-btn pill-active"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><circle cx="17.5" cy="17.5" r="3.5"/></svg>Concept<br>Works</a>
   <a href="professional-works.html" class="pill-btn"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>Professional<br>Works</a>
 </div>
+
+<!-- TAPESTRY CLOSE BUTTONS — at body level to avoid iOS scrollable container touch interception -->
+<button class="tapestry-fs-close tapestry-close-body" id="kitchenTapestryFsClose" style="display:none;" aria-label="Close">✕</button>
+<button class="tapestry-fs-close tapestry-close-body" id="laundryMoodboardFsClose" style="display:none;" aria-label="Close">✕</button>
 </body>
 </html>
