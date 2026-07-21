@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Qualifications — Isabella Heath</title>
+<title>Academic Works — Isabella Heath</title>
 <link rel="stylesheet" href="style.css">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -12,7 +12,7 @@
 <style>
   .page-header { padding-top: 60px; border-bottom: 0.5px solid var(--border); background: var(--bg-card); }
   @media (max-width: 900px) { .page-header { padding-top: 70px; } }
-  .page-header-inner { max-width: 1160px; margin: 0 auto; padding: 4rem 3rem 3.5rem; }
+  .page-header-inner { max-width: 1400px; margin: 0 auto; padding: 4rem 3rem 3.5rem; }
   @media (max-width: 900px) {
     .page-header-inner { padding: 1.5rem 1.5rem 2rem; }
     .nav-links { display: none !important; }
@@ -27,7 +27,7 @@
   /* COURSE BAND */
   .course-band { background: var(--bg-dark); margin-top: 60px; }
   @media (min-width: 901px) { .course-band { margin-top: 0; padding-top: 60px; } }
-  .course-inner { max-width: 1160px; margin: 0 auto; padding: 3rem; display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
+  .course-inner { max-width: 1400px; margin: 0 auto; padding: 3rem; display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
   .course-name { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--bg); margin-bottom: 0.5rem; }
   .course-detail { font-size: 0.875rem; color: rgba(242,237,230,0.5); line-height: 1.6; }
   .course-meta { display: flex; gap: 1.5px; background: rgba(255,255,255,0.06); border: 0.5px solid rgba(255,255,255,0.1); }
@@ -37,7 +37,7 @@
 
   /* PROJECT NAV */
   .proj-nav { background: var(--bg-card); border-bottom: 0.5px solid var(--border); padding: 2rem 0; }
-  .proj-nav-inner { max-width: 1160px; margin: 0 auto; padding: 0 3rem; }
+  .proj-nav-inner { max-width: 1400px; margin: 0 auto; padding: 0 3rem; }
   .proj-nav-label { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.25rem; }
   /* Carousel wrapper */
   .proj-nav-carousel { position: relative; display: flex; align-items: center; gap: 0; }
@@ -298,7 +298,7 @@
   .dev-journal .journal-viewer { background: var(--bg-mid); overflow: hidden; position: relative; }
   .dev-journal .journal-spread { transform-origin: top center; }
   /* Fullscreen: double page desktop, single page mobile */
-  #devFullscreen .journal-fullscreen-spread { grid-template-columns: 1fr; max-width: min(560px, 96vw); }
+  #devFullscreen .journal-fullscreen-spread { grid-template-columns: 1fr; max-width: min(800px, 96vw); }
   @media (max-width: 700px) {
     .dev-journal .journal-spread { max-width: 100%; }
     #devFullscreen .journal-fullscreen-slot:last-child { display: none; }
@@ -312,8 +312,8 @@
   .journal-fullscreen.open { opacity: 1; pointer-events: all; }
   .journal-fullscreen-spread { display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: var(--bg-card); max-width: min(1200px, 90vw); width: 100%; flex-shrink: 0; }
   .journal-fullscreen-slot + .journal-fullscreen-slot { border-left: 2px solid var(--border-strong); }
-  .journal-fullscreen-slot { background: var(--bg-card); overflow: visible; display: flex; align-items: center; justify-content: center; max-height: calc(90vh - 80px); }
-  .journal-fullscreen-slot img { width: 100%; height: 100%; object-fit: contain; display: block; transform-origin: center center; user-select: none; -webkit-user-drag: none; cursor: default; max-height: calc(90vh - 80px); }
+  .journal-fullscreen-slot { background: var(--bg-card); overflow: visible; display: flex; align-items: center; justify-content: center; max-height: calc(88vh - 100px); min-height: calc(70vh - 80px); }
+  .journal-fullscreen-slot img { width: 100%; height: 100%; object-fit: contain; display: block; transform-origin: center center; user-select: none; -webkit-user-drag: none; cursor: default; max-height: calc(88vh - 100px); }
   /* Journal zoom buttons — same style as floor plan zoom buttons */
   .journal-zoom-controls { position: fixed; left: 1.5rem; top: 50%; transform: translateY(-50%); z-index: 100002; display: flex; flex-direction: column; gap: 0.4rem; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
   .journal-fullscreen:hover .journal-zoom-controls { opacity: 1; pointer-events: all; }
@@ -796,7 +796,7 @@
       <span class="badge badge-academic">Academic · 2026</span>
     </div>
     <h2 class="proj-section-title">Dune Wellness Centre</h2>
-    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.25rem; letter-spacing:0.04em;">Commercial concept · BIM &amp; rendered presentation · ArchiCAD · Affinity · AI-assisted visualisation</p>
+    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.25rem; letter-spacing:0.04em;">Commercial concept · BIM &amp; rendered presentation · ArchiCAD · Affinity · visualisation</p>
 
     <div class="proj-detail">
       <div class="proj-body">
@@ -863,15 +863,40 @@
           </div>
         </div>
 
-        <!-- GROUND FLOOR PLAN — full width -->
+        <!-- GROUND FLOOR PLAN — full width with legend left -->
         <span class="img-label" style="margin-top:1.5rem; display:block;">Ground floor &amp; landscaping plan</span>
-        <img src="images/wellness/20-01-ground-floor-landscaping-plan.webp" alt="Ground Floor Plan" class="img-hero" data-gallery="wellness" data-index="12">
+        <div class="plan-legend-wrap-lg" style="margin-top:0.5rem; direction:rtl;">
+          <img src="images/wellness/20-01-ground-floor-landscaping-plan.webp" alt="Ground Floor Plan"
+               style="width:100%; display:block; cursor:zoom-in; direction:ltr;"
+               data-gallery="wellness" data-index="12">
+          <div class="legend-block" style="direction:ltr;">
+            <div class="legend-title">Legend</div>
+            <div class="legend-grid">
+              <span class="legend-num">1</span><span class="legend-name">Reception</span>
+              <span class="legend-num">2</span><span class="legend-name">Retail Display</span>
+              <span class="legend-num">3</span><span class="legend-name">Sauna</span>
+              <span class="legend-num">4</span><span class="legend-name">Steam Room</span>
+              <span class="legend-num">5</span><span class="legend-name">Lift</span>
+              <span class="legend-num">6</span><span class="legend-name">Showers</span>
+              <span class="legend-num">7</span><span class="legend-name">Bathroom</span>
+              <span class="legend-num">8</span><span class="legend-name">Mineral Pool</span>
+              <span class="legend-num">9</span><span class="legend-name">Garden</span>
+              <span class="legend-num">10</span><span class="legend-name">Cold Plunge</span>
+              <span class="legend-num">11</span><span class="legend-name">Refreshment Bar</span>
+              <span class="legend-num">12</span><span class="legend-name">Bathroom</span>
+              <span class="legend-num">13</span><span class="legend-name">Lounge</span>
+              <span class="legend-num">14</span><span class="legend-name">Studio</span>
+              <span class="legend-num">15</span><span class="legend-name">Laundry / Storage</span>
+              <span class="legend-num">16</span><span class="legend-name">Treatment Room</span>
+            </div>
+          </div>
+        </div>
 
-        <!-- FIRST FLOOR PLAN — with legend beside it -->
-        <span class="img-label" style="margin-top:0.5rem; display:block;">Level one floor plan</span>
-        <div class="plan-legend-wrap" style="margin-top:0.5rem;">
+        <!-- FIRST FLOOR PLAN — larger, legend on left -->
+        <span class="img-label" style="margin-top:1.5rem; display:block;">Level one floor plan</span>
+        <div class="plan-legend-wrap-lg" style="margin-top:0.5rem; direction:rtl;">
           <img src="images/wellness/20-02-first-floor-plan.webp" alt="Level One Floor Plan"
-               style="width:100%; display:block; background:transparent; cursor:zoom-in; margin-bottom:0;"
+               style="width:100%; display:block; background:transparent; cursor:zoom-in; margin-bottom:0; direction:ltr;"
                data-gallery="wellness" data-index="13">
           <div class="legend-block">
             <div class="legend-title">Legend</div>
@@ -922,7 +947,7 @@
         </div>
 
         <p>A commercial wellness centre concept exploring spatial zoning, materiality, and user experience through a calm and grounded architectural language. The building organises ritual-based zones — movement, heat, water, and rest — through a sequence of textured, tactile spaces animated by light, greenery, and curved form.</p>
-        <p>The project combined BIM modelling in ArchiCAD and presentation layout in Affinity to produce a cohesive submission. The A1 poster was designed as a standalone document — communicating design intent, atmosphere, floor plans, section, and all four elevations in a single composition. Visualisations were produced using ArchiCAD Cineware and AI-assisted rendering tools.</p>
+        <p>The project combined BIM modelling in ArchiCAD and presentation layout in Affinity to produce a cohesive submission. Visualisations were produced using ArchiCAD Cineware and rendering tools, communicating design intent, atmosphere, floor plans, section, and all four elevations.</p>
 
         <!-- DESIGN DEVELOPMENT JOURNAL -->
         <div style="margin-top:3rem; padding-top:2rem; border-top:0.5px solid var(--border);">
@@ -1013,9 +1038,9 @@
         </div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Year</div><div class="proj-sidebar-value">2026</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Type</div><div class="proj-sidebar-value">Commercial — Wellness Centre</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Software</div><div class="proj-sidebar-value">ArchiCAD 29 · Affinity · AI-assisted visualisation</div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Software</div><div class="proj-sidebar-value">ArchiCAD 29 · Affinity · visualisation</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Spaces</div><div class="proj-sidebar-value">16 rooms — see legend</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Deliverables</div><div class="proj-sidebar-value">A1 poster · Renders · Ground &amp; first floor plans · Section A-A · 4 elevations</div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Deliverables</div><div class="proj-sidebar-value">Renders · Ground &amp; first floor plans · Section A-A · 4 elevations</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Tags</div><div class="proj-tags-row"><span class="tag">Commercial Design</span><span class="tag">BIM</span><span class="tag">Rendering</span><span class="tag">Spatial Planning</span><span class="tag">Presentation</span></div></div>
       </div>
     </div>
@@ -1295,8 +1320,8 @@ if (devL && DEV_TOTAL > 0) {
     devFs.classList.add('open'); document.body.style.overflow = 'hidden';
     devZoom.resetZoom();
   });
-  devFsP.addEventListener('click', () => { if (devFsSpread > 0) { devFsSpread--; renderDevSpread(devFsSpread, devFsL, devFsR, devFsCtr, devFsP, devFsN); devZoom.resetZoom(); } });
-  devFsN.addEventListener('click', () => { if (devFsSpread < DEV_SPREADS - 1) { devFsSpread++; renderDevSpread(devFsSpread, devFsL, devFsR, devFsCtr, devFsP, devFsN); devZoom.resetZoom(); } });
+  devFsP.addEventListener('click', () => { if (devFsSpread > 0) { devFsSpread--; renderDevSpread(devFsSpread, devFsL, devFsR, devFsCtr, devFsP, devFsN); } });
+  devFsN.addEventListener('click', () => { if (devFsSpread < DEV_SPREADS - 1) { devFsSpread++; renderDevSpread(devFsSpread, devFsL, devFsR, devFsCtr, devFsP, devFsN); } });
 
   function closeDevFs() { devFs.classList.remove('open'); document.body.style.overflow = ''; devZoom.resetZoom(); devSpread = devFsSpread; renderDevSpread(devSpread, devL, devR, devCtr, devPrev, devNext); }
   devClose.addEventListener('click', closeDevFs);

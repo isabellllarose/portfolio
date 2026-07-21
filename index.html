@@ -16,11 +16,20 @@
     min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    align-items: end;
-    padding: 0 3rem 6rem;
-    padding-top: 60px;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 4rem 4rem;
+    padding-top: 80px;
     overflow: hidden;
-    gap: 4rem;
+    gap: 5rem;
+  }
+  /* Wrap hero in a full-width container for bg canvas */
+  .hero-outer {
+    position: relative;
+    background: var(--bg);
+    overflow: hidden;
   }
 
   .hero-canvas {
@@ -378,7 +387,7 @@
       A growing portfolio of building design work, documenting my academic projects, technical documentation, design development and visualisation work as I study towards a career in architectural drafting and building design.
     </p>
     <div class="hero-actions">
-      <a href="#work" class="btn btn-dark">View work →</a>
+      <a href="#work" class="btn btn-dark" style="padding: 0.9rem 2.2rem; font-size: 0.95rem; letter-spacing: 0.12em;">View work →</a>
       <a href="#contact" class="btn btn-outline">Get in touch</a>
     </div>
   </div>

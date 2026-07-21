@@ -247,7 +247,7 @@ nav {
 
 /* ---- SECTION WRAPPER ---- */
 .section-wrap {
-  max-width: 1160px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 7rem 3rem;
 }
@@ -523,6 +523,52 @@ footer {
   .section-wrap { padding: 3rem 1.25rem; }
   footer { flex-direction: column; gap: 1rem; text-align: center; }
   .footer-links { justify-content: center; gap: 1rem; flex-wrap: wrap; }
+}
+
+
+/* ── CLICK TO ENLARGE HINT ── */
+.img-slot,
+.before-main,
+.kitchen-carousel-viewer,
+.laundry-before-viewer .before-main,
+.img-hero {
+  position: relative;
+}
+.img-slot img,
+.before-main img,
+.kitchen-carousel-viewer img,
+.img-hero {
+  /* cursor already set to zoom-in in most places */
+}
+/* Small badge top-right on hoverable image containers */
+.img-slot::after,
+.img-hero-wrap::after {
+  content: '⛶ Enlarge';
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(242,237,230,0.9);
+  background: rgba(42,31,26,0.55);
+  padding: 0.25rem 0.5rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.img-slot:hover::after,
+.img-hero-wrap:hover::after {
+  opacity: 1;
+}
+@media (hover: none) {
+  .img-slot::after,
+  .img-hero-wrap::after {
+    opacity: 1;
+    font-size: 8px;
+  }
 }
 
 /* ════════════════════════════════════════
