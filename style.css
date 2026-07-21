@@ -527,45 +527,50 @@ footer {
 
 
 /* ── CLICK TO ENLARGE HINT ── */
+/* ── ENLARGE HINTS — on all zoomable image containers ── */
 .img-slot,
 .before-main,
+.img-hero-wrap,
 .kitchen-carousel-viewer,
-.laundry-before-viewer .before-main,
-.img-hero {
+.plan-img-wrap {
   position: relative;
 }
-.img-slot img,
-.before-main img,
-.kitchen-carousel-viewer img,
-.img-hero {
-  /* cursor already set to zoom-in in most places */
-}
-/* Small badge top-right on hoverable image containers */
+/* ::after works on div containers, not on img elements directly */
 .img-slot::after,
-.img-hero-wrap::after {
-  content: '⛶ Enlarge';
+.before-main::after,
+.img-hero-wrap::after,
+.kitchen-carousel-viewer::after,
+.plan-img-wrap::after {
+  content: '⛶  Enlarge';
   position: absolute;
-  bottom: 0.5rem;
-  right: 0.5rem;
+  bottom: 0.6rem;
+  right: 0.6rem;
   font-family: 'Inter', sans-serif;
   font-size: 9px;
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(242,237,230,0.9);
-  background: rgba(42,31,26,0.55);
-  padding: 0.25rem 0.5rem;
+  color: rgba(242,237,230,0.95);
+  background: rgba(42,31,26,0.6);
+  padding: 0.25rem 0.55rem;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.2s;
+  z-index: 2;
 }
 .img-slot:hover::after,
-.img-hero-wrap:hover::after {
+.before-main:hover::after,
+.img-hero-wrap:hover::after,
+.kitchen-carousel-viewer:hover::after,
+.plan-img-wrap:hover::after {
   opacity: 1;
 }
 @media (hover: none) {
   .img-slot::after,
-  .img-hero-wrap::after {
+  .before-main::after,
+  .img-hero-wrap::after,
+  .kitchen-carousel-viewer::after,
+  .plan-img-wrap::after {
     opacity: 1;
     font-size: 8px;
   }

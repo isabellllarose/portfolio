@@ -12,7 +12,7 @@
 <style>
   .page-header { padding-top: 60px; border-bottom: 0.5px solid var(--border); background: var(--bg-card); }
   @media (max-width: 900px) { .page-header { padding-top: 70px; } }
-  .page-header-inner { max-width: 1400px; margin: 0 auto; padding: 4rem 3rem 3.5rem; }
+  .page-header-inner { max-width: 1400px; margin: 0 auto; padding: 4rem 3rem 3.5rem; text-align: center; }
   @media (max-width: 900px) {
     .page-header-inner { padding: 1.5rem 1.5rem 2rem; }
     .nav-links { display: none !important; }
@@ -71,7 +71,7 @@
   /* COLLAPSIBLE UNITS */
   .units-toggle { display: flex; align-items: center; justify-content: space-between; cursor: pointer; padding-bottom: 1.25rem; border-bottom: 0.5px solid var(--border); margin-bottom: 0; user-select: none; }
   .units-toggle-label { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 3.5vw, 2.6rem); line-height: 1.15; color: var(--text-primary); }
-  .units-toggle-arrow { font-size: 1.2rem; color: var(--text-muted); transition: transform 0.3s; flex-shrink: 0; margin-left: 1rem; }
+  .units-toggle-arrow { font-size: 1.4rem; font-weight: 700; color: var(--accent); transition: transform 0.3s; flex-shrink: 0; margin-left: 1rem; }
   .units-toggle.open .units-toggle-arrow { transform: rotate(180deg); }
   .units-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5px; background: var(--border); border: 0.5px solid var(--border); margin-top: 1.5rem; display: none; }
   .units-grid.open { display: grid; }
@@ -110,7 +110,7 @@
   .proj-toggle-num { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; color: var(--text-muted); text-transform: uppercase; white-space: nowrap; }
   .proj-toggle-title { font-family: 'Playfair Display', serif; font-size: clamp(1rem, 2vw, 1.35rem); color: var(--text-primary); line-height: 1.2; }
   .proj-toggle-type { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
-  .proj-toggle-arrow { font-size: 1rem; color: var(--text-muted); transition: transform 0.3s; flex-shrink: 0; margin-left: 1rem; }
+  .proj-toggle-arrow { font-size: 1.3rem; font-weight: 700; color: var(--accent); transition: transform 0.3s; flex-shrink: 0; margin-left: 1rem; border: 1.5px solid var(--accent); border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; }
   .proj-toggle.collapsed .proj-toggle-arrow { transform: rotate(-90deg); }
   .proj-collapsible { overflow: hidden; transition: max-height 0.45s ease; }
   .proj-collapsible.collapsed { max-height: 0 !important; }
@@ -445,8 +445,8 @@
       <div class="course-detail">Course code: 22627VIC &nbsp;·&nbsp; Holmesglen Institute, Chadstone &nbsp;·&nbsp; Victoria, Australia<br>Nationally accredited qualification covering residential and commercial design, BIM, documentation, and regulatory compliance.</div>
     </div>
     <div class="course-meta">
-      <div class="course-meta-cell"><div class="course-meta-value">Adv.Dip</div><div class="course-meta-label">Level</div></div>
-      <div class="course-meta-cell"><div class="course-meta-value">22</div><div class="course-meta-label">Units</div></div>
+      <div class="course-meta-cell"><div class="course-meta-value">Adv.Dip</div><div class="course-meta-label">Level</div>
+      <div class="course-meta-cell"><div class="course-meta-value">22</div><div class="course-meta-label">Units</div>
     </div>
   </div>
 </div>
@@ -477,7 +477,7 @@
     <span class="section-eyebrow" style="display:block; margin-bottom:1rem;">Course content</span>
     <div class="units-toggle" id="unitsToggle">
       <span class="units-toggle-label">Units of competency</span>
-      <span class="units-toggle-arrow">&#8964;</span>
+      <span class="units-toggle-arrow">▾</span>
     </div>
   </div>
   <div class="units-grid" id="unitsGrid">
@@ -531,10 +531,10 @@
     <div class="proj-detail">
       <div class="proj-body">
         <span class="img-label">A01 — Site plan</span>
-        <img src="images/beach-house/01-site-plan.webp" alt="Beach House site plan" class="img-hero" data-gallery="beach" data-index="0">
+        <div class="img-hero-wrap"><img src="images/beach-house/01-site-plan.webp" alt="Beach House site plan" class="img-hero" data-gallery="beach" data-index="0"></div>
 
         <span class="img-label">A02 — Floor plan</span>
-        <img src="images/beach-house/02-floor-plan.webp" alt="Beach House floor plan" class="img-hero" data-gallery="beach" data-index="1">
+        <div class="img-hero-wrap"><img src="images/beach-house/02-floor-plan.webp" alt="Beach House floor plan" class="img-hero" data-gallery="beach" data-index="1"></div>
 
         <span class="img-label">A03–A04 — Elevations</span>
         <div class="img-grid-2">
@@ -543,7 +543,7 @@
         </div>
 
         <span class="img-label">A05 — Section</span>
-        <img src="images/beach-house/05-section.webp" alt="Beach House section" class="img-hero" data-gallery="beach" data-index="4">
+        <div class="img-hero-wrap"><img src="images/beach-house/05-section.webp" alt="Beach House section" class="img-hero" data-gallery="beach" data-index="4"></div>
 
         <p>A freehand residential design project for a contemporary coastal holiday house at 225–227 Ocean Beach Road, Sorrento. The proposal responds to a client brief focused on accessible, adaptable living — balancing passive solar design, site response, and a relaxed coastal character.</p>
         <p>Working freehand required a different kind of thinking to CAD — decisions about proportion and arrangement had to be resolved directly on the page. The section in particular required committing to ceiling heights, roof pitch, and floor levels without the ability to iterate digitally first.</p>
@@ -557,13 +557,13 @@
         </ul>
       </div>
       <div class="proj-sidebar">
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Year</div><div class="proj-sidebar-value">2025</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Site</div><div class="proj-sidebar-value">225–227 Ocean Beach Road, Sorrento VIC</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Type</div><div class="proj-sidebar-value">Residential — Holiday House</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Method</div><div class="proj-sidebar-value">Freehand drawing</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Scale</div><div class="proj-sidebar-value">1:200 site · 1:50 plans &amp; elevations</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Drawing set</div><div class="proj-sidebar-value"><span style="display:grid; grid-template-columns:auto 1fr; gap:0.15rem 0.6rem; line-height:1.7;"><span>A01</span><span>Site plan</span><span>A02</span><span>Floor plan</span><span>A03</span><span>N&amp;S elevations</span><span>A04</span><span>E&amp;W elevations</span><span>A05</span><span>Section</span></span></div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Tags</div><div class="proj-tags-row"><span class="tag">Freehand</span><span class="tag">Passive Solar</span><span class="tag">Site Analysis</span><span class="tag">Accessible Design</span><span class="tag">Coastal</span></div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Year</div><div class="proj-sidebar-value">2025</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Site</div><div class="proj-sidebar-value">225–227 Ocean Beach Road, Sorrento VIC</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Type</div><div class="proj-sidebar-value">Residential — Holiday House</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Method</div><div class="proj-sidebar-value">Freehand drawing</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Scale</div><div class="proj-sidebar-value">1:200 site · 1:50 plans &amp; elevations</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Drawing set</div><div class="proj-sidebar-value"><span style="display:grid; grid-template-columns:auto 1fr; gap:0.15rem 0.6rem; line-height:1.7;"><span>A01</span><span>Site plan</span><span>A02</span><span>Floor plan</span><span>A03</span><span>N&amp;S elevations</span><span>A04</span><span>E&amp;W elevations</span><span>A05</span><span>Section</span></span></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Tags</div><div class="proj-tags-row"><span class="tag">Freehand</span><span class="tag">Passive Solar</span><span class="tag">Site Analysis</span><span class="tag">Accessible Design</span><span class="tag">Coastal</span></div>
       </div>
     </div>
   </div>
@@ -624,13 +624,13 @@
         <h4 class="h4-serif">Planning Drawing Set</h4>
 
         <span class="img-label">TP-00 — Front page &amp; neighbourhood character</span>
-        <img src="images/richmond-tp/tp00-front-page.webp" alt="Front page and neighbourhood character" class="img-hero" data-gallery="rtp" data-index="0">
+        <div class="img-hero-wrap"><img src="images/richmond-tp/tp00-front-page.webp" alt="Front page and neighbourhood character" class="img-hero" data-gallery="rtp" data-index="0"></div>
 
         <span class="img-label">TP-01 — Site analysis plan</span>
-        <img src="images/richmond-tp/tp01-site-analysis.webp" alt="Site analysis plan" class="img-hero" data-gallery="rtp" data-index="1">
+        <div class="img-hero-wrap"><img src="images/richmond-tp/tp01-site-analysis.webp" alt="Site analysis plan" class="img-hero" data-gallery="rtp" data-index="1"></div>
 
         <span class="img-label">TP-05 — Elevations (all four)</span>
-        <img src="images/richmond-tp/tp05-elevations.webp" alt="All four elevations" class="img-hero" data-gallery="rtp" data-index="2">
+        <div class="img-hero-wrap"><img src="images/richmond-tp/tp05-elevations.webp" alt="All four elevations" class="img-hero" data-gallery="rtp" data-index="2"></div>
 
         <span class="img-label">TP-06 &amp; TP-07 — Shadow diagrams</span>
         <div class="img-grid-2">
@@ -651,14 +651,14 @@
         </ul>
       </div>
       <div class="proj-sidebar">
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Year</div><div class="proj-sidebar-value">2025</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Site</div><div class="proj-sidebar-value">318 Burnley Street, Richmond VIC 3121</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Zone</div><div class="proj-sidebar-value">General Residential Zone 4 (GRZ4)</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Site area</div><div class="proj-sidebar-value">305 m²</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Scale</div><div class="proj-sidebar-value">1:100 at A2</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Software</div><div class="proj-sidebar-value">ArchiCAD 26</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Drawing set</div><div class="proj-sidebar-value"><span style="display:grid; grid-template-columns:auto 1fr; gap:0.15rem 0.6rem; line-height:1.7;"><span>TP-00</span><span>Front page</span><span>TP-01</span><span>Site analysis</span><span>TP-05</span><span>Elevations</span><span>TP-06</span><span>Shadow 9AM</span><span>TP-07</span><span>Shadow 3PM</span></span></div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Tags</div><div class="proj-tags-row"><span class="tag">Town Planning</span><span class="tag">Shadow Diagrams</span><span class="tag">Neighbourhood Character</span><span class="tag">Site Analysis</span><span class="tag">GRZ4</span></div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Year</div><div class="proj-sidebar-value">2025</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Site</div><div class="proj-sidebar-value">318 Burnley Street, Richmond VIC 3121</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Zone</div><div class="proj-sidebar-value">General Residential Zone 4 (GRZ4)</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Site area</div><div class="proj-sidebar-value">305 m²</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Scale</div><div class="proj-sidebar-value">1:100 at A2</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Software</div><div class="proj-sidebar-value">ArchiCAD 26</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Drawing set</div><div class="proj-sidebar-value"><span style="display:grid; grid-template-columns:auto 1fr; gap:0.15rem 0.6rem; line-height:1.7;"><span>TP-00</span><span>Front page</span><span>TP-01</span><span>Site analysis</span><span>TP-05</span><span>Elevations</span><span>TP-06</span><span>Shadow 9AM</span><span>TP-07</span><span>Shadow 3PM</span></span></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Tags</div><div class="proj-tags-row"><span class="tag">Town Planning</span><span class="tag">Shadow Diagrams</span><span class="tag">Neighbourhood Character</span><span class="tag">Site Analysis</span><span class="tag">GRZ4</span></div>
       </div>
     </div>
   </div>
@@ -680,19 +680,19 @@
     <div class="proj-detail">
       <div class="proj-body">
         <span class="img-label">A01 — Site plan</span>
-        <img src="images/richmond-wd/a01-site-plan.webp" alt="Site plan" class="img-hero" data-gallery="rwd" data-index="0">
+        <div class="img-hero-wrap"><img src="images/richmond-wd/a01-site-plan.webp" alt="Site plan" class="img-hero" data-gallery="rwd" data-index="0"></div>
 
         <span class="img-label">A02 — Ground floor plan</span>
-        <img src="images/richmond-wd/a02-ground-floor-plan.webp" alt="Ground floor plan" class="img-hero" data-gallery="rwd" data-index="1">
+        <div class="img-hero-wrap"><img src="images/richmond-wd/a02-ground-floor-plan.webp" alt="Ground floor plan" class="img-hero" data-gallery="rwd" data-index="1"></div>
 
         <span class="img-label">A03 — First floor plan</span>
-        <img src="images/richmond-wd/a03-first-floor-plan.webp" alt="First floor plan" class="img-hero" data-gallery="rwd" data-index="2">
+        <div class="img-hero-wrap"><img src="images/richmond-wd/a03-first-floor-plan.webp" alt="First floor plan" class="img-hero" data-gallery="rwd" data-index="2"></div>
 
         <span class="img-label">A05 — Elevations (North &amp; East)</span>
-        <img src="images/richmond-wd/a05-elevations.webp" alt="Elevations North and East" class="img-hero" data-gallery="rwd" data-index="3">
+        <div class="img-hero-wrap"><img src="images/richmond-wd/a05-elevations.webp" alt="Elevations North and East" class="img-hero" data-gallery="rwd" data-index="3"></div>
 
         <span class="img-label">A06 — Sections (Cross A-A, Cross C-C, Longitudinal B-B)</span>
-        <img src="images/richmond-wd/a06-sections.webp" alt="Cross and longitudinal sections" class="img-hero" data-gallery="rwd" data-index="4">
+        <div class="img-hero-wrap"><img src="images/richmond-wd/a06-sections.webp" alt="Cross and longitudinal sections" class="img-hero" data-gallery="rwd" data-index="4"></div>
 
         <span class="img-label">A07 &amp; A08 — Construction details</span>
         <div class="img-grid-2">
@@ -701,7 +701,7 @@
         </div>
 
         <span class="img-label">A09 — Ground floor electrical plan</span>
-        <img src="images/richmond-wd/a09-electrical-plan.webp" alt="Ground floor electrical plan" class="img-hero" data-gallery="rwd" data-index="7">
+        <div class="img-hero-wrap"><img src="images/richmond-wd/a09-electrical-plan.webp" alt="Ground floor electrical plan" class="img-hero" data-gallery="rwd" data-index="7"></div>
 
         <span class="img-label">A10 &amp; A11 — Schedules</span>
         <div class="img-grid-2">
@@ -722,12 +722,12 @@
         </ul>
       </div>
       <div class="proj-sidebar">
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Year</div><div class="proj-sidebar-value">2025</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Site</div><div class="proj-sidebar-value">318 Burnley Street, Richmond VIC 3121</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Type</div><div class="proj-sidebar-value">Residential — Class 1a, two-storey</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Scale</div><div class="proj-sidebar-value">1:100 plans &amp; elevations · 1:50 sections · 1:10 details</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Materials</div><div class="proj-sidebar-value">Austral Bricks Aged Red · James Hardie Axon · Lysaght Trimdek · Enduradeck Walnut</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Tags</div><div class="proj-tags-row"><span class="tag">Construction Documentation</span><span class="tag">Sections</span><span class="tag">Details</span><span class="tag">Schedules</span><span class="tag">Electrical</span></div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Year</div><div class="proj-sidebar-value">2025</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Site</div><div class="proj-sidebar-value">318 Burnley Street, Richmond VIC 3121</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Type</div><div class="proj-sidebar-value">Residential — Class 1a, two-storey</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Scale</div><div class="proj-sidebar-value">1:100 plans &amp; elevations · 1:50 sections · 1:10 details</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Materials</div><div class="proj-sidebar-value">Austral Bricks Aged Red · James Hardie Axon · Lysaght Trimdek · Enduradeck Walnut</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Tags</div><div class="proj-tags-row"><span class="tag">Construction Documentation</span><span class="tag">Sections</span><span class="tag">Details</span><span class="tag">Schedules</span><span class="tag">Electrical</span></div>
       </div>
     </div>
   </div>
@@ -749,10 +749,10 @@
     <div class="proj-detail">
       <div class="proj-body">
         <span class="img-label">A01 — Drawing register &amp; benefits statement</span>
-        <img src="images/bal/a01-register-benefits.webp" alt="Drawing register and benefits statement" class="img-hero" data-gallery="bal" data-index="0">
+        <div class="img-hero-wrap"><img src="images/bal/a01-register-benefits.webp" alt="Drawing register and benefits statement" class="img-hero" data-gallery="bal" data-index="0"></div>
 
         <span class="img-label">A02 — Site plan to BAL 40</span>
-        <img src="images/bal/a02-site-plan-bal40.webp" alt="Site plan BAL 40" class="img-hero" data-gallery="bal" data-index="1">
+        <div class="img-hero-wrap"><img src="images/bal/a02-site-plan-bal40.webp" alt="Site plan BAL 40" class="img-hero" data-gallery="bal" data-index="1"></div>
 
         <span class="img-label">A08 &amp; A09 — Construction details</span>
         <div class="img-grid-2">
@@ -773,13 +773,13 @@
         </ul>
       </div>
       <div class="proj-sidebar">
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Year</div><div class="proj-sidebar-value">2025</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Site</div><div class="proj-sidebar-value">31 Livingstone Close, Burwood VIC 3125</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Standard</div><div class="proj-sidebar-value">AS 3959:2018</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">BAL levels</div><div class="proj-sidebar-value">BAL 19 (lightweight) · BAL 40 (heavyweight)</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Scale</div><div class="proj-sidebar-value">1:200 site plan · 1:20 details</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Drawing set</div><div class="proj-sidebar-value"><span style="display:grid; grid-template-columns:auto 1fr; gap:0.15rem 0.6rem; line-height:1.7;"><span>A01</span><span>Register &amp; statement</span><span>A02</span><span>Site plan</span><span>A08</span><span>BAL 19 detail</span><span>A09</span><span>BAL 40 detail</span></span></div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Tags</div><div class="proj-tags-row"><span class="tag">AS 3959</span><span class="tag">BAL 19</span><span class="tag">BAL 40</span><span class="tag">Construction Details</span><span class="tag">CFA</span></div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Year</div><div class="proj-sidebar-value">2025</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Site</div><div class="proj-sidebar-value">31 Livingstone Close, Burwood VIC 3125</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Standard</div><div class="proj-sidebar-value">AS 3959:2018</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">BAL levels</div><div class="proj-sidebar-value">BAL 19 (lightweight) · BAL 40 (heavyweight)</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Scale</div><div class="proj-sidebar-value">1:200 site plan · 1:20 details</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Drawing set</div><div class="proj-sidebar-value"><span style="display:grid; grid-template-columns:auto 1fr; gap:0.15rem 0.6rem; line-height:1.7;"><span>A01</span><span>Register &amp; statement</span><span>A02</span><span>Site plan</span><span>A08</span><span>BAL 19 detail</span><span>A09</span><span>BAL 40 detail</span></span></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Tags</div><div class="proj-tags-row"><span class="tag">AS 3959</span><span class="tag">BAL 19</span><span class="tag">BAL 40</span><span class="tag">Construction Details</span><span class="tag">CFA</span></div>
       </div>
     </div>
   </div>
@@ -796,22 +796,15 @@
       <span class="badge badge-academic">Academic · 2026</span>
     </div>
     <h2 class="proj-section-title">Dune Wellness Centre</h2>
-    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.25rem; letter-spacing:0.04em;">Commercial concept · BIM &amp; rendered presentation · ArchiCAD · Affinity · visualisation</p>
+    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.25rem; letter-spacing:0.04em;">Commercial concept · BIM &amp; rendered presentation · ArchiCAD · Affinity</p>
 
     <div class="proj-detail">
       <div class="proj-body">
 
         <!-- A1 POSTER — portrait hero, centred -->
-        <span class="img-label">A1 Presentation Poster</span>
-        <div style="display:flex; justify-content:center; margin-bottom:1.5rem;">
-          <img src="images/wellness/00-a1-dune-wellness-poster.webp" alt="Presentation Poster"
-               style="width:100%; max-width:520px; display:block; margin:0 auto; border:0.5px solid var(--border); cursor:zoom-in;"
-               data-gallery="wellness" data-index="0">
-        </div>
-
         <!-- EXTERIOR — entry views -->
         <span class="img-label">Exterior — entry</span>
-        <img src="images/wellness/02-front.webp" alt="Entry" class="img-hero" data-gallery="wellness" data-index="1">
+        <div class="img-hero-wrap"><img src="images/wellness/02-front.webp" alt="Entry" class="img-hero" data-gallery="wellness" data-index="1"></div>
 
         <div class="img-grid-2">
           <div class="img-slot" style="aspect-ratio:16/9;">
@@ -836,11 +829,11 @@
 
         <!-- INTERIOR — reception lounge (with people first, ArchiCAD second) -->
         <span class="img-label" style="margin-top:1rem; display:block;">Interior — reception &amp; lounge</span>
-        <img src="images/wellness/03-reception-w-people.webp" alt="Lounge" class="img-hero" data-gallery="wellness" data-index="6">
+        <div class="img-hero-wrap"><img src="images/wellness/03-reception-w-people.webp" alt="Lounge" class="img-hero" data-gallery="wellness" data-index="6"></div>
 
         <!-- STUDIO — hero then 2 below -->
         <span class="img-label" style="margin-top:0.25rem; display:block;">Interior — studio</span>
-        <img src="images/wellness/06-studio-main.webp" alt="Studio" class="img-hero" data-gallery="wellness" data-index="7">
+        <div class="img-hero-wrap"><img src="images/wellness/06-studio-main.webp" alt="Studio" class="img-hero" data-gallery="wellness" data-index="7"></div>
 
         <div class="img-grid-2" style="margin-top:1.5px;">
           <div class="img-slot">
@@ -898,32 +891,11 @@
           <img src="images/wellness/20-02-first-floor-plan.webp" alt="Level One Floor Plan"
                style="width:100%; display:block; background:transparent; cursor:zoom-in; margin-bottom:0; direction:ltr;"
                data-gallery="wellness" data-index="13">
-          <div class="legend-block">
-            <div class="legend-title">Legend</div>
-            <div class="legend-grid">
-              <span class="legend-num">1</span><span class="legend-name">Reception</span>
-              <span class="legend-num">2</span><span class="legend-name">Retail Display</span>
-              <span class="legend-num">3</span><span class="legend-name">Sauna</span>
-              <span class="legend-num">4</span><span class="legend-name">Steam Room</span>
-              <span class="legend-num">5</span><span class="legend-name">Lift</span>
-              <span class="legend-num">6</span><span class="legend-name">Showers</span>
-              <span class="legend-num">7</span><span class="legend-name">Bathroom</span>
-              <span class="legend-num">8</span><span class="legend-name">Mineral Pool</span>
-              <span class="legend-num">9</span><span class="legend-name">Garden</span>
-              <span class="legend-num">10</span><span class="legend-name">Cold Plunge</span>
-              <span class="legend-num">11</span><span class="legend-name">Refreshment Bar</span>
-              <span class="legend-num">12</span><span class="legend-name">Bathroom</span>
-              <span class="legend-num">13</span><span class="legend-name">Lounge</span>
-              <span class="legend-num">14</span><span class="legend-name">Studio</span>
-              <span class="legend-num">15</span><span class="legend-name">Laundry / Storage</span>
-              <span class="legend-num">16</span><span class="legend-name">Treatment Room</span>
-            </div>
-          </div>
-        </div>
+          
 
         <!-- SECTION — full width -->
         <span class="img-label" style="margin-top:0.5rem; display:block;">Section A-A</span>
-        <img src="images/wellness/20-03-section-a-a.webp" alt="Section A-A" class="img-hero" data-gallery="wellness" data-index="14">
+        <div class="img-hero-wrap"><img src="images/wellness/20-03-section-a-a.webp" alt="Section A-A" class="img-hero" data-gallery="wellness" data-index="14"></div>
 
         <!-- ELEVATIONS — 4-col grid with labels -->
         <span class="img-label">Elevations</span>
@@ -1025,7 +997,6 @@
           <li>Designed a 16-room commercial wellness centre across two floors with landscape integration</li>
           <li>Produced a full BIM model in ArchiCAD and extracted plans, sections, and elevations from it</li>
           <li>Generated interior and exterior visualisations communicating material and atmospheric intent</li>
-          <li>Designed and produced an A1 portrait presentation poster as a complete design communication document</li>
           <li>Organised spaces through a ritual-based zoning strategy: movement, heat, water, rest</li>
         </ul>
       </div>
@@ -1036,12 +1007,12 @@
           <img src="images/wellness/dune-logo.webp" alt="Dune Wellness logo"
                style="max-width:140px; display:block; margin:0 auto; opacity:0.85;">
         </div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Year</div><div class="proj-sidebar-value">2026</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Type</div><div class="proj-sidebar-value">Commercial — Wellness Centre</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Software</div><div class="proj-sidebar-value">ArchiCAD 29 · Affinity · visualisation</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Spaces</div><div class="proj-sidebar-value">16 rooms — see legend</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Deliverables</div><div class="proj-sidebar-value">Renders · Ground &amp; first floor plans · Section A-A · 4 elevations</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Tags</div><div class="proj-tags-row"><span class="tag">Commercial Design</span><span class="tag">BIM</span><span class="tag">Rendering</span><span class="tag">Spatial Planning</span><span class="tag">Presentation</span></div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Year</div><div class="proj-sidebar-value">2026</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Type</div><div class="proj-sidebar-value">Commercial — Wellness Centre</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Software</div><div class="proj-sidebar-value">ArchiCAD 29 · Affinity</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Spaces</div><div class="proj-sidebar-value">16 rooms — see legend</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Deliverables</div><div class="proj-sidebar-value">Renders · Ground &amp; first floor plans · Section A-A · 4 elevations</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Tags</div><div class="proj-tags-row"><span class="tag">Commercial Design</span><span class="tag">BIM</span><span class="tag">Rendering</span><span class="tag">Spatial Planning</span><span class="tag">Presentation</span></div>
       </div>
     </div>
   </div>
@@ -1064,13 +1035,13 @@
       <div class="proj-body">
 
         <span class="img-label">Parapet detail — 1:10</span>
-        <img src="images/commercial-details/parapet-detail.webp" alt="Parapet construction detail 1:10" class="img-hero" data-gallery="comdet" data-index="0">
+        <div class="img-hero-wrap"><img src="images/commercial-details/parapet-detail.webp" alt="Parapet construction detail 1:10" class="img-hero" data-gallery="comdet" data-index="0"></div>
 
         <span class="img-label">Canopy detail — 1:10</span>
-        <img src="images/commercial-details/canopy-detail.webp" alt="Canopy construction detail 1:10" class="img-hero" data-gallery="comdet" data-index="1">
+        <div class="img-hero-wrap"><img src="images/commercial-details/canopy-detail.webp" alt="Canopy construction detail 1:10" class="img-hero" data-gallery="comdet" data-index="1"></div>
 
         <span class="img-label">Entry footing detail — 1:10</span>
-        <img src="images/commercial-details/entry-footing-detail.webp" alt="Entry footing construction detail 1:10" class="img-hero" data-gallery="comdet" data-index="2">
+        <div class="img-hero-wrap"><img src="images/commercial-details/entry-footing-detail.webp" alt="Entry footing construction detail 1:10" class="img-hero" data-gallery="comdet" data-index="2"></div>
 
         <p>Three construction details for a commercial building, produced to working-drawing standard at 1:10 scale as part of the 22627VIC course at Holmesglen. The details address three distinct junctions — the parapet, the canopy, and the entry footing — each requiring resolution of how materials, structure, waterproofing, and finish layers meet at a critical point in the building envelope.</p>
 
@@ -1084,16 +1055,16 @@
       </div>
 
       <div class="proj-sidebar">
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Year</div><div class="proj-sidebar-value">2026</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Type</div><div class="proj-sidebar-value">Commercial — Construction Details</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Scale</div><div class="proj-sidebar-value">1:10 all drawings</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Deliverables</div><div class="proj-sidebar-value">Parapet detail · Canopy detail · Entry footing detail</div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Year</div><div class="proj-sidebar-value">2026</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Type</div><div class="proj-sidebar-value">Commercial — Construction Details</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Scale</div><div class="proj-sidebar-value">1:10 all drawings</div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Deliverables</div><div class="proj-sidebar-value">Parapet detail · Canopy detail · Entry footing detail</div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Tags</div><div class="proj-tags-row">
           <span class="tag">Construction Details</span>
           <span class="tag">Commercial</span>
           <span class="tag">1:10</span>
           <span class="tag">Technical Documentation</span>
-        </div></div>
+        </div>
       </div>
     </div>
   </div>
@@ -1353,9 +1324,7 @@ if (devL && DEV_TOTAL > 0) {
 }
 const unitsToggle = document.getElementById('unitsToggle');
 const unitsGrid   = document.getElementById('unitsGrid');
-// Default open
-unitsToggle.classList.add('open');
-unitsGrid.classList.add('open');
+// Default closed — user clicks to open
 unitsToggle.addEventListener('click', () => {
   const open = unitsGrid.classList.toggle('open');
   unitsToggle.classList.toggle('open', open);
@@ -1824,7 +1793,7 @@ document.querySelectorAll('.proj-section').forEach((section, i) => {
       <span class="proj-toggle-title">${title}</span>
       <span class="proj-toggle-type">${typeText}${acadText ? ' · ' + acadText : ''}</span>
     </div>
-    <span class="proj-toggle-arrow">&#8964;</span>
+    <span class="proj-toggle-arrow">▾</span>
   `;
 
   // Move preceding hr inside section
