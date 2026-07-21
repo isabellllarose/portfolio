@@ -112,7 +112,7 @@
 
   /* DESIGN DEVELOPMENT TAPESTRY — horizontal scroll */
   .tapestry-wrap { position: relative; margin-bottom: 2rem; }
-  .tapestry-track { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -webkit-overflow-scrolling: touch; cursor: grab; height: 420px; background: #EDE7DE; display: flex; align-items: center; }
+  .tapestry-track { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -webkit-overflow-scrolling: touch; cursor: grab; height: 420px; background: #EDE7DE; display: flex; align-items: center; padding-right: 0; }
   .tapestry-track:active { cursor: grabbing; }
   .tapestry-track::-webkit-scrollbar { display: none; }
   /* Right-edge fade — permanent subtle indicator */
@@ -129,7 +129,7 @@
   .tapestry-scrollbar-track { height: 4px; background: var(--border-strong); border-radius: 2px; position: relative; cursor: pointer; }
   .tapestry-scrollbar-thumb { height: 100%; background: var(--accent); border-radius: 2px; position: absolute; left: 0; top: 0; min-width: 48px; transition: background 0.15s; cursor: grab; }
   .tapestry-scrollbar-thumb:active { cursor: grabbing; background: var(--text-primary); }
-  .tapestry-img { height: 100%; width: auto; display: block; user-select: none; -webkit-user-drag: none; transform-origin: center left; transition: transform 0.25s ease; flex-shrink: 0; }
+  .tapestry-img { height: 100%; width: auto; display: block; user-select: none; -webkit-user-drag: none; transform-origin: center left; transition: transform 0.25s ease; flex-shrink: 0; margin-right: -8%; }
   .tapestry-arrow { display: none; }
   @media (max-width: 700px) {
     .tapestry-track { height: 500px; }
@@ -1780,21 +1780,13 @@ if (beforeMainEl && beforeThumbs.length > 0) {
     });
   }
 
-  // Drag scroll on track
-  let isDragging = false, dragStartX = 0, dragScrollStart = 0;
-  track.addEventListener('mousedown', e => { isDragging = true; dragStartX = e.clientX; dragScrollStart = track.scrollLeft; document.body.style.userSelect = 'none'; e.preventDefault(); });
-  function endDrag() { isDragging = false; document.body.style.userSelect = ''; }
-  document.addEventListener('mousemove', e => { if (!isDragging) return; track.scrollLeft = dragScrollStart - (e.clientX - dragStartX); });
-  document.addEventListener('mouseup', endDrag);
-  document.addEventListener('mouseleave', endDrag);
-
   // Mobile arrows
   const NUDGE = 160;
   if (prevBtn) prevBtn.addEventListener('click', () => { markScrolled(); track.scrollBy({ left: -NUDGE, behavior: 'smooth' }); });
   if (nextBtn) nextBtn.addEventListener('click', () => { markScrolled(); track.scrollBy({ left: NUDGE, behavior: 'smooth' }); });
   addSwipe(track, () => track.scrollBy({ left: NUDGE, behavior: 'smooth' }), () => track.scrollBy({ left: -NUDGE, behavior: 'smooth' }));
 
-  // Inline zoom — also update cursor and enable drag-to-pan when zoomed
+  // Inline zoom
   let panX = 0, panY = 0;
 
   function applyInlineZoomAndPan() {
@@ -1813,24 +1805,36 @@ if (beforeMainEl && beforeThumbs.length > 0) {
 
   function applyInlineZoom() { applyInlineZoomAndPan(); }
 
-  // Vertical drag-to-pan when zoomed (track already handles horizontal scroll)
-  let panDragging = false, panStartY = 0, panStartPanY = 0;
-  img.addEventListener('mousedown', e => {
-    if (inlineScale <= 1) return;
-    e.preventDefault(); e.stopPropagation();
-    panDragging = true; panStartY = e.clientY; panStartPanY = panY;
-    img.style.cursor = 'grabbing';
+  // Unified drag handler on the track — handles both horizontal scroll and vertical pan
+  let dragActive = false, dragStartX = 0, dragStartY = 0, dragScrollStart = 0, dragPanYStart = 0;
+  track.addEventListener('mousedown', e => {
+    dragActive = true;
+    dragStartX = e.clientX; dragStartY = e.clientY;
+    dragScrollStart = track.scrollLeft; dragPanYStart = panY;
+    document.body.style.userSelect = 'none';
+    e.preventDefault();
+    if (inlineScale > 1) img.style.cursor = 'grabbing';
   });
-  window.addEventListener('mousemove', e => {
-    if (!panDragging) return;
-    panY = panStartPanY + (e.clientY - panStartY);
-    applyInlineZoomAndPan();
+  document.addEventListener('mousemove', e => {
+    if (!dragActive) return;
+    const dx = e.clientX - dragStartX;
+    const dy = e.clientY - dragStartY;
+    // Horizontal: scroll the track
+    track.scrollLeft = dragScrollStart - dx;
+    // Vertical: pan the image (only when zoomed)
+    if (inlineScale > 1) {
+      panY = dragPanYStart + dy;
+      img.style.transform = `scale(${inlineScale}) translate(${panX / inlineScale}px, ${panY / inlineScale}px)`;
+    }
   });
-  window.addEventListener('mouseup', () => {
-    if (!panDragging) return;
-    panDragging = false;
+  function endDrag() {
+    if (!dragActive) return;
+    dragActive = false;
+    document.body.style.userSelect = '';
     img.style.cursor = inlineScale > 1 ? 'grab' : 'default';
-  });
+  }
+  document.addEventListener('mouseup', endDrag);
+  document.addEventListener('mouseleave', endDrag);
   // Touch vertical pan
   let tPanStartY = 0, tPanStartPanY = 0;
   img.addEventListener('touchstart', e => {
