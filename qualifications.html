@@ -2,20 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Academic Works — Isabella Heath</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qualifications — Isabella Heath</title>
 <link rel="stylesheet" href="style.css">
-<link rel="icon" type="image/x-icon" href="favicon.ico">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#3A1F14">
 <style>
   .page-header { padding-top: 60px; border-bottom: 0.5px solid var(--border); background: var(--bg-card); }
-  @media (max-width: 900px) { .page-header { padding-top: 70px; } }
-  .page-header-inner { max-width: 1400px; margin: 0 auto; padding: 4rem 3rem 3.5rem; text-align: center; }
-  @media (max-width: 900px) {
-    .page-header-inner { padding: 1.5rem 1.5rem 2rem; }
-    .nav-links { display: none !important; }
+  .page-header-inner { max-width: 1160px; margin: 0 auto; padding: 4rem 3rem 3.5rem; }
+  @media (max-width: 768px) {
+    .page-header-inner { padding: 2.5rem 1.5rem 2.5rem; }
   }
   .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.75rem; }
   .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
@@ -25,9 +19,8 @@
   .page-subtitle { font-size: 1rem; color: var(--text-secondary); max-width: 560px; line-height: 1.75; }
 
   /* COURSE BAND */
-  .course-band { background: var(--bg-dark); margin-top: 60px; }
-  @media (min-width: 901px) { .course-band { margin-top: 0; padding-top: 60px; } }
-  .course-inner { max-width: 1400px; margin: 0 auto; padding: 3rem; display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
+  .course-band { background: var(--bg-dark); }
+  .course-inner { max-width: 1160px; margin: 0 auto; padding: 3rem; display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
   .course-name { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--bg); margin-bottom: 0.5rem; }
   .course-detail { font-size: 0.875rem; color: rgba(242,237,230,0.5); line-height: 1.6; }
   .course-meta { display: flex; gap: 1.5px; background: rgba(255,255,255,0.06); border: 0.5px solid rgba(255,255,255,0.1); }
@@ -37,7 +30,7 @@
 
   /* PROJECT NAV */
   .proj-nav { background: var(--bg-card); border-bottom: 0.5px solid var(--border); padding: 2rem 0; }
-  .proj-nav-inner { max-width: 1400px; margin: 0 auto; padding: 0 3rem; }
+  .proj-nav-inner { max-width: 1160px; margin: 0 auto; padding: 0 3rem; }
   .proj-nav-label { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.25rem; }
   /* Carousel wrapper */
   .proj-nav-carousel { position: relative; display: flex; align-items: center; gap: 0; }
@@ -67,11 +60,13 @@
   .proj-nav-item.bal::before { background-image: url('images/bal/a02-site-plan-bal40.webp'); }
   .proj-nav-item.wellness::before { background-image: url('images/wellness/02-front.webp'); }
   .proj-nav-item.comdet::before { background-image: url('images/commercial-details/parapet-detail.webp'); }
+  .proj-nav-item.arc-house::before { background-image: url('images/arc-house/arc-house-render-01.webp'); }
+  .proj-nav-item.wellness-dev::before { background-image: url('images/wellness-dev/wellness-dev-render-01.webp'); }
 
   /* COLLAPSIBLE UNITS */
   .units-toggle { display: flex; align-items: center; justify-content: space-between; cursor: pointer; padding-bottom: 1.25rem; border-bottom: 0.5px solid var(--border); margin-bottom: 0; user-select: none; }
   .units-toggle-label { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 3.5vw, 2.6rem); line-height: 1.15; color: var(--text-primary); }
-  .units-toggle-arrow { font-size: 1.4rem; font-weight: 700; color: var(--accent); transition: transform 0.3s; flex-shrink: 0; margin-left: 1rem; }
+  .units-toggle-arrow { font-size: 1.2rem; color: var(--text-muted); transition: transform 0.3s; flex-shrink: 0; margin-left: 1rem; }
   .units-toggle.open .units-toggle-arrow { transform: rotate(180deg); }
   .units-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5px; background: var(--border); border: 0.5px solid var(--border); margin-top: 1.5rem; display: none; }
   .units-grid.open { display: grid; }
@@ -110,7 +105,7 @@
   .proj-toggle-num { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; color: var(--text-muted); text-transform: uppercase; white-space: nowrap; }
   .proj-toggle-title { font-family: 'Playfair Display', serif; font-size: clamp(1rem, 2vw, 1.35rem); color: var(--text-primary); line-height: 1.2; }
   .proj-toggle-type { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
-  .proj-toggle-arrow { font-size: 1.3rem; font-weight: 700; color: var(--accent); transition: transform 0.3s; flex-shrink: 0; margin-left: 1rem; border: 1.5px solid var(--accent); border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; }
+  .proj-toggle-arrow { font-size: 1rem; color: var(--text-muted); transition: transform 0.3s; flex-shrink: 0; margin-left: 1rem; }
   .proj-toggle.collapsed .proj-toggle-arrow { transform: rotate(-90deg); }
   .proj-collapsible { overflow: hidden; transition: max-height 0.45s ease; }
   .proj-collapsible.collapsed { max-height: 0 !important; }
@@ -165,8 +160,8 @@
 
   /* LIGHTBOX */
   .lightbox {
-    position: fixed; inset: 0; z-index: 100000;
-    background: var(--bg-card);
+    position: fixed; inset: 0; z-index: 400;
+    background: rgba(26,20,16,0.96);
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     padding: 3rem 1.5rem 1.5rem;
     opacity: 0; pointer-events: none; transition: opacity 0.25s;
@@ -177,95 +172,60 @@
     gap: 1.5rem; width: 100%; flex: 1; max-height: calc(100vh - 80px);
   }
   .lightbox-img-wrap {
-    flex: 0 1 auto; display: flex; align-items: center; justify-content: center;
-    overflow: visible; min-width: 0; position: relative;
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    height: 100%; overflow: hidden; max-height: 100%;
   }
   .lightbox-img-wrap img {
-    max-width: calc(100vw - 260px); max-height: calc(100vh - 120px); object-fit: contain; display: block;
-    transform-origin: center center; user-select: none; -webkit-user-drag: none; cursor: grab;
+    max-width: 100%; max-height: 100%; object-fit: contain; display: block;
+    transition: transform 0.25s ease; cursor: zoom-in; transform-origin: center center;
+    user-select: none; -webkit-user-drag: none;
   }
-  .lightbox-img-wrap img:active { cursor: grabbing; }
-  /* When legend is visible, constrain image width to leave room for it */
-  .lightbox.has-legend .lightbox-img-wrap img { max-width: calc(100vw - 280px); }
-  /* Zoom buttons — accent-coloured squares, sit left of image on desktop, bottom-left on mobile */
-  .lb-zoom-controls { position: fixed; left: 1.5rem; top: 50%; transform: translateY(-50%); z-index: 100002; display: flex; flex-direction: column; gap: 0.4rem; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
-  .lightbox:hover .lb-zoom-controls { opacity: 1; pointer-events: all; }
-  .lb-zoom-controls.zone-active { opacity: 1; pointer-events: all; }
-  @media (hover: none) { .lb-zoom-controls { opacity: 1; pointer-events: all; } }
-  .lb-zoom-btn { background: var(--accent); border: none; color: var(--bg-card); font-size: 1.3rem; font-weight: 500; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; touch-action: manipulation; line-height: 1; }
-  .lb-zoom-btn:hover { background: var(--bg-dark); }
-  .lb-zoom-btn:disabled { opacity: 0.3; cursor: default; }
-  @media (max-width: 700px) {
-    .lb-zoom-controls { left: 1rem; top: auto; bottom: 5.5rem; transform: none; flex-direction: row; }
-    .lb-zoom-btn { width: 48px; height: 48px; font-size: 1.5rem; }
-  }
-  /* Legend — fixed to right edge of viewport so it stays visible independent of image zoom */
+  .lightbox-img-wrap img.zoomed { cursor: grab; }
+  .lightbox-img-wrap img.zoomed:active { cursor: grabbing; }
   .lightbox-legend {
     display: none; flex-direction: column;
-    position: fixed; right: 1.25rem; top: 50%; transform: translateY(-50%);
-    background: var(--bg-card); border: 0.5px solid var(--border-strong);
-    padding: 1.25rem; width: 175px; flex-shrink: 0;
-    max-height: 80vh; overflow-y: auto; z-index: 405;
+    background: rgba(242,237,230,0.07);
+    border: 0.5px solid rgba(255,255,255,0.12);
+    padding: 1.25rem; min-width: 160px; max-width: 190px; flex-shrink: 0;
+    align-self: center; max-height: 80vh; overflow-y: auto;
   }
   .lightbox-legend.visible { display: flex; }
-  .lb-legend-title { font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.75rem; padding-bottom: 0.6rem; border-bottom: 0.5px solid var(--border); }
+  .lb-legend-title { font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(242,237,230,0.4); margin-bottom: 0.75rem; padding-bottom: 0.6rem; border-bottom: 0.5px solid rgba(255,255,255,0.1); }
   .lb-legend-grid { display: grid; grid-template-columns: auto 1fr; gap: 0.35rem 0.6rem; align-items: baseline; }
-  .lb-legend-item { display: contents; }
-  .lb-legend-num { font-size: 10px; font-weight: 600; color: var(--accent); white-space: nowrap; }
-  .lb-legend-name { font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-secondary); }
-  /* Mobile — legend moves below image */
-  @media (max-width: 700px) {
-    .lightbox-legend { position: static; transform: none; width: 100%; max-height: none; overflow-y: visible; margin-top: 0.75rem; }
-    .lightbox-inner { flex-direction: column; max-height: none; }
-    .lightbox-img-wrap { height: auto; max-height: 50vh; width: 100%; }
-    .lightbox-img-wrap img { max-width: 100%; }
-    .lightbox.has-legend .lightbox-img-wrap img { max-width: 100%; }
-    .lb-legend-grid { grid-template-columns: auto 1fr auto 1fr; gap: 0.3rem 0.5rem; }
-  }
-  /* Floating controls — hover to reveal, always visible on touch */
+  .lb-legend-num { font-size: 10px; font-weight: 600; color: #C4916E; white-space: nowrap; }
+  .lb-legend-name { font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; color: rgba(242,237,230,0.5); }
+  /* Floating controls — fixed at bottom centre, auto-hide on idle */
   .lightbox-controls {
     position: fixed; bottom: 1.75rem; left: 50%; transform: translateX(-50%);
     display: flex; align-items: center; gap: 0.75rem;
-    background: rgba(250,248,244,0.92); backdrop-filter: blur(10px);
-    border: 0.5px solid var(--border-strong); padding: 0.55rem 1.25rem;
-    border-radius: 2px; z-index: 100001; transition: opacity 0.3s; opacity: 0;
-    pointer-events: none;
+    background: rgba(26,20,16,0.78); backdrop-filter: blur(10px);
+    border: 0.5px solid rgba(255,255,255,0.12); padding: 0.55rem 1.25rem;
+    border-radius: 2px; z-index: 401; transition: opacity 0.5s; opacity: 1;
   }
-  .lightbox-controls.zone-active, .lightbox-controls:hover { opacity: 1; pointer-events: all; }
-  /* Invisible hot zone — bottom strip, hover here reveals the controls bar */
-  .lightbox-hotzone-bottom { position: fixed; bottom: 0; left: 0; width: 100%; height: 40vh; z-index: 250; }
-  @media (hover: none) { .lightbox-controls { opacity: 1; pointer-events: all; } }
+  .lightbox-controls.ui-hidden { opacity: 0; pointer-events: none; }
   .lightbox-close {
-    position: fixed; top: 1.25rem; right: 1.5rem; z-index: 100002;
-    background: var(--bg-card); border: 0.5px solid var(--border-strong);
-    color: var(--text-secondary); font-size: 1rem; cursor: pointer;
-    padding: 0.4rem 0.7rem; line-height: 1; transition: all 0.3s; opacity: 0;
-    pointer-events: none;
+    position: fixed; top: 1.25rem; right: 1.5rem; z-index: 402;
+    background: rgba(26,20,16,0.65); border: 0.5px solid rgba(255,255,255,0.15);
+    color: rgba(242,237,230,0.7); font-size: 1rem; cursor: pointer;
+    padding: 0.4rem 0.7rem; line-height: 1; transition: all 0.3s; opacity: 1;
   }
-  .lightbox-close.zone-active, .lightbox-close:hover { opacity: 1; pointer-events: all; }
-  /* Invisible hot zone — top-right corner, hover here reveals the close button */
-  .lightbox-hotzone-close { position: fixed; top: 0; right: 0; width: 220px; height: 35vh; z-index: 250; }
-  }
-  @media (hover: none) { .lightbox-close { opacity: 1; pointer-events: all; } }
+  .lightbox-close.ui-hidden { opacity: 0; pointer-events: none; }
   .lightbox-close:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); opacity: 1 !important; }
   .lightbox-btn {
-    background: var(--bg-card); border: 0.5px solid var(--border-strong);
+    background: transparent; border: 0.5px solid rgba(255,255,255,0.2);
     padding: 0.35rem 0.9rem; font-family: 'Inter', sans-serif; font-size: 14px;
-    color: var(--text-secondary); cursor: pointer; transition: all 0.2s; line-height: 1;
+    color: rgba(242,237,230,0.85); cursor: pointer; transition: all 0.2s; line-height: 1;
   }
   .lightbox-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
   .lightbox-btn:disabled { opacity: 0.22; cursor: default; pointer-events: none; }
-  .lightbox-counter { font-size: 11px; letter-spacing: 0.06em; color: var(--text-muted); min-width: 54px; text-align: center; }
+  .lightbox-counter { font-size: 11px; letter-spacing: 0.06em; color: rgba(242,237,230,0.5); min-width: 54px; text-align: center; }
   .lightbox-label {
-    position: fixed; top: 1.25rem; left: 50%; transform: translateX(-50%);
+    position: fixed; bottom: 5.25rem; left: 50%; transform: translateX(-50%);
     font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--text-muted); white-space: nowrap; z-index: 100001;
-    transition: opacity 0.3s; opacity: 0; pointer-events: none;
-    background: var(--bg-card); padding: 0.3rem 0.75rem;
-    border: 0.5px solid var(--border-strong);
+    color: rgba(242,237,230,0.28); white-space: nowrap; z-index: 401;
+    transition: opacity 0.5s; opacity: 1; pointer-events: none;
   }
-  .lightbox:hover .lightbox-label { opacity: 1; }
-  @media (hover: none) { .lightbox-label { opacity: 1; } }
+  .lightbox-label.ui-hidden { opacity: 0; }
 
   /* PLAN + LEGEND */
   .plan-legend-wrap { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; align-items: start; margin-bottom: 1.5rem; }
@@ -291,65 +251,32 @@
   .journal-counter { font-size: 12px; letter-spacing: 0.06em; color: var(--text-muted); min-width: 100px; text-align: center; }
   .journal-note { font-size: 11px; color: var(--text-muted); font-style: italic; text-align: center; }
 
-  /* DEV JOURNAL (Dune Wellness only) — single page embedded, larger */
-  .dev-journal .journal-spread { grid-template-columns: 1fr; max-width: 780px; background: none; overflow: hidden; }
-  .dev-journal .dev-journal-slot-right { display: none; }
-  .dev-journal .journal-spread-slot { overflow: hidden; position: relative; }
-  .dev-journal .journal-viewer { background: var(--bg-mid); overflow: hidden; position: relative; }
-  .dev-journal .journal-spread { transform-origin: top center; }
-  /* Fullscreen: double page desktop, single page mobile */
-  #devFullscreen .journal-fullscreen-spread { grid-template-columns: 1fr; max-width: min(800px, 96vw); }
-  @media (max-width: 700px) {
-    .dev-journal .journal-spread { max-width: 100%; }
-    #devFullscreen .journal-fullscreen-slot:last-child { display: none; }
-    #devFullscreen .journal-close { font-size: 1.5rem; padding: 1rem 1.3rem; min-width: 60px; min-height: 60px; top: 0.75rem; right: 0.75rem; z-index: 420; touch-action: manipulation; pointer-events: all; }
-    #devFullscreen .journal-zoom-controls { z-index: 420; pointer-events: all; }
-    #devFullscreen .journal-fullscreen-controls { z-index: 420; pointer-events: all; }
-  }
-
   /* Journal fullscreen — controls auto-hide on idle */
-  .journal-fullscreen { position: fixed; inset: 0; z-index: 100000; background: var(--bg-card); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; gap: 0; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+  .journal-fullscreen { position: fixed; inset: 0; z-index: 300; background: rgba(26,20,16,0.97); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; gap: 0; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
   .journal-fullscreen.open { opacity: 1; pointer-events: all; }
-  .journal-fullscreen-spread { display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: var(--bg-card); max-width: min(1200px, 90vw); width: 100%; flex-shrink: 0; }
-  .journal-fullscreen-slot + .journal-fullscreen-slot { border-left: 2px solid var(--border-strong); }
-  .journal-fullscreen-slot { background: var(--bg-card); overflow: visible; display: flex; align-items: center; justify-content: center; max-height: calc(88vh - 100px); min-height: calc(70vh - 80px); }
-  .journal-fullscreen-slot img { width: 100%; height: 100%; object-fit: contain; display: block; transform-origin: center center; user-select: none; -webkit-user-drag: none; cursor: default; max-height: calc(88vh - 100px); }
-  /* Journal zoom buttons — same style as floor plan zoom buttons */
-  .journal-zoom-controls { position: fixed; left: 1.5rem; top: 50%; transform: translateY(-50%); z-index: 100002; display: flex; flex-direction: column; gap: 0.4rem; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
-  .journal-fullscreen:hover .journal-zoom-controls { opacity: 1; pointer-events: all; }
-  .journal-zoom-controls.zone-active { opacity: 1; pointer-events: all; }
-  @media (hover: none) { .journal-zoom-controls { opacity: 1; pointer-events: all; } }
-  .journal-zoom-btn { background: var(--accent); border: none; color: var(--bg-card); font-size: 1.3rem; font-weight: 500; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; touch-action: manipulation; line-height: 1; }
-  .journal-zoom-btn:hover { background: var(--bg-dark); }
-  .journal-zoom-btn:disabled { opacity: 0.3; cursor: default; }
-  @media (max-width: 700px) {
-    .journal-zoom-controls { left: 1rem; top: auto; bottom: 5.5rem; transform: none; flex-direction: row; }
-    .journal-zoom-btn { width: 48px; height: 48px; font-size: 1.5rem; }
-  }
+  .journal-fullscreen-spread { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; background: rgba(255,255,255,0.08); max-width: min(1200px, 90vw); width: 100%; flex-shrink: 0; }
+  .journal-fullscreen-slot { background: var(--bg-card); overflow: hidden; aspect-ratio: 210/297; display: flex; align-items: center; justify-content: center; }
+  .journal-fullscreen-slot img { width: 100%; height: 100%; object-fit: contain; display: block; }
   /* Floating controls for fullscreen journal */
   .journal-fullscreen-controls {
     position: fixed; bottom: 1.75rem; left: 50%; transform: translateX(-50%);
     display: flex; align-items: center; gap: 1rem;
-    background: rgba(250,248,244,0.92); backdrop-filter: blur(10px);
-    border: 0.5px solid var(--border-strong); padding: 0.55rem 1.5rem;
-    border-radius: 2px; z-index: 100001; transition: opacity 0.3s; opacity: 0;
-    pointer-events: none;
+    background: rgba(26,20,16,0.78); backdrop-filter: blur(10px);
+    border: 0.5px solid rgba(255,255,255,0.12); padding: 0.55rem 1.5rem;
+    border-radius: 2px; z-index: 301; transition: opacity 0.5s; opacity: 1;
   }
-  .journal-fullscreen-controls.zone-active, .journal-fullscreen-controls:hover { opacity: 1; pointer-events: all; }
-  @media (hover: none) { .journal-fullscreen-controls { opacity: 1; pointer-events: all; } }
-  .journal-fullscreen-btn { background: var(--bg-card); border: 0.5px solid var(--border-strong); padding: 0.35rem 0.9rem; font-family: 'Inter', sans-serif; font-size: 14px; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; line-height: 1; }
+  .journal-fullscreen-controls.ui-hidden { opacity: 0; pointer-events: none; }
+  .journal-fullscreen-btn { background: transparent; border: 0.5px solid rgba(255,255,255,0.2); padding: 0.35rem 0.9rem; font-family: 'Inter', sans-serif; font-size: 14px; color: rgba(242,237,230,0.85); cursor: pointer; transition: all 0.2s; line-height: 1; }
   .journal-fullscreen-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
   .journal-fullscreen-btn:disabled { opacity: 0.22; cursor: default; pointer-events: none; }
-  .journal-fullscreen-counter { font-size: 12px; letter-spacing: 0.06em; color: var(--text-muted); min-width: 120px; text-align: center; }
+  .journal-fullscreen-counter { font-size: 12px; letter-spacing: 0.06em; color: rgba(242,237,230,0.5); min-width: 120px; text-align: center; }
   .journal-close {
-    position: fixed; top: 1.25rem; right: 1.5rem; z-index: 100002;
-    background: var(--bg-card); border: 0.5px solid var(--border-strong);
-    color: var(--text-secondary); font-size: 1rem; cursor: pointer;
-    padding: 0.4rem 0.7rem; line-height: 1; transition: all 0.3s; opacity: 0;
-    pointer-events: none;
+    position: fixed; top: 1.25rem; right: 1.5rem; z-index: 302;
+    background: rgba(26,20,16,0.65); border: 0.5px solid rgba(255,255,255,0.15);
+    color: rgba(242,237,230,0.7); font-size: 1rem; cursor: pointer;
+    padding: 0.4rem 0.7rem; line-height: 1; transition: all 0.3s; opacity: 1;
   }
-  .journal-close.zone-active, .journal-close:hover { opacity: 1; pointer-events: all; }
-  @media (hover: none) { .journal-close { opacity: 1; pointer-events: all; } }
+  .journal-close.ui-hidden { opacity: 0; pointer-events: none; }
   .journal-close:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); opacity: 1 !important; }
 
   /* QBIM card hover */
@@ -407,37 +334,68 @@
     .course-meta-cell { flex: 1 1 auto; min-width: 80px; }
     .course-inner { padding: 2rem 1.5rem; gap: 2rem; }
   }
-  @media (max-width: 900px) { .course-inner { grid-template-columns: 1fr; } .proj-detail { grid-template-columns: 1fr; } .proj-sidebar { position: static; } .img-grid-2 { grid-template-columns: 1fr; } .img-grid-3 { grid-template-columns: 1fr 1fr; } .plan-legend-wrap, .plan-legend-wrap-lg { grid-template-columns: 1fr; } .page-header-inner { padding: 1.5rem 1.5rem 2rem; } }
+  @media (max-width: 900px) { .course-inner { grid-template-columns: 1fr; } .proj-detail { grid-template-columns: 1fr; } .proj-sidebar { position: static; } .img-grid-2 { grid-template-columns: 1fr; } .img-grid-3 { grid-template-columns: 1fr 1fr; } .plan-legend-wrap, .plan-legend-wrap-lg { grid-template-columns: 1fr; } .page-header-inner { padding: 3rem 1.5rem 2.5rem; } }
 
-
-  @media (max-width: 900px) {
-    .lightbox-controls { bottom: calc(80px + env(safe-area-inset-bottom, 0px)) !important; }
-    .lightbox-label { top: 1.25rem !important; bottom: auto !important; }
-    .journal-fullscreen-controls { bottom: calc(80px + env(safe-area-inset-bottom, 0px)) !important; }
-    .lb-zoom-controls { bottom: calc(145px + env(safe-area-inset-bottom, 0px)) !important; }
-    .journal-zoom-controls { bottom: calc(145px + env(safe-area-inset-bottom, 0px)) !important; }
-    .lightbox-hotzone-bottom { height: calc(40vh + 80px) !important; }
-  }
+  /* Render carousel arrows */
+  .render-arrow { position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.45); color:#fff; border:none; border-radius:50%; width:40px; height:40px; font-size:1.4rem; line-height:1; cursor:pointer; z-index:10; display:flex; align-items:center; justify-content:center; transition:background 0.2s; }
+  .render-arrow:hover { background:rgba(0,0,0,0.7); }
+  .render-arrow-prev { left:12px; }
+  .render-arrow-next { right:12px; }
+  .render-arrow:disabled { opacity:0.25; cursor:default; }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo"><img src="favicon-32x32.png" alt="" class="nav-logo-icon" aria-hidden="true">Isabella Heath</a>
-    <ul class="nav-links">
-    <li><a href="qualifications.html" class="active">Academic Works</a></li>
-    <li class="nav-dropdown">
-      <a href="concept-works.html">Concept Works</a>
+  <a href="index.html" class="nav-logo">Isabella Heath</a>
+  <ul class="nav-links">
+        <li class="nav-dropdown">
+      <a href="index.html#work">Work</a>
       <div class="nav-dropdown-menu">
-        <a href="concept-works.html#custom-objects">Custom BIM Objects</a>
+        <a href="qualifications.html">Academic Work</a>
+        <div class="nav-sub">
+          <span class="nav-sub-trigger">Concept Works</span>
+          <div class="nav-sub-menu">
+            <a href="concept-works.html">All Concept Works</a>
+            <a href="concept-works.html#custom-objects">Custom Objects</a>
+          </div>
+        </div>
+        <a href="professional-works.html">Professional Works</a>
       </div>
     </li>
-    <li><a href="professional-works.html">Professional Works</a></li>
+    <li><a href="qualifications.html" class="active">Qualifications</a></li>
+    <li><a href="index.html#about">About</a></li>
     <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
   </ul>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- MOBILE MENU -->
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <!-- Work with sub-items -->
+    <div class="nav-mobile-item" id="mobileWorkToggle">
+    <a href="index.html#work">Work</a>
+    <span class="nav-mobile-arrow" id="mobileWorkArrow">&#8964;</span>
+  </div>
+  <div class="nav-mobile-sub" id="mobileWorkSub">
+    <a href="qualifications.html">Academic Work</a>
+    <a href="concept-works.html">Concept Works</a>
+    <a href="concept-works.html#custom-objects">&#8627; Custom Objects</a>
+    <a href="professional-works.html">Professional Works</a>
+  </div>
+  <a href="qualifications.html" class="nav-mobile-item">Qualifications</a>
+  <a href="index.html#about" class="nav-mobile-item">About</a>
+  <a href="index.html#contact" class="nav-mobile-item">Contact</a>
+</div>
+  <div class="page-header-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span>Qualifications</div>
+    <h1 class="page-title">Advanced Diploma of<br>Building Design</h1>
+    <p class="page-subtitle">A technical qualification at Holmesglen Institute covering architectural building design, construction documentation, BIM workflows, compliance, and planning — from schematic through to working-drawing standard.</p>
+  </div>
+</div>
+
 <div class="course-band">
   <div class="course-inner">
     <div>
@@ -462,8 +420,10 @@
           <a href="#proj-richmond-tp" class="proj-nav-item rich-tp" data-proj-id="proj-richmond-tp"><div class="proj-nav-num">02</div><div class="proj-nav-title">Richmond Townhouse — Town Planning</div><div class="proj-nav-type">Town Planning</div></a>
           <a href="#proj-richmond-wd" class="proj-nav-item rich-wd" data-proj-id="proj-richmond-wd"><div class="proj-nav-num">03</div><div class="proj-nav-title">Richmond Townhouse — Working Drawings</div><div class="proj-nav-type">Construction Documentation</div></a>
           <a href="#proj-bal" class="proj-nav-item bal" data-proj-id="proj-bal"><div class="proj-nav-num">04</div><div class="proj-nav-title">Bushfire-Responsive Design</div><div class="proj-nav-type">BAL Assessment</div></a>
-          <a href="#proj-wellness" class="proj-nav-item wellness" data-proj-id="proj-wellness"><div class="proj-nav-num">05</div><div class="proj-nav-title">Dune Wellness Centre</div><div class="proj-nav-type">Commercial Design</div></a>
+          <a href="#proj-wellness" class="proj-nav-item wellness" data-proj-id="proj-wellness"><div class="proj-nav-num">05</div><div class="proj-nav-title">Dune Wellness Centre — AT3.2</div><div class="proj-nav-type">Commercial Design</div></a>
           <a href="#proj-commercial-details" class="proj-nav-item comdet" data-proj-id="proj-commercial-details"><div class="proj-nav-num">06</div><div class="proj-nav-title">Commercial Construction Details</div><div class="proj-nav-type">Technical Documentation</div></a>
+          <a href="#proj-arc-house" class="proj-nav-item arc-house" data-proj-id="proj-arc-house"><div class="proj-nav-num">07</div><div class="proj-nav-title">Arc House</div><div class="proj-nav-type">Residential Design</div></a>
+          <a href="#proj-wellness-dev" class="proj-nav-item wellness-dev" data-proj-id="proj-wellness-dev"><div class="proj-nav-num">08</div><div class="proj-nav-title">Dune Wellness Centre — AT4.2</div><div class="proj-nav-type">Digital Visualisation</div></a>
         </div>
       </div>
       <button class="proj-nav-arrow" id="projNavNext">&#8250;</button>
@@ -477,7 +437,7 @@
     <span class="section-eyebrow" style="display:block; margin-bottom:1rem;">Course content</span>
     <div class="units-toggle" id="unitsToggle">
       <span class="units-toggle-label">Units of competency</span>
-      <span class="units-toggle-arrow">▾</span>
+      <span class="units-toggle-arrow">&#8964;</span>
     </div>
   </div>
   <div class="units-grid" id="unitsGrid">
@@ -513,8 +473,8 @@
     <span class="section-eyebrow">Academic work</span>
     <h2 class="section-title">Projects completed in this course</h2>
   </div>
-  <p style="color:var(--text-secondary); max-width:680px; margin:0 auto 1.5rem; font-size:0.95rem; line-height:1.75; text-align:center;">Each project below was completed as part of the 22627VIC course at Holmesglen. Projects are listed in chronological order of completion, reflecting the progression of skills developed throughout the course.</p>
-  <p style="color:var(--accent); max-width:680px; margin:0 auto 4rem; font-size:0.85rem; font-style:italic; line-height:1.7; text-align:center;">Click any image to enlarge it — use the arrows to navigate between drawings within that project.</p>
+  <p style="color:var(--text-secondary); max-width:600px; margin-bottom:4rem; font-size:0.95rem; line-height:1.75;">Each project below was completed as part of the 22627VIC course at Holmesglen. Click any image to enlarge it — use the arrows to navigate between drawings within that project.</p>
+  <p style="color:var(--text-muted); max-width:600px; margin-top:-3rem; margin-bottom:4rem; font-size:0.8rem; font-style:italic; line-height:1.7;">Projects are listed in chronological order of completion, reflecting the progression of skills developed throughout the course.</p>
 
   <!-- ============================================================ -->
   <!-- 01  BEACH HOUSE                                              -->
@@ -531,10 +491,10 @@
     <div class="proj-detail">
       <div class="proj-body">
         <span class="img-label">A01 — Site plan</span>
-        <div class="img-hero-wrap"><img src="images/beach-house/01-site-plan.webp" alt="Beach House site plan" class="img-hero" data-gallery="beach" data-index="0"></div>
+        <img src="images/beach-house/01-site-plan.webp" alt="Beach House site plan" class="img-hero" data-gallery="beach" data-index="0">
 
         <span class="img-label">A02 — Floor plan</span>
-        <div class="img-hero-wrap"><img src="images/beach-house/02-floor-plan.webp" alt="Beach House floor plan" class="img-hero" data-gallery="beach" data-index="1"></div>
+        <img src="images/beach-house/02-floor-plan.webp" alt="Beach House floor plan" class="img-hero" data-gallery="beach" data-index="1">
 
         <span class="img-label">A03–A04 — Elevations</span>
         <div class="img-grid-2">
@@ -543,7 +503,7 @@
         </div>
 
         <span class="img-label">A05 — Section</span>
-        <div class="img-hero-wrap"><img src="images/beach-house/05-section.webp" alt="Beach House section" class="img-hero" data-gallery="beach" data-index="4"></div>
+        <img src="images/beach-house/05-section.webp" alt="Beach House section" class="img-hero" data-gallery="beach" data-index="4">
 
         <p>A freehand residential design project for a contemporary coastal holiday house at 225–227 Ocean Beach Road, Sorrento. The proposal responds to a client brief focused on accessible, adaptable living — balancing passive solar design, site response, and a relaxed coastal character.</p>
         <p>Working freehand required a different kind of thinking to CAD — decisions about proportion and arrangement had to be resolved directly on the page. The section in particular required committing to ceiling heights, roof pitch, and floor levels without the ability to iterate digitally first.</p>
@@ -562,7 +522,7 @@
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Type</div><div class="proj-sidebar-value">Residential — Holiday House</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Method</div><div class="proj-sidebar-value">Freehand drawing</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Scale</div><div class="proj-sidebar-value">1:200 site · 1:50 plans &amp; elevations</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Drawing set</div><div class="proj-sidebar-value"><span style="display:grid; grid-template-columns:auto 1fr; gap:0.15rem 0.6rem; line-height:1.7;"><span>A01</span><span>Site plan</span><span>A02</span><span>Floor plan</span><span>A03</span><span>N&amp;S elevations</span><span>A04</span><span>E&amp;W elevations</span><span>A05</span><span>Section</span></span></div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Drawing set</div><div class="proj-sidebar-value">A01 Site plan · A02 Floor plan · A03 N&amp;S elevations · A04 E&amp;W elevations · A05 Section</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Tags</div><div class="proj-tags-row"><span class="tag">Freehand</span><span class="tag">Passive Solar</span><span class="tag">Site Analysis</span><span class="tag">Accessible Design</span><span class="tag">Coastal</span></div></div>
       </div>
     </div>
@@ -603,18 +563,12 @@
 
         <!-- Fullscreen journal overlay -->
         <div class="journal-fullscreen" id="journalFullscreen">
-          <div class="lightbox-hotzone-close" id="journalHotzoneClose"></div>
-          <div class="lightbox-hotzone-bottom" id="journalHotzoneBottom"></div>
           <button class="journal-close" id="journalClose">✕</button>
-          <div class="journal-zoom-controls" id="journalZoomControls">
-            <button class="journal-zoom-btn" id="journalZoomIn" aria-label="Zoom in">+</button>
-            <button class="journal-zoom-btn" id="journalZoomOut" aria-label="Zoom out">−</button>
-          </div>
           <div class="journal-fullscreen-spread">
             <div class="journal-fullscreen-slot" id="fsLeft"></div>
             <div class="journal-fullscreen-slot" id="fsRight"></div>
           </div>
-          <div class="journal-fullscreen-controls" id="journalFsControls">
+          <div class="journal-fullscreen-controls">
             <button class="journal-fullscreen-btn" id="fsPrev" disabled>← Prev</button>
             <span class="journal-fullscreen-counter" id="fsCounter">Pages 1–2 of 15</span>
             <button class="journal-fullscreen-btn" id="fsNext">Next →</button>
@@ -624,13 +578,13 @@
         <h4 class="h4-serif">Planning Drawing Set</h4>
 
         <span class="img-label">TP-00 — Front page &amp; neighbourhood character</span>
-        <div class="img-hero-wrap"><img src="images/richmond-tp/tp00-front-page.webp" alt="Front page and neighbourhood character" class="img-hero" data-gallery="rtp" data-index="0"></div>
+        <img src="images/richmond-tp/tp00-front-page.webp" alt="Front page and neighbourhood character" class="img-hero" data-gallery="rtp" data-index="0">
 
         <span class="img-label">TP-01 — Site analysis plan</span>
-        <div class="img-hero-wrap"><img src="images/richmond-tp/tp01-site-analysis.webp" alt="Site analysis plan" class="img-hero" data-gallery="rtp" data-index="1"></div>
+        <img src="images/richmond-tp/tp01-site-analysis.webp" alt="Site analysis plan" class="img-hero" data-gallery="rtp" data-index="1">
 
         <span class="img-label">TP-05 — Elevations (all four)</span>
-        <div class="img-hero-wrap"><img src="images/richmond-tp/tp05-elevations.webp" alt="All four elevations" class="img-hero" data-gallery="rtp" data-index="2"></div>
+        <img src="images/richmond-tp/tp05-elevations.webp" alt="All four elevations" class="img-hero" data-gallery="rtp" data-index="2">
 
         <span class="img-label">TP-06 &amp; TP-07 — Shadow diagrams</span>
         <div class="img-grid-2">
@@ -656,8 +610,7 @@
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Zone</div><div class="proj-sidebar-value">General Residential Zone 4 (GRZ4)</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Site area</div><div class="proj-sidebar-value">305 m²</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Scale</div><div class="proj-sidebar-value">1:100 at A2</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Software</div><div class="proj-sidebar-value">ArchiCAD 26</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Drawing set</div><div class="proj-sidebar-value"><span style="display:grid; grid-template-columns:auto 1fr; gap:0.15rem 0.6rem; line-height:1.7;"><span>TP-00</span><span>Front page</span><span>TP-01</span><span>Site analysis</span><span>TP-05</span><span>Elevations</span><span>TP-06</span><span>Shadow 9AM</span><span>TP-07</span><span>Shadow 3PM</span></span></div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Drawing set</div><div class="proj-sidebar-value">TP-00 Front page · TP-01 Site analysis · TP-05 Elevations · TP-06 Shadow 9AM · TP-07 Shadow 3PM</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Tags</div><div class="proj-tags-row"><span class="tag">Town Planning</span><span class="tag">Shadow Diagrams</span><span class="tag">Neighbourhood Character</span><span class="tag">Site Analysis</span><span class="tag">GRZ4</span></div></div>
       </div>
     </div>
@@ -680,19 +633,19 @@
     <div class="proj-detail">
       <div class="proj-body">
         <span class="img-label">A01 — Site plan</span>
-        <div class="img-hero-wrap"><img src="images/richmond-wd/a01-site-plan.webp" alt="Site plan" class="img-hero" data-gallery="rwd" data-index="0"></div>
+        <img src="images/richmond-wd/a01-site-plan.webp" alt="Site plan" class="img-hero" data-gallery="rwd" data-index="0">
 
         <span class="img-label">A02 — Ground floor plan</span>
-        <div class="img-hero-wrap"><img src="images/richmond-wd/a02-ground-floor-plan.webp" alt="Ground floor plan" class="img-hero" data-gallery="rwd" data-index="1"></div>
+        <img src="images/richmond-wd/a02-ground-floor-plan.webp" alt="Ground floor plan" class="img-hero" data-gallery="rwd" data-index="1">
 
         <span class="img-label">A03 — First floor plan</span>
-        <div class="img-hero-wrap"><img src="images/richmond-wd/a03-first-floor-plan.webp" alt="First floor plan" class="img-hero" data-gallery="rwd" data-index="2"></div>
+        <img src="images/richmond-wd/a03-first-floor-plan.webp" alt="First floor plan" class="img-hero" data-gallery="rwd" data-index="2">
 
         <span class="img-label">A05 — Elevations (North &amp; East)</span>
-        <div class="img-hero-wrap"><img src="images/richmond-wd/a05-elevations.webp" alt="Elevations North and East" class="img-hero" data-gallery="rwd" data-index="3"></div>
+        <img src="images/richmond-wd/a05-elevations.webp" alt="Elevations North and East" class="img-hero" data-gallery="rwd" data-index="3">
 
         <span class="img-label">A06 — Sections (Cross A-A, Cross C-C, Longitudinal B-B)</span>
-        <div class="img-hero-wrap"><img src="images/richmond-wd/a06-sections.webp" alt="Cross and longitudinal sections" class="img-hero" data-gallery="rwd" data-index="4"></div>
+        <img src="images/richmond-wd/a06-sections.webp" alt="Cross and longitudinal sections" class="img-hero" data-gallery="rwd" data-index="4">
 
         <span class="img-label">A07 &amp; A08 — Construction details</span>
         <div class="img-grid-2">
@@ -701,7 +654,7 @@
         </div>
 
         <span class="img-label">A09 — Ground floor electrical plan</span>
-        <div class="img-hero-wrap"><img src="images/richmond-wd/a09-electrical-plan.webp" alt="Ground floor electrical plan" class="img-hero" data-gallery="rwd" data-index="7"></div>
+        <img src="images/richmond-wd/a09-electrical-plan.webp" alt="Ground floor electrical plan" class="img-hero" data-gallery="rwd" data-index="7">
 
         <span class="img-label">A10 &amp; A11 — Schedules</span>
         <div class="img-grid-2">
@@ -749,10 +702,10 @@
     <div class="proj-detail">
       <div class="proj-body">
         <span class="img-label">A01 — Drawing register &amp; benefits statement</span>
-        <div class="img-hero-wrap"><img src="images/bal/a01-register-benefits.webp" alt="Drawing register and benefits statement" class="img-hero" data-gallery="bal" data-index="0"></div>
+        <img src="images/bal/a01-register-benefits.webp" alt="Drawing register and benefits statement" class="img-hero" data-gallery="bal" data-index="0">
 
         <span class="img-label">A02 — Site plan to BAL 40</span>
-        <div class="img-hero-wrap"><img src="images/bal/a02-site-plan-bal40.webp" alt="Site plan BAL 40" class="img-hero" data-gallery="bal" data-index="1"></div>
+        <img src="images/bal/a02-site-plan-bal40.webp" alt="Site plan BAL 40" class="img-hero" data-gallery="bal" data-index="1">
 
         <span class="img-label">A08 &amp; A09 — Construction details</span>
         <div class="img-grid-2">
@@ -778,7 +731,7 @@
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Standard</div><div class="proj-sidebar-value">AS 3959:2018</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">BAL levels</div><div class="proj-sidebar-value">BAL 19 (lightweight) · BAL 40 (heavyweight)</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Scale</div><div class="proj-sidebar-value">1:200 site plan · 1:20 details</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Drawing set</div><div class="proj-sidebar-value"><span style="display:grid; grid-template-columns:auto 1fr; gap:0.15rem 0.6rem; line-height:1.7;"><span>A01</span><span>Register &amp; statement</span><span>A02</span><span>Site plan</span><span>A08</span><span>BAL 19 detail</span><span>A09</span><span>BAL 40 detail</span></span></div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Drawing set</div><div class="proj-sidebar-value">A01 Register &amp; statement · A02 Site plan · A08 BAL 19 detail · A09 BAL 40 detail</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Tags</div><div class="proj-tags-row"><span class="tag">AS 3959</span><span class="tag">BAL 19</span><span class="tag">BAL 40</span><span class="tag">Construction Details</span><span class="tag">CFA</span></div></div>
       </div>
     </div>
@@ -795,16 +748,23 @@
       <span class="badge badge-type">Commercial Design</span>
       <span class="badge badge-academic">Academic · 2026</span>
     </div>
-    <h2 class="proj-section-title">Dune Wellness Centre</h2>
-    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.25rem; letter-spacing:0.04em;">Commercial concept · BIM &amp; rendered presentation · ArchiCAD · Affinity</p>
+    <h2 class="proj-section-title">Dune Wellness Centre — AT3.2</h2>
+    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.25rem; letter-spacing:0.04em;">Commercial concept · BIM &amp; rendered presentation · ArchiCAD 29 · Affinity</p>
 
     <div class="proj-detail">
       <div class="proj-body">
 
         <!-- A1 POSTER — portrait hero, centred -->
+        <span class="img-label">A1 Presentation Poster</span>
+        <div style="display:flex; justify-content:center; margin-bottom:1.5rem;">
+          <img src="images/wellness/00-a1-dune-wellness-poster.webp" alt="Presentation Poster"
+               style="width:100%; max-width:520px; display:block; margin:0 auto; border:0.5px solid var(--border); cursor:zoom-in;"
+               data-gallery="wellness" data-index="0">
+        </div>
+
         <!-- EXTERIOR — entry views -->
         <span class="img-label">Exterior — entry</span>
-        <div class="img-hero-wrap"><img src="images/wellness/02-front.webp" alt="Entry" class="img-hero" data-gallery="wellness" data-index="1"></div>
+        <img src="images/wellness/02-front.webp" alt="Entry" class="img-hero" data-gallery="wellness" data-index="1">
 
         <div class="img-grid-2">
           <div class="img-slot" style="aspect-ratio:16/9;">
@@ -829,11 +789,11 @@
 
         <!-- INTERIOR — reception lounge (with people first, ArchiCAD second) -->
         <span class="img-label" style="margin-top:1rem; display:block;">Interior — reception &amp; lounge</span>
-        <div class="img-hero-wrap"><img src="images/wellness/03-reception-w-people.webp" alt="Lounge" class="img-hero" data-gallery="wellness" data-index="6"></div>
+        <img src="images/wellness/03-reception-w-people.webp" alt="Lounge" class="img-hero" data-gallery="wellness" data-index="6">
 
         <!-- STUDIO — hero then 2 below -->
         <span class="img-label" style="margin-top:0.25rem; display:block;">Interior — studio</span>
-        <div class="img-hero-wrap"><img src="images/wellness/06-studio-main.webp" alt="Studio" class="img-hero" data-gallery="wellness" data-index="7"></div>
+        <img src="images/wellness/06-studio-main.webp" alt="Studio" class="img-hero" data-gallery="wellness" data-index="7">
 
         <div class="img-grid-2" style="margin-top:1.5px;">
           <div class="img-slot">
@@ -856,13 +816,17 @@
           </div>
         </div>
 
-        <!-- GROUND FLOOR PLAN — full width with legend left -->
+        <!-- GROUND FLOOR PLAN — full width -->
         <span class="img-label" style="margin-top:1.5rem; display:block;">Ground floor &amp; landscaping plan</span>
-        <div class="plan-legend-wrap-lg" style="margin-top:0.5rem; direction:rtl;">
-          <img src="images/wellness/20-01-ground-floor-landscaping-plan.webp" alt="Ground Floor Plan"
-               style="width:100%; display:block; cursor:zoom-in; direction:ltr;"
-               data-gallery="wellness" data-index="12">
-          <div class="legend-block" style="direction:ltr;">
+        <img src="images/wellness/20-01-ground-floor-landscaping-plan.webp" alt="Ground Floor Plan" class="img-hero" data-gallery="wellness" data-index="12">
+
+        <!-- FIRST FLOOR PLAN — with legend beside it -->
+        <span class="img-label" style="margin-top:0.5rem; display:block;">Level one floor plan</span>
+        <div class="plan-legend-wrap" style="margin-top:0.5rem;">
+          <img src="images/wellness/20-02-first-floor-plan.webp" alt="Level One Floor Plan"
+               style="width:100%; display:block; background:transparent; cursor:zoom-in; margin-bottom:0;"
+               data-gallery="wellness" data-index="13">
+          <div class="legend-block">
             <div class="legend-title">Legend</div>
             <div class="legend-grid">
               <span class="legend-num">1</span><span class="legend-name">Reception</span>
@@ -885,17 +849,9 @@
           </div>
         </div>
 
-        <!-- FIRST FLOOR PLAN — full width -->
-        <span class="img-label" style="margin-top:1.5rem; display:block;">Level one floor plan</span>
-        <div class="img-hero-wrap" style="margin-top:0.5rem;">
-          <img src="images/wellness/20-02-first-floor-plan.webp" alt="Level One Floor Plan"
-               style="width:100%; display:block; background:transparent; cursor:zoom-in; margin-bottom:0;"
-               data-gallery="wellness" data-index="13">
-        </div>
-
         <!-- SECTION — full width -->
         <span class="img-label" style="margin-top:0.5rem; display:block;">Section A-A</span>
-        <div class="img-hero-wrap"><img src="images/wellness/20-03-section-a-a.webp" alt="Section A-A" class="img-hero" data-gallery="wellness" data-index="14"></div>
+        <img src="images/wellness/20-03-section-a-a.webp" alt="Section A-A" class="img-hero" data-gallery="wellness" data-index="14">
 
         <!-- ELEVATIONS — 4-col grid with labels -->
         <span class="img-label">Elevations</span>
@@ -919,7 +875,7 @@
         </div>
 
         <p>A commercial wellness centre concept exploring spatial zoning, materiality, and user experience through a calm and grounded architectural language. The building organises ritual-based zones — movement, heat, water, and rest — through a sequence of textured, tactile spaces animated by light, greenery, and curved form.</p>
-        <p>The project combined BIM modelling in ArchiCAD and presentation layout in Affinity to produce a cohesive submission. Visualisations were produced using ArchiCAD Cineware and rendering tools, communicating design intent, atmosphere, floor plans, section, and all four elevations.</p>
+        <p>The project combined BIM modelling in ArchiCAD and presentation layout in Affinity to produce a cohesive submission. The A1 poster was designed as a standalone document — communicating design intent, atmosphere, floor plans, section, and all four elevations in a single composition. Visualisations were produced using ArchiCAD Cineware and AI-assisted rendering tools.</p>
 
         <!-- DESIGN DEVELOPMENT JOURNAL -->
         <div style="margin-top:3rem; padding-top:2rem; border-top:0.5px solid var(--border);">
@@ -931,18 +887,16 @@
             Note: This design development work was produced as a concept exploration exercise. As such, it does not necessarily account for all applicable Australian Standards, NCC requirements, or regulatory provisions that would be addressed in a formal design and documentation process.
           </p>
 
-          <div class="journal-wrap dev-journal">
+          <div class="journal-wrap">
             <div class="journal-viewer">
               <div class="journal-spread" id="devSpread">
-                <div class="journal-spread-slot dev-journal-slot-left" id="devLeft" style="aspect-ratio:297/210;"></div>
-                <div class="journal-spread-slot dev-journal-slot-right" id="devRight" style="aspect-ratio:297/210;"></div>
+                <div class="journal-spread-slot" id="devLeft" style="aspect-ratio:297/210;"></div>
+                <div class="journal-spread-slot" id="devRight" style="aspect-ratio:297/210;"></div>
               </div>
               <div class="journal-controls">
                 <button class="journal-btn" id="devPrev" disabled>← Prev</button>
                 <span class="journal-counter" id="devCounter">Pages 1–2</span>
                 <button class="journal-btn" id="devNext">Next →</button>
-                <button class="journal-zoom-btn" id="devEmbedZoomOut" aria-label="Zoom out" style="margin-left:0.5rem;">−</button>
-                <button class="journal-zoom-btn" id="devEmbedZoomIn" aria-label="Zoom in">+</button>
                 <button class="journal-btn-full" id="devFullBtn">⛶ Full screen</button>
               </div>
               <p class="journal-note">Design development sketches and research — flip through to explore the process</p>
@@ -951,18 +905,12 @@
 
           <!-- Fullscreen for design development -->
           <div class="journal-fullscreen" id="devFullscreen">
-            <div class="lightbox-hotzone-close" id="devHotzoneClose"></div>
-            <div class="lightbox-hotzone-bottom" id="devHotzoneBottom"></div>
             <button class="journal-close" id="devClose">✕</button>
-            <div class="journal-zoom-controls" id="devZoomControls">
-              <button class="journal-zoom-btn" id="devZoomIn" aria-label="Zoom in">+</button>
-              <button class="journal-zoom-btn" id="devZoomOut" aria-label="Zoom out">−</button>
-            </div>
             <div class="journal-fullscreen-spread" style="aspect-ratio:unset;">
-              <div class="journal-fullscreen-slot" id="devFsLeft"></div>
-              <div class="journal-fullscreen-slot" id="devFsRight"></div>
+              <div class="journal-fullscreen-slot" id="devFsLeft" style="aspect-ratio:297/210;"></div>
+              <div class="journal-fullscreen-slot" id="devFsRight" style="aspect-ratio:297/210;"></div>
             </div>
-            <div class="journal-fullscreen-controls" id="devFsControls">
+            <div class="journal-fullscreen-controls">
               <button class="journal-fullscreen-btn" id="devFsPrev" disabled>← Prev</button>
               <span class="journal-fullscreen-counter" id="devFsCounter">Pages 1–2</span>
               <button class="journal-fullscreen-btn" id="devFsNext">Next →</button>
@@ -997,6 +945,7 @@
           <li>Designed a 16-room commercial wellness centre across two floors with landscape integration</li>
           <li>Produced a full BIM model in ArchiCAD and extracted plans, sections, and elevations from it</li>
           <li>Generated interior and exterior visualisations communicating material and atmospheric intent</li>
+          <li>Designed and produced an A1 portrait presentation poster as a complete design communication document</li>
           <li>Organised spaces through a ritual-based zoning strategy: movement, heat, water, rest</li>
         </ul>
       </div>
@@ -1009,9 +958,9 @@
         </div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Year</div><div class="proj-sidebar-value">2026</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Type</div><div class="proj-sidebar-value">Commercial — Wellness Centre</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Software</div><div class="proj-sidebar-value">ArchiCAD 29 · Affinity</div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Software</div><div class="proj-sidebar-value">ArchiCAD · Affinity · AI-assisted visualisation</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Spaces</div><div class="proj-sidebar-value">16 rooms — see legend</div></div>
-        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Deliverables</div><div class="proj-sidebar-value">Renders · Ground &amp; first floor plans · Section A-A · 4 elevations</div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Deliverables</div><div class="proj-sidebar-value">A1 poster · Renders · Ground &amp; first floor plans · Section A-A · 4 elevations</div></div>
         <div class="proj-sidebar-row"><div class="proj-sidebar-label">Tags</div><div class="proj-tags-row"><span class="tag">Commercial Design</span><span class="tag">BIM</span><span class="tag">Rendering</span><span class="tag">Spatial Planning</span><span class="tag">Presentation</span></div></div>
       </div>
     </div>
@@ -1035,13 +984,13 @@
       <div class="proj-body">
 
         <span class="img-label">Parapet detail — 1:10</span>
-        <div class="img-hero-wrap"><img src="images/commercial-details/parapet-detail.webp" alt="Parapet construction detail 1:10" class="img-hero" data-gallery="comdet" data-index="0"></div>
+        <img src="images/commercial-details/parapet-detail.webp" alt="Parapet construction detail 1:10" class="img-hero" data-gallery="comdet" data-index="0">
 
         <span class="img-label">Canopy detail — 1:10</span>
-        <div class="img-hero-wrap"><img src="images/commercial-details/canopy-detail.webp" alt="Canopy construction detail 1:10" class="img-hero" data-gallery="comdet" data-index="1"></div>
+        <img src="images/commercial-details/canopy-detail.webp" alt="Canopy construction detail 1:10" class="img-hero" data-gallery="comdet" data-index="1">
 
         <span class="img-label">Entry footing detail — 1:10</span>
-        <div class="img-hero-wrap"><img src="images/commercial-details/entry-footing-detail.webp" alt="Entry footing construction detail 1:10" class="img-hero" data-gallery="comdet" data-index="2"></div>
+        <img src="images/commercial-details/entry-footing-detail.webp" alt="Entry footing construction detail 1:10" class="img-hero" data-gallery="comdet" data-index="2">
 
         <p>Three construction details for a commercial building, produced to working-drawing standard at 1:10 scale as part of the 22627VIC course at Holmesglen. The details address three distinct junctions — the parapet, the canopy, and the entry footing — each requiring resolution of how materials, structure, waterproofing, and finish layers meet at a critical point in the building envelope.</p>
 
@@ -1069,6 +1018,155 @@
     </div>
   </div>
 
+  <hr class="proj-divider">
+
+  <!-- ============================================================ -->
+  <!-- 07  ARC HOUSE                                                 -->
+  <!-- ============================================================ -->
+  <div class="proj-section" id="proj-arc-house">
+    <a href="index.html#work" class="back-link">← Back to all work</a>
+    <div class="proj-intro-header">
+      <span class="badge badge-type">Residential Design</span>
+      <span class="badge badge-academic">Academic · 2026</span>
+    </div>
+    <h2 class="proj-section-title">Arc House</h2>
+    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.25rem; letter-spacing:0.04em;">Residential · Digital visualisation · Twinmotion · ArchiCAD</p>
+
+    <div class="proj-detail">
+      <div class="proj-body">
+
+        <!-- VIDEO -->
+        <span class="img-label">Animation walkthrough</span>
+        <div class="proj-video-wrap" style="margin-bottom:1.5rem; background:#000; border-radius:4px; overflow:hidden; position:relative; cursor:pointer;" id="arcHouseVideoWrap">
+          <video id="arcHouseVideo"
+                 src="images/arc-house/arc-house-animation.mp4"
+                 preload="metadata"
+                 style="width:100%; display:block; max-height:600px; object-fit:contain;"
+                 playsinline
+                 controls></video>
+        </div>
+
+        <!-- RENDER CAROUSEL -->
+        <span class="img-label" style="margin-top:0.5rem; display:block;">Renders</span>
+        <div class="render-carousel" id="arcHouseCarousel" style="position:relative; background:var(--bg-mid); border-radius:4px; overflow:hidden;">
+          <div class="render-carousel-viewer" id="arcHouseViewer" style="position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+            <img id="arcHouseMain" src="images/arc-house/arc-house-render-01.webp" alt="Arc House render 1" style="max-width:100%; max-height:100%; object-fit:contain; display:block; cursor:zoom-in;" data-gallery="arc-house" data-index="0">
+            <button class="render-arrow render-arrow-prev" id="arcHousePrev" aria-label="Previous render">&#8249;</button>
+            <button class="render-arrow render-arrow-next" id="arcHouseNext" aria-label="Next render">&#8250;</button>
+            <div class="render-counter" id="arcHouseCounter" style="position:absolute; bottom:1rem; right:1rem; background:rgba(0,0,0,0.5); color:#fff; font-size:11px; padding:3px 8px; border-radius:20px; letter-spacing:0.05em;">1 / 7</div>
+          </div>
+          <div class="render-thumbs" id="arcHouseThumbs" style="display:flex; gap:4px; padding:8px; overflow-x:auto; background:var(--bg-dark);">
+            <img src="images/arc-house/arc-house-render-01.webp" alt="Render 1" class="render-thumb active" data-idx="0" style="height:54px; width:auto; flex-shrink:0; cursor:pointer; opacity:1; border:2px solid var(--accent); object-fit:cover; border-radius:2px;">
+            <img src="images/arc-house/arc-house-render-02.webp" alt="Render 2" class="render-thumb" data-idx="1" style="height:54px; width:auto; flex-shrink:0; cursor:pointer; opacity:0.6; border:2px solid transparent; object-fit:cover; border-radius:2px;">
+            <img src="images/arc-house/arc-house-render-03.webp" alt="Render 3" class="render-thumb" data-idx="2" style="height:54px; width:auto; flex-shrink:0; cursor:pointer; opacity:0.6; border:2px solid transparent; object-fit:cover; border-radius:2px;">
+            <img src="images/arc-house/arc-house-render-04.webp" alt="Render 4" class="render-thumb" data-idx="3" style="height:54px; width:auto; flex-shrink:0; cursor:pointer; opacity:0.6; border:2px solid transparent; object-fit:cover; border-radius:2px;">
+            <img src="images/arc-house/arc-house-render-05.webp" alt="Render 5" class="render-thumb" data-idx="4" style="height:54px; width:auto; flex-shrink:0; cursor:pointer; opacity:0.6; border:2px solid transparent; object-fit:cover; border-radius:2px;">
+            <img src="images/arc-house/arc-house-render-06.webp" alt="Render 6" class="render-thumb" data-idx="5" style="height:54px; width:auto; flex-shrink:0; cursor:pointer; opacity:0.6; border:2px solid transparent; object-fit:cover; border-radius:2px;">
+            <img src="images/arc-house/arc-house-render-07.webp" alt="Render 7" class="render-thumb" data-idx="6" style="height:54px; width:auto; flex-shrink:0; cursor:pointer; opacity:0.6; border:2px solid transparent; object-fit:cover; border-radius:2px;">
+          </div>
+        </div>
+
+        <p style="margin-top:1.5rem;">A contemporary residential design built around a sweeping arc form — developed through the full digital production pipeline from ArchiCAD model through to Twinmotion animation. The project demonstrates integrated BIM-to-visualisation workflow, with the animation and renders produced as the primary deliverable for assessment.</p>
+
+        <h4 class="h4-serif-bold">Key outcomes</h4>
+        <ul class="outcomes-list">
+          <li>Developed a resolved residential design using an arc form as the primary architectural gesture</li>
+          <li>Produced a full Twinmotion animation walkthrough from an ArchiCAD BIM model</li>
+          <li>Delivered a suite of high-quality exterior and interior renders demonstrating spatial and material intent</li>
+          <li>Demonstrated an integrated BIM-to-visualisation workflow across ArchiCAD and Twinmotion</li>
+        </ul>
+
+      </div>
+
+      <div class="proj-sidebar">
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Year</div><div class="proj-sidebar-value">2026</div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Type</div><div class="proj-sidebar-value">Residential — Digital Visualisation</div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Software</div><div class="proj-sidebar-value">ArchiCAD · Twinmotion</div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Deliverables</div><div class="proj-sidebar-value">Animation walkthrough · 7 renders</div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Tags</div><div class="proj-tags-row">
+          <span class="tag">Residential</span>
+          <span class="tag">Twinmotion</span>
+          <span class="tag">ArchiCAD</span>
+          <span class="tag">Animation</span>
+          <span class="tag">Visualisation</span>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="proj-divider">
+
+  <!-- ============================================================ -->
+  <!-- 08  DUNE WELLNESS CENTRE — AT4.2                             -->
+  <!-- ============================================================ -->
+  <div class="proj-section" id="proj-wellness-dev">
+    <a href="index.html#work" class="back-link">← Back to all work</a>
+    <div class="proj-intro-header">
+      <span class="badge badge-type">Commercial Design</span>
+      <span class="badge badge-academic">Academic · 2026</span>
+    </div>
+    <h2 class="proj-section-title">Dune Wellness Centre — AT4.2</h2>
+    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.25rem; letter-spacing:0.04em;">Commercial · Digital visualisation · Twinmotion · ArchiCAD</p>
+
+    <div class="proj-detail">
+      <div class="proj-body">
+
+        <!-- VIDEO -->
+        <span class="img-label">Animation walkthrough</span>
+        <div class="proj-video-wrap" style="margin-bottom:1.5rem; background:#000; border-radius:4px; overflow:hidden; position:relative; cursor:pointer;" id="wellnessDevVideoWrap">
+          <video id="wellnessDevVideo"
+                 src="images/wellness-dev/wellness-dev-animation.mp4"
+                 preload="metadata"
+                 style="width:100%; display:block; max-height:600px; object-fit:contain;"
+                 playsinline
+                 controls></video>
+        </div>
+
+        <!-- RENDER CAROUSEL — placeholders -->
+        <span class="img-label" style="margin-top:0.5rem; display:block;">Renders</span>
+        <div class="render-carousel" id="wellnessDevCarousel" style="position:relative; background:var(--bg-mid); border-radius:4px; overflow:hidden;">
+          <div class="render-carousel-viewer" id="wellnessDevViewer" style="position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+            <img id="wellnessDevMain" src="images/wellness-dev/wellness-dev-render-01.webp" alt="Dune Wellness render 1" style="max-width:100%; max-height:100%; object-fit:contain; display:block; cursor:zoom-in;" data-gallery="wellness-dev" data-index="0">
+            <button class="render-arrow render-arrow-prev" id="wellnessDevPrev" aria-label="Previous render">&#8249;</button>
+            <button class="render-arrow render-arrow-next" id="wellnessDevNext" aria-label="Next render">&#8250;</button>
+            <div class="render-counter" id="wellnessDevCounter" style="position:absolute; bottom:1rem; right:1rem; background:rgba(0,0,0,0.5); color:#fff; font-size:11px; padding:3px 8px; border-radius:20px; letter-spacing:0.05em;">1 / 4</div>
+          </div>
+          <div class="render-thumbs" id="wellnessDevThumbs" style="display:flex; gap:4px; padding:8px; overflow-x:auto; background:var(--bg-dark);">
+            <img src="images/wellness-dev/wellness-dev-render-01.webp" alt="Render 1" class="render-thumb active" data-idx="0" style="height:54px; width:auto; flex-shrink:0; cursor:pointer; opacity:1; border:2px solid var(--accent); object-fit:cover; border-radius:2px;">
+            <img src="images/wellness-dev/wellness-dev-render-02.webp" alt="Render 2" class="render-thumb" data-idx="1" style="height:54px; width:auto; flex-shrink:0; cursor:pointer; opacity:0.6; border:2px solid transparent; object-fit:cover; border-radius:2px;">
+            <img src="images/wellness-dev/wellness-dev-render-03.webp" alt="Render 3" class="render-thumb" data-idx="2" style="height:54px; width:auto; flex-shrink:0; cursor:pointer; opacity:0.6; border:2px solid transparent; object-fit:cover; border-radius:2px;">
+            <img src="images/wellness-dev/wellness-dev-render-04.webp" alt="Render 4" class="render-thumb" data-idx="3" style="height:54px; width:auto; flex-shrink:0; cursor:pointer; opacity:0.6; border:2px solid transparent; object-fit:cover; border-radius:2px;">
+          </div>
+        </div>
+
+        <p style="margin-top:1.5rem;">A developed visualisation of the Dune Wellness Centre — building on the AT3.2 BIM model with a full Twinmotion production, producing an animated walkthrough and rendered stills that communicate the spatial and material intent of the design. The project demonstrates the complete journey from resolved BIM documentation through to presentation-ready digital visualisation.</p>
+
+        <h4 class="h4-serif-bold">Key outcomes</h4>
+        <ul class="outcomes-list">
+          <li>Developed the AT3.2 ArchiCAD model into a full Twinmotion scene with materials, lighting and environment</li>
+          <li>Produced an animated walkthrough communicating the spatial sequence of the wellness centre</li>
+          <li>Delivered a suite of high-quality renders demonstrating interior and exterior spatial quality</li>
+          <li>Demonstrated a complete BIM-to-visualisation pipeline for a commercial project</li>
+        </ul>
+
+      </div>
+
+      <div class="proj-sidebar">
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Year</div><div class="proj-sidebar-value">2026</div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Type</div><div class="proj-sidebar-value">Commercial — Digital Visualisation</div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Software</div><div class="proj-sidebar-value">ArchiCAD · Twinmotion</div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Deliverables</div><div class="proj-sidebar-value">Animation walkthrough · Renders</div></div>
+        <div class="proj-sidebar-row"><div class="proj-sidebar-label">Tags</div><div class="proj-tags-row">
+          <span class="tag">Commercial</span>
+          <span class="tag">Twinmotion</span>
+          <span class="tag">ArchiCAD</span>
+          <span class="tag">Animation</span>
+          <span class="tag">Visualisation</span>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- QBIM OBJECT PANEL -->
@@ -1091,7 +1189,7 @@
       <hr style="border:none;border-top:0.5px solid var(--border);margin:0;">
       <div>
         <span style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.5rem;display:block;">Dimensions</span>
-        <div style="display:grid;grid-template-columns:auto 1fr;gap:0.35rem 1rem;align-items:baseline;" id="qbimDims"></div></div>
+        <div style="display:grid;grid-template-columns:auto 1fr;gap:0.35rem 1rem;align-items:baseline;" id="qbimDims"></div>
       </div>
     </div>
   </div>
@@ -1101,13 +1199,7 @@
 <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
 
 <div class="lightbox" id="lightbox">
-  <div class="lightbox-hotzone-close" id="lbHotzoneClose"></div>
-  <div class="lightbox-hotzone-bottom" id="lbHotzoneBottom"></div>
   <button class="lightbox-close" id="lbClose">✕</button>
-  <div class="lb-zoom-controls" id="lbZoomControls">
-    <button class="lb-zoom-btn" id="lbZoomIn" aria-label="Zoom in">+</button>
-    <button class="lb-zoom-btn" id="lbZoomOut" aria-label="Zoom out">−</button>
-  </div>
   <!-- Main content area: image + optional legend side by side -->
   <div class="lightbox-inner">
     <div class="lightbox-img-wrap" id="lbImgWrap">
@@ -1117,22 +1209,22 @@
     <div class="lightbox-legend" id="lbLegend">
       <div class="lb-legend-title">Legend</div>
       <div class="lb-legend-grid">
-        <span class="lb-legend-item"><span class="lb-legend-num">1</span><span class="lb-legend-name">Reception</span></span>
-        <span class="lb-legend-item"><span class="lb-legend-num">2</span><span class="lb-legend-name">Retail Display</span></span>
-        <span class="lb-legend-item"><span class="lb-legend-num">3</span><span class="lb-legend-name">Sauna</span></span>
-        <span class="lb-legend-item"><span class="lb-legend-num">4</span><span class="lb-legend-name">Steam Room</span></span>
-        <span class="lb-legend-item"><span class="lb-legend-num">5</span><span class="lb-legend-name">Lift</span></span>
-        <span class="lb-legend-item"><span class="lb-legend-num">6</span><span class="lb-legend-name">Showers</span></span>
-        <span class="lb-legend-item"><span class="lb-legend-num">7</span><span class="lb-legend-name">Bathroom</span></span>
-        <span class="lb-legend-item"><span class="lb-legend-num">8</span><span class="lb-legend-name">Mineral Pool</span></span>
-        <span class="lb-legend-item"><span class="lb-legend-num">9</span><span class="lb-legend-name">Garden</span></span>
-        <span class="lb-legend-item"><span class="lb-legend-num">10</span><span class="lb-legend-name">Cold Plunge</span></span>
-        <span class="lb-legend-item"><span class="lb-legend-num">11</span><span class="lb-legend-name">Refreshment Bar</span></span>
-        <span class="lb-legend-item"><span class="lb-legend-num">12</span><span class="lb-legend-name">Bathroom</span></span>
-        <span class="lb-legend-item"><span class="lb-legend-num">13</span><span class="lb-legend-name">Lounge</span></span>
-        <span class="lb-legend-item"><span class="lb-legend-num">14</span><span class="lb-legend-name">Studio</span></span>
-        <span class="lb-legend-item"><span class="lb-legend-num">15</span><span class="lb-legend-name">Laundry / Storage</span></span>
-        <span class="lb-legend-item"><span class="lb-legend-num">16</span><span class="lb-legend-name">Treatment Room</span></span>
+        <span class="lb-legend-num">1</span><span class="lb-legend-name">Reception</span>
+        <span class="lb-legend-num">2</span><span class="lb-legend-name">Retail Display</span>
+        <span class="lb-legend-num">3</span><span class="lb-legend-name">Sauna</span>
+        <span class="lb-legend-num">4</span><span class="lb-legend-name">Steam Room</span>
+        <span class="lb-legend-num">5</span><span class="lb-legend-name">Lift</span>
+        <span class="lb-legend-num">6</span><span class="lb-legend-name">Showers</span>
+        <span class="lb-legend-num">7</span><span class="lb-legend-name">Bathroom</span>
+        <span class="lb-legend-num">8</span><span class="lb-legend-name">Mineral Pool</span>
+        <span class="lb-legend-num">9</span><span class="lb-legend-name">Garden</span>
+        <span class="lb-legend-num">10</span><span class="lb-legend-name">Cold Plunge</span>
+        <span class="lb-legend-num">11</span><span class="lb-legend-name">Refreshment Bar</span>
+        <span class="lb-legend-num">12</span><span class="lb-legend-name">Bathroom</span>
+        <span class="lb-legend-num">13</span><span class="lb-legend-name">Lounge</span>
+        <span class="lb-legend-num">14</span><span class="lb-legend-name">Studio</span>
+        <span class="lb-legend-num">15</span><span class="lb-legend-name">Laundry / Storage</span>
+        <span class="lb-legend-num">16</span><span class="lb-legend-name">Treatment Room</span>
       </div>
     </div>
   </div>
@@ -1146,7 +1238,12 @@
 
 <footer>
   <a href="index.html" class="footer-logo">Isabella Heath</a>
-  <ul class="footer-links"><li><a href="index.html#contact">Contact</a></li></ul>
+  <ul class="footer-links">
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="qualifications.html">Qualifications</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
   <span class="footer-text">22627VIC — Advanced Diploma of Building Design (Architectural) · Holmesglen</span>
 </footer>
 
@@ -1159,87 +1256,24 @@ const devSrcs = [
   'images/wellness/30-dune-03.webp','images/wellness/30-dune-04.webp',
   'images/wellness/30-dune-05.webp','images/wellness/30-dune-06.webp'
 ];
-// ============================================================
-// JOURNAL ZOOM + PAN — shared factory, used by both viewers
-// ============================================================
-// Shared drag state — only one viewer active at a time
-let _jzActive = null;
-
-function makeJournalZoom(fsEl, spreadEl, zoomInBtn, zoomOutBtn, origin) {
-  const ZOOM_MIN = 0.4, ZOOM_MAX = 4, ZOOM_STEP = 0.3;
-  let scale = 1, panX = 0, panY = 0;
-  let isDragging = false, justDragged = false;
-  let dragStartX = 0, dragStartY = 0, dragPanX = 0, dragPanY = 0;
-
-  function applyTransform(animated) {
-    if (!spreadEl) return;
-    spreadEl.style.transition = animated ? 'transform 0.2s ease' : 'none';
-    spreadEl.style.transform = `scale(${scale}) translate(${panX / scale}px, ${panY / scale}px)`;
-    spreadEl.style.transformOrigin = origin || 'center center';
-    spreadEl.style.cursor = isDragging ? 'grabbing' : (scale > 1 ? 'grab' : 'default');
-    if (zoomInBtn)  zoomInBtn.disabled  = scale >= ZOOM_MAX;
-    if (zoomOutBtn) zoomOutBtn.disabled = scale <= ZOOM_MIN;
-  }
-
-  function resetZoom() { scale = 1; panX = 0; panY = 0; isDragging = false; justDragged = false; applyTransform(false); }
-
-  if (zoomInBtn)  zoomInBtn.addEventListener('click',  e => { e.stopPropagation(); scale = Math.min(ZOOM_MAX, +(scale + ZOOM_STEP).toFixed(1)); applyTransform(true); });
-  if (zoomOutBtn) zoomOutBtn.addEventListener('click', e => { e.stopPropagation(); scale = Math.max(ZOOM_MIN, +(scale - ZOOM_STEP).toFixed(1)); if (scale <= 1) { panX = 0; panY = 0; } applyTransform(true); });
-
-  if (spreadEl) {
-    spreadEl.addEventListener('mousedown', e => {
-      if (scale <= 1) return;
-      e.preventDefault(); e.stopPropagation();
-      _jzActive = instance;
-      isDragging = true; justDragged = false;
-      dragStartX = e.clientX; dragStartY = e.clientY;
-      dragPanX = panX; dragPanY = panY;
-      applyTransform(false);
-    });
-    spreadEl.addEventListener('click', e => { if (justDragged) { justDragged = false; e.stopPropagation(); } });
-
-    let tStartX = 0, tStartY = 0, tPanX = 0, tPanY = 0;
-    spreadEl.addEventListener('touchstart', e => {
-      tStartX = e.touches[0].clientX; tStartY = e.touches[0].clientY;
-      tPanX = panX; tPanY = panY;
-    }, { passive: true });
-    spreadEl.addEventListener('touchmove', e => {
-      if (scale <= 1) return;
-      panX = tPanX + (e.touches[0].clientX - tStartX);
-      panY = tPanY + (e.touches[0].clientY - tStartY);
-      applyTransform(false);
-    }, { passive: true });
-  }
-
-  const instance = {
-    resetZoom, applyTransform,
-    onMouseMove(e) { if (!isDragging) return; panX = dragPanX + (e.clientX - dragStartX); panY = dragPanY + (e.clientY - dragStartY); justDragged = true; applyTransform(false); },
-    onMouseUp()    { if (!isDragging) return; isDragging = false; applyTransform(false); },
-    onMouseLeave() { if (!isDragging) return; isDragging = false; applyTransform(false); }
-  };
-  return instance;
-}
-
-// Single set of window listeners — delegate to whichever journal viewer is active
-window.addEventListener('mousemove', e => { if (_jzActive) _jzActive.onMouseMove(e); });
-window.addEventListener('mouseup',   () => { if (_jzActive) { _jzActive.onMouseUp(); _jzActive = null; } });
-window.addEventListener('mouseleave',() => { if (_jzActive) { _jzActive.onMouseLeave(); _jzActive = null; } });
-
-
-const DEV_TOTAL   = devSrcs.length;
-const DEV_SPREADS = DEV_TOTAL; // single page per step
+const DEV_TOTAL  = devSrcs.length;
+const DEV_SPREADS = Math.ceil(DEV_TOTAL / 2);
 let devSpread    = 0;
 let devFsSpread  = 0;
 
 function devSpreadLabel(s) {
-  return 'Page ' + (s + 1) + ' of ' + DEV_TOTAL;
+  const l = s * 2 + 1, r = s * 2 + 2;
+  return r > DEV_TOTAL ? 'Page ' + l + ' of ' + DEV_TOTAL : 'Pages ' + l + '–' + r + ' of ' + DEV_TOTAL;
 }
 
 function renderDevSpread(s, L, R, ctr, prev, next) {
-  // Single page only — always fill left slot, always clear right
-  L.innerHTML = ''; if (R) { R.innerHTML = ''; R.style.display = 'none'; }
+  L.innerHTML = ''; R.innerHTML = '';
   L.style.background = '';
-  if (s < DEV_TOTAL) { const img = new Image(); img.src = devSrcs[s]; img.alt = 'Page ' + (s+1); img.style.cssText = 'width:100%;height:100%;object-fit:contain;display:block;'; L.appendChild(img); }
+  R.style.background = '';
+  const li = s * 2, ri = s * 2 + 1;
+  if (li < DEV_TOTAL) { const img = new Image(); img.src = devSrcs[li]; img.alt = 'Page ' + (li+1); img.style.cssText = 'width:100%;height:100%;object-fit:contain;display:block;'; L.appendChild(img); }
+  if (ri < DEV_TOTAL) { const img = new Image(); img.src = devSrcs[ri]; img.alt = 'Page ' + (ri+1); img.style.cssText = 'width:100%;height:100%;object-fit:contain;display:block;'; R.appendChild(img); }
+  else { R.style.background = 'var(--bg-mid)'; }
   ctr.textContent = devSpreadLabel(s);
   prev.disabled = s === 0;
   next.disabled = s === DEV_SPREADS - 1;
@@ -1259,25 +1293,6 @@ const devFsN   = document.getElementById('devFsNext');
 const devFsCtr = document.getElementById('devFsCounter');
 const devClose = document.getElementById('devClose');
 
-// Wire zoom+pan for dev journal fullscreen
-const devFsSpreadEl = devFs ? devFs.querySelector('.journal-fullscreen-spread') : null;
-const devZoom = makeJournalZoom(
-  devFs,
-  devFsSpreadEl,
-  document.getElementById('devZoomIn'),
-  document.getElementById('devZoomOut')
-);
-
-// Wire zoom for dev journal embedded view (uses the spread element in the page, not fullscreen)
-const devEmbedSpread = document.getElementById('devLeft'); // clip zoom to the slot, not the outer spread
-const devEmbedZoom = makeJournalZoom(
-  (document.getElementById('devSpread') ? document.getElementById('devSpread').closest('.journal-viewer') : null) || document.body,
-  devEmbedSpread,
-  document.getElementById('devEmbedZoomIn'),
-  document.getElementById('devEmbedZoomOut'),
-  'top center'
-);
-
 if (devL && DEV_TOTAL > 0) {
   function initDev() { renderDevSpread(devSpread, devL, devR, devCtr, devPrev, devNext); }
   if (document.readyState !== 'loading') initDev(); else document.addEventListener('DOMContentLoaded', initDev);
@@ -1289,42 +1304,19 @@ if (devL && DEV_TOTAL > 0) {
     devFsSpread = devSpread;
     renderDevSpread(devFsSpread, devFsL, devFsR, devFsCtr, devFsP, devFsN);
     devFs.classList.add('open'); document.body.style.overflow = 'hidden';
-    devZoom.resetZoom();
   });
   devFsP.addEventListener('click', () => { if (devFsSpread > 0) { devFsSpread--; renderDevSpread(devFsSpread, devFsL, devFsR, devFsCtr, devFsP, devFsN); } });
   devFsN.addEventListener('click', () => { if (devFsSpread < DEV_SPREADS - 1) { devFsSpread++; renderDevSpread(devFsSpread, devFsL, devFsR, devFsCtr, devFsP, devFsN); } });
 
-  function closeDevFs() { devFs.classList.remove('open'); document.body.style.overflow = ''; devZoom.resetZoom(); devSpread = devFsSpread; renderDevSpread(devSpread, devL, devR, devCtr, devPrev, devNext); }
+  function closeDevFs() { devFs.classList.remove('open'); document.body.style.overflow = ''; devSpread = devFsSpread; renderDevSpread(devSpread, devL, devR, devCtr, devPrev, devNext); }
   devClose.addEventListener('click', closeDevFs);
-  devClose.addEventListener('touchend', e => { e.preventDefault(); e.stopPropagation(); closeDevFs(); }, { passive: false });
   devFs.addEventListener('click', e => { if (e.target === devFs) closeDevFs(); });
-  devFs.addEventListener('touchend', e => { if (e.target === devFs) closeDevFs(); }, { passive: true });
-  // Double-tap anywhere on the spread to close on mobile
-  let devLastTap = 0;
-  if (devFsSpreadEl) {
-    devFsSpreadEl.addEventListener('touchend', () => {
-      const now = Date.now();
-      if (now - devLastTap < 350) closeDevFs();
-      devLastTap = now;
-    }, { passive: true });
-  }
-
-  // Hot zones
-  const devHotzoneClose  = document.getElementById('devHotzoneClose');
-  const devHotzoneBottom = document.getElementById('devHotzoneBottom');
-  const devFsControls    = document.getElementById('devFsControls');
-  if (devHotzoneClose) {
-    devHotzoneClose.addEventListener('mouseenter', () => devClose.classList.add('zone-active'));
-    devHotzoneClose.addEventListener('mouseleave', () => devClose.classList.remove('zone-active'));
-  }
-  if (devHotzoneBottom && devFsControls) {
-    devHotzoneBottom.addEventListener('mouseenter', () => devFsControls.classList.add('zone-active'));
-    devHotzoneBottom.addEventListener('mouseleave', () => devFsControls.classList.remove('zone-active'));
-  }
 }
 const unitsToggle = document.getElementById('unitsToggle');
 const unitsGrid   = document.getElementById('unitsGrid');
-// Default closed — user clicks to open
+// Default open
+unitsToggle.classList.add('open');
+unitsGrid.classList.add('open');
 unitsToggle.addEventListener('click', () => {
   const open = unitsGrid.classList.toggle('open');
   unitsToggle.classList.toggle('open', open);
@@ -1360,6 +1352,7 @@ document.querySelectorAll('[data-gallery]').forEach(img => {
 
 let lbGallery = null;
 let lbIndex   = 0;
+let lbZoomed  = false;
 
 const lightbox   = document.getElementById('lightbox');
 const lbImg      = document.getElementById('lbImg');
@@ -1376,7 +1369,8 @@ const lbActivity = makeAutoHide([lbControls, lbClose, lbLabel], 2500);
 function openLightbox(gallery, index) {
   lbGallery = gallery;
   lbIndex   = index;
-  resetZoom();
+  lbZoomed  = false;
+  lbImg.classList.remove('zoomed');
   showLbImage();
   lightbox.classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -1397,22 +1391,22 @@ function showLbImage() {
   lbPrev.disabled = false;
   lbNext.disabled = false;
   // Reset zoom on navigation
-  resetZoom();
+  lbZoomed = false;
+  lbImg.classList.remove('zoomed');
   applyTransform();
   // Show legend only for floor plan images
   if (lbGallery === LEGEND_GALLERY && LEGEND_INDICES.includes(lbIndex)) {
     lbLegend.classList.add('visible');
-    lightbox.classList.add('has-legend');
   } else {
     lbLegend.classList.remove('visible');
-    lightbox.classList.remove('has-legend');
   }
 }
 
 function closeLightbox() {
-  lightbox.classList.remove('open', 'has-legend');
+  lightbox.classList.remove('open');
   document.body.style.overflow = '';
-  resetZoom();
+  lbZoomed = false;
+  lbImg.classList.remove('zoomed');
   lbLegend.classList.remove('visible');
   applyTransform();
 }
@@ -1422,71 +1416,95 @@ document.querySelectorAll('[data-gallery]').forEach(img => {
   img.addEventListener('click', () => openLightbox(img.dataset.gallery, parseInt(img.dataset.index)));
 });
 
-// ── Zoom + pan system ──────────────────────────────────────────
-const lbZoomIn  = document.getElementById('lbZoomIn');
-const lbZoomOut = document.getElementById('lbZoomOut');
-const ZOOM_MIN = 1, ZOOM_MAX = 4, ZOOM_STEP = 0.5;
-let lbScale = 1, panX = 0, panY = 0;
+// Click image = toggle zoom (quick click), drag = pan when zoomed
+let isDragging   = false;
+let dragStartX   = 0;
+let dragStartY   = 0;
+let panX         = 0;
+let panY         = 0;
+let mouseDownTime = 0;
+const DRAG_THRESHOLD = 5; // px — below this = click, above = drag
 
-function applyTransform(animated) {
-  lbImg.style.transition = animated ? 'transform 0.2s ease' : 'none';
-  lbImg.style.transform = `scale(${lbScale}) translate(${panX / lbScale}px, ${panY / lbScale}px)`;
-  lbImg.style.cursor = lbScale > 1 ? 'grab' : 'default';
-  if (lbZoomIn)  lbZoomIn.disabled  = lbScale >= ZOOM_MAX;
-  if (lbZoomOut) lbZoomOut.disabled = lbScale <= ZOOM_MIN;
+function applyTransform() {
+  if (lbZoomed) {
+    lbImg.style.transform = 'scale(2.2) translate(' + (panX / 2.2) + 'px, ' + (panY / 2.2) + 'px)';
+  } else {
+    lbImg.style.transform = 'translate(0,0) scale(1)';
+    panX = 0; panY = 0;
+  }
 }
 
-function resetZoom() { lbScale = 1; panX = 0; panY = 0; applyTransform(false); }
-
-if (lbZoomIn)  lbZoomIn.addEventListener('click',  e => { e.stopPropagation(); lbScale = Math.min(ZOOM_MAX, +(lbScale + ZOOM_STEP).toFixed(1)); applyTransform(true); });
-if (lbZoomOut) lbZoomOut.addEventListener('click', e => { e.stopPropagation(); lbScale = Math.max(ZOOM_MIN, +(lbScale - ZOOM_STEP).toFixed(1)); if (lbScale === 1) { panX = 0; panY = 0; } applyTransform(true); });
-
-// Mouse drag to pan
-let isDragging = false, dragStartX = 0, dragStartY = 0, dragPanX = 0, dragPanY = 0;
-let lbJustDragged = false;
 lbImg.addEventListener('mousedown', e => {
-  if (lbScale <= 1) return;
-  e.preventDefault(); e.stopPropagation();
-  isDragging = true; lbJustDragged = false;
-  dragStartX = e.clientX; dragStartY = e.clientY;
-  dragPanX = panX; dragPanY = panY;
-  lbImg.style.cursor = 'grabbing';
-});
-window.addEventListener('mousemove', e => {
-  if (!isDragging) return;
-  panX = dragPanX + (e.clientX - dragStartX);
-  panY = dragPanY + (e.clientY - dragStartY);
-  applyTransform(false);
-  lbJustDragged = true;
-});
-window.addEventListener('mouseup', () => {
-  if (!isDragging) return;
+  e.preventDefault();
+  mouseDownTime = Date.now();
   isDragging = false;
-  lbImg.style.cursor = lbScale > 1 ? 'grab' : 'default';
+  dragStartX = e.clientX - panX;
+  dragStartY = e.clientY - panY;
 });
-window.addEventListener('mouseleave', () => { isDragging = false; });
 
-// Touch drag to pan
-let touchStartX = 0, touchStartY = 0, touchPanX = 0, touchPanY = 0, touchMoved = false;
+window.addEventListener('mousemove', e => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.buttons !== 1) return;
+  const dx = e.clientX - dragStartX;
+  const dy = e.clientY - dragStartY;
+  if (!isDragging && (Math.abs(dx - panX) > DRAG_THRESHOLD || Math.abs(dy - panY) > DRAG_THRESHOLD)) {
+    isDragging = true;
+  }
+  if (isDragging && lbZoomed) {
+    panX = dx;
+    panY = dy;
+    applyTransform();
+    lbActivity();
+  }
+});
+
+window.addEventListener('mouseup', e => {
+  if (!lightbox.classList.contains('open')) return;
+  const elapsed = Date.now() - mouseDownTime;
+  if (!isDragging && elapsed < 300 && e.target === lbImg) {
+    // Quick click = toggle zoom
+    lbZoomed = !lbZoomed;
+    if (!lbZoomed) { panX = 0; panY = 0; }
+    lbImg.classList.toggle('zoomed', lbZoomed);
+    applyTransform();
+    lbActivity();
+  }
+  isDragging = false;
+});
+
+// Touch support — pinch not needed, just drag to pan
+let touchStartX = 0;
+let touchStartY = 0;
+let touchMoved  = false;
+
 lbImg.addEventListener('touchstart', e => {
-  touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY;
-  touchPanX = panX; touchPanY = panY; touchMoved = false;
+  touchStartX = e.touches[0].clientX - panX;
+  touchStartY = e.touches[0].clientY - panY;
+  touchMoved  = false;
 }, { passive: true });
-lbImg.addEventListener('touchmove', e => {
-  if (lbScale <= 1) return;
-  touchMoved = true;
-  panX = touchPanX + (e.touches[0].clientX - touchStartX);
-  panY = touchPanY + (e.touches[0].clientY - touchStartY);
-  applyTransform(false);
-}, { passive: true });
-lbImg.addEventListener('touchend', () => { /* no toggle zoom on touch */ });
 
-// Click background to close (not image)
+lbImg.addEventListener('touchmove', e => {
+  if (!lbZoomed) return;
+  touchMoved = true;
+  panX = e.touches[0].clientX - touchStartX;
+  panY = e.touches[0].clientY - touchStartY;
+  applyTransform();
+  lbActivity();
+}, { passive: true });
+
+lbImg.addEventListener('touchend', e => {
+  if (!touchMoved) {
+    lbZoomed = !lbZoomed;
+    if (!lbZoomed) { panX = 0; panY = 0; }
+    lbImg.classList.toggle('zoomed', lbZoomed);
+    applyTransform();
+    lbActivity();
+  }
+});
+
+// Click dark background or wrap = close
 lightbox.addEventListener('click', e => {
-  // Don't close if we just finished a drag
-  if (lbJustDragged) { lbJustDragged = false; return; }
-  const isInteractive = e.target.closest('button, .lightbox-legend, img, .lightbox-controls, .lb-zoom-controls, .lightbox-hotzone-close, .lightbox-hotzone-bottom');
-  if (!isInteractive) closeLightbox();
+  if (e.target === lightbox || e.target === lbWrap) closeLightbox();
 });
 
 lbClose.addEventListener('click', closeLightbox);
@@ -1507,18 +1525,6 @@ lbNext.addEventListener('click', e => {
 // Mouse move / touch = show controls
 lightbox.addEventListener('mousemove', lbActivity);
 lightbox.addEventListener('touchstart', lbActivity);
-
-// Hot zones — hovering near where a control actually sits reveals just that control
-const lbHotzoneClose  = document.getElementById('lbHotzoneClose');
-const lbHotzoneBottom = document.getElementById('lbHotzoneBottom');
-if (lbHotzoneClose) {
-  lbHotzoneClose.addEventListener('mouseenter', () => lbClose.classList.add('zone-active'));
-  lbHotzoneClose.addEventListener('mouseleave', () => lbClose.classList.remove('zone-active'));
-}
-if (lbHotzoneBottom) {
-  lbHotzoneBottom.addEventListener('mouseenter', () => lbControls.classList.add('zone-active'));
-  lbHotzoneBottom.addEventListener('mouseleave', () => lbControls.classList.remove('zone-active'));
-}
 
 document.addEventListener('keydown', e => {
   if (!lightbox.classList.contains('open')) return;
@@ -1608,15 +1614,6 @@ const fsActivity  = makeAutoHide(
   2500
 );
 
-// Wire zoom+pan for townhouse journal fullscreen
-const jFsSpreadEl = fs ? fs.querySelector('.journal-fullscreen-spread') : null;
-const jZoom = makeJournalZoom(
-  fs,
-  jFsSpreadEl,
-  document.getElementById('journalZoomIn'),
-  document.getElementById('journalZoomOut')
-);
-
 function initJournal() {
   renderSpread(spread, spreadLeft, spreadRight, counter, prevBtn, nextBtn);
 }
@@ -1635,37 +1632,22 @@ fullBtn.addEventListener('click', () => {
   renderSpread(fsSpread, fsLeft, fsRight, fsCounter, fsPrev, fsNext);
   fs.classList.add('open');
   document.body.style.overflow = 'hidden';
-  jZoom.resetZoom();
   fsActivity();
 });
 
 fsPrev.addEventListener('click', () => {
-  if (fsSpread > 0) { fsSpread--; renderSpread(fsSpread, fsLeft, fsRight, fsCounter, fsPrev, fsNext); jZoom.resetZoom(); fsActivity(); }
+  if (fsSpread > 0) { fsSpread--; renderSpread(fsSpread, fsLeft, fsRight, fsCounter, fsPrev, fsNext); fsActivity(); }
 });
 fsNext.addEventListener('click', () => {
-  if (fsSpread < SPREADS - 1) { fsSpread++; renderSpread(fsSpread, fsLeft, fsRight, fsCounter, fsPrev, fsNext); jZoom.resetZoom(); fsActivity(); }
+  if (fsSpread < SPREADS - 1) { fsSpread++; renderSpread(fsSpread, fsLeft, fsRight, fsCounter, fsPrev, fsNext); fsActivity(); }
 });
 
 fs.addEventListener('mousemove', fsActivity);
 fs.addEventListener('touchstart', fsActivity);
 
-// Hot zones
-const journalHotzoneClose  = document.getElementById('journalHotzoneClose');
-const journalHotzoneBottom = document.getElementById('journalHotzoneBottom');
-const journalCloseBtn      = document.getElementById('journalClose');
-if (journalHotzoneClose) {
-  journalHotzoneClose.addEventListener('mouseenter', () => journalCloseBtn.classList.add('zone-active'));
-  journalHotzoneClose.addEventListener('mouseleave', () => journalCloseBtn.classList.remove('zone-active'));
-}
-if (journalHotzoneBottom) {
-  journalHotzoneBottom.addEventListener('mouseenter', () => fsControls.classList.add('zone-active'));
-  journalHotzoneBottom.addEventListener('mouseleave', () => fsControls.classList.remove('zone-active'));
-}
-
 function closeFs() {
   fs.classList.remove('open');
   document.body.style.overflow = '';
-  jZoom.resetZoom();
   spread = fsSpread;
   renderSpread(spread, spreadLeft, spreadRight, counter, prevBtn, nextBtn);
 }
@@ -1687,14 +1669,12 @@ const qbimObjects = {
     project: 'Dune Wellness Centre',
     desc:    'A custom curved reception desk modelled in ArchiCAD to suit the organic, flowing spatial language of the Dune Wellness Centre. The curved front face and integrated shelf could not be achieved with standard library components, so the object was built from scratch.',
     dims: [
-      { label: 'Length',   value: '3032 mm' },
-      { label: 'Width',    value: '820 mm' },
-      { label: 'Height',   value: '1255 mm' },
       { label: 'Material', value: 'Thermolaminated panels and doors' }
     ],
     images: [
       { src: 'images/wellness/bim-01-context.webp',         alt: 'In context' },
       { src: 'images/wellness/bim-02-three-quarter-a.webp', alt: 'Three-quarter A' },
+      { src: 'images/wellness/bim-03-three-quarter-b.webp', alt: 'Three-quarter B' },
       { src: 'images/wellness/bim-04-front.webp',           alt: 'Front perspective' },
       { src: 'images/wellness/bim-05-detail.webp',          alt: 'Detail' }
     ]
@@ -1793,7 +1773,7 @@ document.querySelectorAll('.proj-section').forEach((section, i) => {
       <span class="proj-toggle-title">${title}</span>
       <span class="proj-toggle-type">${typeText}${acadText ? ' · ' + acadText : ''}</span>
     </div>
-    <span class="proj-toggle-arrow">▾</span>
+    <span class="proj-toggle-arrow">&#8964;</span>
   `;
 
   // Move preceding hr inside section
@@ -1933,7 +1913,34 @@ if (track && prevBtn2 && nextBtn2) {
 // ============================================================
 // MOBILE NAV
 // ============================================================
+const hamburger    = document.getElementById('navHamburger');
+const mobileMenu   = document.getElementById('navMobileMenu');
+const workToggle   = document.getElementById('mobileWorkToggle');
+const workArrow    = document.getElementById('mobileWorkArrow');
+const workSub      = document.getElementById('mobileWorkSub');
 
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+
+// Work sub-menu toggle — arrow click opens sub, link click navigates
+workArrow.addEventListener('click', e => {
+  e.preventDefault();
+  e.stopPropagation();
+  workArrow.classList.toggle('open');
+  workSub.classList.toggle('open');
+});
+
+// Close menu when any link inside it is tapped
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    workArrow.classList.remove('open');
+    workSub.classList.remove('open');
+  });
+});
 
 // Close on outside tap
 document.addEventListener('click', e => {
@@ -1986,19 +1993,103 @@ window.addEventListener('hashchange', () => {
   const hashId = window.location.hash.replace('#', '');
   openProjectById(hashId);
 });
+
+// ============================================================
+// RENDER CAROUSELS (Arc House + Dune AT4.2)
+// ============================================================
+function initRenderCarousel(cfg) {
+  // cfg: { mainId, prevId, nextId, counterId, thumbsContainerId, galleryKey, total }
+  const mainImg   = document.getElementById(cfg.mainId);
+  const prevBtn   = document.getElementById(cfg.prevId);
+  const nextBtn   = document.getElementById(cfg.nextId);
+  const counter   = document.getElementById(cfg.counterId);
+  const thumbsCtr = document.getElementById(cfg.thumbsContainerId);
+  if (!mainImg || !prevBtn || !nextBtn) return;
+
+  const thumbs = thumbsCtr ? Array.from(thumbsCtr.querySelectorAll('.render-thumb')) : [];
+  let current = 0;
+
+  function setSlide(idx) {
+    current = idx;
+    const src = cfg.srcs[idx];
+    mainImg.src = src;
+    mainImg.alt = cfg.alts ? cfg.alts[idx] : `Render ${idx + 1}`;
+    mainImg.dataset.gallery = cfg.galleryKey;
+    mainImg.dataset.index   = idx;
+    if (counter) counter.textContent = `${idx + 1} / ${cfg.total}`;
+    thumbs.forEach((t, i) => {
+      t.style.opacity = i === idx ? '1' : '0.6';
+      t.style.border  = i === idx ? '2px solid var(--accent)' : '2px solid transparent';
+    });
+    prevBtn.disabled = idx === 0;
+    nextBtn.disabled = idx === cfg.total - 1;
+    // Register in lightbox galleries
+    if (!galleries[cfg.galleryKey]) galleries[cfg.galleryKey] = [];
+    // Ensure the clicked main image opens lightbox correctly
+  }
+
+  prevBtn.addEventListener('click', () => { if (current > 0) setSlide(current - 1); });
+  nextBtn.addEventListener('click', () => { if (current < cfg.total - 1) setSlide(current + 1); });
+
+  thumbs.forEach((t, i) => {
+    t.addEventListener('click', () => setSlide(i));
+  });
+
+  // Open lightbox on main image click
+  mainImg.addEventListener('click', () => {
+    // Build gallery on demand
+    if (!galleries[cfg.galleryKey] || galleries[cfg.galleryKey].length === 0) {
+      galleries[cfg.galleryKey] = cfg.srcs.map((s, i) => ({ src: s, alt: cfg.alts ? cfg.alts[i] : `Render ${i+1}` }));
+    }
+    openLightbox(cfg.galleryKey, current);
+  });
+
+  setSlide(0);
+}
+
+// Arc House — 7 renders
+initRenderCarousel({
+  mainId:           'arcHouseMain',
+  prevId:           'arcHousePrev',
+  nextId:           'arcHouseNext',
+  counterId:        'arcHouseCounter',
+  thumbsContainerId:'arcHouseThumbs',
+  galleryKey:       'arc-house',
+  total:            7,
+  srcs: [
+    'images/arc-house/arc-house-render-01.webp',
+    'images/arc-house/arc-house-render-02.webp',
+    'images/arc-house/arc-house-render-03.webp',
+    'images/arc-house/arc-house-render-04.webp',
+    'images/arc-house/arc-house-render-05.webp',
+    'images/arc-house/arc-house-render-06.webp',
+    'images/arc-house/arc-house-render-07.webp',
+  ],
+  alts: [
+    'Arc House render 1','Arc House render 2','Arc House render 3','Arc House render 4',
+    'Arc House render 5','Arc House render 6','Arc House render 7',
+  ]
+});
+
+// Dune AT4.2 — 4 placeholder renders (update total + srcs when images are ready)
+initRenderCarousel({
+  mainId:           'wellnessDevMain',
+  prevId:           'wellnessDevPrev',
+  nextId:           'wellnessDevNext',
+  counterId:        'wellnessDevCounter',
+  thumbsContainerId:'wellnessDevThumbs',
+  galleryKey:       'wellness-dev',
+  total:            4,
+  srcs: [
+    'images/wellness-dev/wellness-dev-render-01.webp',
+    'images/wellness-dev/wellness-dev-render-02.webp',
+    'images/wellness-dev/wellness-dev-render-03.webp',
+    'images/wellness-dev/wellness-dev-render-04.webp',
+  ],
+  alts: [
+    'Dune Wellness render 1','Dune Wellness render 2','Dune Wellness render 3','Dune Wellness render 4',
+  ]
+});
 </script>
-
-  </div>
-</div>
-
-
-
-<!-- MOBILE PILL NAV -->
-<div class="pill-nav" role="navigation" aria-label="Mobile navigation">
-  <a href="index.html" class="pill-btn"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/><polyline points="9,21 9,12 15,12 15,21"/></svg>Home</a>
-  <a href="qualifications.html" class="pill-btn pill-active"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>Academic<br>Works</a>
-  <a href="concept-works.html" class="pill-btn"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><circle cx="17.5" cy="17.5" r="3.5"/></svg>Concept<br>Works</a>
-  <a href="professional-works.html" class="pill-btn"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>Professional<br>Works</a>
-</div>
 </body>
 </html>
