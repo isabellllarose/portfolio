@@ -79,9 +79,10 @@
   .proj-intro-header { display: flex; gap: 0.5rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
   .proj-section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.15; color: var(--text-primary); margin-bottom: 0.25rem; }
   .proj-detail { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; align-items: start; margin-top: 2rem; }
+  .proj-body { min-width: 0; }
   .proj-body p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem; }
   .proj-body p:last-child { margin-bottom: 0; }
-  .proj-sidebar { display: flex; flex-direction: column; gap: 1.5px; background: var(--border); border: 0.5px solid var(--border); position: sticky; top: 80px; }
+  .proj-sidebar { display: flex; flex-direction: column; gap: 1.5px; background: var(--border); border: 0.5px solid var(--border); position: sticky; top: 80px; min-width: 0; }
   .proj-sidebar-row { background: var(--bg-card); padding: 1.1rem 1.25rem; }
   .proj-sidebar-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.3rem; }
   .proj-sidebar-value { font-size: 0.85rem; color: var(--text-primary); line-height: 1.5; }
@@ -1037,7 +1038,7 @@
 
         <!-- VIDEO -->
         <span class="img-label">Animation walkthrough</span>
-        <div class="proj-video-wrap" style="margin-bottom:1.5rem; background:#000; border-radius:4px; overflow:hidden; position:relative; cursor:pointer;" id="arcHouseVideoWrap">
+        <div class="proj-video-wrap" style="width:100%; margin-bottom:1.5rem; background:#000; border-radius:4px; overflow:hidden; position:relative; cursor:pointer;" id="arcHouseVideoWrap">
           <video id="arcHouseVideo"
                  src="images/arc-house/arc-house-animation.mp4"
                  preload="metadata"
@@ -1048,7 +1049,7 @@
 
         <!-- RENDER CAROUSEL -->
         <span class="img-label" style="margin-top:0.5rem; display:block;">Renders</span>
-        <div class="render-carousel" id="arcHouseCarousel" style="position:relative; background:var(--bg-mid); border-radius:4px; overflow:hidden;">
+        <div class="render-carousel" id="arcHouseCarousel" style="width:100%; position:relative; background:var(--bg-mid); border-radius:4px; overflow:hidden;">
           <div class="render-carousel-viewer" id="arcHouseViewer" style="position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; display:flex; align-items:center; justify-content:center;">
             <img id="arcHouseMain" src="images/arc-house/arc-house-render-01.webp" alt="Arc House render 1" style="max-width:100%; max-height:100%; object-fit:contain; display:block; cursor:zoom-in;" data-gallery="arc-house" data-index="0">
             <button class="render-arrow render-arrow-prev" id="arcHousePrev" aria-label="Previous render">&#8249;</button>
@@ -1113,7 +1114,7 @@
 
         <!-- VIDEO -->
         <span class="img-label">Animation walkthrough</span>
-        <div class="proj-video-wrap" style="margin-bottom:1.5rem; background:#000; border-radius:4px; overflow:hidden; position:relative; cursor:pointer;" id="wellnessDevVideoWrap">
+        <div class="proj-video-wrap" style="width:100%; margin-bottom:1.5rem; background:#000; border-radius:4px; overflow:hidden; position:relative; cursor:pointer;" id="wellnessDevVideoWrap">
           <video id="wellnessDevVideo"
                  src="images/wellness-dev/wellness-dev-animation.mp4"
                  preload="metadata"
@@ -1124,7 +1125,7 @@
 
         <!-- RENDER CAROUSEL — placeholders -->
         <span class="img-label" style="margin-top:0.5rem; display:block;">Renders</span>
-        <div class="render-carousel" id="wellnessDevCarousel" style="position:relative; background:var(--bg-mid); border-radius:4px; overflow:hidden;">
+        <div class="render-carousel" id="wellnessDevCarousel" style="width:100%; position:relative; background:var(--bg-mid); border-radius:4px; overflow:hidden;">
           <div class="render-carousel-viewer" id="wellnessDevViewer" style="position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; display:flex; align-items:center; justify-content:center;">
             <img id="wellnessDevMain" src="images/wellness-dev/wellness-dev-render-01.webp" alt="Dune Wellness render 1" style="max-width:100%; max-height:100%; object-fit:contain; display:block; cursor:zoom-in;" data-gallery="wellness-dev" data-index="0">
             <button class="render-arrow render-arrow-prev" id="wellnessDevPrev" aria-label="Previous render">&#8249;</button>
