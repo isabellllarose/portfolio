@@ -1050,11 +1050,12 @@
         <!-- RENDER CAROUSEL -->
         <span class="img-label" style="margin-top:0.5rem; display:block;">Renders</span>
         <div class="render-carousel" id="arcHouseCarousel" style="width:100%; position:relative; background:var(--bg-mid); border-radius:4px; overflow:hidden;">
-          <div class="render-carousel-viewer" id="arcHouseViewer" style="position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-            <img id="arcHouseMain" src="images/arc-house/arc-house-render-01.webp" alt="Arc House render 1" style="max-width:100%; max-height:100%; object-fit:contain; display:block; cursor:zoom-in;" data-gallery="arc-house" data-index="0">
+          <div class="render-carousel-viewer" id="arcHouseViewer" style="position:relative; width:100%; height:min(480px, 80vw); overflow:hidden; display:flex; align-items:center; justify-content:center; background:var(--bg-mid);">
+            <img id="arcHouseMain" src="images/arc-house/arc-house-render-01.webp" alt="Arc House render 1" style="max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; display:block; cursor:zoom-in;" data-gallery="arc-house" data-index="0">
             <button class="render-arrow render-arrow-prev" id="arcHousePrev" aria-label="Previous render">&#8249;</button>
             <button class="render-arrow render-arrow-next" id="arcHouseNext" aria-label="Next render">&#8250;</button>
             <div class="render-counter" id="arcHouseCounter" style="position:absolute; bottom:1rem; right:1rem; background:rgba(0,0,0,0.5); color:#fff; font-size:11px; padding:3px 8px; border-radius:20px; letter-spacing:0.05em;">1 / 7</div>
+            <button class="render-fs-btn" id="arcHouseFs" aria-label="View fullscreen" onclick="document.getElementById('arcHouseMain').click()" style="position:absolute; top:0.6rem; right:0.6rem; background:rgba(0,0,0,0.45); border:none; border-radius:4px; color:#fff; width:32px; height:32px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:14px; z-index:10;">⤢</button>
           </div>
           <div class="render-thumbs" id="arcHouseThumbs" style="display:flex; gap:4px; padding:8px; overflow-x:auto; background:var(--bg-dark);">
             <img src="images/arc-house/arc-house-render-01.webp" alt="Render 1" class="render-thumb active" data-idx="0" style="height:54px; width:auto; flex-shrink:0; cursor:pointer; opacity:1; border:2px solid var(--accent); object-fit:cover; border-radius:2px;">
@@ -1126,11 +1127,12 @@
         <!-- RENDER CAROUSEL — placeholders -->
         <span class="img-label" style="margin-top:0.5rem; display:block;">Renders</span>
         <div class="render-carousel" id="wellnessDevCarousel" style="width:100%; position:relative; background:var(--bg-mid); border-radius:4px; overflow:hidden;">
-          <div class="render-carousel-viewer" id="wellnessDevViewer" style="position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-            <img id="wellnessDevMain" src="images/wellness-dev/wellness-dev-render-01.webp" alt="Dune Wellness render 1" style="max-width:100%; max-height:100%; object-fit:contain; display:block; cursor:zoom-in;" data-gallery="wellness-dev" data-index="0">
+          <div class="render-carousel-viewer" id="wellnessDevViewer" style="position:relative; width:100%; height:min(480px, 80vw); overflow:hidden; display:flex; align-items:center; justify-content:center; background:var(--bg-mid);">
+            <img id="wellnessDevMain" src="images/wellness-dev/wellness-dev-render-01.webp" alt="Dune Wellness render 1" style="max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; display:block; cursor:zoom-in;" data-gallery="wellness-dev" data-index="0">
             <button class="render-arrow render-arrow-prev" id="wellnessDevPrev" aria-label="Previous render">&#8249;</button>
             <button class="render-arrow render-arrow-next" id="wellnessDevNext" aria-label="Next render">&#8250;</button>
             <div class="render-counter" id="wellnessDevCounter" style="position:absolute; bottom:1rem; right:1rem; background:rgba(0,0,0,0.5); color:#fff; font-size:11px; padding:3px 8px; border-radius:20px; letter-spacing:0.05em;">1 / 4</div>
+            <button class="render-fs-btn" id="wellnessDevFs" aria-label="View fullscreen" onclick="document.getElementById('wellnessDevMain').click()" style="position:absolute; top:0.6rem; right:0.6rem; background:rgba(0,0,0,0.45); border:none; border-radius:4px; color:#fff; width:32px; height:32px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:14px; z-index:10;">⤢</button>
           </div>
           <div class="render-thumbs" id="wellnessDevThumbs" style="display:flex; gap:4px; padding:8px; overflow-x:auto; background:var(--bg-dark);">
             <img src="images/wellness-dev/wellness-dev-render-01.webp" alt="Render 1" class="render-thumb active" data-idx="0" style="height:54px; width:auto; flex-shrink:0; cursor:pointer; opacity:1; border:2px solid var(--accent); object-fit:cover; border-radius:2px;">
